@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.10.14)  16 OCT 2023 16:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.10.14)  16 OCT 2023 20:38
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1027,28 +1027,28 @@ Underfull \hbox (badness 3780) in paragraph at lines 67--68
  []
 
 [6] [7]
-Underfull \hbox (badness 1052) in paragraph at lines 263--263
-[][]\OT1/cmr/m/n/10 Similarly to what is done to obtain $[][]$, to
+Underfull \hbox (badness 1052) in paragraph at lines 249--251
+[]\OT1/cmr/m/n/10 Similarly to what is done to obtain $[][]$, to
  []
 
 
-Underfull \hbox (badness 1237) in paragraph at lines 263--264
+Underfull \hbox (badness 1237) in paragraph at lines 260--263
 \OT1/cmr/m/n/10 operations and its contribution to the arithmetic
  []
 
 
-Underfull \hbox (badness 1077) in paragraph at lines 263--264
+Underfull \hbox (badness 1077) in paragraph at lines 260--263
 \OT1/cmr/m/n/10 complexity of the algorithm is subdominant with
  []
 
 
-Underfull \hbox (badness 1571) in paragraph at lines 266--267
+Underfull \hbox (badness 1571) in paragraph at lines 264--265
 \OT1/cmr/m/n/10 equation (51[]) by this method requires $\OML/cmm/m/it/10 O\OT1
 /cmr/m/n/10 (\OML/cmm/m/it/10 N[]N[]\OT1/cmr/m/n/10 )$
  []
 
 [8]
-Underfull \hbox (badness 1874) in paragraph at lines 328--329
+Underfull \hbox (badness 1874) in paragraph at lines 325--326
 \OT1/cmr/m/n/10 the trapezoidal rule, which for periodic analytic
  []
 
@@ -1535,6 +1535,11 @@ Underfull \hbox (badness 1502) in paragraph at lines 1--2
  []
 
 
+Underfull \hbox (badness 1142) in paragraph at lines 1--2
+\OT1/cmr/m/n/10 in predictive transport frameworks, which require
+ []
+
+
 Underfull \hbox (badness 2269) in paragraph at lines 4--5
 []\OT1/cmr/m/n/10 Equation (1[]), solved by \OT1/cmtt/m/n/10 MONKES\OT1/cmr/m/n
 /10 , includes a
@@ -1922,8 +1927,8 @@ Underfull \hbox (badness 3158) in paragraph at lines 331--336
 ] (monkes-paper.aux) ) 
 Here is how much of TeX's memory you used:
  30430 strings out of 475385
- 772808 string characters out of 2776434
- 1203598 words of memory out of 3000000
+ 773233 string characters out of 2776434
+ 1203580 words of memory out of 3000000
  50987 multiletter control sequences out of 15000+600000
  483438 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1969,7 +1974,7 @@ Users/Javier/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8
 nts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/Javier/AppData/Local/Pro
 grams/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/Javier/Ap
 pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on monkes-paper.pdf (29 pages, 1502276 bytes).
+Output written on monkes-paper.pdf (29 pages, 1502214 bytes).
 PDF statistics:
  2275 PDF objects out of 2487 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
