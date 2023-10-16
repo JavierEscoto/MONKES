@@ -1,0 +1,16 @@
+#!/bin/bash
+##SBATCH --mail-type=ALL
+##SBATCH --mail-user=fjavier.escoto@ciemat.es
+#SBATCH --nodes=1
+
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=180400
+#SBATCH --time=80:30:00
+#SBATCH --partition=xula2
+
+#SBATCH --output=monkes_%j.out  
+#SBATCH --error=monkes_%j.err 
+srun $HOME/MONKES/bin/main_monkes.x
+
+##tar -czvf monkes_$SLURM_JOB_ID.tar.gz monkes_*_$SLURM_JOB_ID.*
