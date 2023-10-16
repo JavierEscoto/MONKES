@@ -1,0 +1,9 @@
+TikzFigures/convergence_plots-figure4.pdf: c9/la40/results.stellopt
+TikzFigures/convergence_plots-figure4.pdf: c9/la60/results.stellopt
+TikzFigures/convergence_plots-figure4.pdf: c9/la80/results.stellopt
+TikzFigures/convergence_plots-figure4.pdf: c9/la100/results.stellopt
+TikzFigures/convergence_plots-figure4.pdf: c9/la120/results.stellopt
+TikzFigures/convergence_plots-figure4.pdf: c9/la140/results.stellopt
+TikzFigures/convergence_plots-figure4.pdf: c9/la160/results.stellopt
+TikzFigures/convergence_plots-figure4.pdf: c9/la180/results.stellopt
+TikzFigures/convergence_plots-figure4.pdf: c9/la200/results.stellopt

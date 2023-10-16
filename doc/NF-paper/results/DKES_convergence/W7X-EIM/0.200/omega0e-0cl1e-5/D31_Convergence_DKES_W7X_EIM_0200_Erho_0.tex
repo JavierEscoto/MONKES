@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		xlabel = $N_\xi$, ylabel=$\Gamma_{31}$
+		]
+		
+		\foreach \Nxi in {20,40,...,200}{
+			\addplot[blue, mark=*, only marks] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=(\thisrowno{6}+\thisrowno{7})/2,
+			restrict expr to domain={\thisrowno{1}}{0:0}
+			]{results/DKES_convergence/W7X-EIM/0.200/omega0e-0cl1e-5/la\Nxi/results.stellopt};			
+			
+		}
+	\end{axis}
+\end{tikzpicture}

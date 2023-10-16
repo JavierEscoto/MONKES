@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		ymin=0.4674*0.4674*0.5e-4,
+		ymax=0.4674*0.4674*2e-3,
+		width=0.95\textwidth, 
+		xlabel = $N_\xi$, ylabel=$(\widehat{D}_{11}^+ + \widehat{D}_{11}^-)/2$, 
+		scaled y ticks=base 10:4,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd} ,
+		legend pos = north east
+		]
+			
+		\foreach \Nxi in {40,60,...,200}
+		{			
+			\addplot[red, mark=square*, only marks, error bars/.cd, y explicit,
+			y dir=both,	error bar style={thick}] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=0.4674*0.4674*(\thisrowno{4} + \thisrowno{5})/2,
+			y error plus expr=0.4674*0.4674*(\thisrowno{4}-\thisrowno{5})/2,
+			y error minus expr=0.4674*0.4674*(\thisrowno{4}-\thisrowno{5})/2,
+			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}
+			]{results/DKES_convergence/CIEMAT-QI/0.250/omega1e-3cl1e-5/la\Nxi/results.stellopt};	
+%			
+%			\addplot[red, mark=square*, only marks] table[skip first n=1, 
+%			x expr=\Nxi,
+%			y expr=(\thisrowno{4} + \thisrowno{5})/2,
+%			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}
+%			]{results/DKES_convergence/CIEMAT-QI/0.250/omega1e-3cl1e-5/la\Nxi/results.stellopt};			
+		}
+		
+		
+		\addlegendentry{$\hat{E}_r=10^{-3}$}
+	\end{axis}
+\end{tikzpicture}

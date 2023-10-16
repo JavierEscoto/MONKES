@@ -1,0 +1,72 @@
+
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=0.97\textwidth, 
+			xlabel=$\hat{\nu}$  ${[\text{m}^{-1}]}$, ylabel=$\widehat{D}_{33} - \widehat{D}_{33, \text{Sp}}$ ${[\text{m}]}$,
+			xmode=log, 
+			ymode=log, 
+%			ymax=3e6,
+%            xmax=0.01,
+            ytick={1e-10, 1e-3,1e4},
+			enlarge x limits=false,
+%			enlarge y limits=false,
+			legend pos = south west,
+			mark size = 1.5pt
+			]
+			
+			%%% MONKES RESULTS
+			\addplot+[no markers, blue]
+			table[skip first n=1, 
+			x expr=\thisrowno{0},
+			y expr=(\thisrowno{5} - \thisrowno{6})
+			]
+			{./results/W7X-EIM/0.200/Monoenergetic_Database_Example_23_55_140/Monoenergetic_1.plt};	
+%			\addlegendentry{\texttt{MONKES} $1/{\nu}$}			
+						
+			%%% SFINCS RESULTS
+			%			\addplot[only marks, blue, mark=triangle*]
+			%			table[col sep = comma, skip first n=1, 
+			%			x expr=\thisrowno{0},
+			%			y expr=\thisrowno{2}
+			%			]
+			%			{./results/SFINCS_results/W7X-EIM/20230420-01-027-W7X-EIM_Er0_nuScan_sfincs_results.dat};	
+			%			\addlegendentry{\texttt{SFINCS} $\hat{E}_r = 0$}			
+					
+					
+			%%% DKES RESULTS				
+			\addplot[only marks, mark=*, blue, error bars/.cd, y explicit,
+			y dir=both,
+			error bar style={thick}] table[
+			x expr=\thisrowno{0},
+			y expr={ (\thisrowno{8} + \thisrowno{9})/2 }, 
+			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
+			restrict expr to domain={\thisrowno{1}}{0:0},
+			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/W7X-EIM/0.200/results.data};
+%			\addlegendentry{\texttt{DKES} $1/{\nu}$}
+			
+			%%% MONKES RESULTS
+			\addplot+[no markers, red, dashed]
+			table[skip first n=1, 
+			x expr=\thisrowno{0},			
+			y expr=(\thisrowno{5} - \thisrowno{6}),  
+			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4}]
+			{./results/W7X-EIM/0.200/Monoenergetic_Database_Example_27_55_140/Monoenergetic_5.plt};	
+%			\addlegendentry{\texttt{MONKES} $\sqrt{\nu}$}
+			
+			%%% DKES RESULTS				
+			\addplot[only marks, mark=square, red, error bars/.cd, y explicit,
+			y dir=both,
+			error bar style={thick}] table[
+			x expr=\thisrowno{0},
+			y expr={ (\thisrowno{8} + \thisrowno{9})/2 }, 
+			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
+			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4},
+			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/W7X-EIM/0.200/results.data};
+%			\addlegendentry{\texttt{DKES} $\sqrt{\nu}$}			
+			
+		\end{axis}
+		
+	\end{tikzpicture}
+

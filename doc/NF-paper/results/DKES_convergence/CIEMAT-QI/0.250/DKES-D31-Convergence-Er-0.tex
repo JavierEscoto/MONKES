@@ -1,0 +1,46 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		ymax=0.4674*0.4,
+		width=0.95\textwidth, 
+		xlabel = $N_\xi$, ylabel=$(\widehat{D}_{31}^+ + \widehat{D}_{31}^-)/2$,
+		scaled y ticks=base 10:1,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd} 
+		]
+				
+		
+		\foreach \Nxi in {40,60,...,200}{
+			
+			\addplot[forget plot, blue, mark=*, only marks] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=0.4674*(\thisrowno{6} + \thisrowno{7})/2,
+			restrict expr to domain={\thisrowno{1}}{0:0}
+			]{results/DKES_convergence/CIEMAT-QI/0.250/omega0e-0cl1e-5/la\Nxi/results.stellopt};	
+			
+			
+		}	    
+		
+		\foreach \Nxi in {200}{
+			
+			\addplot[blue, mark=*, only marks] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=0.4674*(\thisrowno{6} + \thisrowno{7})/2,
+			restrict expr to domain={\thisrowno{1}}{0:0}
+			]{results/DKES_convergence/CIEMAT-QI/0.250/omega0e-0cl1e-5/la\Nxi/results.stellopt};    	
+			
+		}
+		\addlegendentry{$\hat{E}_r=0$}	    
+		
+		\addplot[forget plot, name path=Upper2,blue!20, 
+		domain = 40:200] {0.4674*(0.13301E+00	+ 0.20469E+00)/2*1.07};	
+		\addplot[forget plot, name path=Lower2,blue!20, 
+		domain = 40:200] {0.4674*(0.13301E+00	+ 0.20469E+00)/2*0.93};		
+		\addplot[blue!20] fill between[of=Upper2 and Lower2];
+		\addlegendentry{$\mathcal{R}_{7}$}	
+		
+	\end{axis}
+\end{tikzpicture}

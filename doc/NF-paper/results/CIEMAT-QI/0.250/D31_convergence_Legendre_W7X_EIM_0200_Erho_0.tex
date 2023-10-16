@@ -1,0 +1,55 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=0.95\textwidth, 
+		scaled y ticks=base 10:1,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=2,
+			/tikz/.cd}, 
+		xlabel = $N_\xi$, ylabel=$\widehat{D}_{31} {K}_{31}$
+		]
+		
+		
+		\foreach \Nxi in {20, 40, ...,100}{		
+			\addplot[blue, mark=+, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=\thisrowno{6},
+			restrict expr to domain={\thisrowno{2}}{19:47},
+			restrict expr to domain={\thisrowno{3}}{65:179},
+			restrict expr to domain={\thisrowno{4}}{\Nxi:\Nxi}
+			]{results/W7X-EIM/0.200/DKE_zeta_Convergence_Example_Nxi_20/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+			
+			\addplot[blue, mark=o, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=-\thisrowno{7},
+			restrict expr to domain={\thisrowno{2}}{19:47},
+			restrict expr to domain={\thisrowno{3}}{65:179},
+			restrict expr to domain={\thisrowno{4}}{\Nxi:\Nxi}
+			]{results/W7X-EIM/0.200/DKE_zeta_Convergence_Example_Nxi_20/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+		}
+		
+		\foreach \Nxi in {120, 140, ...,200}{		
+			\addplot[blue, mark=+, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=\thisrowno{6},
+			restrict expr to domain={\thisrowno{2}}{27:47},
+			restrict expr to domain={\thisrowno{3}}{65:179},
+			restrict expr to domain={\thisrowno{4}}{\Nxi:\Nxi}
+			]{results/W7X-EIM/0.200/DKE_zeta_Convergence_Example_Nxi_120/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+			
+			\addplot[blue, mark=o, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=-\thisrowno{7},
+			restrict expr to domain={\thisrowno{2}}{27:47},
+			restrict expr to domain={\thisrowno{3}}{65:179},
+			restrict expr to domain={\thisrowno{4}}{\Nxi:\Nxi}
+			]{results/W7X-EIM/0.200/DKE_zeta_Convergence_Example_Nxi_120/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+		}	
+		
+		\addlegendentry{$\widehat{D}_{31}{K}_{31}$}
+		\addlegendentry{$-\widehat{D}_{13}{K}_{13}$}
+	\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,40 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		ymin=0.5,
+		width=0.95\textwidth, 
+		xlabel = $N_\xi$, ylabel=$(\widehat{D}_{31}^+ + \widehat{D}_{31}^-){K}_{31}/2$,
+		scaled y ticks=base 10:0,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd} 
+		]
+		
+		
+		\foreach \Nxi in {100,120,...,200}{
+			
+			\addplot[forget plot, blue, mark=*, only marks] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=sqrt((\thisrowno{4} - \thisrowno{5})*(\thisrowno{8} - \thisrowno{9}))/2,
+			restrict expr to domain={\thisrowno{1}}{0:0}
+			]{results/DKES_convergence/W7X-KJM/0.204/omega0e-0cl1e-5/la\Nxi/results.stellopt};	
+			
+			
+		}	    
+		
+		\foreach \Nxi in {200}{
+			
+			\addplot[blue, mark=*, only marks] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=sqrt((\thisrowno{4} - \thisrowno{5})*(\thisrowno{8} - \thisrowno{9}))/2,
+			restrict expr to domain={\thisrowno{1}}{0:0}
+			]{results/DKES_convergence/W7X-KJM/0.204/omega0e-0cl1e-5/la\Nxi/results.stellopt};    	
+			
+		}
+		\addlegendentry{$\hat{E}_r=0$}	    
+			
+		
+	\end{axis}
+\end{tikzpicture}

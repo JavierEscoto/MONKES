@@ -1,0 +1,3 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 1847647.0 ON xula2003 CANCELLED AT 2023-09-18T18:14:20 ***
+slurmstepd: error: *** JOB 1847647 ON xula2003 CANCELLED AT 2023-09-18T18:14:20 ***

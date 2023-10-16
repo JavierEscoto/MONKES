@@ -1,0 +1,36 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		width=0.95\textwidth, 
+		xlabel = $N_\xi$, ylabel=$(\widehat{D}_{31}^+ + \widehat{D}_{31}^-)/2$, 
+		legend pos = south east,
+		scaled y ticks=base 10:3,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd} 
+		]
+		
+		
+		
+		\addplot[forget plot, name path=Upper2,red!20, 
+		domain = 80:200] {0.4674*(0.32052E-03	+ 0.17269E-01)/2*1.07};	
+		\addplot[forget plot, name path=Lower2,red!20, 
+		domain = 80:200] {0.4674*(0.32052E-03	+ 0.17269E-01)/2*0.93};		
+		\addplot[red!20] fill between[of=Upper2 and Lower2];
+		\addlegendentry{$\mathcal{R}_{7}$}	
+		
+		\foreach \Nxi in {80,100,...,200}{
+			
+			\addplot[red, mark=square*, only marks] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=0.4674*(\thisrowno{6} + \thisrowno{7})/2,
+			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}
+			]{results/DKES_convergence/CIEMAT-QI/0.250/omega1e-3cl1e-5/la\Nxi/results.stellopt};			
+		}
+		
+		
+		\addlegendentry{$\hat{E}_r=10^{-3}$}
+	\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,97 @@
+\section{Onsager symmetry}
+In this appendix we will prove the well known Onsager symmetry relations for equation (\ref{eq:DKE}). The proof is almost identical to the one given in \cite{Sugama_Entropy_Onsager} but for a simpler collision operator and a different inner product. For this, is convenient to rewrite the drift-kinetic equation (\ref{eq:DKE}) using the Vlasov operator
+%
+\begin{align}
+	\mathcal{V} := \xi \vb*{b} \cdot \nabla + \nabla\cdot\vb*{b}\frac{1-\xi^2}{2}\pdv{\xi}  + v^{-1}\vb*{v}_E\cdot\nabla
+\end{align}
+and the monoenergetic coefficients (\ref{eq:Monoenergetic_geometric_coefficients}) in terms of a inner product in the $v-$foliated phase space
+\begin{align}
+	\mean*{f,g}_{\text{ps}} := \mean*{ \int  fg \dd{\xi}},
+\end{align}
+for fixed $v$.
+
+With this inner product, the $\widehat{D}_{ij}$ defined in (\ref{eq:Monoenergetic_geometric_coefficients}) can be written as
+%
+\begin{align}
+	\widehat{D}_{ij} = \mean*{s_j, f_i}_{\text{ps}}
+	\label{eq:Monoenergetic_geometric_inner_product}
+\end{align}
+Denoting $\mathcal{C}:=\hat{\nu}\Lorentz$, the collision operator is self-adjoint (symmetric) with respect to this inner product
+%
+\begin{align}
+	\mean*{\mathcal{C} f, g}_{\text{ps}} = \mean*{f, \mathcal{C} g}_{\text{ps}}
+	\label{eq:Collision_self_adjointness}
+\end{align}
+and the Vlasov operator is skew-self-adjoint (skew-symmetric) 
+%
+\begin{align}
+	\mean*{\mathcal{V} f, g}_{\text{ps}} = -\mean*{f, \mathcal{V} g}_{\text{ps}}.
+	\label{eq:Vlasov_skew_self_adjointness}
+\end{align}
+Note that (\ref{eq:Vlasov_skew_self_adjointness}) implies that the image of $f$ by $\mathcal{V}$ is orthogonal to $f$, i.e. $\mean*{\mathcal{V} f, f}_{\text{ps}} =0$.
+
+We can now write, using (\ref{eq:DKE}) and (\ref{eq:Monoenergetic_geometric_inner_product}) the coefficient $\widehat{D}_{ij}$ as
+%
+\begin{align}
+	\widehat{D}_{ij} = \mean*{\mathcal{V} f_i, f_j}_{\text{ps}} - \mean*{\mathcal{C} f_i, f_j}_{\text{ps}}.
+	\label{eq:Onsager_Dij}
+\end{align}
+
+Now note that, as a consequence of (\ref{eq:Collision_self_adjointness}), the term $\mean*{\mathcal{C} f_i, f_j}_{\text{ps}}$ is invariant to the cyclic permutation $(i,j)\mapsto (j,i)$. In contrast, due to (\ref{eq:Vlasov_skew_self_adjointness}), the term $\mean*{\mathcal{V} f_i, f_j}_{\text{ps}}$ changes sign when cyclic permutation $(i,j)\mapsto (j,i)$ is applied. Combining both facts we obtain a convenient expression for $\widehat{D}_{ji}$
+%
+\begin{align}
+	\widehat{D}_{ji} = -\mean*{\mathcal{V} f_i, f_j}_{\text{ps}} - \mean*{\mathcal{C} f_i, f_j}_{\text{ps}}.
+	\label{eq:Onsager_Dji}
+\end{align}
+
+Using equations (\ref{eq:Onsager_Dij}) and (\ref{eq:Onsager_Dji}) we can deduce the symmetry relations of the Onsager matrix. First, we apply the following trick: for fixed arbitrary $i,j\in\{1,2,3\}$, we write
+%
+\begin{align}
+	\sum_{k=1}^{2}\delta_{ki}\widehat{D}_{ij}   + \delta_{3j}\widehat{D}_{ji} \nonumber
+	& = 
+	(\sum_{k=1}^{2}\delta_{ki} - \delta_{3j}) \mean*{\mathcal{V} f_i, f_j}_{\text{ps}}
+	\nonumber
+	\\
+	& -
+	(\sum_{k=1}^{2}\delta_{ki} + \delta_{3j}) \mean*{\mathcal{C} f_i, f_j}_{\text{ps}}
+	\label{eq:Onsager_trick_invariant_ij}
+	\\
+	\sum_{k=1}^{2}\delta_{kj}\widehat{D}_{ji}   + \delta_{3i}\widehat{D}_{ij} \nonumber
+	& = 
+	(\sum_{k=1}^{2}\delta_{kj} - \delta_{3i}) \mean*{\mathcal{V} f_j, f_i}_{\text{ps}}
+	\nonumber
+	\\
+	& -
+	(\sum_{k=1}^{2}\delta_{kj} + \delta_{3i}) \mean*{\mathcal{C} f_j, f_i}_{\text{ps}}
+	\label{eq:Onsager_trick_invariant_ji}
+\end{align}
+Substracting (\ref{eq:Onsager_trick_invariant_ji}) to (\ref{eq:Onsager_trick_invariant_ji}) gives
+%
+\begin{align}
+	& (\sum_{k=1}^{2}\delta_{ki}- \delta_{3i})\widehat{D}_{ij}    
+	+ 
+	(\delta_{3j}
+	-
+	\sum_{k=1}^{2}\delta_{kj})\widehat{D}_{ji}\nonumber
+	\\
+	& = 
+	(\sum_{k=1}^{2}\delta_{ki} - \delta_{3j} + \sum_{k=1}^{2}\delta_{kj} - \delta_{3i}) \mean*{\mathcal{V} f_i, f_j}_{\text{ps}}
+	\nonumber 
+	\\ 
+	& -
+	(\sum_{k=1}^{2}\delta_{ki} + \delta_{3j} - \sum_{k=1}^{2}\delta_{kj} - \delta_{3i}) \mean*{\mathcal{C} f_i, f_j}_{\text{ps}}
+\end{align}
+
+
+
+where for the second equality we have used (\ref{eq:Onsager_Dij}) and (\ref{eq:Onsager_Dji}).
+Now, note that due to the self-adjointness of $\mathcal{C}$, in the last equality of (\ref{eq:Onsager_trick_invariant_ij}) the right-hand-side is invariant with respect to the cyclic permutation $(i,j)\mapsto(j,i)$ when $i=m$ and $j=n$. We will implicitly assume that this is the situation but still keep the $\delta_{mi}$ and $\delta_{nj}$ symbols. In such case, also the right-hand-side of the first equality is invariant with respect to the $(i,j)\mapsto(j,i)$ and we obtain through its application
+%
+\begin{align}
+	(\delta_{mi} - \delta_{ni})\widehat{D}_{ij}   = (\delta_{mj} - \delta_{nj})\widehat{D}_{ji} .
+	\label{eq:Onsager_symmetry_relations} 
+\end{align}
+Introducing $(m,n)=(1,2)$ and $(i,j) =(m,n)=(1,2) $ in (\ref{eq:Onsager_symmetry_relations}) gives $\widehat{D}_{13} = - \widehat{D}_{31}$. For $(m,n)=(1,3)$ and $(i,j) =(m,n)=(1,3) $
+
+
+

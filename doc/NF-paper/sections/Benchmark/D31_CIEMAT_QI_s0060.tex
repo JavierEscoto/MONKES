@@ -1,0 +1,83 @@
+\begin{figure}[h]
+	\tikzsetnextfilename{Benchmark-CIEMAT-QI-s0060-D31}
+	\begin{tikzpicture}
+		\begin{axis}[
+			xlabel=$\hat{\nu}$  ${[\text{m}^{-1}]}$, ylabel=$\widehat{D}_{31}{K}_{31}$, 
+			xmode=log, enlarge x limits=false,
+			xmax = 0.01, 
+			ymin = -0.15,
+%			ymax = 0.178,
+			legend pos = south east
+			]
+			
+			%%% MONKES RESULTS
+			\addplot+[no markers, blue]
+			table[skip first n=1, 
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{3}]
+			{./results/CIEMAT-QI/0.060/Monoenergetic_Database_Example_15_139_180/Monoenergetic_1.plt};	
+			\addlegendentry{\texttt{MONKES} $\hat{E}_r = 0$}			
+			
+			
+			
+			
+			%%% DKES RESULTS				
+			\addplot[only marks, mark=*, blue, error bars/.cd, y explicit,
+			y dir=both,
+			error bar style={thick}] table[
+			x expr=\thisrowno{0},
+			y expr={ (\thisrowno{6} + \thisrowno{7})/2 }, 
+			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
+			restrict expr to domain={\thisrowno{1}}{0:0},
+			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/CIEMAT-QI/0.060/results.data};
+			\addlegendentry{\texttt{DKES} $\hat{E}_r = 0$}
+			
+			
+			%%% SFINCS RESULTS
+			\addplot[mark repeat = 1, only marks, blue, mark=triangle*]
+			table[col sep = comma, skip first n=1, 
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{2}
+			]
+			{./results/SFINCS_results/CIEMAT-QI/20230420-01-059-CIEMAT-QI_s0p045_Er0_nuScan_sfincs_results.dat};	
+			\addlegendentry{\texttt{SFINCS} $\hat{E}_r = 0$}	
+			
+			%%% MONKES RESULTS
+			\addplot+[no markers, red, dashed]
+			table[skip first n=1, 
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{3},  
+			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}]
+			{./results/CIEMAT-QI/0.060/Monoenergetic_Database_Example_15_139_180/Monoenergetic_6.plt};	
+			\addlegendentry{\texttt{MONKES} $\hat{E}_r = 10^{-3}$}
+			
+			
+			%%% DKES RESULTS				
+			\addplot[only marks, mark=square*, red, error bars/.cd, y explicit,
+			y dir=both,
+			error bar style={thick}] table[
+			x expr=\thisrowno{0},
+			y expr={ (\thisrowno{6} + \thisrowno{7})/2 }, 
+			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
+			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3},
+			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/CIEMAT-QI/0.060/results.data};
+			\addlegendentry{\texttt{DKES} $\hat{E}_r = 10^{-3}$}	
+			
+			
+			%%% SFINCS RESULTS
+			\addplot[mark repeat = 1, only marks, red, mark=triangle*, mark options={rotate=60}]
+			table[col sep = comma, skip first n=1, 
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{2}
+			]
+			{./results/SFINCS_results/CIEMAT-QI/20230420-01-046-CIEMAT-QI_s0p045_withEr_nuScan_sfincs_results.dat};	
+			\addlegendentry{\texttt{SFINCS} $\hat{E}_r = 10^{-3}$}			
+			
+		\end{axis}
+		
+	\end{tikzpicture}
+	\caption{Calculation of $\widehat{D}_{31}$ by \texttt{MONKES}, \texttt{DKES} and \texttt{SFINCS} in the $1/\nu$ and $\sqrt{\nu}$ regimes for CIEMAT-QI EIM at the surface $\psi /\psi_{\text{lcfs}}=0.060$. $\hat{E}_r $ in $\text{kV}\cdot\text{s}/\text{m}^2$.}
+\end{figure}
+

@@ -1,0 +1,58 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=0.97\textwidth, 
+		xtick = {20,40,80},
+		extra x ticks={0.55E+02},
+		extra y ticks={0.2245864600000004E+02},
+		extra tick style={grid=major, grid style={dashed,black}}, 
+%		scaled y ticks=base 10:-1,
+		%		xtick={80,120,160,200, 240},
+		xmax = 100, 
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=0,
+			/tikz/.cd}, 
+		%		ymin = 0.053,
+		%		ymax = 0.102,
+		legend pos = south east, 
+		legend columns =2, 
+		xlabel = $N_\zeta$, ylabel=Wall-clock time {[s]}
+		]
+		
+		
+%		\addplot[forget plot, name path=Upper2,blue!20, 
+%		domain = 15:71] {0.3593392335766615E+00*1.05};	
+%		\addplot[forget plot, name path=Lower2,blue!20, 
+%		domain = 15:71] {0.3593392335766615E+00*0.95};		
+%		\addplot[forget plot, blue!20] fill between[of=Upper2 and Lower2];
+		
+		\foreach \Ntheta in {23}{		
+			\addplot+[Brown,no markers] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{10},
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{21:131},
+			restrict expr to domain={\thisrowno{4}}{140:140}
+			]{results/W7X-EIM/0.200/Convergence_nu_1e-5_Er_0/Nxi_140/monkes_Monoenergetic_Database.dat};
+			\addlegendimage{empty legend}
+			\addlegendentry{$N_\theta=$}
+			\expandafter\addlegendentry\expandafter{\Ntheta}
+		}	
+		
+		
+		
+		\foreach \Ntheta in {23}{		
+			\addplot+[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{10},
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{55:55},
+			restrict expr to domain={\thisrowno{4}}{140:140}
+			]{results/W7X-EIM/0.200/Convergence_nu_1e-5_Er_0/Nxi_140/monkes_Monoenergetic_Database.dat};
+		}
+		
+	\end{axis}
+\end{tikzpicture}

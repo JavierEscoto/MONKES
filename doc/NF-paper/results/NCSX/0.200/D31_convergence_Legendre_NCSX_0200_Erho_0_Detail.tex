@@ -1,0 +1,56 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=0.95\textwidth, 
+		scaled y ticks=base 10:0,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=2,
+			/tikz/.cd}, 
+		ymin = 1.5,
+		xlabel = $N_\xi$, ylabel=$\widehat{D}_{31}{K}_{31}$,
+		legend pos = south east
+		]
+			
+		
+		\addplot[forget plot, name path=Upper2,blue!20, 
+		domain = 40:200] {0.2369500222373034E+01*1.05};	
+		\addplot[forget plot, name path=Lower2,blue!20, 
+		domain = 40:200] {0.2369500222373034E+01*0.95};		
+		\addplot[blue!20] fill between[of=Upper2 and Lower2];
+		\addlegendentry{ $\mathcal{R}_5$ }	
+		
+		\foreach \Nxi in {60,80,100}{		
+			\addplot[forget plot, blue, mark=+, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=\thisrowno{6},
+			restrict expr to domain={\thisrowno{2}}{47:55},
+			restrict expr to domain={\thisrowno{3}}{75:179},
+			restrict expr to domain={\thisrowno{4}}{\Nxi:\Nxi}
+			]{results/NCSX/0.200/DKE_zeta_Convergence_Example_Nxi_20/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};			
+		}
+		
+		\foreach \Nxi in {160, 180, ...,200}{		
+			\addplot[forget plot, blue, mark=+, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=\thisrowno{6},
+			restrict expr to domain={\thisrowno{2}}{47:67},
+			restrict expr to domain={\thisrowno{3}}{111:179},
+			restrict expr to domain={\thisrowno{4}}{\Nxi:\Nxi}
+			]{results/NCSX/0.200/DKE_zeta_Convergence_Example_Nxi_\Nxi/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+			
+		}	
+		
+		\addplot[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1,  
+		x expr=\thisrowno{4},
+		y expr=\thisrowno{6},
+		restrict expr to domain={\thisrowno{2}}{55:55},
+		restrict expr to domain={\thisrowno{3}}{95:115},
+		restrict expr to domain={\thisrowno{4}}{140:140}
+		]{results/NCSX/0.200/DKE_zeta_Convergence_Example_Nxi_140/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+		\addlegendentry{Selected}	
+				
+	\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,244 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{external}
+\usepgfplotslibrary{fillbetween}
+
+\tikzexternalize[prefix=TikzFigures/]
+
+\begin{document}
+	\foreach \c in {5,6,7,8,9}{
+		\begin{tikzpicture}
+			\begin{axis}[
+				legend pos = north east,
+				%			ymin=0.4674*0.4674*4e-2,
+				%			ymax=0.4674*0.4674*5.4e-2, 
+				title={Check collisionality},
+				scaled y ticks=base 10:2,
+				y tick label style={
+					/pgf/number format/.cd,
+					fixed,
+					fixed zerofill,
+					precision=1,
+					/tikz/.cd} ,
+				width=0.95\textwidth,  
+				xlabel = CMUL, ylabel=EFIELD
+				]
+				
+				\foreach \Nxi in {40,60,...,200}
+				{			
+					\addplot[blue, mark=*, only marks] table[skip first n=1, 
+					x expr=\thisrowno{0},
+					y expr=\thisrowno{1}
+					]{c\c/la\Nxi/results.stellopt};
+				}	    
+				
+				\addlegendentry{$\hat{E}_r=0$}	    
+				%		
+				%		\addplot[forget plot, name path=Upper2,blue!20, 
+				%		domain = 40:200] {(0.52404E-01 + 0.43659E-01)/2*1.1};	
+				%		\addplot[forget plot, name path=Lower2,blue!20, 
+				%		domain = 40:200] {(0.52404E-01 + 0.43659E-01)/2*0.9};		
+				%		\addplot[blue!20] fill between[of=Upper2 and Lower2];
+				%		\addlegendentry{Spread of 10\%}	
+				
+			\end{axis}
+		\end{tikzpicture}
+	}
+	
+	\foreach \c in {5,6,7,8,9}
+	{
+	\begin{tikzpicture}
+		\begin{axis}[
+			legend pos = north east,
+%			ymin=8e-2,
+%			ymax=0.4674*0.4674*5.4e-2, 
+            title={Coupling parameter=\c},
+			scaled y ticks=base 10:2,
+			y tick label style={
+				/pgf/number format/.cd,
+				fixed,
+				fixed zerofill,
+				precision=1,
+				/tikz/.cd} ,
+			width=0.95\textwidth,  
+			xlabel = $N_\xi$, ylabel=$(\widehat{D}_{11}^+ + \widehat{D}_{11}^-)K_{11}/2$
+			]
+			
+			\foreach \Nxi in {40,60,...,200}
+			{			
+				\addplot[blue, mark=*, only marks, error bars/.cd, y explicit,
+				y dir=both,	error bar style={thick}] table[skip first n=1, 
+				x expr=\Nxi,
+				y expr=(\thisrowno{4} + \thisrowno{5})/2,%0.4674*0.4674*
+				y error plus expr=(\thisrowno{4}-\thisrowno{5})/2,
+				y error minus expr=(\thisrowno{4}-\thisrowno{5})/2,
+				restrict expr to domain={\thisrowno{0}}{1e-5:1e-5},
+				restrict expr to domain={\thisrowno{1}}{0:0}
+				]{c\c/la\Nxi/results.stellopt};
+			}	    
+			
+			\addlegendentry{$\hat{E}_r=0$}	    
+			%		
+			%		\addplot[forget plot, name path=Upper2,blue!20, 
+			%		domain = 40:200] {(0.52404E-01 + 0.43659E-01)/2*1.1};	
+			%		\addplot[forget plot, name path=Lower2,blue!20, 
+			%		domain = 40:200] {(0.52404E-01 + 0.43659E-01)/2*0.9};		
+			%		\addplot[blue!20] fill between[of=Upper2 and Lower2];
+			%		\addlegendentry{Spread of 10\%}	
+			
+		\end{axis}
+	\end{tikzpicture}
+    }
+    
+    \foreach \c in {5,6,7,8,9}{
+    	\begin{tikzpicture}
+    		\begin{axis}[
+    			legend pos = north east,
+    			ymin=8e-2,
+    			ymax=0.13, 
+    			title={Coupling parameter=\c},
+    						scaled y ticks=base 10:1,
+    			y tick label style={
+    				/pgf/number format/.cd,
+    				fixed,
+    				fixed zerofill,
+    				precision=1,
+    				/tikz/.cd} ,
+    			width=0.95\textwidth,  
+    			xlabel = $N_\xi$, ylabel=$(\widehat{D}_{31}^+ + \widehat{D}_{31}^-)/2$
+    			]
+    			
+    			\addplot[forget plot, name path=Upper2,red!20, 
+    			domain = 80:200] {(0.888E-01)*1.07 };	
+    			\addplot[forget plot, name path=Lower2,red!20, 
+    			domain = 80:200] {(0.888E-01)*0.93 };		
+    			\addplot[red!20] fill between[of=Upper2 and Lower2];
+    			\addlegendentry{ $\mathcal{R}_{7}$ MONKES}	
+    			
+    			\addplot[forget plot, name path=Upper2,blue!20, 
+    			domain = 80:200] {(0.91331E-01	+ 0.86729E-01)/2*1.07 };	
+    			\addplot[forget plot, name path=Lower2,blue!20, 
+    			domain = 80:200] {(0.91331E-01	+ 0.86729E-01)/2*0.93 };		
+    			\addplot[blue!20] fill between[of=Upper2 and Lower2];
+    			\addlegendentry{ $\mathcal{R}_{7}$ DKES}	
+    			
+    			
+    			
+    			\foreach \Nxi in {80,100,...,200}
+    			{			
+    				\addplot[blue, mark=+, only marks, error bars/.cd, y explicit,
+    				y dir=both,	error bar style={thick}] table[skip first n=1, 
+    				x expr=\Nxi,
+    				y expr=(\thisrowno{6} + \thisrowno{7})/2,
+    				y error plus expr=(\thisrowno{4}-\thisrowno{4})/2,
+    				y error minus expr=(\thisrowno{4}-\thisrowno{4})/2,
+    				restrict expr to domain={\thisrowno{0}}{1e-5:1e-5},
+    				restrict expr to domain={\thisrowno{1}}{0:0}
+    				]{c\c/la\Nxi/results.stellopt};
+    				
+    			}	    
+    			
+    			\addlegendentry{$\hat{E}_r=0$}	    
+    			%		
+    			%		\addplot[forget plot, name path=Upper2,blue!20, 
+    			%		domain = 40:200] {(0.52404E-01 + 0.43659E-01)/2*1.1};	
+    			%		\addplot[forget plot, name path=Lower2,blue!20, 
+    			%		domain = 40:200] {(0.52404E-01 + 0.43659E-01)/2*0.9};		
+    			%		\addplot[blue!20] fill between[of=Upper2 and Lower2];
+    			%		\addlegendentry{Spread of 10\%}	
+    			
+    		\end{axis}
+    	\end{tikzpicture}
+    }
+    \begin{tikzpicture}
+    	\begin{axis}[
+    		legend pos = north east,
+    		ymin=8e-2,
+    		ymax=0.13, 
+    		title={$N_\xi$ fixed},
+    		scaled y ticks=base 10:1,
+    		y tick label style={
+    			/pgf/number format/.cd,
+    			fixed,
+    			fixed zerofill,
+    			precision=1,
+    			/tikz/.cd} ,
+    		width=0.95\textwidth,  
+    		xlabel = Coupling parameter, ylabel=$(\widehat{D}_{31}^+ + \widehat{D}_{31}^-)/2$
+    		]
+    		
+    		\addplot[forget plot, name path=Upper2,red!20, 
+    		domain = 5:9] {(0.888E-01)*1.07 };	
+    		\addplot[forget plot, name path=Lower2,red!20, 
+    		domain = 5:9] {(0.888E-01)*0.93 };		
+    		\addplot[red!20] fill between[of=Upper2 and Lower2];
+    		\addlegendentry{ $\mathcal{R}_{7}$ MONKES}	
+    		
+    		\addplot[forget plot, name path=Upper2,blue!20, 
+    		domain = 5:9] {(0.91331E-01	+ 0.86729E-01)/2)*1.07 };	
+    		\addplot[forget plot, name path=Lower2,blue!20, 
+    		domain = 5:9] {(0.91331E-01	+ 0.86729E-01)/2)*0.93 };		
+    		\addplot[blue!20] fill between[of=Upper2 and Lower2];
+    		\addlegendentry{ $\mathcal{R}_{7}$ DKES}	
+    		
+    		
+    		
+    		\foreach \c in {5,6,...,9}
+    		{			
+    			\addplot[forget plot, red, mark=+, only marks, error bars/.cd, y explicit,
+    			y dir=both,	error bar style={thick}] table[skip first n=1, 
+    			x expr=\c,
+    			y expr=(\thisrowno{6} + \thisrowno{7})/2,
+    			y error plus expr=(\thisrowno{4}-\thisrowno{4})/2,
+    			y error minus expr=(\thisrowno{4}-\thisrowno{4})/2,
+    			restrict expr to domain={\thisrowno{0}}{1e-5:1e-5},
+    			restrict expr to domain={\thisrowno{1}}{0:0}
+    			]{c\c/la140/results.stellopt};
+    			
+    		}	    
+    	    
+    	    \addplot[red, mark=+, only marks, error bars/.cd, y explicit,
+    	    y dir=both,	error bar style={thick}] table[skip first n=1, 
+    	    x expr=5,
+    	    y expr=(\thisrowno{6} + \thisrowno{7})/2,
+    	    y error plus expr=(\thisrowno{4}-\thisrowno{4})/2,
+    	    y error minus expr=(\thisrowno{4}-\thisrowno{4})/2,
+    	    restrict expr to domain={\thisrowno{0}}{1e-5:1e-5},
+    	    restrict expr to domain={\thisrowno{1}}{0:0}
+    	    ]{c5/la140/results.stellopt};
+    		
+    		\addlegendentry{$\hat{E}_r=0$, $N_\xi=140$}	  
+    		
+    		
+    		
+    		\foreach \c in {5,6,...,9}
+    		{			
+    			\addplot[forget plot, blue, mark=+, only marks, error bars/.cd, y explicit,
+    			y dir=both,	error bar style={thick}] table[skip first n=1, 
+    			x expr=\c,
+    			y expr=(\thisrowno{6} + \thisrowno{7})/2,
+    			y error plus expr=(\thisrowno{4}-\thisrowno{4})/2,
+    			y error minus expr=(\thisrowno{4}-\thisrowno{4})/2,
+    			restrict expr to domain={\thisrowno{0}}{1e-5:1e-5},
+    			restrict expr to domain={\thisrowno{1}}{0:0}
+    			]{c\c/la160/results.stellopt};
+    			
+    		}	    
+    		
+    		\addplot[blue, mark=+, only marks, error bars/.cd, y explicit,
+    		y dir=both,	error bar style={thick}] table[skip first n=1, 
+    		x expr=5,
+    		y expr=(\thisrowno{6} + \thisrowno{7})/2,
+    		y error plus expr=(\thisrowno{4}-\thisrowno{4})/2,
+    		y error minus expr=(\thisrowno{4}-\thisrowno{4})/2,
+    		restrict expr to domain={\thisrowno{0}}{1e-5:1e-5},
+    		restrict expr to domain={\thisrowno{1}}{0:0}
+    		]{c5/la160/results.stellopt};
+    		
+    		\addlegendentry{$\hat{E}_r=0$, $N_\xi=160$}	
+    		
+    	\end{axis}
+    \end{tikzpicture}
+\end{document}

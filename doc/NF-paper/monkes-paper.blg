@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: monkes-paper.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: unsrt.bst
+Reallocating 'name_of_file' (item size: 1) to 5 items.
+Database file #1: refs.bib
+You've used 43 entries,
+            1791 wiz_defined-function locations,
+            730 strings with 21359 characters,
+and the built_in function-call counts, 17879 in all, are:
+= -- 803
+> -- 2363
+< -- 0
++ -- 804
+- -- 761
+* -- 2025
+:= -- 3485
+add.period$ -- 130
+call.type$ -- 43
+change.case$ -- 42
+chr.to.int$ -- 0
+cite$ -- 43
+duplicate$ -- 369
+empty$ -- 962
+format.name$ -- 761
+if$ -- 3377
+int.to.chr$ -- 0
+int.to.str$ -- 43
+missing$ -- 41
+newline$ -- 219
+num.names$ -- 43
+pop$ -- 72
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 145
+stack$ -- 0
+substring$ -- 709
+swap$ -- 43
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 77
+width$ -- 45
+write$ -- 473

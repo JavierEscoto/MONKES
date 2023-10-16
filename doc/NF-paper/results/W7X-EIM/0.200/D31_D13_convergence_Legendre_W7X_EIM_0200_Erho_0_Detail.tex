@@ -1,0 +1,43 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		legend columns=3, 
+		enlarge x limits=false, 
+		legend pos = north west, 
+		width=0.95\textwidth,  
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=3,
+			/tikz/.cd}, 
+		xlabel = $N_\xi$, ylabel=${\Gamma_{31},-\Gamma_{13}}$
+		]	
+		%
+		\addplot[blue, mark=o, only marks] table[skip first n=1, 
+		x expr=\thisrowno{4},
+		y expr=\thisrowno{6},
+		restrict expr to domain={\thisrowno{2}}{29:47},
+		restrict expr to domain={\thisrowno{3}}{65:97}
+		]{results/W7X-EIM/0.200/DKE_zeta_Convergence_Example_Nxi_120/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};	
+		\addlegendentry{$\Gamma_{31}$}
+		%
+		\addplot[blue, mark=x, only marks] table[skip first n=1, 
+		x expr=\thisrowno{4},
+		y expr=-\thisrowno{7},
+		restrict expr to domain={\thisrowno{2}}{43:47},
+		restrict expr to domain={\thisrowno{3}}{65:97}
+		]{results/W7X-EIM/0.200/DKE_zeta_Convergence_Example_Nxi_120/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+		\addlegendentry{-$\Gamma_{13}$}	
+		
+		
+		
+		\addplot[forget plot, name path=Upper2,blue!20, 
+		 domain = 119:201,
+		] {0.3593392335766615E+00*1.05};	
+		\addplot[forget plot, name path=Lower2,blue!20, 
+	    domain = 119:201,
+		] {0.3593392335766615E+00*0.95};		
+		\addplot[blue!20] fill between[of=Upper2 and Lower2];
+		\addlegendentry{5\%}
+	\end{axis}
+\end{tikzpicture}

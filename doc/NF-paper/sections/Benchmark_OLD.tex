@@ -1,0 +1,63 @@
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{ccccccc}
+		\toprule
+		Configuration & $\psi/\psi_{\text{lcfs}}$ & $\hat{\nu}$ & $E_r/v$ &  \begin{tabular}[c]{@{}c@{}}$\Gamma_{31}$ \\ \texttt{MONKES} \end{tabular} & $N_\xi$ 5\%  & $t_{\text{clock}}$ {[}s{]}  \\ \midrule
+		CIEMAT-QI     & 0.25    & $10^{-5}$   & 0    & 0.07448                                                                                        & 120         &         19      \\
+		CIEMAT-QI     & 0.25    & $10^{-5}$    & $10^{-3}$   & 0.01955                                                                                     & 140         &  41.95                        \\
+		CIEMAT-QI     & 0.06    & $10^{-5}$    & 0     & -0.007521                                                                                    & 120         & 58.72                        \\
+		CIEMAT-QI     & 0.06    & $10^{-5}$    & $10^{-3}$   &    0.04413                                                                                     & 120         &   14.31                    \\
+		W7X-KJM       & 0.204   & $10^{-5}$    & 0     
+		&    0.06523                                                                                  & 140         &  31.39                          \\
+		W7X-KJM       & 0.204   & $10^{-5}$    & $3\cdot10^{-4}$     &  0.2492  & 140          &      32.22                      \\
+		W7X-EIM       & 0.200   & $10^{-5}$    & 0     & 0.3425                                                                                    & 140          &   13.95                \\
+		W7X-EIM       & 0.200   & $10^{-5}$    & $3\cdot10^{-4}$    
+		& 0.2262                                                                                        & 140          &   35.58          \\ \bottomrule
+	\end{tabular}
+	\caption{Table of {\MONKES} results}
+\end{table}
+
+
+
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{@{}cccccccc@{}}
+		\toprule
+		Configuration & $\psi/\psi_{\text{lcfs}}$ & $\hat{\nu}$ & $E_r/v$ & \begin{tabular}[c]{@{}c@{}}$\Gamma_{31}$ \\ \texttt{DKES}\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\Gamma_{31}$ \\ \texttt{DKES} 5\%\end{tabular} & $N_\xi$ 5\%  & $t_{\text{cpu}}$ {[}s{]} 5\% \\ \midrule
+		CIEMAT-QI     & 0.25    & $10^{-5}$   & 0    & 0.168                                                                                   & 0.171                                                                                       & 100         &  238                          \\
+		CIEMAT-QI     & 0.25    & $10^{-5}$    & $10^{-3}$   & 0.0088                                                                                  & 0.0086                                                                                      & 120         &  214                        \\
+		CIEMAT-QI     & 0.06    & $10^{-5}$    & 0     & -0.048                                                                                  & -0.045                                                                                      & 120         &  68                           \\
+		CIEMAT-QI     & 0.06    & $10^{-5}$    & $10^{-3}$   & 0.039                                                                                   & 0.037                                                                                       & 120         &  111                          \\
+		W7X-KJM       & 0.204   & $10^{-5}$    & 0     & 0.0696                                                                                  & 0.0692                                                                                      & 120         &  615                          \\
+		W7X-KJM       & 0.204   & $10^{-5}$    & $3\cdot10^{-4}$     & 0.2693                                                                                  & 0.2638                                                                                      & 60          &  248                          \\
+		W7X-EIM       & 0.200   & $10^{-5}$    & 0     & 0.3594                                                                                  & 0.3705                                                                                      & 80          &  83.9                         \\
+		W7X-EIM       & 0.200   & $10^{-5}$    & $3\cdot10^{-4}$    & 0.2356                                                                                  & 0.2376                                                                                      & 80          &  57.5                         \\ \bottomrule
+	\end{tabular}
+\caption{Table of {\DKES} results}
+\end{table}
+
+\begin{figure}
+	\input{results/DKES_convergence/W7X-EIM/0.200/omega0e-0cl1e-5/D11_Convergence_DKES_W7X_EIM_0200_Erho_0.tex}
+\end{figure}
+
+
+\begin{figure}
+	\input{results/DKES_convergence/W7X-EIM/0.200/omega0e-0cl1e-5/D31_Convergence_DKES_W7X_EIM_0200_Erho_0.tex}
+	\caption{$\Gamma_{31}$ convergence from {\DKES} at W7-X EIM $\psi/\psi_{\text{lcfs}}=0.200$}
+\end{figure}
+
+
+
+\begin{figure}
+	\input{results/DKES_convergence/CIEMAT-QI/0.250/omega0e-0cl1e-5/D31_Convergence_DKES_CIEMAT_QI_0250_Erho_0.tex}
+	\caption{$\Gamma_{31}$ convergence from {\DKES} at CIEMAT-QI $\psi/\psi_{\text{lcfs}}=0.250$ and $E_\psi=0$.}
+\end{figure}
+
+
+
+\begin{figure}
+	\input{results/DKES_convergence/CIEMAT-QI/0.250/omega1e-3cl1e-5/D31_Convergence_DKES_CIEMAT_QI_0250_Erho_1e-3.tex}
+	\caption{$\Gamma_{31}$ convergence from {\DKES} at CIEMAT-QI $\psi/\psi_{\text{lcfs}}=0.250$ and $E_\psi=10^{-3}$.}
+\end{figure}

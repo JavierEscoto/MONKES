@@ -1,0 +1,6 @@
+TikzFigures/Convergence_plots-figure1.pdf: Nxi_120/monkes_Monoenergetic_Database.dat
+TikzFigures/Convergence_plots-figure1.pdf: Nxi_140/monkes_Monoenergetic_Database.dat
+TikzFigures/Convergence_plots-figure1.pdf: Nxi_160/monkes_Monoenergetic_Database.dat
+TikzFigures/Convergence_plots-figure1.pdf: Nxi_180/monkes_Monoenergetic_Database.dat
+TikzFigures/Convergence_plots-figure1.pdf: Nxi_200/monkes_Monoenergetic_Database.dat
+TikzFigures/Convergence_plots-figure1.pdf: Nxi_240/monkes_Monoenergetic_Database.dat

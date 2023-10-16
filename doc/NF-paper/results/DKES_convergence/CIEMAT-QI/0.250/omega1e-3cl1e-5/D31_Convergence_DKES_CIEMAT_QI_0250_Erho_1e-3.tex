@@ -1,0 +1,52 @@
+\tikzsetnextfilename{D31_Convergence_DKES_CIEMAT_QI_0250_Erho_1e-3}
+\begin{tikzpicture}
+	\begin{axis}[
+		extra x ticks={120}, extra tick style={grid=major, grid style={dashed,black}}, 
+		xlabel = $N_\xi$, ylabel=$\Gamma_{31}$
+		]
+		
+		\foreach \Nxi in {20,40,...,200}{
+			\addplot[blue, mark=*, only marks] table[skip first n=2, 
+			x expr=\Nxi,
+			y expr=(\thisrowno{6}+\thisrowno{7})/2,
+			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}
+			]{results/DKES_convergence/CIEMAT-QI/0.250/omega1e-3cl1e-5/la\Nxi/results.stellopt};		
+	
+%	    	
+%	    	
+	    \addplot[mark=-, mark size=10pt, name path=Upper5, blue!20 
+	    ] table [skip first n=2, 	    
+	    x expr=\Nxi,
+	    y expr=1.05*(\thisrowno{6}+\thisrowno{7})/2,
+	    ]{results/DKES_convergence/CIEMAT-QI/0.250/omega1e-3cl1e-5/la200/results.stellopt};
+	    
+	    
+	    \addplot[mark=-, mark size=10pt, name path=Lower5, blue!20 
+	    ] table [skip first n=2, 	    
+	    x expr=\Nxi,
+	    y expr=0.95*(\thisrowno{6}+\thisrowno{7})/2,
+	    ]{results/DKES_convergence/CIEMAT-QI/0.250/omega1e-3cl1e-5/la200/results.stellopt};
+	    
+	    }
+	\end{axis}
+\end{tikzpicture}
+
+\tikzsetnextfilename{Clock_time_DKES_CIEMAT_QI_0250_Erho_1e-3}
+\begin{tikzpicture}
+	\begin{axis}[
+		extra x ticks={120},
+		extra y ticks={214/60}, extra tick style={grid=major, grid style={dashed,black}}, 
+		xlabel = $N_\xi$, ylabel=Clock time {[min]}
+		]
+		
+		\foreach \Nxi in {20,40,...,200}{
+			\addplot[blue, mark=*, only marks] table[skip first n=1, 
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{1}/60,
+			restrict expr to domain={\thisrowno{0}}{\Nxi:\Nxi}
+			]{results/DKES_convergence/CIEMAT-QI/0.250/omega1e-3cl1e-5/cpu_time.plt};	
+        } 
+     
+    
+	\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,39 @@
+Hola, Javier,
+
+te mando una primera ronda de comentarios, solo de la sección 2
+
+- En la sección 2, yo diría al principio de todo que se resuelve la ecuación de DKES, que sabemos que es correcta en tal región del espacio de configuraciones de parámetros, y que se ha comparado extensivamente con el experimento en el pasado (No sé si dices que calculas la desviación con respecto a la maxwelliana, por ejemplo).
+
+- Eso no quita que luego se discutan más detalles como la localidad, una vez presentadas las ecuaciones y una vez se ve que no hay derivadas radiales de F (es decir, lo que haces).
+
+- La parte del operador de colisiones y lo de si las diferentes especies están acopladas requiere que te extiendas un poco más
+
+- Cuando se presenten las ecuaciones conviene hacerlo de forma completa. Quiero decir, que la ecuación 17 (no sé si escrita exactamente así o no) debería ir inmediatamente después de la 3.
+
+- No sé si las expresiones de las ecuaciones 13, 14 y 15 tienen alguna utilidad en esta sección. Probablemente sea mejor moverlas más abajo.
+
+- Lo que va después de la ecuación 17 creo que conviene ponerlo en una subsección en la que se empiece diciendo que se revisa la aproximación monoenergética, que es bien conocida.
+
+    - Más que la ecuación (18), es su solución lo que solo depende de hat E_psi y hat nu. Debidamente normalizada, cosa que quizás convendría enseñar.
+
+- Hay que justificar por qué defines los D_ij y los Gamma_ij, uno podría pensar que con tener unos ya vale. Habrá que hablar de DKES. También quizás mencionar en una footnote EFIELD y CMUL en realación a hat E_psi y hat nu
+
+Cosas menores que he ido apuntando de forma no exhaustiva
+
+- poner "equation" antes de cada número de ecuación.
+
+- nosotros solemos usar Z_b e en lugar de e_b
+
+- quizás es cuestión de gustos, pero suele usarse F para la función de distribución y f o delta f para la desviación con respecto a la maxwelliana.
+
+- no sé si defines E_0, phi_0, psi_lcfs prima.
+
+- B_psi es cero en tus cálculos
+
+- "specie" -> "species"
+
+- "gyrorradius" -> "gyro-radius"
+
+- SFINCS tiene ese modelo de trayectorias pero no es el principal.
+
+- mencionar que usas un sistema de coordenadas right-handed (en condiciones normales, no haría falta, pero como hablamos de DKES...)

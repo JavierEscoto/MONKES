@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=\textwidth,  
+		xlabel = $N_\xi$, ylabel=Wall-clock time {[s]},
+		mark size=2 pt,
+		legend pos=south east
+		]		
+				
+	    \addplot+[only marks, blue, mark=+] table[skip first n=1, 
+		x expr=\thisrowno{4},
+		y expr=\thisrowno{10}*1,
+		restrict expr to domain={\thisrowno{4}}{0:600}
+		]{results/W7X-EIM/0.200/Convergence_Nxi/N_theta_27_N_zeta_75/monkes_Monoenergetic_Database.dat};
+		\addlegendentry{$N_{\text{fs}}=2025$}
+		
+		\addplot+[no markers, black] table[skip first n=1, 
+		x expr=\thisrowno{4},
+		y expr=\thisrowno{4}*0.61,
+		restrict expr to domain={\thisrowno{4}}{0:600}
+		]{results/W7X-EIM/0.200/Convergence_Nxi/N_theta_27_N_zeta_75/monkes_Monoenergetic_Database.dat};
+		\addlegendentry{$0.61 N_{\xi}$}
+		
+		
+	\end{axis}
+\end{tikzpicture}

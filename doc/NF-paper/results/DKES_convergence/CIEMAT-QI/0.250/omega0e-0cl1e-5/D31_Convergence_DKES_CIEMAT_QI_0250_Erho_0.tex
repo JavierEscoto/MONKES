@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		title={Convergence of $\Gamma_{13}^+$ and $\Gamma_{13}^-$ of \texttt{DKES}}, 
+		xlabel = $N_\xi$, ylabel=$\Gamma_{31}$
+		]
+		
+		\foreach \Nxi in {20,40,...,200}{
+			\addplot[blue, mark=*, only marks] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=\thisrowno{7},
+			restrict expr to domain={\thisrowno{1}}{0:0}
+			]{results/DKES_convergence/CIEMAT-QI/0.250/omega0e-0cl1e-5/la\Nxi/results.stellopt};			
+			
+		}
+	
+	    
+	    \foreach \Nxi in {20,40,...,200}{
+	    	\addplot[red, mark=*, only marks] table[skip first n=1, 
+	    	x expr=\Nxi,
+	    	y expr=\thisrowno{6},
+	    	restrict expr to domain={\thisrowno{1}}{0:0}
+	    	]{results/DKES_convergence/CIEMAT-QI/0.250/omega0e-0cl1e-5/la\Nxi/results.stellopt};			
+	    	
+	    }
+	\end{axis}
+\end{tikzpicture}

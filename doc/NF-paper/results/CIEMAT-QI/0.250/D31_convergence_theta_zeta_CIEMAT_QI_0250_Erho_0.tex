@@ -1,0 +1,61 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=\textwidth, 
+		scaled y ticks=base 10:2,
+		xtick={40, 80,119,160,200, 240},
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd}, 
+		ymin = 0.040 * 0.4674,
+		ymax = 0.102 * 0.4674,
+		legend pos = south east, 
+		legend columns =2, 
+		xlabel = $N_\zeta$, ylabel=$\widehat{D}_{31}$ ${[\text{m}]}$
+		]		
+		
+		\addplot[forget plot, name path=Upper2,red!20, 
+		domain = 73:243] {0.888E-01* 0.4674+ 5e-3  };	
+		\addplot[forget plot, name path=Lower2,red!20, 
+		domain = 73:243] {0.888E-01* 0.4674- 5e-3  };			
+		\addplot[forget plot,red!20] fill between[of=Upper2 and Lower2];
+%		\addlegendentry{ $\pm 0.01$ }
+		
+		\addplot[forget plot, name path=Upper2,blue!20, 
+		domain = 73:243] {0.888E-01*1.07 * 0.4674};	
+		\addplot[forget plot, name path=Lower2,blue!20, 
+		domain = 73:243] {0.888E-01*0.93 * 0.4674};	
+		\addplot[forget plot, blue!20] fill between[of=Upper2 and Lower2];
+		
+		\foreach \Ntheta in {15,19,...,27}{		
+			\addplot+[no markers] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{6} * 0.4674,
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{75:270}
+			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+%			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_160/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+			\addlegendimage{empty legend}
+			\addlegendentry{$N_\theta=$}
+			\expandafter\addlegendentry\expandafter{\Ntheta}
+		}	
+	
+	    
+		
+		\foreach \Ntheta in {15}{		
+			\addplot+[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{6} * 0.4674,
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{119:119}
+			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+			
+		}	
+		%		\addlegendentry{Spread of 5\%}
+		
+		
+	\end{axis}
+\end{tikzpicture}

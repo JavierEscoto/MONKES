@@ -1,0 +1,58 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+%				ymax = 150, 
+		width=0.97\textwidth, 
+		xtick = {20,40,80,100},
+		extra x ticks={63},		
+		extra y ticks={32.6},
+		extra tick style={grid=major, grid style={dashed,black}}, 
+		%		scaled y ticks=base 10:-1,
+		%		xtick={80,120,160,200, 240},
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=0,
+			/tikz/.cd}, 
+		%		ymin = 0.053,
+		%		ymax = 0.102,
+		legend pos = south east, 
+		legend columns =2, 
+		xlabel = $N_\zeta$, ylabel=Wall-clock time {[s]}
+		]
+		
+		
+		%		\addplot[forget plot, name path=Upper2,blue!20, 
+		%		domain = 15:71] {0.3593392335766615E+00*1.05};	
+		%		\addplot[forget plot, name path=Lower2,blue!20, 
+		%		domain = 15:71] {0.3593392335766615E+00*0.95};		
+		%		\addplot[forget plot, blue!20] fill between[of=Upper2 and Lower2];
+		
+		\foreach \Ntheta in {23}{		
+			\addplot+[Brown, no markers] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{10},
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{21:105},
+			restrict expr to domain={\thisrowno{4}}{140:140}
+			]{results/W7X-KJM/0.204/DKE_zeta_Convergence_Example_Nxi_140/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+			\addlegendimage{empty legend}
+			\addlegendentry{$N_\theta=$}
+			\expandafter\addlegendentry\expandafter{\Ntheta}
+		}	
+		
+		
+		
+		\foreach \Ntheta in {23}{		
+			\addplot+[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{10},
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{63:63},
+			restrict expr to domain={\thisrowno{4}}{140:140}
+			]{results/W7X-KJM/0.204/DKE_zeta_Convergence_Example_Nxi_140/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+		}
+		
+	\end{axis}
+\end{tikzpicture}

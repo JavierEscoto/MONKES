@@ -1,0 +1,84 @@
+In low collisionality regimes, convection is dominant with respect to diffusion. As equation (\ref{eq:DKE}) is singularly perturbed with respect to $\hat{\nu}$, its solution possesses internal boundary layers in $\xi$. These boundary layers appear at the interfaces between different classes of trapped particles. At these regions of phase space, collisions are no longer subdominant with respect to advection. Besides, at these regions, the poloidal $\vb*{E}\times\vb*{B}$ precession from equation (\ref{eq:DKE}) can produce the chaotic transition of collisionless particles from one class to another due to separatrix crossing mechanisms \cite{Cary_Separatrix_Crossing, dherbemont2022}. The existence of these localized regions with large $\xi$ gradients demands a high number of Legendre modes $N_\xi$, explaining the difficulty to obtain fast and accurate solutions to equation (\ref{eq:DKE}) at low collisionality. 
+
+In this subsection we will select resolutions $N_\theta$, $N_\zeta$ and $N_\xi$ for which {\MONKES} provides accurate calculations of the monoenergetic coefficients in a wide range of collisionalities. For this, we will study how the monoenergetic coefficients computed by {\MONKES} converge with $N_\theta$, $N_\zeta$ and $N_\xi$ at low collisionality. From the point of view of numerical analysis, the need for large values of $N_\xi$ is due to the lack of diffusion along $\xi$ in equation (\ref{eq:DKE}). Hence, if {\MONKES} is capable of producing fast and accurate calculations at low collisionality, it will also produce fast and accurate calculations at higher collisionalities. 
+
+For the convergence study, we select three different magnetic configurations at a single flux surface. Two of them correspond to configurations of W7-X: EIM and KJM. The third one corresponds to the new QI ``flat mirror'' \cite{velasco2023robust} configuration CIEMAT-QI \cite{Sanchez_2023}. The calculations are done for the $1/\nu$ (cases with $\hat{E}_r=0$) and $\sqrt{\nu}$-$\nu$ regimes \cite{dherbemont2022} (cases with $\hat{E}_r\ne 0$) at the low collisionality value $\hat{\nu}=10^{-5}$ m. In table \ref{tab:Convergence_cases} the cases considered are listed, including their correspondent values of $\hat{E}_r:= \hat{E}_\psi\dv*{\psi}{r}$. We have denoted $r = a \sqrt{\psi/\psi_{\text{lcfs}}}$ and, in this context, $a$ is the minor radius of the device\footnote{{\DKES} uses $r$ as radial coordinate instead of $\psi$. The quantities $\hat{\nu}$ and $\hat{E}_r$ are denoted respectively \texttt{CMUL} and \texttt{EFIELD} in the code {\DKES}.}.
+\begin{table}[h]
+	\centering
+	\begin{tabular}{@{}lccc@{}}
+		\toprule
+		Configuration & $\psi/\psi_{\text{lcfs}}$ & $\hat{\nu}$ $[\text{m}^{-1}]$ & $\hat{E}_r$  $[\text{kV}\cdot\text{s}/\text{m}^2]$   \\ \midrule
+		W7X-EIM       & 0.200                     & $10^{-5}$   & 0 \\
+		W7X-EIM       & 0.200                     & $10^{-5}$   & $3\cdot10^{-4}$ \\
+		W7X-KJM       & 0.204                     & $10^{-5}$   & 0 \\
+		W7X-KJM       & 0.204                     & $10^{-5}$   & $3\cdot10^{-4}$ \\ 
+		CIEMAT-QI     & 0.250                     & $10^{-5}$   & 0       \\
+		CIEMAT-QI     & 0.250                     & $10^{-5}$   & $10^{-3}$       \\
+		\bottomrule
+	\end{tabular}
+	\caption{Cases considered in the convergence study of monoenergetic coefficients and values of $(\hat{\nu},\hat{E}_r)$.}
+	\label{tab:Convergence_cases}
+\end{table}
+
+In order to select the triplets $(N_\theta,N_\zeta, N_\xi)$ for sufficiently accurate calculations of $\widehat{D}_{31}$, we need to specify when we will consider that a computation has converged. For each case of table \ref{tab:Convergence_cases} we will proceed in the same manner. First, we plot the coefficients $\widehat{D}_{ij}$ as functions of the number of Legendre modes in a sufficiently wide interval. For each value of $N_\xi$, the selected spatial resolutions $N_\theta$ and $N_\zeta$ are large enough so that increasing them varies the monoenergetic coefficients in less than a 1\%. We will say that these calculations are ``spatially converged''. Since, typically, the most difficult coefficient to calculate is the bootstrap current coefficient, we will select the resolutions so that $\widehat{D}_{31}$ is accurately computed. From the curve of (spatially converged) $\widehat{D}_{31}$ as a function of $N_\xi$ we define our converged reference value, which we denote by $\widehat{D}_{31}^{\text{r}}$, as the converged calculation to three significant digits. From this converged reference value we will define two regions. A first region
+%
+\begin{align}
+	\mathcal{R}_{\epsilon}:=
+	\left[
+	(1-\epsilon/100)\widehat{D}_{31}^{\text{r}}, (1+\epsilon/100)\widehat{D}_{31}^{\text{r}} 
+	\right]
+\end{align} 
+for calculations that deviate less than or equal to an $\epsilon$\% with respect to $\widehat{D}_{31}^{\text{r}}$. This interval will be used for selecting the resolutions through the following convergence criteria. We say that, for fixed $(N_\theta,N_\zeta,N_\xi)$ and $\epsilon$, a calculation $\widehat{D}_{31}\in\mathcal{R}_{\epsilon}$ is sufficiently converged if two conditions are satisfied 
+%
+\begin{enumerate}
+	\item Spatially converged calculations with $N_\xi'\ge N_\xi$ belong to $\mathcal{R}_{\epsilon}$.
+	\item Increasing $N_\theta$ and $N_\zeta$ while keeping $N_\xi$ constant produces calculations which belong to $\mathcal{R}_{\epsilon}$.
+\end{enumerate}
+Condition (i) is used to select the number of Legendre modes $N_\xi$ and condition (ii) is used to select the values of $N_\theta$ and $N_\zeta$ once $N_\xi$ is fixed. 
+
+
+
+
+Additionally, we define a second interval 
+%
+\begin{align}
+	\mathcal{A}_{\epsilon}:=
+	\left[
+	\widehat{D}_{31}^{\text{r}}-\epsilon, \widehat{D}_{31}^{\text{r}}+\epsilon 
+	\right]
+\end{align}
+to distinguish which calculations are at a distance smaller than or equal to $\epsilon$ from $\widehat{D}_{31}^{\text{r}}$. The reason to have two different regions is that for stellarators close to QI, the relative convergence criteria can become too demanding (the smaller $\widehat{D}_{31}^{\text{r}}$ is, the narrower $\mathcal{R}_{\epsilon}$ becomes). Nevertheless, for \textcolor{blue}{optimizing QI configurations}, it is sufficient to ensure that $|\widehat{D}_{31}|$ is sufficiently small. If the absolute error is much smaller than a value of $|\widehat{D}_{31}|$ that can be considered sufficiently small, the calculation is converged for optimization purposes. We will use this interval for two purposes: first to give a visual idea of how narrow $\mathcal{R}_{\epsilon}$ becomes. Second, to show that if $\mathcal{R}_{\epsilon}$ is very small, it is easier to satisfy an absolute criteria than a relative one. 
+
+Figure \ref{fig:Convergence_W7X_EIM_Er_0} shows the convergence of monoenergetic coefficients with the number of Legendre modes for W7-X EIM when $\hat{E}_r=0$. From figures \ref{subfig:D11_Convergence_W7X_EIM_Er_0_Legendre} and \ref{subfig:D33_Convergence_W7X_EIM_Er_0_Legendre} we see that the radial transport and parallel conductivity coefficients converge monotonically with $N_\xi$. On the other hand, the bootstrap current coefficient is more difficult to converge as can be seen on \ref{subfig:D31_convergence_Legendre_W7X_EIM_0200_Erho_0_Detail}. As a sanity check, the fulfilment of the Onsager symmetry relation $\widehat{D}_{31}= - \widehat{D}_{13}$ is included. The converged reference value $\widehat{D}_{31}^{\text{r}}$ is the spatially converged calculation for $N_\xi=380$. Defining a region of relative convergence of $\epsilon=5\%$, allows to select a resolution of $N_\xi=140$ Legendre modes to satisfy condition (i). The selection is indicated with a five-pointed green star. Note that for this case, an absolute deviation of $0.005$ m from $\widehat{D}_{31}^{\text{r}}$ is slightly more demanding than the relative condition. This absolute deviation is selected as the 5\% of $\widehat{D}_{31}\sim 0.1$ m, which can be considered a small value of $\widehat{D}_{31}$. From figure \ref{subfig:D31_convergence_theta_zeta_W7X_EIM_0200_Erho_0} we choose the resolutions $(N_\theta,N_\zeta)=(23,55)$ to satisfy convergence condition (ii). 
+
+The case of W7-X EIM with $\hat{E}_r\ne 0$ is shown in figure \ref{fig:Convergence_W7X_EIM_Er_3e-4}. We note from figure \ref{subfig:D31_convergence_Legendre_W7X_EIM_0200_Erho_3e-4_Detail} that obtaining sufficiently converged results for the region $\mathcal{R}_{5}$ is more difficult than in the case without radial electric field. For this case, the sizes of the intervals $\mathcal{A}_{0.005}$ and $\mathcal{R}_{5}$ are almost the same. This is in part due to the fact that the $\widehat{D}_{31}$ coefficient is smaller in absolute value and thus, the region $\mathcal{R}_{5}$ is narrower. We select $N_\xi=160$ to satisfy condition (i). The selection $(N_\theta,N_\zeta)=(27,55)$ satisfies condition (ii) as shown in figure \ref{subfig:D31_convergence_theta_zeta_W7X_EIM_0200_Erho_3e-4_Detail}. 
+
+The convergence curves for the case of W7-X KJM when $\hat{E}_r=0$ are shown in figure \ref{fig:Convergence_W7X_KJM_Er_0}. Due to the smallness of $\widehat{D}_{31}^{\text{r}}$, the amplitude of the region $\mathcal{R}_{5}$ is much narrower than in the EIM case, being of order $10^{-3}$. It is so narrow that the absolute value region $\mathcal{A}_{0.005}$ contains the relative convergence region. It is shown in figure \ref{subfig:D31_convergence_Legendre_W7X_KJM_0204_Erho_0_Detail} that taking $N_\xi=140$ is sufficient to satisfy condition (i). According to the convergence curves plotted in figure \ref{subfig:D31_convergence_theta_zeta_W7X_KJM_0204_Erho_0}, selecting $(N_\theta,N_\zeta)=(23,63)$ ensures satisfying condition (ii). 
+
+The case of W7-X KJM for finite $\hat{E}_r$ is shown in figure \ref{fig:Convergence_W7X_KJM_Er_3e-4}. The selection of $N_\xi=180$ Legendre modes, indicated in figure \ref{subfig:D31_convergence_Legendre_W7X_KJM_0204_Erho_3e-4_Detail}, satisfies convergence condition (i). As shown in figure \ref{subfig:D31_convergence_theta_zeta_W7X_KJM_0204_Erho_3e-4_Detail}, condition (ii) is satisfied by the selection $(N_\theta, N_\zeta)=(19,79)$. 
+
+
+\input{sections/Convergence/Results_W7X_EIM_0200_Erho_0.tex}
+\input{sections/Convergence/Results_W7X_EIM_0200_Erho_3e-4.tex}
+
+\input{sections/Convergence/Results_W7X_KJM_0204_Erho_0.tex}
+\input{sections/Convergence/Results_W7X_KJM_0204_Erho_3e-4.tex}%
+
+\input{sections/Convergence/Results_CIEMAT_QI_0250_Erho_0.tex}
+\input{sections/Convergence/Results_CIEMAT_QI_0250_Erho_1e-3.tex}
+
+The convergence of monoenergetic coefficients for CIEMAT-QI without $\hat{E}_r$ is shown in figure \ref{fig:Convergence_CIEMAT_QI_Er_0}. Note that as in the W7-X KJM case at this regime, the region of absolute error $\mathcal{A}_{0.005}$ is bigger than the relative one. As the monoenergetic coefficients are smaller, we relax the relative convergence parameter to $\epsilon=7\%$. In figure \ref{subfig:D31_convergence_Legendre_CIEMAT_QI_0250_Erho_0_Detail} we see that the region of 7\% of deviation $\mathcal{R}_{7}$ is quite narrow and that selecting $N_\xi=180$ satisfies condition (i). To satisfy condition (ii), we choose the resolutions $(N_\theta,N_\zeta)=(15,119)$ as shown in figure \ref{subfig:D31_convergence_theta_zeta_CIEMAT_QI_0250_Erho_0}. 
+
+
+
+Finally, the case of CIEMAT-QI with $\hat{E}_r\ne 0$ is shown in figure \ref{fig:Convergence_CIEMAT_QI_Er_1e-3}. Looking at figure \ref{subfig:D31_convergence_Legendre_CIEMAT_QI_0250_Erho_1e-3_Detail} we can check that taking $N_\xi=180$ satisfies condition (i) for the region $\mathcal{R}_7$ of 7\% of deviation. In this case, the region of absolute error $\mathcal{A}_{0.001}$ is five times smaller than in the rest of cases and is still bigger than the relative error region. As shown in figure \ref{subfig:D31_convergence_theta_zeta_CIEMAT_QI_0250_Erho_1e-3}, the selection $(N_\theta,N_\zeta)=(15,119)$ satisfies condition (ii).
+
+
+
+
+
+
+
+
+
+%\FloatBarrier

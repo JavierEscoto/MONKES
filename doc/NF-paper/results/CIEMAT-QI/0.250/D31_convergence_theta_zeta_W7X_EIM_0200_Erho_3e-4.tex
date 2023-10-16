@@ -1,0 +1,62 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth,
+		ymin =0.235/2.4311, 
+		width=\textwidth, 
+		scaled y ticks=base 10:1,
+		%		xtick={80,120,160,200, 240},
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd}, 
+		%		ymin = 0.053,
+				ymax = 0.1338,
+		legend pos = south east, 
+		legend columns =2, 
+		xlabel = $N_\zeta$, ylabel=$\widehat{D}_{31}$ ${[\text{m}]}$
+		]
+		
+		\foreach \Ntheta in {27}{		
+			\addplot+[forget plot, ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{6}*0.5237,
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{55:55},
+			restrict expr to domain={\thisrowno{4}}{160:160}
+			]{results/W7X-EIM/0.200/Convergence_nu_1e-5_Er_3e-4/Nxi_160/monkes_Monoenergetic_Database.dat};
+		}
+		
+		\addplot[forget plot, name path=Upper2,blue!20, 
+		domain = 23:131] {0.241E+00*1.05*0.5237};	
+		\addplot[forget plot, name path=Lower2,blue!20, 
+		domain = 23:131] {0.241E+00*0.95*0.5237};		
+		\addplot[forget plot, blue!20] fill between[of=Upper2 and Lower2];
+		
+		
+		\addplot[forget plot, name path=Upper2,red!20, 
+		domain = 23:131] {(0.241E+00)*0.5237+0.005};	
+		\addplot[forget plot, name path=Lower2,red!20, 
+		domain = 23:131] {(0.241E+00)*0.5237-0.005};		
+		\addplot[forget plot, red!20] fill between[of=Upper2 and Lower2];
+		
+		\foreach \Ntheta in {19,23,27,...,31}{		
+			\addplot+[no markers] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{6}*0.5237,
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{27:131},
+			restrict expr to domain={\thisrowno{4}}{160:160}
+			]{results/W7X-EIM/0.200/Convergence_nu_1e-5_Er_3e-4/Nxi_160/monkes_Monoenergetic_Database.dat};
+			
+			\addlegendimage{empty legend}
+			\addlegendentry{$N_\theta=$}
+			\expandafter\addlegendentry\expandafter{\Ntheta}
+		}	
+				
+		
+		
+		
+	\end{axis}
+\end{tikzpicture}

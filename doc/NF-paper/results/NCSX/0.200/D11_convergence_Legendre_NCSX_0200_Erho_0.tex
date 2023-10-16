@@ -1,0 +1,37 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=0.95\textwidth, 
+		scaled y ticks=base 10:0,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=2,
+			/tikz/.cd}, 
+		xlabel = $N_\xi$, ylabel=$\widehat{D}_{11} {K}_{11}$
+		]
+				
+		\foreach \Nxi in {20, 40, ...,120}{		
+			\addplot[blue, mark=+, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=\thisrowno{5},
+			restrict expr to domain={\thisrowno{2}}{19:47},
+			restrict expr to domain={\thisrowno{3}}{65:179},
+			restrict expr to domain={\thisrowno{4}}{\Nxi:\Nxi}
+			]{results/NCSX/0.200/DKE_zeta_Convergence_Example_Nxi_20/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+		}
+		
+		\foreach \Nxi in {140,160,...,200}{		
+			\addplot[blue, mark=+, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=\thisrowno{5},
+			restrict expr to domain={\thisrowno{2}}{19:47},
+			restrict expr to domain={\thisrowno{3}}{65:179},
+			restrict expr to domain={\thisrowno{4}}{\Nxi:\Nxi}
+			]{results/NCSX/0.200/DKE_zeta_Convergence_Example_Nxi_\Nxi/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+		}	
+		
+		
+	\end{axis}
+\end{tikzpicture}

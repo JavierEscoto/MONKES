@@ -1,0 +1,49 @@
+\section{Boozer coordinates} \label{sec:Appendix_Boozer}
+For the spatial domain, in section \ref{sec:Algorithm}, we will employ right-handed Boozer coordinates $(\psi,\theta,\zeta)\in[0,\psi_{\text{lcfs}}]\times[0,2\pi)\times[0,2\pi/N_p)$. In these coordinates $2\pi \psi$ is the toroidal flux of the magnetic field and $\theta$, $\zeta$ are respectively the poloidal and toroidal (in a single period) angles. The integer $N_p\ge 1$ denotes the number of periods of the device. In Boozer coordinates the magnetic field can be written as
+\begin{align}
+	\vb*{B} & = \nabla\psi \times \nabla\theta - \iota(\psi) \nabla\psi \times \nabla\zeta 
+	\nonumber\\
+	& = B_\psi(\psi,\theta,\zeta) \nabla \psi + B_\theta(\psi) \nabla \theta + B_\zeta(\psi) \nabla \zeta,
+\end{align}
+and the Jacobian of the transformation reads 
+%
+\begin{align}
+	\sqrt{g}(\psi,\theta,\zeta) 
+	:=( 
+	\nabla\psi \times \nabla \theta \cdot \nabla\zeta  
+	)^{-1} 
+	= 
+	\frac{B_\zeta + \iota B_\theta}{B^2},
+\end{align}
+where we have denoted $B:=|\vb*{B}|$ and $\iota =\vb*{B} \cdot \nabla \theta / \vb*{B} \cdot \nabla \zeta $ is the rotational transform.
+
+
+Here, the symbol $\mean*{...}$ stands for the flux-surface average operation, which in Boozer coordinates $(\theta,\zeta)$ takes the form
+%
+\begin{align}
+	\mean*{F} = \frac{1}{V'(\psi)}\oint \oint \sqrt{g}(\psi,\theta,\zeta) F(\psi,\theta,\zeta) \dd{\theta}\dd{\zeta}
+\end{align}
+for any integrable function $F(\psi,\theta,\zeta)$ and $V'(\psi)$ is fixed from the condition $\mean*{1}=1$. Also, the spatial differential operators involved in equation (\ref{eq:DKE_Original}) in Boozer coordinates take the form
+%
+\begin{align}
+	\vb*{b} \cdot \nabla & = 
+	\frac{B}{B_\zeta + \iota B_\theta}
+	\left(
+	\iota \pdv{\theta}
+	+ 
+	\pdv{\zeta} 
+	\right), %\label{eq:Parallel_streaming_spatial_operator}
+	\\
+	\vb*{B}\times\nabla\psi \cdot \nabla & = 
+	\frac{B^2}{B_\zeta + \iota B_\theta}
+	\left(
+	B_\zeta \pdv{\theta}
+	-
+	B_\theta \pdv{\zeta}
+	\right). %\label{eq:ExB_spatial_operator}
+\end{align}
+
+
+
+
+

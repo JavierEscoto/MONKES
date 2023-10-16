@@ -1,0 +1,6 @@
+TikzFigures/Benchmark-W7X-EIM-s0200-D31.pdf: ./results/W7X-EIM/0.200/Monoenergetic_Database_Example_23_55_140/Monoenergetic_1.plt
+TikzFigures/Benchmark-W7X-EIM-s0200-D31.pdf: ./results/SFINCS_results/W7X-EIM/20230420-01-027-W7X-EIM_Er0_nuScan_sfincs_results.dat
+TikzFigures/Benchmark-W7X-EIM-s0200-D31.pdf: ./results/W7X-EIM/0.200/results.data
+TikzFigures/Benchmark-W7X-EIM-s0200-D31.pdf: ./results/W7X-EIM/0.200/Convergence_nu_1e-5_Er_3e-4/monkes_Monoenergetic_Database.dat
+TikzFigures/Benchmark-W7X-EIM-s0200-D31.pdf: ./results/W7X-EIM/0.200/results.data
+TikzFigures/Benchmark-W7X-EIM-s0200-D31.pdf: ./results/SFINCS_results/W7X-EIM/20230420-01-018-W7X-EIM_withEr_nuScan_sfincs_results.dat

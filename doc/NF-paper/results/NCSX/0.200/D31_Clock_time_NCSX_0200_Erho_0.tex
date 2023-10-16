@@ -1,0 +1,56 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=0.97\textwidth, 
+		scaled y ticks=base 10:0,
+		%		xtick={80,120,160,200, 240},
+		extra y ticks={0.8289730000000000E+02},
+		extra tick style={grid=major, grid style={dashed,black}}, 
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=0,
+			/tikz/.cd}, 
+		ymin = 1.8,
+		legend pos = south east, 
+		legend columns =2, 
+		xlabel = $N_\zeta$, ylabel=Wall-clock time {[s]}
+		]
+		
+		\foreach \Ntheta in {27}{		
+			\addplot+[no markers] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{10},
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{23:99},
+			restrict expr to domain={\thisrowno{4}}{140:140}
+			]{results/NCSX/0.200/DKE_zeta_Convergence_Example_Nxi_140/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+			\addlegendimage{empty legend}
+			\addlegendentry{$N_\theta=$}
+			\expandafter\addlegendentry\expandafter{\Ntheta}
+		}	
+		
+		\foreach \Ntheta in {27}{		
+			\addplot+[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{10},
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{75:75},
+			restrict expr to domain={\thisrowno{4}}{140:140}
+			]{results/NCSX/0.200/DKE_zeta_Convergence_Example_Nxi_140/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+		}
+		%		\foreach \Ntheta in {15}{		
+		%			\addplot+[only marks, mark = oplus, mark size = 4 pt, blue ] table[skip first n=1, 
+		%			x expr=\thisrowno{3},
+		%			y expr=\thisrowno{6},
+		%			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+		%			restrict expr to domain={\thisrowno{3}}{119:119}
+		%			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+		
+		%		}	
+		%		\addlegendentry{Spread of 5\%}
+		
+		
+	\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,40 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		width=0.95\textwidth,
+		ymax=0.5237*0.5237*0.025, 
+		ymin=0.5237*0.5237*0.01,  
+		xlabel = $N_\xi$, ylabel=$(\widehat{D}_{11}^+ + \widehat{D}_{11}^-)/2$, 
+		scaled y ticks=base 10:3,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd} ,
+		legend pos = north east
+		]
+		
+		
+		
+		\foreach \Nxi in {40,60,...,200}
+		{			
+%			\addplot[red, mark=square*, only marks] table[skip first n=1, 
+%			x expr=\Nxi,
+%			y expr=(\thisrowno{4} + \thisrowno{5})/2,
+%			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4}
+%			]{results/DKES_convergence/W7X-EIM/0.200/omega3e-4cl1e-5/la\Nxi/results.stellopt};	
+			%
+			\addplot[red, mark=square*, only marks, error bars/.cd, y explicit,
+			y dir=both,	error bar style={thick}] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=0.5237*0.5237*(\thisrowno{4} + \thisrowno{5})/2,
+			y error plus expr=0.5237*0.5237*(\thisrowno{4}-\thisrowno{5})/2,
+			y error minus expr=0.5237*0.5237*(\thisrowno{4}-\thisrowno{5})/2,
+			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4}
+			]{results/DKES_convergence/W7X-EIM/0.200/omega3e-4cl1e-5/la\Nxi/results.stellopt};				
+		}
+		
+		
+		\addlegendentry{$\hat{E}_r=3\cdot10^{-4}$}
+	\end{axis}
+\end{tikzpicture}

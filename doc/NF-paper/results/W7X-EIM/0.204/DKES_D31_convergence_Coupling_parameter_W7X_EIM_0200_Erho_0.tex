@@ -1,0 +1,47 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=\textwidth, 
+		scaled y ticks=base 10:1,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=2,
+			/tikz/.cd}, 
+		xlabel = Coupling parameter, 
+		ylabel=$(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ ${[\text{m}]}$,
+		legend pos = north east, 
+		xtick={5,6,...,9}
+		]		
+		
+		\addplot[forget plot, name path=Upper2,blue!20, 
+		domain = 5:9] {(0.35610E+00	+ 0.37192E+00)/2*1.05  *0.5132};	
+		\addplot[forget plot, name path=Lower2,blue!20, 
+		domain = 5:9] {(0.35610E+00	+ 0.37192E+00)/2*0.95  *0.5132};		
+		\addplot[blue!20] fill between[of=Upper2 and Lower2];
+		%		\addlegendentry{ $\mathcal{R}_5$ }			
+		
+		
+		
+		\foreach \c in {5}
+		{		
+			\addplot[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
+			x expr=\c,
+			y expr=(\thisrowno{6} + \thisrowno{7})/2*0.5132,
+			]{results/DKES_convergence/W7X-EIM/0.200/efield_0e-0/c\c/la80/results.stellopt};					
+		}
+	
+		\foreach \c in {6,7,...,9}
+		{		
+			\addplot[forget plot, blue, mark=*, only marks] table[skip first n=1, 
+			x expr=\c,
+			y expr=(\thisrowno{6} + \thisrowno{7})/2*0.5132,
+			]{results/DKES_convergence/W7X-EIM/0.200/efield_0e-0/c\c/la80/results.stellopt};					
+		}
+		
+		
+		
+		
+	\end{axis}
+\end{tikzpicture}

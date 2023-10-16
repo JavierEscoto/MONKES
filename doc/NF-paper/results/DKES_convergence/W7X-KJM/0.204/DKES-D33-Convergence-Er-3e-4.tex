@@ -1,0 +1,32 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		width=0.95\textwidth, 
+		ymin=3.4e4,
+		ymax=3.58e4,
+		xlabel = $N_\xi$, ylabel=$(\widehat{D}_{33}^+ + \widehat{D}_{33}^-)/2$, 
+		scaled y ticks=base 10:-4,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=2,
+			/tikz/.cd} ,
+		legend pos = north east
+		]
+					
+		\foreach \Nxi in {40,60,...,200}
+		{
+			\addplot[red, mark=square*, only marks, error bars/.cd, y explicit,
+			y dir=both,	error bar style={thick}] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=(\thisrowno{8} + \thisrowno{9})/2,
+			y error plus expr=(\thisrowno{8}-\thisrowno{9})/2,
+			y error minus expr=(\thisrowno{8}-\thisrowno{9})/2,
+			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4}
+			]{results/DKES_convergence/W7X-KJM/0.204/omega3e-4cl1e-5/la\Nxi/results.stellopt};				
+		}
+		
+		
+		\addlegendentry{$\hat{E}_r=3\cdot10^{-4}$}
+	\end{axis}
+\end{tikzpicture}

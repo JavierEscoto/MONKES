@@ -1,0 +1,4 @@
+TikzFigures/Benchmark-W7X-EIM-s0200-D33.pdf: ./results/W7X-EIM/0.200/Monoenergetic_Database_Example_23_55_140/Monoenergetic_1.plt
+TikzFigures/Benchmark-W7X-EIM-s0200-D33.pdf: ./results/W7X-EIM/0.200/results.data
+TikzFigures/Benchmark-W7X-EIM-s0200-D33.pdf: ./results/W7X-EIM/0.200/Monoenergetic_Database_Example_27_55_140/Monoenergetic_5.plt
+TikzFigures/Benchmark-W7X-EIM-s0200-D33.pdf: ./results/W7X-EIM/0.200/results.data

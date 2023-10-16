@@ -1,0 +1,60 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=0.97\textwidth, 
+		scaled y ticks=base 10:0,
+		%		xtick={80,120,160,200, 240},
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=2,
+			/tikz/.cd}, 
+		ymin = 1.8,
+		legend pos = south east, 
+		legend columns =2, 
+		xlabel = $N_\zeta$, ylabel=$\widehat{D}_{31}{K}_{31}$
+		]
+		
+		\addplot[forget plot, name path=Upper2,blue!20, 
+		domain = 19:111] {0.2369500222373034E+01*1.05};	
+		\addplot[forget plot, name path=Lower2,blue!20, 
+		domain = 19:111] {0.2369500222373034E+01*0.95};		
+		\addplot[forget plot, blue!20] fill between[of=Upper2 and Lower2];
+		
+		\foreach \Ntheta in {23,27,...,35}{		
+			\addplot+[no markers] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{6},
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{23:111},
+			restrict expr to domain={\thisrowno{4}}{140:140}
+			]{results/NCSX/0.200/DKE_zeta_Convergence_Example_Nxi_140/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+			\addlegendimage{empty legend}
+			\addlegendentry{$N_\theta=$}
+			\expandafter\addlegendentry\expandafter{\Ntheta}
+		}	
+		
+		\foreach \Ntheta in {27}{		
+			\addplot+[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{6},
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{75:75},
+			restrict expr to domain={\thisrowno{4}}{140:140}
+			]{results/NCSX/0.200/DKE_zeta_Convergence_Example_Nxi_140/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+		}
+		%		\foreach \Ntheta in {15}{		
+		%			\addplot+[only marks, mark = oplus, mark size = 4 pt, blue ] table[skip first n=1, 
+		%			x expr=\thisrowno{3},
+		%			y expr=\thisrowno{6},
+		%			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+		%			restrict expr to domain={\thisrowno{3}}{119:119}
+		%			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+		
+		%		}	
+		%		\addlegendentry{Spread of 5\%}
+		
+		
+	\end{axis}
+\end{tikzpicture}

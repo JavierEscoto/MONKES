@@ -1,0 +1,47 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		ymax=0.4,
+		width=0.95\textwidth, legend pos = north east,
+		scaled y ticks=base 10:2,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd} ,
+		xlabel = $N_\xi$, ylabel=$(\widehat{D}_{11}^- - \widehat{D}_{11}^+){K}_{11}/2$
+		]
+		
+		
+		
+		\foreach \Nxi in {60,80,...,200}{
+			
+			\addplot[forget plot, blue, mark=*, only marks] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=(\thisrowno{4} - \thisrowno{5})/2,
+			restrict expr to domain={\thisrowno{1}}{0:0}
+			]{results/DKES_convergence/W7X-KJM/0.204/omega0e-0cl1e-5/la\Nxi/results.stellopt};	
+			
+			
+		}	    
+		
+		\foreach \Nxi in {200}{
+			
+			\addplot[blue, mark=*, only marks] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=(\thisrowno{4} - \thisrowno{5})/2,
+			restrict expr to domain={\thisrowno{1}}{0:0}
+			]{results/DKES_convergence/W7X-KJM/0.204/omega0e-0cl1e-5/la\Nxi/results.stellopt};    	
+			
+		}
+		\addlegendentry{$\hat{E}_r=0$}	    
+		%		
+		%		\addplot[forget plot, name path=Upper2,blue!20, 
+		%		domain = 40:200] {(0.52404E-01 + 0.43659E-01)/2*1.1};	
+		%		\addplot[forget plot, name path=Lower2,blue!20, 
+		%		domain = 40:200] {(0.52404E-01 + 0.43659E-01)/2*0.9};		
+		%		\addplot[blue!20] fill between[of=Upper2 and Lower2];
+		%		\addlegendentry{Spread of 10\%}	
+		
+	\end{axis}
+\end{tikzpicture}

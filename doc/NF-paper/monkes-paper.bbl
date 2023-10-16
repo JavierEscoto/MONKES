@@ -1,0 +1,361 @@
+\begin{thebibliography}{10}
+
+\bibitem{Cary1997OmnigenityAQ}
+J.~R. Cary and S.~G. Shasharina.
+\newblock {Omnigenity and quasihelicity in helical plasma confinement systems}.
+\newblock {\em Physics of Plasmas}, 4:3323--3333, 1997.
+
+\bibitem{Helander_2009}
+P.~Helander and J.~Nührenberg.
+\newblock Bootstrap current and neoclassical transport in quasi-isodynamic
+  stellarators.
+\newblock {\em Plasma Physics and Controlled Fusion}, 51(5):055004, 2009.
+
+\bibitem{Helander_2011_Bootstrap}
+P.~Helander, J.~Geiger, and H.~Maaßberg.
+\newblock {On the bootstrap current in stellarators and tokamaks}.
+\newblock {\em Physics of Plasmas}, 18(9), 2011.
+\newblock 092505.
+
+\bibitem{Beidler2021}
+C.~D. Beidler, H.~M. Smith, A.~Alonso, T.~Andreeva, J.~Baldzuhn, M.~N.~A.
+  Beurskens, M.~Borchardt, S.~A. Bozhenkov, K.~J. Brunner, H.~Damm, M.~Drevlak,
+  O.~P. Ford, G.~Fuchert, J.~Geiger, P.~Helander, U.~Hergenhahn, M.~Hirsch,
+  U.~H{\"o}fel, Ye.~O. Kazakov, R.~Kleiber, M.~Krychowiak, S.~Kwak,
+  A.~Langenberg, H.~P. Laqua, U.~Neuner, N.~A. Pablant, E.~Pasch, A.~Pavone,
+  T.~S. Pedersen, K.~Rahbarnia, J.~Schilling, E.~R. Scott, T.~Stange,
+  J.~Svensson, H.~Thomsen, Y.~Turkin, F.~Warmer, R.~C. Wolf, D.~Zhang,
+  I.~Abramovic, S.~{\"A}k{\"a}slompolo, J.~Alcus{\'o}n, P.~Aleynikov,
+  K.~Aleynikova, A.~Ali, G.~Anda, E.~Ascasibar, J.~P. B{\"a}hner, S.~G. Baek,
+  M.~Balden, M.~Banduch, T.~Barbui, W.~Behr, A.~Benndorf, C.~Biedermann,
+  W.~Biel, B.~Blackwell, E.~Blanco, M.~Blatzheim, S.~Ballinger, T.~Bluhm,
+  D.~B{\"o}ckenhoff, B.~B{\"o}swirth, L.-G. B{\"o}ttger, V.~Borsuk, J.~Boscary,
+  H.-S. Bosch, R.~Brakel, H.~Brand, C.~Brandt, T.~Br{\"a}uer, H.~Braune,
+  S.~Brezinsek, K.-J. Brunner, R.~Burhenn, R.~Bussiahn, B.~Buttensch{\"o}n,
+  V.~Bykov, J.~Cai, I.~Calvo, B.~Cannas, A.~Cappa, A.~Carls, L.~Carraro,
+  B.~Carvalho, F.~Castejon, A.~Charl, N.~Chaudhary, D.~Chauvin, F.~Chernyshev,
+  M.~Cianciosa, R.~Citarella, G.~Claps, J.~Coenen, M.~Cole, M.~J. Cole,
+  F.~Cordella, G.~Cseh, A.~Czarnecka, K.~Czerski, M.~Czerwinski, G.~Czymek,
+  A.~da~Molin, A.~da~Silva, A.~de~la Pena, S.~Degenkolbe, C.~P. Dhard,
+  M.~Dibon, A.~Dinklage, T.~Dittmar, P.~Drewelow, P.~Drews, F.~Durodie,
+  E.~Edlund, F.~Effenberg, G.~Ehrke, S.~Elgeti, M.~Endler, D.~Ennis,
+  H.~Esteban, T.~Estrada, J.~Fellinger, Y.~Feng, E.~Flom, H.~Fernandes, W.~H.
+  Fietz, W.~Figacz, J.~Fontdecaba, T.~Fornal, H.~Frerichs, A.~Freund,
+  T.~Funaba, A.~Galkowski, G.~Gantenbein, Y.~Gao, J.~Garc{\'i}a~Rega{\~{n}}a,
+  D.~Gates, B.~Geiger, V.~Giannella, A.~Gogoleva, B.~Goncalves, A.~Goriaev,
+  D.~Gradic, M.~Grahl, J.~Green, H.~Greuner, A.~Grosman, H.~Grote, M.~Gruca,
+  O.~Grulke, C.~Guerard, P.~Hacker, X.~Han, J.~H. Harris, D.~Hartmann,
+  D.~Hathiramani, B.~Hein, B.~Heinemann, S.~Henneberg, M.~Henkel,
+  J.~Hernandez~Sanchez, C.~Hidalgo, K.~P. Hollfeld, A.~H{\"o}lting,
+  D.~H{\"o}schen, M.~Houry, J.~Howard, X.~Huang, Z.~Huang, M.~Hubeny, M.~Huber,
+  H.~Hunger, K.~Ida, T.~Ilkei, S.~Illy, B.~Israeli, S.~Jablonski,
+  M.~Jakubowski, J.~Jelonnek, H.~Jenzsch, T.~Jesche, M.~Jia, P.~Junghanns,
+  J.~Kacmarczyk, J.-P. Kallmeyer, U.~Kamionka, H.~Kasahara, W.~Kasparek,
+  N.~Kenmochi, C.~Killer, A.~Kirschner, T.~Klinger, J.~Knauer, M.~Knaup,
+  A.~Knieps, T.~Kobarg, G.~Kocsis, F.~K{\"o}chl, Y.~Kolesnichenko,
+  A.~K{\"o}nies, R.~K{\"o}nig, P.~Kornejew, J.-P. Koschinsky, F.~K{\"o}ster,
+  M.~Kr{\"a}mer, R.~Krampitz, A.~Kr{\"a}mer-Flecken, N.~Krawczyk, T.~Kremeyer,
+  J.~Krom, I.~Ksiazek, M.~Kubkowska, G.~K{\"u}hner, T.~Kurki-Suonio, P.~A.
+  Kurz, M.~Landreman, P.~Lang, R.~Lang, S.~Langish, H.~Laqua, R.~Laube,
+  S.~Lazerson, C.~Lechte, M.~Lennartz, W.~Leonhardt, C.~Li, Y.~Li, Y.~Liang,
+  C.~Linsmeier, S.~Liu, J.-F. Lobsien, D.~Loesser, J.~Loizu~Cisquella, J.~Lore,
+  A.~Lorenz, M.~Losert, A.~L{\"u}cke, A.~Lumsdaine, V.~Lutsenko,
+  H.~Maa{\ss}berg, O.~Marchuk, J.~H. Matthew, S.~Marsen, M.~Marushchenko,
+  S.~Masuzaki, D.~Maurer, M.~Mayer, K.~McCarthy, P.~McNeely, A.~Meier,
+  D.~Mellein, B.~Mendelevitch, P.~Mertens, D.~Mikkelsen, A.~Mishchenko,
+  B.~Missal, J.~Mittelstaedt, T.~Mizuuchi, A.~Mollen, V.~Moncada,
+  T.~M{\"o}nnich, T.~Morisaki, D.~Moseev, S.~Murakami, G.~N{\'a}fr{\'a}di,
+  M.~Nagel, D.~Naujoks, H.~Neilson, R.~Neu, O.~Neubauer, T.~Ngo, D.~Nicolai,
+  S.~K. Nielsen, H.~Niemann, T.~Nishizawa, R.~Nocentini, C.~N{\"u}hrenberg,
+  J.~N{\"u}hrenberg, S.~Obermayer, G.~Offermanns, K.~Ogawa, J.~{\"O}lmanns,
+  J.~Ongena, J.~W. Oosterbeek, G.~Orozco, M.~Otte, L.~Pacios~Rodriguez,
+  N.~Panadero, N.~Panadero~Alvarez, D.~Papenfu{\ss}, S.~Paqay, E.~Pawelec,
+  G.~Pelka, V.~Perseo, and the W7-X~Team.
+\newblock {Demonstration of reduced neoclassical energy transport in
+  Wendelstein 7-X}.
+\newblock {\em Nature}, 596(7871):221--226, 2021.
+
+\bibitem{Dinklage2018}
+A.~Dinklage, C.~D. Beidler, P.~Helander, G.~Fuchert, H.~Maa{\ss}berg,
+  K.~Rahbarnia, T.~Sunn~Pedersen, Y.~Turkin, R.~C. Wolf, A.~Alonso,
+  T.~Andreeva, B.~Blackwell, S.~Bozhenkov, B.~Buttensch{\"o}n, A.~Czarnecka,
+  F.~Effenberg, Y.~Feng, J.~Geiger, M.~Hirsch, U.~H{\"o}fel, M.~Jakubowski,
+  T.~Klinger, J.~Knauer, G.~Kocsis, A.~Kr{\"a}mer-Flecken, M.~Kubkowska,
+  A.~Langenberg, H.~P. Laqua, N.~Marushchenko, A.~Moll{\'e}n, U.~Neuner,
+  H.~Niemann, E.~Pasch, N.~Pablant, L.~Rudischhauser, H.~M. Smith, O.~Schmitz,
+  T.~Stange, T.~Szepesi, G.~Weir, T.~Windisch, G.~A. Wurden, D.~Zhang,
+  I.~Abramovic, S.~{\"A}k{\"a}slompolo, A.~Ali, J.Alcuson Belloso,
+  P.~Aleynikov, K.~Aleynikova, R.~Alzbutas, G.~Anda, E.~Ascasibar, J.~Assmann,
+  S.-G. Baek, J.~Baldzuhn, M.~Banduch, T.~Barbui, M.~Barlak, K.~Baumann,
+  W.~Behr, C.~Beidler, A.~Benndorf, O.~Bertuch, M.~Beurskens, C.~Biedermann,
+  W.~Biel, D.~Birus, E.~Blanco, M.~Blatzheim, T.~Bluhm, D.~B{\"o}ckenhoff,
+  P.~Bolgert, M.~Borchardt, V.~Borsuk, J.~Boscary, H.-S. Bosch, L.-G.
+  B{\"o}ttger, R.~Brakel, H.~Brand, Ch. Brandt, T.~Br{\"a}uer, H.~Braune,
+  S.~Brezinsek, K.-J. Brunner, B.~Br{\"u}nner, R.~Burhenn, R.~Bussiahn,
+  V.~Bykov, Y.~Cai, I.~Calvo, B.~Cannas, A.~Cappa, A.~Card, A.~Carls,
+  L.~Carraro, B.~Carvalho, F.~Castejon, A.~Charl, F.~Chernyshev, M.~Cianciosa,
+  R.~Citarella, {\L}~Ciupi{\'{n}}ski, G.~Claps, M.~J. Cole, F.~Cordella,
+  G.~Cseh, A.~Czermak, K.~Czerski, M.~Czerwinski, G.~Czymek, A.~da~Molin,
+  A.~da~Silva, G.~Dammertz, A.~de~la Pena, S.~Degenkolbe, P.~Denner,
+  T.~Dittmar, C.~P. Dhard, M.~Dostal, M.~Drevlak, P.~Drewelow, Ph. Drews,
+  A.~Dudek, G.~Dundulis, F.~Durodie, P.~van Eeten, G.~Ehrke, M.~Endler,
+  D.~Ennis, E.~Erckmann, H.~Esteban, T.~Estrada, N.~Fahrenkamp, J.-H. Feist,
+  J.~Fellinger, H.~Fernandes, W.~H. Fietz, W.~Figacz, J.~Fontdecaba, O.~Ford,
+  T.~Fornal, H.~Frerichs, A.~Freund, M.~F{\"u}hrer, T.~Funaba, A.~Galkowski,
+  G.~Gantenbein, Y.~Gao, J.Garc{\'i}a Rega{\~{n}}a, M.~Garcia-Munoz, D.~Gates,
+  G.~Gawlik, B.~Geiger, V.~Giannella, N.~Gierse, A.~Gogoleva, B.~Goncalves,
+  A.~Goriaev, D.~Gradic, M.~Grahl, J.~Green, A.~Grosman, H.~Grote, M.~Gruca,
+  O.~Grulke, C.~Guerard, P.~Hacker, L.~Haiduk, K.~Hammond, X.~Han, F.~Harberts,
+  J.~H. Harris, H.-J. Hartfu{\ss}, D.~Hartmann, D.~Hathiramani, B.~Hein,
+  B.~Heinemann, P.~Heitzenroeder, S.~Henneberg, C.~Hennig, J.Hernandez Sanchez,
+  C.~Hidalgo, H.~H{\"o}lbe, K.~P. Hollfeld, A.~H{\"o}lting, D.~H{\"o}schen,
+  M.~Houry, J.~Howard, X.~Huang, M.~Huber, V.~Huber, H.~Hunger, K.~Ida,
+  T.~Ilkei, S.~Illy, B.~Israeli, A.~Ivanov, S.~Jablonski, J.~Jagielski,
+  J.~Jelonnek, H.~Jenzsch, P.~Junghans, J.~Kacmarczyk, T.~Kaliatka, J.-P.
+  Kallmeyer, U.~Kamionka, R.~Karalevicius, H.~Kasahara, W.~Kasparek,
+  Y.~Kazakov, N.~Kenmochi, M.~Keunecke, A.~Khilchenko, C.~Killer, D.~Kinna,
+  R.~Kleiber, M.~Knaup, A.~Knieps, Th. Kobarg, F.~K{\"o}chl, Y.~Kolesnichenko,
+  A.~K{\"o}nies, M.~K{\"o}ppen, J.~Koshurinov, R.~Koslowski, R.~K{\"o}nig,
+  F.~K{\"o}ster, P.~Kornejew, R.~Koziol, M.~Kr{\"a}mer, R.~Krampitz,
+  P.~Kraszewsk, N.~Krawczyk, T.~Kremeyer, Th. Krings, J.~Krom, M.~Krychowiak,
+  G.~Krzesinski, I.~Ksiazek, G.~K{\"u}hner, T.~Kurki-Suonio, S.~Kwak,
+  M.~Landreman, R.~Lang, S.~Langish, H.~Laqua, H.~P. Laqua, R.~Laube,
+  S.~Lazerson, C.~Lechte, M.~Lennartz, W.~Leonhardt, L.~Lewerentz, Y.~Liang,
+  Ch. Linsmeier, S.~Liu, J.-F. Lobsien, D.~Loesser, J.Loizu Cisquella, J.~Lore,
+  A.~Lorenz, M.~Losert, L.~Lubyako, A.~L{\"u}cke, A.~Lumsdaine, V.~Lutsenko,
+  J.~Maisano-Brown, O.~Marchuk, M.~Mardenfeld, P.~Marek, S.~Marsen,
+  M.~Marushchenko, S.~Masuzaki, D.~Maurer, K.~McCarthy, P.~McNeely, A.~Meier, ,
+  and the W7-X~Team.
+\newblock {Magnetic configuration effects on the Wendelstein 7-X stellarator}.
+\newblock {\em Nature Physics}, 14(8):855--860, 2018.
+
+\bibitem{Beidler_2011}
+C.~D. Beidler, K.~Allmaier, M.~Yu. Isaev, S.~V. Kasilov, W.~Kernbichler, G.~O.
+  Leitold, H.~Maaßberg, D.~R. Mikkelsen, S.~Murakami, M.~Schmidt, D.~A. Spong,
+  V.~Tribaldos, and A.~Wakasa.
+\newblock {Benchmarking of the mono-energetic transport coefficients—results
+  from the International Collaboration on Neoclassical Transport in
+  Stellarators (ICNTS)}.
+\newblock {\em Nuclear Fusion}, 51(7):076001, 2011.
+
+\bibitem{Sanchez_2023}
+E.~Sánchez, J.~L. Velasco, I.~Calvo, and S.~Mulas.
+\newblock A quasi-isodynamic configuration with good confinement of fast ions
+  at low plasma beta.
+\newblock {\em Nuclear Fusion}, 63(6):066037, 2023.
+
+\bibitem{velasco2023robust}
+J.~L. Velasco, I.~Calvo, E.~Sánchez, and F.~I. Parra.
+\newblock {Robust stellarator optimization via flat mirror magnetic fields},
+  2023.
+
+\bibitem{RJorge_2022}
+R.~Jorge, G.G. Plunk, M.~Drevlak, M.~Landreman, J.-F. Lobsien, K.~Camacho~Mata,
+  and P.~Helander.
+\newblock A single-field-period quasi-isodynamic stellarator.
+\newblock {\em Journal of Plasma Physics}, 88(5):175880504, 2022.
+
+\bibitem{camachomata_plunk_jorge_2022}
+K.~Camacho~Mata, G.~G. Plunk, and R.~Jorge.
+\newblock Direct construction of stellarator-symmetric quasi-isodynamic
+  magnetic configurations.
+\newblock {\em Journal of Plasma Physics}, 88(5):905880503, 2022.
+
+\bibitem{goodman2022constructing}
+A.~Goodman, K.~Camacho Mata, S.~A. Henneberg, R.~Jorge, M.~Landreman, G.~Plunk,
+  H.~Smith, R.~Mackenbach, and P.~Helander.
+\newblock Constructing precisely quasi-isodynamic magnetic fields, 2022.
+
+\bibitem{Pytte_Isomorphic}
+A.~Pytte and A.~H. Boozer.
+\newblock {Neoclassical transport in helically symmetric plasmas}.
+\newblock {\em The Physics of Fluids}, 24(1):88--92, 1981.
+
+\bibitem{Boozer_Isomorphic}
+A.~H. Boozer.
+\newblock {Transport and isomorphic equilibria}.
+\newblock {\em The Physics of Fluids}, 26(2):496--499, 1983.
+
+\bibitem{Landreman_PreciseQS}
+M.~Landreman and E.~Paul.
+\newblock Magnetic fields with precise quasisymmetry for plasma confinement.
+\newblock {\em Phys. Rev. Lett.}, 128:035001, 2022.
+
+\bibitem{Helander_2014}
+P.~Helander.
+\newblock Theory of plasma confinement in non-axisymmetric magnetic fields.
+\newblock {\em Reports on Progress in Physics}, 77(8):087001, 2014.
+
+\bibitem{Landreman_SelfConsistent}
+M.~Landreman, S.~Buller, and M.~Drevlak.
+\newblock {Optimization of quasi-symmetric stellarators with self-consistent
+  bootstrap current and energetic particle confinement}.
+\newblock {\em Physics of Plasmas}, 29(8), 2022.
+\newblock 082501.
+
+\bibitem{HSX}
+F.~Simon~B. Anderson, Abdulgader~F. Almagri, D.~T. Anderson, Peter~G. Matthews,
+  Joseph~N. Talmadge, and J.~Leon Shohet.
+\newblock {The Helically Symmetric Experiment, (HSX) Goals, Design and Status}.
+\newblock {\em Fusion Technology}, 27(3T):273--277, 1995.
+
+\bibitem{NCSX}
+M.~C. Zarnstorff, L.~A. Berry, A.~Brooks, E.~Fredrickson, G.-Y. Fu,
+  S.~Hirshman, S.~Hudson, L.-P. Ku, E.~Lazarus, D.~Mikkelsen, D.~Monticello,
+  G.~H. Neilson, N.~Pomphrey, A.~Reiman, D.~Spong, D.~Strickler, A.~Boozer,
+  W.~A. Cooper, R.~Goldston, R.~Hatcher, M.~Isaev, C.~Kessel, J.~Lewandowski,
+  J.~F. Lyon, P.~Merkel, H.~Mynick, B.~E. Nelson, C.~Nuehrenberg, M~Redi,
+  W.~Reiersen, P.~Rutherford, R.~Sanchez, J.~Schmidt, and R.~B. White.
+\newblock {Physics of the compact advanced stellarator NCSX}.
+\newblock {\em Plasma Physics and Controlled Fusion}, 43(12A):A237, 2001.
+
+\bibitem{Nemov1999EvaluationO1}
+V.~V. Nemov, S.~V. Kasilov, W.~Kernbichler, and M.~F. Heyn.
+\newblock Evaluation of 1/$\nu$ neoclassical transport in stellarators.
+\newblock {\em Physics of Plasmas}, 6:4622--4632, 1999.
+
+\bibitem{Shaing-Callen-1983}
+K.~C. Shaing and J.~D. Callen.
+\newblock {Neoclassical flows and transport in nonaxisymmetric toroidal
+  plasmas}.
+\newblock {\em The Physics of Fluids}, 26(11):3315--3326, 1983.
+
+\bibitem{Nakajima-1988}
+N.~{Nakajima}, M.~{Okamoto}, J.~{Todoroki}, Y.~{Nakamura}, and M.~{Wakatani}.
+\newblock {Optimization of bootstrap current in a large helical system with L =
+  2}, 1988.
+
+\bibitem{helander_parra_newton_2017}
+P.~Helander, F.~I. Parra, and S.~L. Newton.
+\newblock Stellarator bootstrap current and plasma flow velocity at low
+  collisionality.
+\newblock {\em Journal of Plasma Physics}, 83(2):905830206, 2017.
+
+\bibitem{Calvo_2017}
+I.~Calvo, F.~I. Parra, J.~L. Velasco, and J.~A. Alonso.
+\newblock The effect of tangential drifts on neoclassical transport in
+  stellarators close to omnigeneity.
+\newblock {\em Plasma Physics and Controlled Fusion}, 59(5):055014, 2017.
+
+\bibitem{dherbemont2022}
+V.~d'Herbemont, F.~I. Parra, I.~Calvo, and J.~L. Velasco.
+\newblock Finite orbit width effects in large aspect ratio stellarators.
+\newblock {\em Journal of Plasma Physics}, 88(5):905880507, 2022.
+
+\bibitem{KNOSOSJCP}
+J.~L. Velasco, I.~Calvo, F.~I. Parra, and J.~M. García-Regaña.
+\newblock {KNOSOS: A fast orbit-averaging neoclassical code for stellarator
+  geometry}.
+\newblock {\em Journal of Computational Physics}, 418:109512, 2020.
+
+\bibitem{KNOSOSJPP}
+J.~L. Velasco, I.~Calvo, F.~I. Parra, V.~d’Herbemont, H.~M. Smith,
+  D.~Carralero, T.~Estrada, and the W7-X~Team.
+\newblock {Fast simulations for large aspect ratio stellarators with the
+  neoclassical code KNOSOS}.
+\newblock {\em Nuclear Fusion}, 61(11):116013, 2021.
+
+\bibitem{STELLOPT}
+{Lazerson, S. and Schmitt, J. and Zhu, C. and Breslau, J. and STELLOPT
+  Developers, All and USDOE Office of Science}.
+\newblock Stellopt, version 2.7.5, 2020.
+
+\bibitem{Banon_Navarro_2023}
+A.~Bañón Navarro, A.~Di Siena, J.~L. Velasco, F.~Wilms, G.~Merlo,
+  T.~Windisch, L.~L. LoDestro, J.~B. Parker, and F.~Jenko.
+\newblock First-principles based plasma profile predictions for optimized
+  stellarators.
+\newblock {\em Nuclear Fusion}, 63(5):054003, 2023.
+
+\bibitem{Barnes_Trinity_2010}
+M.~Barnes, I.~G. Abel, W.~Dorland, T.~Görler, G.~W. Hammett, and F.~Jenko.
+\newblock {Direct multiscale coupling of a transport code to gyrokinetic
+  turbulence codes)}.
+\newblock {\em Physics of Plasmas}, 17(5):056109, 2010.
+
+\bibitem{Taguchi}
+M.~Taguchi.
+\newblock {A method for calculating neoclassical transport coefficients with
+  momentum conserving collision operator}.
+\newblock {\em Physics of Fluids B: Plasma Physics}, 4(11):3638--3643, 1992.
+
+\bibitem{Sugama-PENTA}
+H.~Sugama and S.~Nishimura.
+\newblock {How to calculate the neoclassical viscosity, diffusion, and current
+  coefficients in general toroidal plasmas}.
+\newblock {\em Physics of Plasmas}, 9(11):4637--4653, 2002.
+
+\bibitem{Sugama2008}
+H.~Sugama and S.~Nishimura.
+\newblock {Moment-equation methods for calculating neoclassical transport
+  coefficients in general toroidal plasmas}.
+\newblock {\em Physics of Plasmas}, 15(4):042502, 04 2008.
+
+\bibitem{MaasbergMomentumCorrection}
+H.~Maaßberg, C.~D. Beidler, and Y.~Turkin.
+\newblock {Momentum correction techniques for neoclassical transport in
+  stellarators}.
+\newblock {\em Physics of Plasmas}, 16(7), 2009.
+\newblock 072504.
+
+\bibitem{DKES1986}
+S.~P. Hirshman, K.~C. Shaing, W.~I. van Rij, C.~O. Beasley, and E.~C. Crume.
+\newblock Plasma transport coefficients for nonsymmetric toroidal confinement
+  systems.
+\newblock {\em The Physics of Fluids}, 29(9):2951--2959, 1986.
+
+\bibitem{VanRij_1989}
+W.~I. van Rij and S.~P. Hirshman.
+\newblock Variational bounds for transport coefficients in three‐dimensional
+  toroidal plasmas.
+\newblock {\em Physics of Fluids B: Plasma Physics}, 1(3):563--569, 1989.
+
+\bibitem{Landreman_2014}
+M.~Landreman, H.~M. Smith, A.~Mollén, and P.~Helander.
+\newblock Comparison of particle trajectories and collision operators for
+  collisional transport in nonaxisymmetric plasmas.
+\newblock {\em Physics of Plasmas}, 21(4):042503, 2014.
+
+\bibitem{Helander_2005}
+P.~Helander and D.~J. Sigmar.
+\newblock {\em Collisional transport in magnetized plasmas}.
+\newblock Cambridge university press, 2005.
+
+\bibitem{Landreman_Monoenergetic}
+M.~Landreman.
+\newblock The monoenergetic approximation in stellarator neoclassical
+  calculations.
+\newblock {\em Plasma Physics and Controlled Fusion}, 53(8):082003, 2011.
+
+\bibitem{DEWAR1998275}
+R.L. Dewar and S.R. Hudson.
+\newblock Stellarator symmetry.
+\newblock {\em Physica D: Nonlinear Phenomena}, 112(1):275--280, 1998.
+\newblock Proceedings of the Workshop on Time-Reversal Symmetry in Dynamical
+  Systems.
+
+\bibitem{Spong-PENTA}
+D.~A. Spong.
+\newblock {Generation and damping of neoclassical plasma flows in
+  stellaratorsa)}.
+\newblock {\em Physics of Plasmas}, 12(5), 2005.
+\newblock 056114.
+
+\bibitem{Trapezoidal}
+L.~N. Trefethen and J.~A.~C. Weideman.
+\newblock The exponentially convergent trapezoidal rule.
+\newblock {\em SIAM Review}, 56(3):385--458, 2014.
+
+\bibitem{lapack99}
+E.~Anderson, Z.~Bai, C.~Bischof, S.~Blackford, J.~Demmel, J.~Dongarra,
+  J.~Du~Croz, A.~Greenbaum, S.~Hammarling, A.~McKenney, and D.~Sorensen.
+\newblock {\em {LAPACK} Users' Guide}.
+\newblock Society for Industrial and Applied Mathematics, Philadelphia, PA,
+  third edition, 1999.
+
+\bibitem{Cary_Separatrix_Crossing}
+J.~L. Tennyson, J.~R. Cary, and D.~F. Escande.
+\newblock Change of the adiabatic invariant due to separatrix crossing.
+\newblock {\em Phys. Rev. Lett.}, 56:2117--2120, 1986.
+
+\end{thebibliography}

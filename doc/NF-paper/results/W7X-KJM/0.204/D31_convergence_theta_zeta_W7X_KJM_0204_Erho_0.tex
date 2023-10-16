@@ -1,0 +1,59 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=\textwidth, 
+		scaled y ticks=base 10:2,
+		%		xtick={80,120,160,200, 240},
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd}, 
+		%		ymin = 0.053,
+		ymax = 0.13 *0.5132,
+		legend pos = north east, 
+		legend columns =2, 
+		xlabel = $N_\zeta$, ylabel=$\widehat{D}_{31}$ ${[\text{m}]}$
+		]		
+		
+		
+		\addplot[forget plot, name path=Upper2,red!20, 
+		domain = 33:131] {(0.672E-01) *0.5132 + 5e-3};
+		\addplot[forget plot, name path=Lower2,red!20, 
+		domain = 33:131] {(0.672E-01) *0.5132 - 5e-3};		
+		\addplot[forget plot,red!20] fill between[of=Upper2 and Lower2];
+		
+		
+		\addplot[forget plot, name path=Upper2,blue!20, 
+		domain = 33:131] {0.672E-01*1.05 *0.5132};	
+		\addplot[forget plot, name path=Lower2,blue!20, 
+		domain = 33:131] {0.672E-01*0.95 *0.5132};		
+		\addplot[forget plot, blue!20] fill between[of=Upper2 and Lower2];
+		
+		\foreach \Ntheta in {15,19,...,27}{		
+			\addplot+[no markers] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{6} *0.5132,
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{37:131},
+			restrict expr to domain={\thisrowno{4}}{140:140}
+			]{results/W7X-KJM/0.204/DKE_zeta_Convergence_Example_Nxi_140/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+			\addlegendimage{empty legend}
+			\addlegendentry{$N_\theta=$}
+			\expandafter\addlegendentry\expandafter{\Ntheta}
+		}			
+		
+		
+		\foreach \Ntheta in {23}{		
+			\addplot+[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
+			x expr=\thisrowno{3},
+			y expr=\thisrowno{6} *0.5132,
+			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
+			restrict expr to domain={\thisrowno{3}}{63:63},
+			restrict expr to domain={\thisrowno{4}}{140:140}
+			]{results/W7X-KJM/0.204/DKE_zeta_Convergence_Example_Nxi_140/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+		}
+		
+	\end{axis}
+\end{tikzpicture}

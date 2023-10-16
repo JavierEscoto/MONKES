@@ -1,0 +1,232 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    INSTITUTE OF PHYSICS PUBLISHING                                   %
+%                                                                      %
+%   `Preparing an article for publication in an Institute of Physics   %
+%    Publishing journal using LaTeX'                                   %
+%                                                                      %
+%    LaTeX source code `ioplau2e.tex' used to generate `author         %
+%    guidelines', the documentation explaining and demonstrating use   %
+%    of the Institute of Physics Publishing LaTeX preprint files       %
+%    `iopart.cls, iopart12.clo and iopart10.clo'.                      %
+%                                                                      %
+%    `ioplau2e.tex' itself uses LaTeX with `iopart.cls'                %
+%                                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+% First we have a character check
+%
+% ! exclamation mark    " double quote  
+% # hash                ` opening quote (grave)
+% & ampersand           ' closing quote (acute)
+% $ dollar              % percent       
+% ( open parenthesis    ) close paren.  
+% - hyphen              = equals sign
+% | vertical bar        ~ tilde         
+% @ at sign             _ underscore
+% { open curly brace    } close curly   
+% [ open square         ] close square bracket
+% + plus sign           ; semi-colon    
+% * asterisk            : colon
+% < open angle bracket  > close angle   
+% , comma               . full stop
+% ? question mark       / forward slash 
+% \ backslash           ^ circumflex
+%
+% ABCDEFGHIJKLMNOPQRSTUVWXYZ 
+% abcdefghijklmnopqrstuvwxyz 
+% 1234567890
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\documentclass[10pt]{iopart}
+\newcommand{\gguide}{{\it Preparing graphics for IOP Publishing journals}}
+%Uncomment next line if AMS fonts required  
+\usepackage{iopams}
+
+
+\expandafter\let\csname equation*\endcsname\relax
+\expandafter\let\csname endequation*\endcsname\relax
+\usepackage{physics}
+
+% This sets the text font to Times New Roman but not the equations
+%\renewcommand\rmdefault{ptm}
+
+\usepackage{amsfonts}
+%\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+%% The amssymb package provides various useful mathematical symbols
+%\usepackage{amssymb}
+\usepackage{latexsym}
+
+% Following three lines are needed for this document.
+% If you are not loading colors or url, then these are
+% not required.
+\usepackage{url}
+\usepackage[dvipsnames]{xcolor}
+
+
+\usepackage{mleftright}
+
+%% Packages for Tikz
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\captionsetup[sub]{skip=-1.75pt, margin=90pt}
+
+
+\usepackage{tikz}
+\usetikzlibrary{plotmarks}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\usepackage{float}
+\usepackage[]{placeins} %
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{fillbetween}
+\tikzexternalize
+[
+%      shell escape=-enable-write18, 
+prefix={TikzFigures/}
+]
+\pgfplotsset{
+	every tick label/.append style={font=\small},
+	every axis/.append style={
+		width = 0.45\textwidth,
+		mark size = 2.85pt,
+		axis line style = ultra thick,
+		legend cell align={left}, 
+		legend style={draw=none},
+		legend style={font=\small},
+		legend style={fill=none, text opacity=1}
+	},
+    every axis plot/.append style={very thick} % semithick, thick and very thick or line width = * pt
+}
+\usepackage{pdfpages}
+\usepackage{booktabs}
+\usepackage[toc,page]{appendix}
+ \usepackage{float}
+\usepackage{slashbox}
+\usepackage{subcaption}
+
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\captionsetup[subfigure]{labelformat=simple}
+
+%%%% Macros defined by Escoto
+\DeclarePairedDelimiterX{\mean}[1]{\langle}{\rangle}{#1}
+
+\newcommand{\Lorentz}{\mathcal{L}}
+\newcommand{\MONKES}{{\texttt{MONKES}}}
+\newcommand{\DKES}{{\texttt{DKES}}}
+\newcommand{\ii}{\text{i}}
+\newcommand{\Matrix}[2]
+{
+	\mleft[
+	\begin{array}{#1}
+		#2
+	\end{array}
+	\mright]
+}
+\newcommand{\Eval}[1]
+{
+	#1|
+}
+
+\newcommand{\bluechange}[1]{\textcolor{blue}{#1}}
+\begin{document}
+
+\title[MONKES: a fast neoclassical code for the evaluation of monoenergetic transport coefficients]{MONKES: a fast neoclassical code for the evaluation of monoenergetic transport coefficients}
+
+\author{F. J. Escoto$^1$, J. L. Velasco$^1$, I. Calvo$^1$, M. Landreman$^2$ and F. I. Parra$^3$}
+\address{$^1$Laboratorio Nacional de Fusión, CIEMAT, 28040 Madrid, Spain}
+\address{$^2$University of Maryland, College Park, MD 20742, USA}
+\address{$^3$Princeton Plasma Physics Laboratory, Princeton, NJ 08540, USA}
+\ead{fjavier.escoto@ciemat.es}
+\vspace{10pt}
+\begin{indented}
+\item[]April 2023
+\end{indented}
+
+\begin{abstract}
+	{\MONKES} is a new neoclassical code for the evaluation of monoenergetic transport coefficients in stellarators. By means of a convergence study and benchmarks with other codes, it is shown that {\MONKES} is accurate and efficient. The combination of spectral discretization in spatial and velocity coordinates with block sparsity allows {\MONKES} to compute monoenergetic coefficients at low collisionality, in a single core, in approximately one minute. {\MONKES} is sufficiently fast to be integrated into stellarator optimization codes for direct optimization of the bootstrap current and to be included in predictive transport suites.    
+\end{abstract}
+
+%
+% Uncomment for keywords
+\vspace{2pc}
+\noindent{\it Keywords}: stellarator optimization, neoclassical transport,  bootstrap current.
+%
+% Uncomment for Submitted to journal title message
+\submitto{\NF}
+%
+% Uncomment if a separate title page is required
+%\maketitle
+% 
+% For two-column output uncomment the next line and choose [10pt] rather than [12pt] in the \documentclass declaration
+\ioptwocol
+%
+
+\section{Introduction}
+\label{sec:Introduction}
+\input{sections/Introduction.tex}
+
+\section{Drift-kinetic equation and transport coefficients}
+\label{sec:DKE}
+\input{sections/Drift-kinetic-equation.tex}
+
+\section{Numerical method}
+\label{sec:Algorithm}
+\input{sections/Algorithm.tex}
+%
+\section{Code performance and benchmark}
+\label{sec:Results_Benchmark}
+\input{sections/Results.tex}
+
+
+
+
+\subsection{Convergence of monoenergetic coefficients at low collisionality}
+\label{subsec:Convergence}
+\input{sections/Convergence.tex}
+
+%\FloatBarrier
+\subsection{Code performance}\label{subsec:Performance}
+\input{sections/Performance.tex}
+\FloatBarrier
+%\subsection{Benchmark of monoenergetic coefficients}
+
+\subsection{Benchmark of the monoenergetic coefficients}\label{subsec:Benchmark}
+\input{sections/Benchmark.tex}
+
+
+\section{Conclusions and future work}
+\label{sec:Conclusions}
+\input{sections/Conclusions.tex}
+ 
+
+\FloatBarrier
+\appendix
+\input{sections/Onsager_symmetry.tex}
+\input{sections/Appendix_Legendre.tex}
+\input{sections/Appendix_Invertibility_Spatial_Operators.tex}
+\input{sections/Appendix_Fourier.tex}	
+\input{sections/Appendix_DKES_Error_Bars.tex}
+%\input{sections/Onsager_Momentum_conservation.tex}
+	
+\FloatBarrier
+\section*{Acknowledgements}
+This work has been carried out within the framework of the EUROfusion Consortium, funded by the European Union via the Euratom Research and Training Programme (Grant Agreement No 101052200 – EUROfusion). Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Commission. Neither the European Union nor the European Commission can be held responsible for them. This research was supported in part by grant PID2021-123175NB-I00, Ministerio de Ciencia e Innovación, Spain. 
+ML was supported by the U.S. Department of Energy, Office of Science, Office of Fusion Energy Science, under award number DE-FG02-93ER54197. \textcolor{blue}{The authors would like to thank C. D. Beidler for useful suggestions on the usage of {\DKES}}.
+
+
+% This without biblatex package works but does not sort quotes
+\section*{References}
+\bibliographystyle{unsrt}
+\bibliography{refs}{}
+
+\end{document} 

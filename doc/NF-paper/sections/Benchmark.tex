@@ -1,0 +1,14 @@
+Once we have chosen the resolutions $(N_\theta,N_\zeta,N_\xi)$ for each case, we need to verify that these selections indeed provide sufficiently accurate calculations of all the monoenergetic coefficients in the interval $\hat{\nu}\in[10^{-5},300]$ $\text{m}^{-1} $. In all cases, {\MONKES} calculations of the $\widehat{D}_{11}$ and $\widehat{D}_{31}$ coefficients will be benchmarked against converged calculations from {\DKES} (see \ref{sec:Appendix_DKES_Bounds}) and from \texttt{SFINCS}\footnote{\texttt{SFINCS} calculations are converged up to 3\% in the three independent variables.}. The parallel conductivity coefficient will be benchmarked only against {\DKES}. The benchmarking of the coefficient $\widehat{D}_{11}$ is shown in figure \ref{fig:D11_Benchmark}. For W7-X, perfect agreement with and without $\hat{E}_r$ is obtained. This is shown in figures \ref{subfig:D11_Benchmark_W7X_EIM} and \ref{subfig:D11_Benchmark_W7X_KJM}. The good agreement in the $\widehat{D}_{11}$ calculation between the three codes for the CIEMAT-QI cases is shown in figure \ref{subfig:D11_Benchmark_CIEMAT_QI}. 
+
+Figures \ref{subfig:D31_Benchmark_W7X_EIM} and \ref{subfig:D31_Benchmark_W7X_KJM} show that {\MONKES} calculations of the bootstrap current coefficient for W7-X EIM and W7-X KJM are in total agreement with those of {\DKES} and \texttt{SFINCS}. For the CIEMAT-QI cases with and without $\hat{E}_r$, there is also very good agreement, as shown in figure \ref{subfig:D31_Benchmark_CIEMAT_QI}.
+%
+
+For the parallel conductivity coefficient, the agreement between the results of {\MONKES} and {\DKES} is very good. We can observe in figure \ref{fig:D33_Benchmark} that, for all the cases, is difficult to distinguish between the results of {\MONKES} and {\DKES}. Due to the weak effect of the radial electric field in the $\widehat{D}_{33}$ coefficient, the symbols for this plot have been changed. 
+%
+
+
+\input{sections/D11_Benchmark.tex}
+\input{sections/D31_Benchmark.tex}
+\input{sections/D33_Benchmark.tex}
+
+%\FloatBarrier

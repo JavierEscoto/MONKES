@@ -1,0 +1,42 @@
+\begin{tikzpicture}
+	\begin{axis}[
+	    ymin=2.7e4,
+	    ymax=3e4,
+		width=0.95\textwidth, legend pos = north east,
+		xlabel = $N_\xi$, ylabel=$(\widehat{D}_{33}^+ + \widehat{D}_{33}^-)/2$,
+		scaled y ticks=base 10:-4,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd} 
+		]	
+		
+		\foreach \Nxi in {40,60,...,200}{
+			
+			\addplot[blue, mark=*, only marks, error bars/.cd, y explicit,
+			y dir=both,	error bar style={thick}] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=(\thisrowno{8} + \thisrowno{9})/2,
+			y error plus expr=(\thisrowno{8}-\thisrowno{9})/2,
+			y error minus expr=(\thisrowno{8}-\thisrowno{9})/2,
+			restrict expr to domain={\thisrowno{1}}{0:0}
+			]{results/DKES_convergence/W7X-EIM/0.200/omega0e-0cl1e-5/la\Nxi/results.stellopt};	
+			
+			
+		}	    
+		
+%		\foreach \Nxi in {200}{
+%			
+%			\addplot[blue, mark=*, only marks] table[skip first n=1, 
+%			x expr=\Nxi,
+%			y expr=(\thisrowno{8} + \thisrowno{9})/2,
+%			restrict expr to domain={\thisrowno{1}}{0:0}
+%			]{results/DKES_convergence/W7X-EIM/0.200/omega0e-0cl1e-5/la\Nxi/results.stellopt};    	
+%			
+%		}
+		\addlegendentry{$\hat{E}_r=0$}	 
+		
+	\end{axis}
+\end{tikzpicture}

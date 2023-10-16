@@ -1,0 +1,69 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=TikzFigures/]
+
+\begin{document}
+	
+	
+		\begin{tikzpicture}
+			\begin{axis}[
+				title={MONKES},
+				%		height=0.85\textwidth, 
+				width=\textwidth, 
+				scaled y ticks=base 10:1,
+				y tick label style={
+					/pgf/number format/.cd,
+					fixed,
+					fixed zerofill,
+					precision=2,
+					/tikz/.cd}, 
+				xlabel = $N_\xi$, ylabel=$\widehat{D}_{11}  K_{11}$
+				]
+				
+				\foreach \Nxi in {120,140,...,200,240}{		
+					\addplot[blue, mark=+, only marks] table[skip first n=1, 
+					x expr=\thisrowno{4},
+					y expr=\thisrowno{5},
+					restrict expr to domain={\thisrowno{2}}{35:47},
+					restrict expr to domain={\thisrowno{3}}{165:179}
+					]{Nxi_\Nxi/monkes_Monoenergetic_Database.dat};
+				};
+				
+				
+			\end{axis}
+		
+	\end{tikzpicture}
+	
+	
+	\begin{tikzpicture}
+		\begin{axis}[
+			title={MONKES},
+			%		height=0.85\textwidth, 
+			width=\textwidth, 
+			scaled y ticks=base 10:1,
+			y tick label style={
+				/pgf/number format/.cd,
+				fixed,
+				fixed zerofill,
+				precision=2,
+				/tikz/.cd}, 
+			xlabel = $N_\xi$, ylabel=$\widehat{D}_{31}  K_{31}$
+			]
+			
+			\foreach \Nxi in {120,140,...,200,240}{		
+				\addplot[blue, mark=+, only marks] table[skip first n=1, 
+				x expr=\thisrowno{4},
+				y expr=\thisrowno{6},
+				restrict expr to domain={\thisrowno{2}}{35:47},
+				restrict expr to domain={\thisrowno{3}}{195:290}
+				]{Nxi_\Nxi/monkes_Monoenergetic_Database.dat};
+			};
+			
+			
+		\end{axis}
+		
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,158 @@
+\section{Onsager symmetry}
+\label{sec:Appendix_Onsager_symmetry}
+In this appendix we will prove that the monoenergetic coefficients $\widehat{D}_{ij}$ defined by (\ref{eq:Monoenergetic_geometric_coefficients}) satisfy Onsager symmetry relations whenever there is no electric field $E_\psi=0$ or the magnetic field possesses stellarator symmetry. For this, we will prove a more general result involving linear equations defined in some domain (phase-space) $\mathcal{S}$. Suppose we have a space $\mathcal{F_S}$ of functions from $\mathcal{S}$ to $\mathbb{R}$ with inner product $\mean*{\cdot,\cdot}_{\mathcal{S}}$ and a set of linear equations
+%
+\begin{align}
+	\mathcal{V} f_j - \mathcal{C}f_j = s_j,
+	\label{eq:Onsager_symmetry_DKE}
+\end{align}
+for $j=1,2\ldots, N_{\text{e}} $ where $s_j\in\mathcal{F_S}$ and the linear operators $\mathcal{C}$ and $\mathcal{V}$ are respectively symmetric and antisymmetric with respect to $\mean*{\cdot,\cdot}_{\mathcal{S}}$. Namely,
+%
+\begin{align}
+	\mean*{\mathcal{C}f,g}_{\mathcal{S}} & = \mean*{f,\mathcal{C}g}_{\mathcal{S}}, 
+	\label{eq:Onsager_symmetry_Collision_Symmetry}\\
+	\mean*{\mathcal{V}f,g}_{\mathcal{S}} & = -\mean*{f,\mathcal{V}g}_{\mathcal{S}}.
+	\label{eq:Onsager_symmetry_Vlasov_Skew_Symmetry}
+\end{align}
+
+Now, we define the scalars 
+%
+\begin{align}
+	\mathcal{D}_{ij} := \mean*{ s_i, f_j}_{\mathcal{S}}
+	\label{eq:Onsager_symmetry_coefficients}
+\end{align}
+for $i,j=1,2\ldots, N_{\text{e}} $.
+
+Additionally, we define a property $\mathcal{P}$ to be a map which associates to each $f\in\mathcal{F_S}$ a function $\mathcal{P} f \in\mathcal{F_S}$ and is idempotent\footnote{This means that, for all $f\in\mathcal{F_S}$, $\mathcal{P} \mathcal{P} f=f$.}. Any function $f\in\mathcal{F_S}$ can be splitted in its even $f^+$ and odd $f^-$ portions with respect to the property $\mathcal{P}$ as follows
+%
+\begin{align}
+	f^\pm : = 
+	\frac{1}{2}
+	\left(
+	f \pm \mathcal{P} f
+	\right),
+\end{align}
+satisfying $\mathcal{P} f^\pm = \pm f^\pm$. Without loss of generality, we assume that $N^+\le N_{\text{e}}$ sources $s_j$ in (\ref{eq:Onsager_symmetry_DKE}) are even with respect to $\mathcal{P}$ and the remaining $N^- := N_{\text{e}}- N^+$ sources are odd. 
+
+The coefficients $\mathcal{D}_{ij}$ satisfy Onsager symmetry relations if three (sufficient) conditions are satisfied. 
+%
+\begin{enumerate}
+	\item Even and odd functions are mutually orthogonal $\mean*{f^\pm, g^\mp}_\mathcal{S}=0$. This implies that
+	%
+	\begin{align}
+		\mean*{f,g}_{\mathcal{S}} = \mean*{f^+,g^+}_{\mathcal{S}} + \mean*{f^-,g^-}_{\mathcal{S}}.
+		\label{eq:Onsager_symmetry_orthogonality_Even_Odd}
+	\end{align}
+
+    \item The operator $\mathcal{C}$ is even with respect to property $\mathcal{P}$. Explicitly,
+    %
+    \begin{align}
+    	(\mathcal{C} f)^\pm & = \mathcal{C} f^\pm.
+    	\label{eq:Onsager_symmetry_Collisions_Even}
+    \end{align}
+    
+    \item The operator $\mathcal{V}$ is odd with respect to property $\mathcal{P}$. Explicitly,
+    %
+    \begin{align}
+    	(\mathcal{V} f)^\pm & = \mathcal{V} f^\mp.
+    	\label{eq:Onsager_symmetry_Vlasov_Odd}
+    \end{align}
+\end{enumerate}
+When conditions (\ref{eq:Onsager_symmetry_orthogonality_Even_Odd}), (\ref{eq:Onsager_symmetry_Collisions_Even}) and (\ref{eq:Onsager_symmetry_Vlasov_Odd}) are satisfied we have the following Onsager symmetry relations.
+%
+\begin{itemize}
+	\item For fixed $i$ and $j$, if $s_i$ and $s_j$ are both even, $\mathcal{D}_{ij} = \mathcal{D}_{ji}$. The proof is as follows 
+	%
+	\begin{align*}
+		\mathcal{D}_{ij} & = \mean*{s_i^+, f_j^+}_{\mathcal{S}} \\
+		& 
+		= \mean*{\mathcal{V} f_i^-, f_j^+}_{\mathcal{S}}
+		- \mean*{\mathcal{C} f_i^+, f_j^+}_{\mathcal{S}} \\
+		& 
+		= - \mean*{f_i^-, \mathcal{V} f_j^+}_{\mathcal{S}}
+		- \mean*{\mathcal{C} f_i^+, f_j^+}_{\mathcal{S}} \\
+		& 
+		= - \mean*{f_i^-, \mathcal{C} f_j^-}_{\mathcal{S}}
+		- \mean*{\mathcal{C} f_i^+, f_j^+}_{\mathcal{S}}\\
+		& 
+		= - \mean*{f_i, \mathcal{C} f_j}_{\mathcal{S}}.
+	\end{align*}
+    As in the last equality, due to (\ref{eq:Onsager_symmetry_Collision_Symmetry}), the roles of $i$ and $j$ are interchangeable, we have that $\mathcal{D}_{ij} = \mathcal{D}_{ji}$.
+	
+	\item For fixed $i$ and $j$, if $s_i$ and $s_j$ are both odd, $\mathcal{D}_{ij} = \mathcal{D}_{ji}$. The proof is as follows 
+	%
+	\begin{align*}
+		\mathcal{D}_{ij} & = \mean*{s_i^-, f_j^-}_{\mathcal{S}} \\
+		& 
+		= \mean*{\mathcal{V} f_i^+, f_j^-}_{\mathcal{S}}
+		- \mean*{\mathcal{C} f_i^-, f_j^-}_{\mathcal{S}} \\
+		& 
+		= - \mean*{f_i^+, \mathcal{V} f_j^-}_{\mathcal{S}}
+		- \mean*{\mathcal{C} f_i^-, f_j^-}_{\mathcal{S}} \\
+		& 
+		= - \mean*{f_i^+, \mathcal{C} f_j^+}_{\mathcal{S}}
+		- \mean*{\mathcal{C} f_i^-, f_j^-}_{\mathcal{S}} \\
+		& 
+		= - \mean*{f_i, \mathcal{C} f_j}_{\mathcal{S}}.
+	\end{align*}
+    As in the last equality, due to (\ref{eq:Onsager_symmetry_Collision_Symmetry}), the roles of $i$ and $j$ are interchangeable, we have that $\mathcal{D}_{ij} = \mathcal{D}_{ji}$.
+		
+	\item For fixed $i$ and $j$, if $s_i$ is even and $s_j$ is odd, $\mathcal{D}_{ij} = -\mathcal{D}_{ji}$. The proof is as follows 
+	%
+	\begin{align*}
+		\mathcal{D}_{ij} & = \mean*{s_i^+, f_j^+}_{\mathcal{S}} \\
+		& 
+		= \mean*{\mathcal{V} f_i^-, f_j^+}_{\mathcal{S}}
+		- \mean*{\mathcal{C} f_i^+, f_j^+}_{\mathcal{S}} \\
+		& 
+		= \mean*{\mathcal{V} f_i^-, f_j^+}_{\mathcal{S}}
+		- \mean*{f_i^+, \mathcal{C}  f_j^+}_{\mathcal{S}} \\
+		& 
+		= \mean*{\mathcal{V} f_i^-, f_j^+}_{\mathcal{S}}
+		- \mean*{f_i^+, \mathcal{V}  f_j^-}_{\mathcal{S}} \\
+		& 
+		= \mean*{\mathcal{V} f_i, f_j}_{\mathcal{S}}.
+	\end{align*}
+    As in the last equality, due to (\ref{eq:Onsager_symmetry_Vlasov_Skew_Symmetry}), interchanging the roles of $i$ and $j$ switches signs, we have that $\mathcal{D}_{ij} = -\mathcal{D}_{ji}$.
+
+\end{itemize}
+
+The equation (\ref{eq:DKE}) can be written in the form of (\ref{eq:Onsager_symmetry_DKE}) by setting
+the operators to be
+%
+\begin{align}
+	\mathcal{V} & = \xi \vb*{b}\cdot \nabla + \nabla\cdot\vb*{b} \frac{1-\xi^2}{2}\pdv{\xi}
+%	\nonumber \\ & 
+	-  \frac{\hat{E}_\psi}{\mean*{B^2}} \vb*{B}\times \nabla \psi \cdot \nabla,
+	\\ 
+	\mathcal{C} & = \hat{\nu} \Lorentz,
+\end{align}
+and the inner product
+%
+\begin{align}
+	\mean*{f,g}_{\mathcal{S}}:= \mean*{\int_{-1}^{1}fg\dd{\xi}}.
+	\label{eq:Onsager_Inner_Product}
+\end{align}
+
+With these definitions, properties (\ref{eq:Onsager_symmetry_Collision_Symmetry}) and (\ref{eq:Onsager_symmetry_Vlasov_Skew_Symmetry})\footnote{As $\nabla \cdot \vb*{v}_E =0$, the operator $\mathcal{V}$ can be written in divergence form. For the symmetry of $\Lorentz$ see \ref{sec:Appendix_Legendre}.} are satisfied and $\mathcal{D}_{ij} = \widehat{D}_{ij} $. \textcolor{blue}{It is interesting to remark that, the antisymmetry property (\ref{eq:Onsager_symmetry_Vlasov_Skew_Symmetry}) of $\mathcal{V}$ implies that the diagonal monoenergetic coefficients $\widehat{D}_{ii} $ are always positive. Note first that (\ref{eq:Onsager_symmetry_Vlasov_Skew_Symmetry}) implies $\mean*{f, \mathcal{V} f}_{\mathcal{S}} = 0$ for any $f\in \mathcal{F}_{\mathcal{S}}$. This implies that $\widehat{D}_{ii} = - \mean*{f_i, \hat{\nu}\Lorentz f_i}_{\mathcal{S}} $ and, as $\Lorentz$ is a negative operator (its eigenvalues are all negative or zero, see \ref{sec:Appendix_Legendre}), $\widehat{D}_{ii} \ge 0$.}
+
+Now we distinguish the two cases for which the monoenergetic coefficients $\widehat{D}_{ij} $ satisfy Onsager symmetry relations. Apart from the velocity coordinate $\xi$, we will use Boozer coordinates $( {\theta},\zeta)$.
+\begin{enumerate}
+	\item If $E_\psi=0$, the property is defined as 
+	%
+	\begin{align}
+		\mathcal{P} f( {\theta},\zeta,\xi) = f( {\theta},\zeta,-\xi).
+	\end{align}
+    It is straightforward to check that for this property, conditions (\ref{eq:Onsager_symmetry_orthogonality_Even_Odd}), (\ref{eq:Onsager_symmetry_Collisions_Even}) and (\ref{eq:Onsager_symmetry_Vlasov_Odd}) are satisfied. Also, $s_1= s_1^+$, $s_2 = s_2^+$ and $s_3 = s_3^-$. Hence, we have $\widehat{D}_{12}=\widehat{D}_{21}$, $\widehat{D}_{13}=-\widehat{D}_{31}$ and $\widehat{D}_{23}=-\widehat{D}_{32}$. 
+    
+    
+    \item When $E_\psi$ is not necessarily zero, we define the property $\mathcal{P}$ as the one that defines stellarator symmetry \cite{DEWAR1998275}
+    %
+    \begin{align}
+    	\mathcal{P} f( {\theta},\zeta,\xi) = f( - {\theta}, - \zeta,\xi)
+    \end{align}
+    and we have assumed without loss of generality that the planes of symmetry are $\theta=0$ and $ \zeta =0$. Thus, when the magnetic field is stellarator-symmetric $B=B^+$. In this case, using (\ref{eq:FSA_Boozer}), (\ref{eq:Parallel_streaming_spatial_operator}) and (\ref{eq:ExB_spatial_operator}) it is straightforward to check\footnote{Note that derivatives along $\theta$ and $\zeta$ switch parities with respect to the stellarator symmetry property, i.e. $\pdv*{f^\pm}{\theta} = (\pdv*{f^\pm}{\theta} )^\mp$ and $\pdv*{f^\pm}{\zeta} = (\pdv*{f^\pm}{\zeta} )^\mp$. Also, as for stellarator-symmetric fields, $\sqrt{g}=\sqrt{g}^+$ the flux-surface average satisfies $\mean*{f^-}=0$.} that conditions (\ref{eq:Onsager_symmetry_orthogonality_Even_Odd}), (\ref{eq:Onsager_symmetry_Collisions_Even}) and (\ref{eq:Onsager_symmetry_Vlasov_Odd}) are satisfied. Besides, $s_1=s_1^-$, $s_2 = s_2^-$ and $s_3 = s_3^+$. Hence, we have $\widehat{D}_{12}=\widehat{D}_{21}$, $\widehat{D}_{13}=-\widehat{D}_{31}$ and $\widehat{D}_{23}=-\widehat{D}_{32}$. 
+\end{enumerate}
+
+Note that for equation (\ref{eq:DKE}), the Onsager symmetry relation $\widehat{D}_{12}=\widehat{D}_{21}$ is trivial as $s_1=s_2$, which implies $f_1=f_2$ and thus $\widehat{D}_{12}=\widehat{D}_{21} = \widehat{D}_{11}= \widehat{D}_{22} $, $\widehat{D}_{31} = \widehat{D}_{32}$ and $\widehat{D}_{13} = \widehat{D}_{23}$. Nevertheless, if the definition of $s_1$ and $s_2$ was different, as long as their parity is the same, the relation $\widehat{D}_{12}=\widehat{D}_{21}$ would still hold.
+ 

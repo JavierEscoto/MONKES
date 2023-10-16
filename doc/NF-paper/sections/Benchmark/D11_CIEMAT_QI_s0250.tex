@@ -1,0 +1,99 @@
+
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=\textwidth,  
+			xlabel=$\hat{\nu}$  ${[\text{m}^{-1}]}$, ylabel=$\widehat{D}_{11}$ ${[\text{m}]}$, 
+			xmode=log, 
+			ymode=log, 
+			enlarge x limits=false,
+%			xmax = 0.1, 
+%			ymax = 4,
+			legend pos = north west,
+			legend columns=6, 
+			legend style={/tikz/every even column/.append style={column sep=1.1cm}, cells={align=left}},
+			legend to name={legend},
+			mark size = 1.5pt
+			]
+			
+			%%% MONKES RESULTS
+			\addplot[ no markers, blue]
+			table[skip first n=1, 
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{2}*0.4674*0.4674]
+			{./results/CIEMAT-QI/0.250/Monoenergetic_Database_Example_15_119_180/Monoenergetic_1.plt};	
+			\addlegendentry{\texttt{MONKES} \\ $\hat{E}_r=0$}			
+						
+			%%% DKES RESULTS	
+			\foreach \nu in 
+			{1e-5,1e-4,3e-4,3e-3,1e-2,3e-2,1e-1,3e-1,1e-0,3e-0,1e+1,3e+1,1e+2,3e+2}
+			{
+				\addplot[forget plot, only marks, mark=*, blue] table[skip first n=2, 
+				x expr=\thisrowno{0},
+				y expr={ (\thisrowno{4} + \thisrowno{5})/2*0.4674*0.4674 }, 
+				restrict expr to domain={\thisrowno{1}}{0:0}] {./results/CIEMAT-QI/0.250/omega_0e-0/cl_\nu/results.stellopt};
+			} 			
+			
+			%%% DKES RESULTS				
+			\addplot[ only marks, mark=*, blue, error bars/.cd, y explicit,
+			y dir=both,
+			error bar style={thick}] table[
+			x expr=\thisrowno{0},
+			y expr={ (\thisrowno{4} + \thisrowno{5})/2*0.4674*0.4674 }, 
+			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
+			restrict expr to domain={\thisrowno{1}}{0:0},
+			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/CIEMAT-QI/0.250/results.data};
+			\addlegendentry{\texttt{DKES} \\ $\hat{E}_r=0$}
+			
+			%%% DKES RESULTS	
+			\foreach \nu in 
+			{1e-5,1e-4,3e-4,3e-3,1e-2,3e-2,1e-1,3e-1,1e-0,3e-0,1e+1,3e+1,1e+2,3e+2}
+			{
+				\addplot[forget plot, only marks, mark=square*, red] table[skip first n=2, 
+				x expr=\thisrowno{0},
+				y expr={ (\thisrowno{4} + \thisrowno{5})/2*0.4674*0.4674 }, 
+				restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}] {./results/CIEMAT-QI/0.250/omega_1e-3/cl_\nu/results.stellopt};
+			}
+			%%% SFINCS RESULTS
+			\addplot[mark repeat = 2, only marks, blue, mark=triangle*]
+			table[col sep = comma, skip first n=1, 
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{1}*0.4674*0.4674
+			]
+			{./results/SFINCS_results/CIEMAT-QI/20230420-01-058-CIEMAT-QI_s0p238_Er0_nuScan_sfincs_results.dat};	
+			\addlegendentry{\texttt{SFINCS}\\ $\hat{E}_r=0$}	
+			
+			%%% MONKES RESULTS
+			\addplot[no markers, red]
+			table[skip first n=1, 
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{2}*0.4674*0.4674,  
+			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}]
+			{./results/CIEMAT-QI/0.250/Monoenergetic_Database_Example_15_119_180/Monoenergetic_6.plt};	
+			\addlegendentry{\texttt{MONKES}\\ $\hat{E}_r\ne 0$}			
+			
+			%%% DKES RESULTS				
+			\addplot[only marks, mark=square*, red, error bars/.cd, y explicit,
+			y dir=both,
+			error bar style={thick}] table[
+			x expr=\thisrowno{0},
+			y expr={ (\thisrowno{4} + \thisrowno{5})/2*0.4674*0.4674 }, 
+			restrict expr to domain={\thisrowno{0}}{1e-4:3e2},
+			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3},
+			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/CIEMAT-QI/0.250/results.data};
+			\addlegendentry{\texttt{DKES} \\ $\hat{E}_r\ne 0$}				
+			
+			%%% SFINCS RESULTS
+			\addplot[mark repeat =2, only marks, red, mark=triangle*, mark options={rotate=60}]
+			table[col sep = comma, skip first n=1, 
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{1}*0.4674*0.4674
+			]
+			{./results/SFINCS_results/CIEMAT-QI/20230420-01-047-CIEMAT-QI_s0p238_withEr_nuScan_sfincs_results.dat};	
+			\addlegendentry{\texttt{SFINCS}\\ $\hat{E}_r\ne 0$}			
+			
+		\end{axis}
+		
+	\end{tikzpicture}
+

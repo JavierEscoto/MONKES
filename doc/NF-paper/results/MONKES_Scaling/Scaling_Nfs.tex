@@ -1,0 +1,49 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		enlarge x limits=false, 
+		scaled x ticks=base 10:-3,
+		width=\textwidth, 
+		xtick={0, 1000,...,5000}, 
+		ytick={0, 1,...,10}, 
+		ytick={0.0, 0.5, ..., 3.5}, 
+		xlabel = $N_{\text{fs}}$, 
+		ylabel={$ \frac{\text{Wall-clock time}}{\text{No. Legendre modes}}$ {[s]}},
+%		ylabel=Wall-clock time$/(N_\xi+1)$ {[s]},        
+        y tick label style={
+        	/pgf/number format/.cd,
+        	fixed,
+        	fixed zerofill,
+        	precision=1,
+        	/tikz/.cd}, 
+		mark size=2.5 pt,
+		legend pos = north west, legend columns=1,
+		xmin = 0, xmax=4800,
+		ymax = 3.15, ymin=0, 
+%		xmode=log, ymode=log
+		]		
+				
+		\addplot+[only marks, mark repeat=2, mark options={thick,fill=white, fill opacity=0}] table[skip first n=1, 
+		x expr=\thisrowno{2}*\thisrowno{3},
+		y expr=(\thisrowno{10}/(1+\thisrowno{4})),
+		restrict expr to domain={\thisrowno{10}/(1+\thisrowno{4})}{0:3.7}
+		]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+				
+	   \foreach \Ncores in {2,4,8,16}
+	   {				
+		    \addplot+[only marks, mark options={thick,fill=white, fill opacity=0}, mark repeat = 2] table[skip first n=1, 
+	    	x expr=\thisrowno{2}*\thisrowno{3},
+	    	y expr=(\thisrowno{10}/(1+\thisrowno{4})),
+	    	restrict expr to domain={\thisrowno{10}/(1+\thisrowno{4})}{0:3.7}
+	    	]{results/MONKES_Scaling/\Ncores_cores/Convergence_nu_1e-5_Er_0/Nxi_100/monkes_Monoenergetic_Database.dat};
+	    	
+	   }
+	   \legend{1 core,2 cores,4 cores,8 cores,16 cores, $C_{\text{alg}}N_{\text{fs}}^3$}
+	   
+	   
+	   \addplot[no markers, black, very thick] table[skip first n=1, 
+	   x expr=\thisrowno{2}*\thisrowno{3},
+	   y expr=0.61*(\thisrowno{2}*\thisrowno{3} /2025)^3,
+	   restrict expr to domain={\thisrowno{10}/(1+\thisrowno{4})}{0:3.7}
+	   ]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+	\end{axis}
+\end{tikzpicture}

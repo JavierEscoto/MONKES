@@ -1,0 +1,252 @@
+
+\section{Invertibility of the spatial differential operators}
+\label{sec:Appendix_Invertibility} 
+In this Appendix we will study the invertibility of the left-hand-side of (\ref{eq:DKE_Legendre_expansion}). For this, we view $L_k$, $D_k$ and $U_k$ as operators that act on $\mathcal{F}$, where $\mathcal{F}$ is the space of smooth functions on the flux-surface equipped with the inner product
+%
+\begin{align}
+	\mean*{f,g}_{\mathcal{F}}=\frac{N_p}{4\pi^2}\oint\oint f\bar{g}\dd{\theta}\dd{\zeta},
+	\label{eq:Fourier_inner_product}
+\end{align}
+where $\bar{z}$ denotes the complex conjugate of $z$ and the inner product induces a norm 
+%
+\begin{align}
+	\norm{f}_{\mathcal{F}}:=\sqrt{\mean*{f,f}_{\mathcal{F}}}.
+	\label{eq:Fourier_norm}
+\end{align}
+In this setting $L_k$, $D_k$ and $U_k$ are operators from $\mathcal{F}$ to $\mathcal{F}$ as all of their coefficients are smooth on the flux-surface. However, the operators $L_k$ and $U_k$ given by (\ref{eq:DKE_Legendre_expansion_Lower}) and (\ref{eq:DKE_Legendre_expansion_Upper}) do not have a uniquely defined inverse. This is a consequence of the fact that the parallel streaming operator $\xi \vb*{b}\cdot \nabla+\nabla \cdot \vb*{b} {(1-\xi^2)}/{2}  \pdv*{\xi}$ has a non trivial kernel comprised of functions $g((1-\xi^2)/B)$. On the other hand, the operator $D_k$ has a unique inverse for $k\ge 1$.
+
+Whether $L_k$ and $U_k$ are or not invertible can be determined studying the uniqueness of continuous solutions (on the flux-surface) to
+\begin{align}
+	 \vb*{B}\cdot \nabla f + \omega_k f = s B,
+	 \label{eq:Invertibility_Lk_Uk_MDE}
+\end{align}
+for some $s\in\mathcal{F}$ and $\omega_k$ is a smooth on the torus. Note that equations $L_k f = ks/(2k-1)$ and $U_k f =(k+1)s/(2k+3)$ can be written in the form of equation (\ref{eq:Invertibility_Lk_Uk_MDE}) setting, respectively, $\omega_k=(k-1)\vb*{B}\cdot\nabla \ln B /2$ and $\omega_k=-(k+2)\vb*{B}\cdot\nabla \ln B /2$. We will determine a condition for $\omega_k$ which, if satisfied, equation (\ref{eq:Invertibility_Lk_Uk_MDE}) has a unique solution $f\in\mathcal{F}$.
+
+The solution to equation (\ref{eq:Invertibility_Lk_Uk_MDE}) can be written as
+%
+\begin{align}
+	f = (f_0 + K ) \Phi,
+	\label{eq:Invertibility_Lk_Uk_Variation_of Constants}
+\end{align}
+where
+%
+\begin{align}
+	& \vb*{B}\cdot \nabla f_0 = 0,  \label{eq:Invertibility_Lk_Uk_constant}
+	\\
+	& \vb*{B}\cdot \nabla \Phi + \omega_k \Phi = 0,  \label{eq:Invertibility_Lk_Uk_Homogeneous}
+	\\
+	& \vb*{B}\cdot \nabla K = {sB}/{\Phi}.  \label{eq:Invertibility_Lk_Uk_Particular}
+\end{align}
+Equations (\ref{eq:Invertibility_Lk_Uk_Homogeneous}) and (\ref{eq:Invertibility_Lk_Uk_Particular}) are integrated (along a field line) imposing $\eval{\Phi}_{p}=1$ and $\eval{K}_{p}=0$ at a point $p$ of the field line. Note that $f_0=\eval{f}_{p}$ is an integration constant. Depending on the form of $\omega_k$, $f_0$ can or cannot be determined imposing continuity on the flux-surface. In order to proceed further, we employ coordinates $(\alpha,l)$ where $\alpha:=\theta-\iota \zeta$ is a poloidal angle that labels field lines and $l$ is the length along magnetic field lines. Depending on the type of flux-surface there are two possible situations
+%
+\begin{enumerate}
+	\item For ergodic flux-surfaces, $\iota\in\mathbb{R}\backslash \mathbb{Q}$ and satisfying (\ref{eq:Invertibility_Lk_Uk_constant}) implies that $f_0$ is a flux-function. The solution $f$ to (\ref{eq:Invertibility_Lk_Uk_Particular}) is a differentiable function on the torus if $\mean*{\vb*{B}\cdot\nabla f} = 0$. Applying $\mean*{\text{Eq. (\ref{eq:Invertibility_Lk_Uk_MDE})}}$ combined with splitting (\ref{eq:Invertibility_Lk_Uk_Variation_of Constants}) yields
+	%
+	\begin{align}
+		f_0\mean*{\omega_k \Phi}  & = \mean*{B s} - \mean*{K \omega_k \Phi} \nonumber
+		\\
+		& = \mean*{\vb*{B}\cdot\nabla(K \Phi)}. \label{eq:Invertibility_Lk_Uk_Ergodic_condition}
+	\end{align}
+    Hence, if $\mean*{\omega_k \Phi} \ne 0$, equation (\ref{eq:Invertibility_Lk_Uk_Ergodic_condition}) fixes the value of $f_0$ so that $f$ is continuous on the torus. Note that if $\mean*{\omega_k \Phi} \ne 0$, by virtue of (\ref{eq:Invertibility_Lk_Uk_Homogeneous}), $\Phi$ is not univaluated. On the contrary, if $f_0$ is free, then $\Phi$ is a continuous function on the torus. 
+    
+    \item For rational flux-surfaces, $\iota\in \mathbb{Q}$ and satisfying (\ref{eq:Invertibility_Lk_Uk_constant}) implies that $f_0(\alpha)$ depends on the field line chosen. At these surfaces, the field line labelled by $\alpha$ closes on itself after a length $L_{\text{c}}(\alpha)$. If the solution $f$ is continuous on the flux-surface, then $\int_{0}^{L_{\text{c}}} \vb*{B}\cdot\nabla f \dd{l}/B=0$ for each field line. Applying $\int_{0}^{L_{\text{c}}} \text{Eq. (\ref{eq:Invertibility_Lk_Uk_MDE})}\dd{l}/B$ combined with splitting (\ref{eq:Invertibility_Lk_Uk_Variation_of Constants}) yields
+    %
+    \begin{align}
+    	f_0(\alpha)
+    	\int_{0}^{L_{\text{c}}} \omega_k \Phi \frac{\dd{l}}{B}  
+    	& =  
+    	\int_{0}^{L_{\text{c}}} s \dd{l} - \int_{0}^{L_{\text{c}}} \omega_k K \Phi \frac{\dd{l}}{B}
+    	\nonumber 
+    	\\
+    	& =  
+        \int_{0}^{L_{\text{c}}} \vb*{B}\cdot\nabla(K \Phi) \frac{\dd{l}}{B}
+    	. \label{eq:Invertibility_Lk_Uk_Rational_condition}
+    \end{align}
+    If $\int_{0}^{L_{\text{c}}} \omega_k \Phi {\dd{l}}/{B} \ne 0$, condition (\ref{eq:Invertibility_Lk_Uk_Rational_condition}) fixes a unique value of $f_0(\alpha)$ (for each field line) for which $f$ is continuous on the torus. As for ergodic surfaces, continuity of $f$ implies that $\Phi$ is multivaluated along field lines. 
+\end{enumerate}
+If (\ref{eq:Invertibility_Lk_Uk_Ergodic_condition}) or (\ref{eq:Invertibility_Lk_Uk_Rational_condition}) does not fix $f_0$, the operator $\vb*{B}\cdot\nabla + \omega_k$ from $\mathcal{F}$ to itself is not one-to-one (it has a non trivial kernel comprised of multiples of $K$).  
+Moreover, when $\Phi$ is continuous, (\ref{eq:Invertibility_Lk_Uk_Ergodic_condition}) or (\ref{eq:Invertibility_Lk_Uk_Rational_condition}) imposes a condition on the source $s$. This means that the operator $\vb*{B}\cdot\nabla + \omega_k$ from $\mathcal{F}$ to itself is not onto. Hence, if $\mean*{\omega_k \Phi} =0 $ or $\int_{0}^{L_{\text{c}}} \omega_k \Phi {\dd{l}}/{B} = 0$, the operator $\vb*{B}\cdot\nabla + \omega_k$ is not invertible. 
+
+This result can be applied to determine that $L_k$ and $U_k$ are not invertible. First, note that the solution to (\ref{eq:Invertibility_Lk_Uk_Homogeneous}) can be written as
+%
+\begin{align}
+	\Phi = \exp(-W_k), 
+	\label{eq:Invertibility_Lk_Uk_Homogeneous_solution}
+\end{align}
+where $\vb*{B}\cdot\nabla W_k = \omega_k$ and is integrated imposing $\eval{W_k}_{p}=0$. For both $L_k$ and $U_k$, the exponentiated term of $\Phi$ takes the form $W_k \propto \ln(B/\eval{B}_{p})$, which means that $\omega_k \Phi \propto \vb*{B}\cdot\nabla B $. As $B$ is univaluated we have for $L_k$ and $U_k$ that $\int_{0}^{L_{\text{c}}} \omega_k \Phi {\dd{l}}/{B} =  0$ or $\mean*{\omega_k \Phi}=0$, which means that neither $L_k$ nor $U_k$ are invertible.
+
+Now we turn our attention to the invertibility of $D_k$ for $k\ge 1$. For $\hat{E}_\psi =0$, $D_k$ is just a multiplicative operator and is clearly invertible when $\hat{\nu}, k\ne0$. For $\hat{E}_\psi \ne 0$, the invertibility of $D_k$ can be proven by studying the uniqueness of solutions to
+\begin{align} 
+	\vb*{B}\times\nabla\psi\cdot \nabla g - \hat{\nu}_k g  = - \frac{\mean*{B^2}}{\hat{E}_\psi} s,
+	\label{eq:Invertibility_Dk_MDE}
+\end{align}
+where $\hat{\nu}_k = \hat{\nu} k (k+1) {\mean*{B^2}}/{2\hat{E}_\psi}$. The procedure is very similar to the one carried out for $L_k$ and $U_k$. First, we write the solution to equation (\ref{eq:Invertibility_Dk_MDE}) as
+%
+\begin{align}
+	g = ( g_0 + I ) \Psi,
+	\label{eq:Invertibility_Dk_Variation_of_Constants}
+\end{align}
+where
+%
+\begin{align}
+	& \vb*{B}\times\nabla\psi\cdot \nabla g_0 = 0,  \label{eq:Invertibility_Dk_constant}
+	\\
+	& \vb*{B}\times\nabla\psi\cdot \nabla \Psi - \hat{\nu}_k \Psi = 0,  \label{eq:Invertibility_Dk_Homogeneous}
+	\\
+	& \vb*{B}\times\nabla\psi\cdot \nabla I = - \frac{\mean*{B^2}}{\hat{E}_\psi}\frac{s}{\Psi}.  \label{eq:Invertibility_Dk_Particular}
+\end{align}
+Equations (\ref{eq:Invertibility_Dk_Homogeneous}) and (\ref{eq:Invertibility_Dk_Particular}) are integrated along a integral curve of $\vb*{B}\times\nabla\psi$ imposing $\eval{\Psi}_{p}=1$ and $\eval{I}_{p}=0$ at the initial point $p$ of integration. The integral curves of $\vb*{B}\times\nabla\psi$ are, in Boozer coordinates, straight lines $B_\theta \theta + B_\zeta \zeta = \text{constant}$. In order to proceed further, we change from Boozer angles $(\theta,\zeta)$ to a different set of magnetic coordinates $(\alpha,\varphi)$ using the linear transformation
+%
+\begin{align}
+	\Matrix{c}{\theta \\ \zeta}
+	=
+	\Matrix{cc}
+	{
+		(1 + \iota \delta)^{-1}	 &  \iota\\ 
+		-\delta(1 + \iota \delta)^{-1}	 &  1
+	}
+	\Matrix{c}{\alpha \\ \varphi}
+	\label{eq:Invertibility_Magnetic_Coordinates_Dk}
+\end{align}
+where $\delta = B_\theta/B_\zeta$. In these coordinates $\vb*{B} =\nabla \psi \times \nabla \alpha $, $B_\alpha = 0$ and
+%
+\begin{align}
+	\vb*{B}\times\nabla \psi \cdot \nabla = 
+	B^2 \pdv{}{\alpha}.
+	\label{eq:Invertibility_Dk_Localization_alpha}
+\end{align}
+%
+Depending on the rationality or irrationality of $\delta$ we can distinguish two options
+%
+\begin{enumerate}
+	\item If $\delta \in \mathbb{R}\backslash\mathbb{Q}$, satisfying (\ref{eq:Invertibility_Dk_constant}) implies that $g_0$ is a flux-function (the integral curves trace out the whole flux surface). Note that if $g$ is a differentiable function on the torus $\mean{ \vb*{B} \times \nabla \psi \cdot \nabla g } = \mean{ \nabla\times (g\vb*{B}) \cdot\nabla \psi }=0$, where we have used $\nabla\times\vb*{B}\cdot\nabla\psi = 0$. Taking $\mean*{\text{Eq. (\ref{eq:Invertibility_Dk_MDE})}}$ assuming that $f$ is continuous on the flux-surface, combined with (\ref{eq:Invertibility_Dk_Variation_of_Constants}) gives
+	%
+	\begin{align} 
+		\mean*{\Psi} g_0  
+		& = 
+		\frac{ \mean*{B^2} }{ \hat{\nu}_k \hat{E}_\psi } 
+		\mean*{s}
+		- 
+		\mean*{I \Psi}\nonumber
+		\\
+		& = 
+		\frac{1}{\hat{\nu}_k}
+		\mean*{\vb*{B}\times\nabla \psi \cdot \nabla(I \Psi)}. 
+		\label{eq:Invertibility_Dk_Ergodic_condition}
+	\end{align}
+    Hence, if $\mean*{\Psi}\ne 0$, continuity of $g$ on the torus fixes the integration constant $g_0$. 
+
+    \item If $\delta \in \mathbb{Q}$, satisfying (\ref{eq:Invertibility_Dk_constant}) implies that $g_0(\varphi)$ is a function of $\varphi$. Now the integral curves $\varphi=\text{constant}$ close on itself after moving in $\alpha$ an arc-length $L_\alpha$. In this scenario, if $g$ is a differentiable function on the torus $\int_{0}^{L_\alpha}\vb*{B}\times \nabla\psi \cdot \nabla g \dd{\alpha}/ B^2  = 0$, where we have used (\ref{eq:Invertibility_Dk_Localization_alpha}). Thus, taking $\int_{0}^{L_\alpha}\text{Eq. (\ref{eq:Invertibility_Dk_MDE})} \dd{\alpha}/ B^2 $, combined with (\ref{eq:Invertibility_Dk_Variation_of_Constants}) gives
+    %
+    \begin{align}
+      g_0(\varphi) \int_{0}^{L_\alpha} \Psi\frac{\dd{\alpha}}{ B^2 }
+      & = 
+      \frac{ \mean*{B^2} }{ \hat{\nu}_k \hat{E}_\psi }
+      \int_{0}^{L_\alpha} s    \frac{\dd{\alpha}}{ B^2 }
+      \nonumber 
+%      \\
+%      & 
+-      
+      \int_{0}^{L_\alpha}   I \Psi  \frac{\dd{\alpha}}{ B^2 }
+      \\
+      & =       
+      \frac{1}{\hat{\nu}_k}
+      \int_{0}^{L_\alpha}
+      \vb*{B}\times\nabla \psi \cdot \nabla(I \Psi)
+      \frac{\dd{\alpha}}{ B^2 }
+      .
+      \label{eq:Invertibility_Dk_Rational_condition}
+    \end{align}
+    Thus, if $\int_{0}^{L_\alpha} \Psi \dd{\alpha} / B^2 \ne 0 $ condition (\ref{eq:Invertibility_Dk_Rational_condition}) fixes the value of $g_0(\varphi)$ so that $g$ is continuous on the flux-surface. 
+    
+\end{enumerate}
+Similarly to what happened to $\Phi$ when studying the invertibility of $L_k$ and $U_k$, continuity of the solution implies that $\Psi$ cannot be univaluated. We can write $\Psi$ as
+%
+\begin{align}
+	\Psi = \exp(-A_k), 
+	\label{eq:Invertibility_Dk_Exponential}
+\end{align}
+where $\vb*{B}\times \nabla\psi \cdot \nabla A_k = \hat{\nu}_k$ and is integrated along with condition $\eval{A_k}_{p}=0$. Using (\ref{eq:Invertibility_Dk_Localization_alpha}), we can write
+%
+\begin{align}
+	A_k(\alpha,\varphi) = \hat{\nu}_k \int_{0}^{\alpha} \frac{\dd{\alpha'}}{ B^2(\alpha',\varphi)}.
+\end{align}
+Note that $A_k$ is monotonically crescent with $\alpha$, which means that $\Psi $ cannot be univaluated. Besides, (\ref{eq:Invertibility_Dk_Exponential}) implies $\Psi>0$, which means that $\mean*{\Psi}\ne 0 $ and $\int_{0}^{L_\alpha}\Psi   \dd{\alpha}/  B^2 \ne 0 $. Thus, there is a unique value of the constant $g_0$ which compensates the jumps in $\Psi$ and $I\Psi$ so that $g=g_0 \Psi + I \Psi$ is continuous on the flux-surface. Hence, $D_k$ is an invertible operator from $\mathcal{F}$ to itself. 
+
+
+The inverse of $D_k$ for $k \ge 1$ and $\hat{E}_\psi \ne 0$ is defined by
+%
+\begin{align}
+	D_k^{-1} s :=  ( \mathcal{G}_0[s] + \mathcal{I}[s] ) \Psi,
+\end{align}
+where $\mathcal{G}_0[s]$ and $\mathcal{I}[s]$ denote the linear operators which define, respectively, the constant of integration and the solution to (\ref{eq:Invertibility_Dk_Particular}) with $\eval{I}_{p}=0$ for a given source term. Specifically,
+%
+\begin{align}
+	\mathcal{I}[s](\alpha,\varphi)
+	& :=
+	- \frac{\mean*{B^2}}{\hat{E}_\psi}
+	\int_{0}^{\alpha}
+	\frac{s(\alpha',\varphi)}{\Psi(\alpha',\varphi)}
+	\frac{\dd{\alpha'}}{ B^2(\alpha',\varphi)}  ,
+\end{align}
+and
+\begin{align}
+	\mathcal{G}_0[s](\varphi)
+	& :=
+	\begin{dcases}
+		& \text{If }\delta\in\mathbb{R}\backslash\mathbb{Q}:\\
+		& \frac{2}{ \hat{\nu} k (k+1) } \frac{\mean*{s}}{\mean*{\Psi} }
+		- 
+		\frac{\mean*{\mathcal{I}[s] \Psi}}{\mean*{\Psi} },  
+		\vspace{0.5cm} \\ 
+		& \text{If }\delta\in\mathbb{Q}:\\
+		& \frac{2}{\hat{\nu} k(k+1)} \dfrac{\int_{0}^{L_\alpha} s \frac{\dd{\alpha}}{ B^2 }}{\int_{0}^{L_\alpha} \Psi\frac{\dd{\alpha}}{ B^2 }}
+		 -      
+		\dfrac{\int_{0}^{L_\alpha}   \mathcal{I}[s] \Psi  \frac{\dd{\alpha}}{ B^2 }}{\int_{0}^{L_\alpha} \Psi\frac{\dd{\alpha}}{ B^2 }} .
+	\end{dcases}  
+\end{align}
+
+
+Finally, we will study the invertibility of the operator $\Delta_k$ 
+%
+\begin{align}
+	\Delta_{k} = D_k - U_k \Delta_{k+1}^{-1} L_{k+1} 
+\label{eq:Invertibility_Delta}
+\end{align}
+assuming that $\Delta_{k+1}$ is invertible. For this, first, we note that in the space of functions of interest (smooth periodic functions on the torus), using a Fourier basis $\{e^{\ii (m \theta+ nN_p\zeta)}\}_{m,n\in\mathbb{Z}}$, we can approximate any function $f(\theta,\zeta)=\sum_{m,n\in \mathbb{Z}} \hat{f}_{mn} e^{\ii (m \theta+ nN_p\zeta)} \in \mathcal{F}$ using an approximant $\tilde{f}(\theta,\zeta)$
+%
+\begin{align}
+	\tilde{f}(\theta,\zeta)=\sum_{- N \le m,n\le N } \hat{f}_{mn} e^{\ii (m \theta+ nN_p\zeta)}
+\label{eq:Fourier_truncated}
+\end{align}
+truncating the modes with mode number greater than some positive integer $N $ where 
+\begin{align}
+	\hat{f}_{mn} = \mean*{f,e^{\ii (m \theta+ nN_p\zeta)}}_{\mathcal{F}}  \norm{e^{\ii (m \theta+ nN_p\zeta)}}_{\mathcal{F}}^{-2}
+\end{align}
+ are the Fourier modes of $f$. Thus, we approximate $\mathcal{F}$ using a finite dimensional subspace $\mathcal{F}^{N} \subset \mathcal{F}$ consisting on all the functions of the form given by equation (\ref{eq:Fourier_truncated}).
+ 
+ 
+ Hence, we can approximate $D_k$, $U_k$, $\Delta_{k+1}$ and $L_{k+1} $ restricted to $\mathcal{F}^{N}$ (and therefore $\Delta_{k}$) in equation (\ref{eq:Invertibility_Delta}) by operators $D_k^N$, $U_k^N$, $\Delta_{k+1}^N$ and $L_{k+1}^N$ that map any $\tilde{f}\in\mathcal{F}^N$ to the projections of $D_k \tilde{f}$, $U_k \tilde{f}$, $\Delta_{k+1} \tilde{f}$ and $L_{k+1} \tilde{f}$ onto $\mathcal{F}^N$. The operators $D_k^N$, $U_k^N$, $\Delta_{k+1}^N$ and $L_{k+1}^N$ can be exactly represented (in a Fourier basis) by square matrices of size $\dim \mathcal{F}^N$. When the operators are invertible, these matrices are invertible aswell. Doing so, we can interpret the matrix representation of $\Delta_{k}$ as the Schur complement of the matrix
+%
+\begin{align}
+	M_k^N = 
+	\Matrix{cc}
+	{ D_k^N & U_k^N \\
+		L_{k+1}^N & \Delta_{k+1}^N
+	}.
+	\label{eq:Invertibility_Delta_Schur}
+\end{align}
+It is well known from linear algebra that the determinant of $M_k^N$ satisfies
+%
+\begin{align}
+	\det(M_k^N)
+	& =
+	\det(\Delta_{k+1}^N)
+	\det(\Delta_k^N)
+	.
+	\label{eq:Schur_complement_determinant}
+\end{align}
+%
+The matrix $M_k^N$ is invertible when both $D_k^N$ and $\Delta_{k+1}^N$ are invertible. Hence, note from (\ref{eq:Schur_complement_determinant}) that, for $k\ge1$, the matrix $\Delta_{k}^N$ can be inverted for any $N$, and therefore $\Delta_{k}$ is invertible. For $k=0$, it is necessary to substitute one of the rows of $[D_0^N \ \ U_0^N]$ by the condition (\ref{eq:kernel_elimination_condition_Legendre}) so that $M_0^N$ is invertible for any $N$ and as $\Delta_1^N$ can be inverted, also $\Delta_0^N$ constructed in this manner for any $N$, which implies that $\Delta_0$ (as the limit $\lim_{N\rightarrow\infty} \Delta_0^N$) is invertible. 
+
+\textcolor{blue}{Under the assumption of existing ergodic nested flux-surfaces made in section \ref{sec:DKE}, condition (\ref{eq:kernel_elimination_condition_Legendre}) is sufficient to fix the value of $f^{(0)}$. However, for completeness, we briefly discuss the different possibilities when $\iota$ is rational. Condition (\ref{eq:kernel_elimination_condition_Legendre}) fixes the value of $f^{(0)}$ solely when the only functions that lie simultaneously at the kernels of $D_0 = -\hat{E}_\psi \mean*{B^2}^{-1} \vb*{B}\times\nabla\psi\cdot\nabla$ and $L_1=\vb*{b}\cdot\nabla$ are constants (flux-functions). If $\hat{E}_\psi \ne 0$, this occurs for any $|\delta|<\infty $. For rational flux-surfaces and $\hat{E}_\psi = 0$, condition (\ref{eq:kernel_elimination_condition_Legendre}) is insufficient to make $M_0^N$ invertible. In such case, we would need to fix the value of $f^{(0)}$ at a point of each field line as any function $g(\alpha)$ lies in the kernel of $\vb*{b}\cdot\nabla$. However, selecting this value is not a trivial task as the solution must be continuous along $\alpha$ and also the selection should not affect transport coefficients, which is not automatically guaranteed. }

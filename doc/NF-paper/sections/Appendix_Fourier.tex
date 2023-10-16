@@ -1,0 +1,237 @@
+\section{Fourier collocation method} \label{sec:Appendix_Fourier}
+
+In this appendix we describe the Fourier collocation (also called pseudospectral) method for discretizing the angles $\theta$ and $\zeta$. This discretization will be used to obtain the matrices $\vb*{L}_k$, $\vb*{D}_k$ and $\vb*{U}_k$. For convenience, we will use the complex version of the discretization method but for the discretization matrices we will just take their real part as the solutions to (\ref{eq:DKE}) are all real. We search for approximate solutions to equation (\ref{eq:DKE_Legendre_expansion}) of the form
+%
+\begin{align}
+	f^{(k)}(\theta,\zeta) 
+	& = 
+	\sum_{n=-N_{\zeta1}/2}^{N_{\zeta2}/2-1}
+	\sum_{m=-N_{\theta1}/2}^{N_{\theta2}/2-1}
+	\tilde{f}_{mn}^{(k)}
+	e^{\ii(m\theta + nN_{p}\zeta)}
+	\label{eq:Discrete_Fourier_Expansion}
+\end{align}
+where $N_{\theta1} = N_\theta - N_\theta\mod 2 $, $N_{\theta2} = N_\theta + N_\theta\mod 2 $, $N_{\zeta1} = N_\zeta - N_\zeta\mod 2 $, $N_{\zeta2} = N_\zeta + N_\zeta\mod 2 $ for some positive integers $N_\theta$, $N_\zeta$. The complex numbers 
+%
+\begin{align}
+	\tilde{f}_{mn}^{(k)}
+	:=
+	\mean*{f^{(k)}, e^{\ii(m\theta + nN_{p}\zeta)}}_{N_\theta N_\zeta}
+	\norm{ e^{\ii(m\theta + nN_{p}\zeta)}}_{N_\theta N_\zeta}^{-2}
+	\label{eq:Discrete_Fourier_Transform}
+\end{align}
+are the discrete Fourier modes (also called discrete Fourier transform), 
+%
+\begin{align}
+	\mean*{f,g}_{N_\theta N_\zeta}:= 
+	\frac{1}{N_\theta N_\zeta}	
+	\sum_{j'=0}^{N_{\zeta}-1}
+	\sum_{i'=0}^{N_{\theta}-1}
+	f(\theta_{i'},\zeta_{j'})
+	\overline{g(\theta_{i'},\zeta_{j'})}
+	\label{eq:Discrete_Fourier_Inner_product}
+\end{align} 
+is the discrete inner product associated to the equispaced grid points (\ref{eq:Theta_grid}), (\ref{eq:Zeta_grid}), $\norm{ f}_{N_\theta N_\zeta}:=\sqrt{\mean*{f,f}_{N_\theta N_\zeta}}$ its induced norm and $\bar{z}$ denotes the complex conjugate of $z$. We denote by $\mathcal{F}^{N_\theta N_\zeta}$ to the finite dimensional vector space (of dimension $N_\theta N_\zeta$) comprising all the functions that can be written in the form of expansion (\ref{eq:Discrete_Fourier_Expansion}).
+
+The set of functions $\{e^{\ii(m\theta + nN_p\zeta)}\}\subset \mathcal{F}^{N_\theta N_\zeta}$ forms an orthogonal basis for $\mathcal{F}^{N_\theta N_\zeta}$ equipped with the discrete inner product (\ref{eq:Discrete_Fourier_Inner_product}). Namely, 
+%
+\begin{align}
+	\mean*{e^{\ii(m\theta + nN_{p}\zeta)},e^{\ii(m'\theta + n'N_{p}\zeta)}}_{N_\theta N_\zeta} 
+	\propto
+	\delta_{mm'}\delta_{nn'}
+\end{align}
+for $-N_{\theta 1}/2\le m \le N_{\theta 2}/2$ and $-N_{\zeta 1}/2\le n \le N_{\zeta 2}/2$. Thus, for functions lying in $\mathcal{F}^{N_\theta N_\zeta}$, discrete expansions such as (\ref{eq:Discrete_Fourier_Expansion}) coincide with their (finite) Fourier series. The discrete Fourier modes (\ref{eq:Discrete_Fourier_Transform}) are chosen so that the expansion (\ref{eq:Discrete_Fourier_Expansion}) interpolates $f^{(k)}$ at grid points. Hence, there is a vector space isomorphism between the space of discrete Fourier modes and $f^{(k)}$ evaluated at the equispaced grid. 
+
+
+Combining equations (\ref{eq:Discrete_Fourier_Expansion}), (\ref{eq:Discrete_Fourier_Transform}) and (\ref{eq:Discrete_Fourier_Inner_product}) we can write our Fourier interpolant as
+%
+\begin{align}
+	f^{(k)}(\theta,\zeta) 
+	& = 
+	\vb*{I}(\theta,\zeta) \cdot \vb*{f}^{(k)}
+	\nonumber
+	\\
+	& =
+	\sum_{j'=0}^{N_{\zeta}-1}
+	\sum_{i'=0}^{N_{\theta}-1}
+	I_{i'j'}(\theta,\zeta)
+	f^{(k)}(\theta_{i'},\zeta_{j'})
+	,
+	\label{eq:Fourier_interpolant}
+\end{align}
+where $\vb*{f}^{(k)}\in\mathbb{R}^{N_{\text{fs}}}$ is the state vector containing $f^{(k)}(\theta_{i'},\zeta_{j'})$. The entries of the vector $\vb*{I}(\theta,\zeta)$ are the functions $I_{i'j'}(\theta,\zeta)$ given by, 
+\begin{align}
+	& I_{i'j'}(\theta,\zeta)
+	=
+	I_{i'}^\theta(\theta)
+	I_{j'}^\zeta(\zeta),
+\\
+	I_{i'}^{\theta}(\theta) &= 
+	\frac{1}{N_\theta}
+	\sum_{m=-N_{\theta1}/2}^{N_{\theta2}/2-1}
+	e^{{ \ii m (\theta-\theta_{i'})} },
+	\\
+	I_{j'}^{\zeta}(\zeta) &= 
+	\frac{1}{N_\zeta}
+	\sum_{n=-N_{\zeta1}/2}^{N_{\zeta2}/2-1}
+	e^{{ N_p\ii n (\zeta-\zeta_{j'})} }
+	.
+\end{align}
+Note that the interpolant is the only function in $\mathcal{F}^{N_\theta N_\zeta}$ which interpolates the data at the grid points, as $I_{i'}^\theta(\theta_i)=\delta_{ii'}$ and $I_{j'}^\zeta(\zeta_j)=\delta_{jj'}$. 
+
+Of course, our approximation (\ref{eq:Fourier_interpolant}) cannot (in general) be a solution to (\ref{eq:DKE_Legendre_expansion}) at all points $(\theta,\zeta)\in[0,2\pi)\times[0,2\pi/N_p)$. Instead, we will force that the interpolant (\ref{eq:Fourier_interpolant}) solves equation (\ref{eq:DKE_Legendre_expansion}) exactly at the equispaced grid points. Thanks to the vector space isomorphism (\ref{eq:Discrete_Fourier_Transform}) between $\vb*{f}^{(k)}$ and the discrete modes $\tilde{f}_{mn}^{(k)}$ this is equivalent to matching the discrete Fourier modes of the left and right-hand-sides of equation (\ref{eq:DKE_Legendre_expansion}).
+
+Inserting the interpolant (\ref{eq:Fourier_interpolant}) in the left-hand side of equation (\ref{eq:DKE_Legendre_expansion}) and evaluating the result at grid points gives
+%
+\begin{align}
+	& 
+	\eval{\left(
+		L_k f^{(k-1)} 
+		+
+		D_k f^{(k)}
+		+
+		U_k f^{(k+1)}
+		\right)}_{(\theta_i,\zeta_j)}
+	=
+	\nonumber
+	\\
+	& 
+	\eval{\left(
+		L_k \vb*{I} \cdot \vb*{f}^{(k-1)} 
+		+
+		D_k \vb*{I} \cdot \vb*{f}^{(k)}
+		+
+		U_k \vb*{I} \cdot \vb*{f}^{(k+1)}
+		\right)}_{(\theta_i,\zeta_j)}.
+%	\nonumber
+%	\\
+%	&\qquad
+%	\sum_{j'=0}^{N_\zeta-1}
+%	\sum_{i'=0}^{N_\theta-1}
+%	\left[
+%	\left(\vb*{L}_k\right)_{(i,j)}^{(i',j')}
+%	{f}^{(k-1)}(\theta_{i'},\zeta_{j'})
+%	\right.
+%	%    \nonumber\\ 
+%	%    & 
+%	\nonumber\\ 
+%	&\qquad\qquad 
+%	+
+%	\left(\vb*{D}_k\right)_{(i,j)}^{(i',j')}
+%	{f}^{(k)}(\theta_{i'},\zeta_{j'})
+%	\nonumber\\ 
+%	&\qquad\qquad  
+%	+\left.
+%	\left(\vb*{U}_k\right)_{(i,j)}^{(i',j')}
+%%	\vb*{f}^{(k+1)}_{(i',j')}
+%	{f}^{(k+1)}(\theta_{i'},\zeta_{j'})
+%	\right].
+\end{align}
+Here, $L_k \vb*{I}(\theta_i,\zeta_j)$, $D_k \vb*{I}(\theta_i,\zeta_j)$ and $U_k \vb*{I}(\theta_i,\zeta_j)$ are respectively the rows of $\vb*{L}_k$, $\vb*{D}_k$ and $\vb*{U}_k$ associated to the grid point $(\theta_i,\zeta_j)$. We can relate them to the actual positions they will occupy in the matrices choosing an ordenation of rows and columns. We use the ordenation that relates respectively the row $i_{\text{r}}$ and column $i_{\text{c}}$ to the grid points $(\theta_i,\zeta_j)$ and $(\theta_{i'},\zeta_{j'})$ as
+%
+\begin{align}
+	i_{\text{r}} & = 1 + i + j N_\theta,  \label{eq:Row_ordenation}\\ 
+	i_{\text{c}} & = 1 + i' + j' N_\theta, \label{eq:Column_ordenation}
+\end{align}
+for $i,i'=0,1,\ldots,N_\theta-1$ and  $j,j'=0,1,\ldots,N_\zeta-1$. With this ordenation, we define the elements of the row $i_{\text{r}}$ and column $i_{\text{c}}$ given by (\ref{eq:Row_ordenation}) and (\ref{eq:Column_ordenation}) of the matrices $\vb*{L}_k$, $\vb*{D}_k$ and $\vb*{U}_k$ to be 
+%
+\begin{align}
+	\left(\vb*{L}_k\right)_{i_{\text{r}} i_{\text{c}}}
+	& =
+	{L_k I_{i'j'}}{(\theta_i,\zeta_j)},
+	\\
+	\left(\vb*{D}_k\right)_{i_{\text{r}} i_{\text{c}}}
+	& =
+	{D_k I_{i'j'}}{(\theta_i,\zeta_j)},
+	\\
+	\left(\vb*{U}_k\right)_{i_{\text{r}} i_{\text{c}}}
+	& =
+	{U_k I_{i'j'}}{(\theta_i,\zeta_j)}.
+\end{align}
+Explicitly,
+\begin{align}
+	\eval{L_k I_{i'j'}}_{(\theta_i,\zeta_j)}
+	& =
+	\frac{k}{2k-1} 
+	\left(
+	\eval{\vb*{b} \cdot \nabla I_{i'j'}}_{(\theta_i,\zeta_j)}
+	 \nonumber
+	 \right.
+	 \\
+	 &
+	 +
+	\frac{k-1}{2}
+	\left.
+	\eval{\vb*{b}\cdot\nabla \ln B}_{(\theta_i,\zeta_j)}	
+	\delta_{ii'}\delta_{jj'}
+	\right)
+    ,
+	\\
+	\eval{D_k I_{i'j'}}_{(\theta_i,\zeta_j)}
+	& =
+	-\frac{\hat{E}_\psi}{\mean*{B^2}}
+	\eval{\vb*{B}\times \nabla\psi  \cdot \nabla 
+	I_{i'j'}}_{(\theta_i,\zeta_j)}
+	\nonumber \\
+	& +  
+	\frac{k(k+1)}{2}
+	\hat{\nu}\delta_{ii'}\delta_{jj'}
+	,
+	\\
+	\eval{U_k I_{i'j'}}_{(\theta_i,\zeta_j)}
+	& = 
+	\frac{k+1}{2k+3} 
+	\left(
+	\eval{\vb*{b} \cdot \nabla  I_{i'j'}}_{(\theta_i,\zeta_j) } 
+	\right. \nonumber
+	\\
+	& +
+	\left.
+	\frac{k+2}{2}
+	\eval{\vb*{b}\cdot\nabla \ln B}_{(\theta_i,\zeta_j)}	
+	\delta_{ii'}\delta_{jj'}
+	\right)
+	,
+\end{align}
+where we have used expressions (\ref{eq:Parallel_streaming_spatial_operator}) and (\ref{eq:ExB_spatial_operator}) to write
+%
+\begin{align}
+    & \eval{\vb*{b} \cdot \nabla  I_{i'j'}}_{(\theta_i,\zeta_j) }
+	=
+	\eval{\frac{B}{B_\zeta + \iota B_\theta}}_{(\theta_i,\zeta_j)}
+	\nonumber\\
+	& \qquad \times
+	\left(
+	\iota 
+	\delta_{jj'}
+	\eval{\dv{I_{i'}^{\theta}}{\theta}}_{\theta_i}
+	\right.
+	 -
+	\left.
+	\delta_{ii'}
+	\eval{\dv{I_{j'}^{\zeta}}{\zeta}}_{\zeta_j}
+	\right),
+	\\
+	& \eval{\vb*{B}\times \nabla\psi  \cdot \nabla 
+	I_{i'j'}}_{(\theta_i,\zeta_j)}
+    =
+    \eval{\frac{B^2}{B_\zeta + \iota B_\theta}}_{(\theta_i,\zeta_j)}
+    \nonumber \\ 
+    &
+    \qquad
+    \times\left(
+    B_\zeta 
+    \delta_{jj'}
+    \eval{\dv{I_{i'}^{\theta}}{\theta}}_{\theta_i}
+    \right. 
+%    \nonumber \\
+%    & 
+    -
+    \left.
+    B_\theta 
+    \delta_{ii'}
+    \eval{\dv{I_{j'}^{\zeta}}{\zeta}}_{\zeta_j}
+    \right).
+\end{align}
+We remark that, for $k=0$, the rows of $\vb*{D}_0$ and $\vb*{U}_0$ associated to the grid point $(\theta_0,\zeta_0)=(0,0)$, are replaced by equation (\ref{eq:kernel_elimination_condition_Legendre}). Finally, each state vector $\vb*{f}^{(k)}$ for the Fourier interpolants contains the images $f^{(k)}(\theta_{i'},\zeta_{j'})$ at the grid points, ordered according to (\ref{eq:Column_ordenation}).
+

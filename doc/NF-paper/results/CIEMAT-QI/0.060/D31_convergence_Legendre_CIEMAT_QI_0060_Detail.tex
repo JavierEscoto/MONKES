@@ -1,0 +1,32 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=0.95\textwidth, 
+		scaled y ticks=base 10:2,
+%		y tick label style={
+%			/pgf/number format/.cd,
+%			fixed,
+%			fixed zerofill,
+%			precision=2,
+%			/tikz/.cd}, 
+		xlabel = $N_\xi$, ylabel=$\Gamma_{31}$
+		]
+		\addplot[blue, mark=*, only marks] table[skip first n=1, 
+		x expr=\thisrowno{4},
+		y expr=\thisrowno{6},
+		restrict expr to domain={\thisrowno{2}}{15:47},
+		restrict expr to domain={\thisrowno{3}}{89:97},
+		restrict expr to domain={\thisrowno{4}}{100:100}
+		]{results/CIEMAT-QI/0.060/DKE_zeta_Convergence_Example_Nxi_20/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+		
+		
+		\foreach \Nxi in {120,140,160}{		
+			\addplot[blue, mark=*, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=\thisrowno{6},
+			restrict expr to domain={\thisrowno{2}}{15:47},
+			restrict expr to domain={\thisrowno{3}}{135:179}
+			]{results/CIEMAT-QI/0.060/DKE_zeta_Convergence_Example_Nxi_\Nxi/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+		}	
+	\end{axis}
+\end{tikzpicture}

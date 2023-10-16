@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		ymin=0.4674*0.4674*4e-2,
+		ymax=0.4674*0.4674*5.4e-2, 
+		scaled y ticks=base 10:2,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd} ,
+		width=0.95\textwidth, legend pos = south east,
+		xlabel = $N_\xi$, ylabel=$(\widehat{D}_{11}^+ + \widehat{D}_{11}^-)/2$
+		]
+			
+		\foreach \Nxi in {40,60,...,200}
+		{			
+			\addplot[blue, mark=*, only marks, error bars/.cd, y explicit,
+			y dir=both,	error bar style={thick}] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=0.4674*0.4674*(\thisrowno{4} + \thisrowno{5})/2,
+			y error plus expr=0.4674*0.4674*(\thisrowno{4}-\thisrowno{5})/2,
+			y error minus expr=0.4674*0.4674*(\thisrowno{4}-\thisrowno{5})/2,
+			restrict expr to domain={\thisrowno{1}}{0:0}
+			]{results/DKES_convergence/CIEMAT-QI/0.250/omega0e-0cl1e-5/la\Nxi/results.stellopt};
+		}	    
+		
+		\addlegendentry{$\hat{E}_r=0$}	    
+%		
+%		\addplot[forget plot, name path=Upper2,blue!20, 
+%		domain = 40:200] {(0.52404E-01 + 0.43659E-01)/2*1.1};	
+%		\addplot[forget plot, name path=Lower2,blue!20, 
+%		domain = 40:200] {(0.52404E-01 + 0.43659E-01)/2*0.9};		
+%		\addplot[blue!20] fill between[of=Upper2 and Lower2];
+%		\addlegendentry{Spread of 10\%}	
+		
+	\end{axis}
+\end{tikzpicture}

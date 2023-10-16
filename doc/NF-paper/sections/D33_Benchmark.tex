@@ -1,0 +1,33 @@
+
+\begin{figure*}[h]
+	\captionsetup[sub]{skip=-1.75pt, margin=95pt}
+	\centering
+	\tikzexternaldisable
+	\ref{legendD33}
+	\tikzexternalenable
+	
+	\tikzsetnextfilename{Benchmark-W7X-EIM-s0200-D33}
+	\begin{subfigure}[t]{0.32\textwidth}	
+		\input{sections/Benchmark/D33_W7X_EIM.tex}
+		\caption{}
+		\label{subfig:D33_Benchmark_W7X_EIM}
+	\end{subfigure}
+	%
+	\tikzsetnextfilename{Benchmark-W7X-KJM-s0204-D33}
+	\begin{subfigure}[t]{0.32\textwidth}		
+		\input{sections/Benchmark/D33_W7X_KJM.tex}%
+		\caption{}
+		\label{subfig:D33_Benchmark_W7X_KJM}
+	\end{subfigure}
+	%
+	\tikzsetnextfilename{Benchmark-CIEMAT-QI-s0250-D33}
+	\begin{subfigure}[t]{0.32\textwidth}
+%		\tikzexternaldisable
+		\input{sections/Benchmark/D33_CIEMAT_QI_s0250.tex}
+%		\tikzexternalenable
+		\caption{}
+		\label{subfig:D33_Benchmark_CIEMAT_QI}
+	\end{subfigure}
+	\caption{Calculation of $\widehat{D}_{33}$ by \texttt{MONKES} and \texttt{DKES} for zero and finite $\hat{E}_r$. (a) W7-X EIM at the surface $\psi /\psi_{\text{lcfs}}=0.200$. (b) W7-X KJM at the surface $\psi /\psi_{\text{lcfs}}=0.204$. (c) CIEMAT-QI at the surface $\psi /\psi_{\text{lcfs}}=0.250$.}
+	\label{fig:D33_Benchmark}
+\end{figure*}

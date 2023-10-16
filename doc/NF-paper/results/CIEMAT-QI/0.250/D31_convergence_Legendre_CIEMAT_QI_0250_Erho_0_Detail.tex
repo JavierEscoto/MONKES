@@ -1,0 +1,133 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		%		height=0.85\textwidth, 
+		width=\textwidth, 
+		scaled y ticks=base 10:2,
+		xtick={80,180,280,...,480},
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd}, 
+		ymax = 0.0999,
+		xlabel = $N_\xi$, ylabel=$\widehat{D}_{31}$ ${[\text{m}]}$,
+		legend columns=1, legend pos = north east
+		]
+		\addplot[forget plot, blue, mark=+, only marks] table[skip first n=1, 
+		x expr=\thisrowno{4},
+		y expr=\thisrowno{6}  * 0.4674,
+		restrict expr to domain={\thisrowno{4}}{80:100},
+		restrict expr to domain={\thisrowno{2}}{19:47},
+		restrict expr to domain={\thisrowno{3}}{91:197}
+		]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_20/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+		
+		
+		\addplot[forget plot, blue, mark=o, only marks] table[skip first n=1, 
+		x expr=\thisrowno{4},
+		y expr=-\thisrowno{7}  * 0.4674,
+		restrict expr to domain={\thisrowno{4}}{80:100},
+		restrict expr to domain={\thisrowno{2}}{19:47},
+		restrict expr to domain={\thisrowno{3}}{91:197}
+		]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_20/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+		
+		
+		\foreach \Nxi in {120}{		
+			\addplot[forget plot, blue, mark=+, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=\thisrowno{6}  * 0.4674,
+			restrict expr to domain={\thisrowno{2}}{27:47},
+			restrict expr to domain={\thisrowno{3}}{149:230}
+			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_\Nxi/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};	
+			
+			\addplot[forget plot, blue, mark=o, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=-\thisrowno{7}  * 0.4674,
+			restrict expr to domain={\thisrowno{2}}{27:47},
+			restrict expr to domain={\thisrowno{3}}{149:230}
+			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_\Nxi/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+		}	
+		
+		\foreach \Nxi in {140, 160}{		
+			\addplot[forget plot, blue, mark=+, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=\thisrowno{6}  * 0.4674,
+			restrict expr to domain={\thisrowno{2}}{27:47},
+			restrict expr to domain={\thisrowno{3}}{169:230}
+			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_\Nxi/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+			
+					
+			\addplot[forget plot, blue, mark=o, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=-\thisrowno{7}  * 0.4674,
+			restrict expr to domain={\thisrowno{2}}{27:47},
+			restrict expr to domain={\thisrowno{3}}{169:230}
+			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_\Nxi/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+			
+		}	
+		
+		\foreach \Nxi in {200}{		
+			\addplot[forget plot, blue, mark=+, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=\thisrowno{6}  * 0.4674,
+			restrict expr to domain={\thisrowno{2}}{27:47},
+			restrict expr to domain={\thisrowno{3}}{189:290}
+			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_\Nxi/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};	
+			
+			
+			\addplot[forget plot, blue, mark=o, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=-\thisrowno{7}  * 0.4674,
+			restrict expr to domain={\thisrowno{2}}{27:47},
+			restrict expr to domain={\thisrowno{3}}{189:290}
+			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_\Nxi/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+		}	
+		    
+	    \addplot[blue, mark=+, only marks] table[skip first n=1, 
+	    x expr=\thisrowno{4},
+	    y expr=\thisrowno{6} * 0.4674,
+	    restrict expr to domain={\thisrowno{1}}{0:0},
+	    restrict expr to domain={\thisrowno{4}}{220:400}
+	    ]{results/CIEMAT-QI/0.250/Convergence_nu_1e-5/Convergence_Nxi/N_theta_47_N_zeta_215/monkes_Monoenergetic_Database.dat};
+	    \addlegendentry{$\widehat{D}_{31}$}
+	    
+	    \addplot[blue, mark=o, only marks] table[skip first n=1, 
+	    x expr=\thisrowno{4},
+	    y expr=-\thisrowno{7} * 0.4674,
+	    restrict expr to domain={\thisrowno{1}}{0:0},
+	    restrict expr to domain={\thisrowno{4}}{220:400}
+	    ]{results/CIEMAT-QI/0.250/Convergence_nu_1e-5/Convergence_Nxi/N_theta_47_N_zeta_215/monkes_Monoenergetic_Database.dat};
+	    \addlegendentry{$-\widehat{D}_{13}$}
+	    
+	    
+	    
+	    \addplot[forget plot, name path=Upper2,red!20, 
+	    domain = 100:400] {(0.888E-01)  * 0.4674+ 5e-3};	
+	    \addplot[forget plot, name path=Lower2,red!20, 
+	    domain = 100:400] {(0.888E-01)  * 0.4674- 5e-3};			
+	    \addplot[red!20] fill between[of=Upper2 and Lower2];
+	    \addlegendentry{ $\mathcal{A}_{0.005}$ }	
+	    
+		\addplot[forget plot, name path=Upper2,blue!20, 
+		domain = 100:400] {0.888E-01*1.07 * 0.4674};	
+		\addplot[forget plot, name path=Lower2,blue!20, 
+		domain = 100:400] {0.888E-01*0.93 * 0.4674};		
+		\addplot[blue!20] fill between[of=Upper2 and Lower2];
+		\addlegendentry{ $\mathcal{R}_{7}$ }	
+		
+				    
+		
+		
+		\foreach \Nxi in {180}{		
+			\addplot[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
+			x expr=\thisrowno{4},
+			y expr=\thisrowno{6} * 0.4674,
+			restrict expr to domain={\thisrowno{2}}{27:47},
+			restrict expr to domain={\thisrowno{3}}{199:230}
+			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_\Nxi/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00_sorted.plt};
+		}	
+		\addlegendentry{Selected}		
+		
+		
+	\end{axis}
+\end{tikzpicture}

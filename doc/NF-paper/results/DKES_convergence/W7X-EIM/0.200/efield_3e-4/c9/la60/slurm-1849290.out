@@ -1,0 +1,8 @@
+slurmstepd: error: Unable to create TMPDIR [/mnt/local/big/u6156/1849290]: No space left on device
+slurmstepd: error: Setting TMPDIR to /tmp
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/mnt/lustre/home/u6156/.profile: line 2: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/mnt/lustre/home/u6156/.profile: line 2: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/mnt/lustre/home/u6156/.profile: line 144: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/mnt/lustre/home/u6156/.profile: line 144: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)

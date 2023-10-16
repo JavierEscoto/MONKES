@@ -1,0 +1,77 @@
+In this subsection we will demonstrate how the monoenergetic coefficients computed by {\MONKES} converge with $N_\theta$, $N_\zeta$ and $N_\xi$ at low collsionality for three different magnetic configurations at a single flux surface. Two of them correspond to two modes of operation of W7-X: W7-X EIM (also called standard), W7-KJM (also called high mirror). The third one corresponds to the new QI ``flat mirror'' configuration CIEMAT-QI \cite{Sanchez_2023}. The calculations are for the $1/\nu$ ($\hat{E}_r=0$) and $\sqrt{\nu}$ regimes at the low collisionality value $\hat{\nu}=10^{-5}$. In table \ref{tab:Convergence_cases} the list of cases considered is enlisted with their correspondent values of $\hat{E}_r$.
+\begin{table}[]
+	\centering
+	\begin{tabular}{@{}lccc@{}}
+		\toprule
+		Configuration & $\psi/\psi_{\text{lcfs}}$ & $\hat{\nu}$ $[\text{m}^{-1}]$ & $\hat{E}_r$  $[\text{kV}\cdot\text{s}/\text{m}^2]$   \\ \midrule
+		CIEMAT-QI     & 0.250                     & $10^{-5}$   & 0       \\
+		CIEMAT-QI     & 0.250                     & $10^{-5}$   & $10^{-3}$       \\
+		W7X-EIM       & 0.200                     & $10^{-5}$   & 0 \\
+		W7X-EIM       & 0.200                     & $10^{-5}$   & $3\cdot10^{-4}$ \\
+		W7X-KJM       & 0.204                     & $10^{-5}$   & 0 \\
+		W7X-KJM       & 0.204                     & $10^{-5}$   & $3\cdot10^{-4}$ \\ \bottomrule
+	\end{tabular}
+	\caption{Cases considered to study the convergence of monoenergetic coefficients and values of $(\hat{\nu},\hat{E}_r)$.}
+	\label{tab:Convergence_cases}
+\end{table}
+ 
+% The dominance of convection can be roughly estimated with the ratio $|\xi \vb*{b}\cdot\nabla f_j /\hat{\nu}\Lorentz f_j | \sim \hat{\nu}^{-1} B_{00}/(B_\zeta + \iota B_\theta)$, being more dominant whenever this ratio is bigger. On table \ref{tab:Magnetic_Configuration_Convergence_cases} we display the values of $B_{00}/(B_\zeta + \iota B_\theta)$ for each case considered. Therefore, it is expected that for CIEMAT-QI it will be more difficult to obtain converged values of the monoenergetic coefficients. 
+%
+%\begin{table}[]
+%	\centering
+%	\begin{tabular}{@{}lccc@{}}
+%		\toprule
+%		Configuration & $\psi/\psi_{\text{lcfs}}$ & $B_{00} $ $[\text{T}]$ & $\frac{B_{00}}{B_\zeta + \iota B_\theta} $  $[\text{m}^{-1}]$   \\ \midrule
+%		CIEMAT-QI     & 0.250   & 5.4714  & 0.49138  \\
+%		W7X-EIM       & 0.200   & 2.4311  & 0.17257  \\
+%		W7X-KJM       & 0.204   & 2.5003  & 0.17363  \\ \bottomrule
+%	\end{tabular}
+%	\caption{Cases considered to study the convergence of monoenergetic coefficients and .}
+%	\label{tab:Magnetic_Configuration_Convergence_cases}
+%\end{table}
+
+
+
+
+For each configuration we will proceed in the same manner. First, we plot the (spatially converged) coefficients $\widehat{D}_{ij}$ as functions of the number of Legendre modes in the interval $N_\xi \in [20,200]$. From the curve of $\widehat{D}_{31}$ vs $N_\xi$ we define our converged reference value, which we denote by $\widehat{D}_{31}^{\text{r}}$, as the (spatially converged) calculation for the highest number of Legendre modes, i.e. for $N_\xi=200$. From this converged reference value we define a region $\mathcal{R}_{\epsilon}:=[(1-\epsilon/100)\widehat{D}_{31}^{\text{r}}, (1+\epsilon/100)\widehat{D}_{31}^{\text{r}} ]$ of calculations that deviate less than or equal to an $\epsilon$\% with respect to $\widehat{D}_{31}^{\text{r}}$. Now we can define properly what it means to be ``sufficiently converged''. We say that, for fixed $(N_\theta,N_\zeta,N_\xi)$ and $\epsilon$, a calculation $\widehat{D}_{31}\in\mathcal{R}_{\epsilon}$ is sufficiently converged if, two conditions are satisfied:
+%
+\begin{enumerate}
+	\item Spatially converged calculations with $N_\xi'>N_\xi$ still belong to $\mathcal{R}_{\epsilon}$.
+	\item Increasing $N_\theta$ and $N_\zeta$ keeping $N_\xi$ constant produces calculations which belong to $\mathcal{R}_{\epsilon}$.
+\end{enumerate}
+
+Condition (i) is used to select the number of Legendre modes $N_\xi$ and condition (ii) is used to select the values of $N_\theta$ and $N_\zeta$ once $N_\xi$ is fixed. 
+
+On figure \ref{fig:Convergence_W7X_EIM_Er_0} the convergence of monoenergetic coefficients with the number of Legendre modes is shown for W7-X EIM in the $1/\nu$ regime. From figure \ref{subfig:D31_Convergence_W7X_EIM_Er_0_Legendre} we can check that the calculation for $N_\xi=200$ can be safely considered as our converged reference value $\widehat{D}_{31}^{\text{r}}$. We choose the value of $\epsilon = 5 \%$ to define $\mathcal{R}_{5}$ as shown in figure \ref{subfig:D31_convergence_Legendre_W7X_EIM_0200_Erho_0_Detail}. We conclude from this figure that any value of $N_\xi\ge 80$ satisfies condition (i) of our definition of sufficiently converged. In order to not to be too indulgent with {\MONKES} calculations we select, as shown in figures \ref{subfig:D31_convergence_theta_zeta_W7X_EIM_0200_Erho_0} and \ref{subfig:D31_Clock_time_W7X_EIM_0200_Erho_0} the values $(N_\theta,N_\zeta)=(23,55)$ to satisfy condition (ii). On figure \ref{subfig:D31_Clock_time_W7X_EIM_0200_Erho_0} we plot the wall-clock time spent in {\MONKES} fast calculations of the monoenergetic coefficients, which is of 22 seconds.
+%
+\input{sections/Convergence/Results_W7X_EIM_0200_Erho_0.tex}
+\input{sections/Convergence/Results_W7X_EIM_0200_Erho_0_Detail.tex}
+
+
+For the $\sqrt{\nu}$ regime case of W7-X EIM on figure \ref{subfig:D31_convergence_Legendre_W7X_EIM_0200_Erho_3e-4} we check again that the calculation for $N_\xi=200$ serves as a good converged reference value $\widehat{D}_{31}^{\text{r}}$. 
+%
+\input{sections/Convergence/Results_W7X_EIM_0200_Erho_3e-4.tex}
+
+On figure \ref{subfig:D31_convergence_Legendre_W7X_EIM_0200_Erho_3e-4_Detail} we check that to obtain sufficiently converged results for the region $\mathcal{R}_{5}$ is more difficult than in the previous $1/\nu$ regime. This is in part due to the fact that the $\widehat{D}_{31}$ coefficient is smaller in absolute value and thus, the region $\mathcal{R}_{5}$ is narrower. Inspecting this plot, with the same spirit as before of not trying to be too indulgent, we select $N_\xi=160$ to satisfy condition (i). The selection $(N_\theta,N_\zeta)=(27,55)$ satisfies condition (ii) as shown in figure \ref{subfig:D31_convergence_theta_zeta_W7X_EIM_0200_Erho_3e-4_Detail}. From figure \ref{subfig:D31_Clock_time_W7X_EIM_0200_Erho_3e-4_Detail} we check that it required 40 seconds to compute the monoenergetic coefficients with this selection of $(N_\theta,N_\zeta,N_\xi)$, which is quite fast.
+\input{sections/Convergence/Results_W7X_EIM_0200_Erho_3e-4_Detail.tex}
+
+\FloatBarrier
+For the high mirror configuration of W7-X in the $1/\nu$ we can use again the calculation for $N_\xi=200$ as the converged reference value $\widehat{D}_{31}^{\text{r}}$ as shown in figure \ref{subfig:D31_convergence_Legendre_W7X_KJM_0204_Erho_0}. Due to the smaller value of $\widehat{D}_{31}^{\text{r}}$ the amplitude of the region $\mathcal{R}_{5}$ is much narrower, being of order $10^{-3}$. On figure \ref{subfig:D31_convergence_Legendre_W7X_KJM_0204_Erho_0_Detail} we see that taking $N_\xi=140$ is sufficient to satisfy convergence condition (i). According to the convergence curves shown in figure \ref{subfig:D31_convergence_theta_zeta_W7X_KJM_0204_Erho_0}, taking $(N_\theta,N_\zeta)=(23,63)$ would yield a calculation that satisfies condition (ii). This calculation is also quite fast as can be checked from figure \ref{subfig:D31_Clock_time_W7X_KJM_0204_Erho_0}, with a wall-clock time of 33 seconds. 
+\input{sections/Convergence/Results_W7X_KJM_0204_Erho_0.tex}
+\input{sections/Convergence/Results_W7X_KJM_0204_Erho_0_Detail.tex}
+\FloatBarrier
+Again, for the high mirror configuration of W7-X in the $\sqrt{\nu}$ the (spatially converged) calculation for $N_\xi=200$ serves as the converged reference value $\widehat{D}_{31}^{\text{r}}$ as can be checked in figure \ref{subfig:D31_convergence_Legendre_W7X_KJM_0204_Erho_0}. The number of Legendre modes selected to have a calculation which satisfies convergence condition (i) is shown in \ref{subfig:D31_convergence_Legendre_W7X_KJM_0204_Erho_3e-4_Detail} is $N_\xi=140$.
+\input{sections/Convergence/Results_W7X_KJM_0204_Erho_3e-4.tex}
+\input{sections/Convergence/Results_W7X_KJM_0204_Erho_3e-4_Detail.tex}
+
+
+%\input{sections/Convergence/Results_NCSX_0200_Erho_0.tex}
+%\input{sections/Convergence/Results_NCSX_0200_Erho_0_Detail.tex}
+\FloatBarrier
+The monoenergetic coefficients of the flat mirror configuration CIEMAT-QI are more difficult to converge due to their smaller absolute value. 
+\input{sections/Convergence/Results_CIEMAT_QI_0250_Erho_0.tex}
+\input{sections/Convergence/Results_CIEMAT_QI_0250_Erho_0_Detail.tex}
+
+The monoenergetic coefficients of the flat mirror configuration CIEMAT-QI are more difficult to converge due to their smaller absolute value. 
+\input{sections/Convergence/Results_CIEMAT_QI_0250_Erho_1e-3.tex}
+\input{sections/Convergence/Results_CIEMAT_QI_0250_Erho_1e-3_Detail.tex}

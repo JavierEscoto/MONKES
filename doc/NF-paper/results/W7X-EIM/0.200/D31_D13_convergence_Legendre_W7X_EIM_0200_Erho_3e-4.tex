@@ -1,0 +1,43 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		legend columns=2, 
+		width=0.95\textwidth,  
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=2,
+			/tikz/.cd}, 
+		xlabel = $N_\xi$, ylabel=${\Gamma_{31},-\Gamma_{13}}$
+		]		
+		\addplot[forget plot, blue, mark=o, only marks] table[skip first n=1, 
+		x expr=\thisrowno{4},
+		y expr=\thisrowno{6},
+		restrict expr to domain={\thisrowno{2}}{29:47},
+		restrict expr to domain={\thisrowno{3}}{55:97}
+		]{results/W7X-EIM/0.200/DKE_zeta_Convergence_Example_Nxi_20/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.300E-03.plt};		
+		%
+		\addplot[blue, mark=o, only marks] table[skip first n=1, 
+		x expr=\thisrowno{4},
+		y expr=\thisrowno{6},
+		restrict expr to domain={\thisrowno{2}}{29:47},
+		restrict expr to domain={\thisrowno{3}}{65:97}
+		]{results/W7X-EIM/0.200/DKE_zeta_Convergence_Example_Nxi_120/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.300E-03.plt};	
+		\addlegendentry{$\Gamma_{31}$}
+		%
+		\addplot[forget plot, blue, mark=x, only marks] table[skip first n=1, 
+		x expr=\thisrowno{4},
+		y expr=-\thisrowno{7},
+		restrict expr to domain={\thisrowno{2}}{29:47},
+		restrict expr to domain={\thisrowno{3}}{65:97}
+		]{results/W7X-EIM/0.200/DKE_zeta_Convergence_Example_Nxi_20/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.300E-03.plt};
+		%
+		\addplot[blue, mark=x, only marks] table[skip first n=1, 
+		x expr=\thisrowno{4},
+		y expr=-\thisrowno{7},
+		restrict expr to domain={\thisrowno{2}}{43:47},
+		restrict expr to domain={\thisrowno{3}}{65:97}
+		]{results/W7X-EIM/0.200/DKE_zeta_Convergence_Example_Nxi_120/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.300E-03.plt};
+		\addlegendentry{-$\Gamma_{13}$}	
+	\end{axis}
+\end{tikzpicture}

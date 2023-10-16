@@ -1,0 +1,43 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		width=0.95\textwidth, 
+		ymin = 0.5132*0.22,
+		xlabel = $N_\xi$, ylabel=$(\widehat{D}_{31}^+ + \widehat{D}_{31}^-)/2$, 
+		scaled y ticks=base 10:1,
+		y tick label style={
+			/pgf/number format/.cd,
+			fixed,
+			fixed zerofill,
+			precision=1,
+			/tikz/.cd} ,
+		legend pos = north east
+		]
+					
+		
+		\foreach \Nxi in {20,40,60,...,180}{
+			
+			\addplot[forget plot, red, mark=square*, only marks] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=0.5132*(\thisrowno{6} + \thisrowno{7})/2,
+			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4}
+			]{results/DKES_convergence/W7X-KJM/0.204/omega3e-4cl1e-5/la\Nxi/results.stellopt};			
+		}
+		\foreach \Nxi in {200}{
+			
+			\addplot[red, mark=square*, only marks] table[skip first n=1, 
+			x expr=\Nxi,
+			y expr=0.5132*(\thisrowno{6} + \thisrowno{7})/2,
+			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4}
+			]{results/DKES_convergence/W7X-KJM/0.204/omega3e-4cl1e-5/la\Nxi/results.stellopt};			
+		}
+		
+		\addlegendentry{$\hat{E}_r=3\cdot 10^{-4}$}
+		
+		\addplot[forget plot, name path=Upper2,red!20, 
+		domain = 40:200] {0.5132*(0.25975E+00	+ 0.27887E+00)/2*1.05};	
+		\addplot[forget plot, name path=Lower2,red!20, 
+		domain = 40:200] {0.5132*(0.25975E+00	+ 0.27887E+00)/2*0.95};		
+		\addplot[red!20] fill between[of=Upper2 and Lower2];
+		\addlegendentry{$\mathcal{R}_{5}$}
+	\end{axis}
+\end{tikzpicture}
