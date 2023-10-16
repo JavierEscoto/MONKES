@@ -1,0 +1,59 @@
+% !TeX program = lualatex
+
+\documentclass[twoside,11pt,english2 ]{article}
+
+\setcounter{tocdepth}{2}
+%
+\include{./format/packages}
+\include{./format/mathcommands}
+\include{./format/graphs}
+
+\include{./format/TexPlot}
+
+\include{./format/luamacros}
+\include{./format/listings}
+%
+%
+
+%
+\input{./figures/figures.tex}
+\title{\huge \textsc{MONKES MANUAL} \\ (DRAFT) }
+\author{Francisco Javier Escoto L\'opez\\ \\ \includegraphics[scale=0.35]{figures/chad_MONKE}}
+
+\date{}
+\usetikzlibrary{positioning,decorations.pathreplacing}
+
+\input{bibliography.tex}
+\begin{document} 
+	\maketitle
+
+\newpage
+\tableofcontents
+
+\newcommand{\uu}{\vb*{u}}
+\newcommand{\vv}{\vb*{v}}
+\newcommand{\ww}{\vb*{w}}
+\newcommand{\zz}{\vb*{z}}
+\newcommand{\FF}{\vb*{F}}
+\newcommand{\GG}{\vb*{G}}
+\newcommand{\HH}{\vb*{H}}	
+\newcommand{\OO}{\mathcal{O}}
+%\include{./chapters/Lyapunov}
+
+\newcommand{\fix}[1]{\mbox{fix}\left(#1\right)}
+\newcommand{\MONKES}{\texttt{MONKES}}
+\newcommand{\per}[1]{\mbox{per}\left(#1\right)}
+ 
+ \newpage
+ \input{chapters/Install.tex} 
+ \input{chapters/Usage.tex}
+ \input{chapters/Implementation.tex}
+ 
+ \input{chapters/API.tex}
+ 
+ \appendix 
+  
+ 
+ \printbibliography
+\end{document}
+

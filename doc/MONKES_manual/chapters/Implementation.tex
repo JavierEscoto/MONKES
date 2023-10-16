@@ -1,0 +1,21 @@
+\section{Algorithm implementation}
+
+
+\subsection{User level}
+
+\listings{../../sources/main_monkes.f90}{! Select input}{end select}{\texttt{main\_monkes.f90} \label{lst:main_monkes_Select_case}}
+
+
+\listings{../../sources/main_monkes.f90}{call Monoenergetic_Database_Input}{call Monoenergetic_Database_Input_Orthonormal}{\texttt{main\_monkes.f90} \label{lst:main_monkes_Monoenergetic_Database}}
+
+\listings{../../sources/examples/API_Example_DKE_BTD_Solution_Legendre.f90}{subroutine Monoenergetic_Database_Input}{end subroutine}{\texttt{examples/API\_Example\_DKE\_BTD\_Solution\_Legendre.f90} \label{lst:Monoenergetic_Database_Input}}
+
+
+
+
+The subroutine \texttt{\detokenize{Monoenergetic_Database_Scan}} computes the monoenergetic database by looping in the different parameters. For this, it calls within the loop the subroutine \texttt{\detokenize{Solve_BTD_DKE_Legendre}}. What the routine \texttt{\detokenize{Solve_BTD_DKE_Legendre}} does is out of the scope of this section (see Developer section). The output is written in the file {\mycap{monkes_Monoenergetic_Database.dat}}
+\listings{../../sources/examples/API_Example_DKE_BTD_Solution_Legendre.f90}{subroutine Monoenergetic_Database_Scan}{end subroutine}{\texttt{examples/API\_Example\_DKE\_BTD\_Solution\_Legendre.f90} \label{lst:Monoenergetic_Database_Scan}}
+\subsection{Developer level: main routines}
+
+
+\subsection{Developer level: libraries}

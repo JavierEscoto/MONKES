@@ -1,0 +1,351 @@
+\usepackage[english]{babel} % English language/hyphenation
+%\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={19cm, 26cm}]{geometry}
+%\usepackage[maxfloats=25]{morefloats}
+%\usepackage{subfiles}
+
+
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+%\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsxtra}
+\usepackage{amscd}
+\usepackage{amsthm}
+\usepackage{amsopn}
+\usepackage{lmodern}
+%\usepackage[slovene]{b\texttt{}abel}
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{fullpage}
+\usepackage{slashed}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{cancel}
+%\usepackage{mathdots}
+%\usepackage{mathrsfs}
+\usepackage{mleftright}
+\usepackage{empheq}
+\usepackage{pdfpages}
+% _____ AUTHOR INSTITUTION
+\usepackage{authblk}
+
+%appendix package
+\usepackage[toc,page]{appendix}
+%%%% BIBTEX
+%\usepackage[semicolon]{natbib}
+%\usepackage[
+%backend=biber, 
+%natbib=true,
+%style=numeric,
+%sorting=none
+%]{biblatex}
+%\usepackage[ 
+%natbib=true,
+%style=numeric,
+%sorting=none,
+%bibencoding=utf8
+%]{biblatex}
+%___________________ FONTS ______________________________________________
+\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{txfonts}
+\usepackage{mathrsfs}
+\usepackage{mathdots}
+%\usepackage{lmodern}
+%\usepackage[classicReIm]{kpfonts}
+\usepackage{physics}    %  partial and total derivatives  
+
+% \usepackage{siunix}
+%___________ MATH THEOREMS
+\usepackage{amsthm}
+
+
+
+%_______________________ GLOSSARIES & NOMENCLATURE
+
+%\usepackage{nomencl}
+
+%\usepackage{glossaries}
+
+%__________________________HEADERS & FOOTERS_____________________________
+%\usepackage{fancyhdr}
+%\usepackage{footmisc} %[norule]
+
+
+
+%_________________ GRAPHS ______________________________________________
+\usepackage{float} % Force image position
+%\usepackage{color}
+%\usepackage{xcolor}
+
+\usepackage[font=small]{caption}
+
+
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\usepackage{placeins}
+\pgfplotsset{compat=1.12}
+
+\usetikzlibrary{calc,intersections}
+\usetikzlibrary{arrows,arrows.meta,positioning,shapes.geometric,shapes}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{matrix}
+\usepgfplotslibrary{colorbrewer}
+
+%%%%%%%%% EXTERNALIZATION OF TIKZ FIGURES %%%%%%%%%%%%%%%%%%
+% Load pgfplots package several bugs are fixed for it
+\usepgfplotslibrary{external}
+
+%% set LuaLaTeX for externalization and folder for pdfs
+\tikzexternalize
+[
+%      shell escape=-enable-write18, 
+prefix={TikzFigures/}
+]
+%% TIkz settings for externalization
+\tikzset{%
+	%	external/system call ={lualatex -enable-write18 -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}
+}
+
+\usepackage{xifthen}
+
+%________________________ TABLES________________________________________
+\usepackage{booktabs} % Horizontal rules in tables
+
+
+%_____________________ TABLE OF CONTENTS _______________________________
+\usepackage{makeidx} %Table of contents
+%%\PassOptionsToPackage{hyphens}{url}
+%\PassOptionsToPackage{hyphens}{url}
+
+
+% PACKAGES INCOMPATIBLE WITH TIKZ EXTERNALIZE MUST BE INVOKED AS FOLLOWS
+\tikzifexternalizing{}{
+	\usepackage
+	[
+	driverfallback=dvipdfmdvipdfm,
+	colorlinks=true,
+	linkcolor=black,
+	breaklinks=true
+	]{hyperref}
+}
+
+\AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
+\AtEndEnvironment{tikzcd}{\tikzexternalenable}
+% Para incluir hipervinculos en el pdf
+%\hypersetup{citecolor=blue, urlcolor=blue}%,hyperfootnotes=false}		%Blue is different from blue, Blue is darker
+
+
+\usepackage{enumitem} % Edit the itemizes
+%\usepackage{titletoc,tocloft} % this two lines quit the indent that latex make between
+% To change the format to the subsections
+\usepackage{titlesec}
+\usepackage{todonotes}
+
+
+% ______________________EXTRA SPACE IN TABLES ______________________________
+\usepackage{setspace}
+
+%_____________________________________ It is used to determine the number of pages in the document ____________________________(for "Page X of Total")
+\usepackage{lastpage}
+
+
+
+%\usepackage{extsizes} %14pt font size is not in the normal sizes of latex, we need this package
+
+
+%_________________________The easylist package for numbered items____________________________________
+%\usepackage[ampersand]{easylist}
+\usepackage{subcaption}
+
+
+
+%___________________ It enhances cross-reference ________________________________________
+%\usepackage{cleveref}
+%\usepackage{nameref}
+
+%__________LUALATEX
+
+%\usepackage{luatex85}
+
+
+
+\usepackage{titling} % Allows custom title configuration
+%\usepackage[a4,frame,center]{crop}
+
+
+%%PARA DOS CARAS
+%\fancyhf{}				%allows additional selectors H (header) and F (footer)
+%\pagestyle{fancy}
+
+
+%\graphicspath{ {images/} }
+%\newcommand{\folder}{./libraries}
+
+
+\definecolor{DarkGoldenrod}{rgb}{0.8,0.6,0.1}
+\definecolor{DarkRed}{rgb}{0.5,0.1,0.1}
+\definecolor{DarkRedPart}{rgb}{0.3,0.1,0.2}
+
+% Defines the gold horizontal rule around the title
+%\newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}}
+
+
+
+
+\usepackage{titling} % Allows custom title configuration
+% Defines the gold horizontal rule around the title
+
+
+
+
+
+
+
+
+
+
+\definecolor{mygray}{gray}{0.8}
+\definecolor{mygray2}{gray}{0.4}
+\definecolor{mygreen}{rgb}{0.0, 0.42, 0.24}
+\definecolor{myred}{rgb}{0.8, 0.0, 0.0}
+\definecolor{myorange}{rgb}{0.91, 0.41, 0.17}
+\definecolor{myblue}{rgb}{0.0, 0.44, 1.0}
+
+
+
+
+
+
+
+%To make the head rule
+%\usepackage{etoolbox}
+%\makeatletter
+%\patchcmd{\headrule}{\hrule}{\color{mygray}\hrule}{}{}
+%\makeatother
+
+
+
+
+%\setlength{\cftsecindent}{-0.8cm} % the section and the subsection in the table of contents
+%\setlength{\cftsubsecindent}{-0.6cm} % the section and the subsection in the table of contents
+
+
+% Replace the title of the table of contents 
+\addto\captionsenglish{
+	\renewcommand{\contentsname}%
+	{}% Here it goes the new title
+}
+
+% Here we give the color to the subsections in the table of contents
+
+%\makeatletter
+%\let\stdl@subsection\l@subsection
+%\renewcommand*{\l@subsection}[2]{%
+%	\stdl@subsection{\textcolor{blue}{#1}}{\textcolor{black}{#2}}}
+%\makeatother
+
+% CHANGING THE FORMAT OF SUBSECTIONS AND SECTIONS
+
+%\titleformat\subsection{}{}{0em}{ \bf \todo[inline, color=green!40]}[\vspace{0ex}]
+
+
+
+%\titleformat\section{\centering \LARGE}{}{0em}{ \bf }[]
+
+%\renewcommand{\thesubsection}{} %Subsection numbering
+%\renewcommand{\thesection}{} %Section numbering
+
+
+
+%\newcommand{\bluepageref}[1]{\textcolor{blue}{\pageref{#1}}}
+%\newcommand{\qnameref}[1]{``\nameref{#1}''}
+
+
+
+% Comment the following to have chapters numbered without interruption (numbering through parts)
+%\makeatletter\@addtoreset{chapter}{part}\makeatother%
+
+% \tableofcontents, without the title contents
+%\makeatletter
+%\@starttoc{toc}
+%\makeatother
+%
+
+
+
+%\newcommand{\remark}[1]{\textbf{``#1"}}
+
+
+
+
+%Allow us to make the rules larger
+
+%\renewcommand{\headrulewidth}{0.5pt} % No header rule
+%\renewcommand{\footrulewidth}{0.5pt} % Thin footer rule
+%% Headers - all currently empty
+%\lhead{ }
+%\chead{}
+%\rhead{}
+%% Footers
+%\lfoot{}
+%\cfoot{}
+%%\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+%\rfoot{\footnotesize \thepage\ }
+
+%\usepackage{lettrine} % Package to accentuate the first letter of the text
+
+
+
+
+
+
+
+
+
+%\newcommand{\tit}{Raspberry Pi Server}
+%\newcommand{\rhdr}{Developer Manual}
+
+
+%\DeclareCaptionFormat{myformat}{#1#2#3\vspace{2ex}}
+%\captionsetup{format=myformat}
+
+%\captionsetup[lstlisting]{position=bottom,format=myformat}
+%\usepackage{lstautodedent}
+
+%commands
+
+%\newcommand{\relpathto}[1]{./codes/#1}
+
+%\renewcommand{\medskip}{\vspace{2ex}}
+
+%\newcommand{\capof}[2]{\begingroup\captionof{#1}{#2}\endgroup}
+
+
+
+
+
+%\usepackage{titling} % Allows custom title configuration
+% Defines the gold horizontal rule around the title
+%\newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}}
+
+
+%\graphicspath{ {images/} }
+
+
+
+%\graphicspath{ {images/} }
+
+
+
+
+
+

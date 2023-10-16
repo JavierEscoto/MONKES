@@ -1,0 +1,29 @@
+%%%%%%%%%  COMMANDS TO CONSTRUCT MIXED COLUMN GRAPHS
+
+\newcommand{\Axis}[2]
+{
+	\begin{axis}[{#1}]
+		{#2}
+	\end{axis}
+}
+
+
+\newcommand{\Plot}[3]
+{
+	\foreach \x/\y in {#3}
+	\addplot table [{#1},skip first n=2, x index=\x,y index=\y]{#2};
+}
+
+%%%% Command Graph: Plots several figures in a single axis 
+\newcommand{\Graph}[6]
+{
+	\begin{tikzpicture}[]
+	\begin{axis}[{#1}]
+	\foreach \x/\y in {#4}
+	\addplot table [skip first n=2, x index=\x,y index=\y]{#2};
+	\legend{#3}
+	{#5}
+	\end{axis}
+	{#6}
+	\end{tikzpicture}
+}
