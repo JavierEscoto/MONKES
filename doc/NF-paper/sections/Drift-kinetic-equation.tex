@@ -12,7 +12,7 @@
 \end{align}
 where $\vb*{b}:= \vb*{B}/B$ is the unit vector tangent to magnetic field lines and we have employed as velocity coordinates the cosine of the pitch-angle $\xi := \vb*{v}\cdot\vb*{b}/|\vb*{v}|$ and the magnitude of the velocity $v:=|\vb*{v}|$. 
 
-We assume that the magnetic configuration has ergodic nested flux-surfaces. We denote by $\psi\in[0,\psi_{\text{lcfs}}]$ a radial coordinate that labels flux-surfaces, where $\psi_{\text{lcfs}}$ denotes the label of the last closed flux-surface. In equation (\ref{eq:DKE_Original}), $h_a$ is the non-adiabatic component of the deviation of the distribution function from a local Maxwellian for a plasma species $a$ 
+We assume that the magnetic configuration has nested flux-surfaces. We denote by $\psi\in[0,\psi_{\text{lcfs}}]$ a radial coordinate that labels flux-surfaces, where $\psi_{\text{lcfs}}$ denotes the label of the last closed flux-surface. In equation (\ref{eq:DKE_Original}), $h_a$ is the non-adiabatic component of the deviation of the distribution function from a local Maxwellian for a plasma species $a$ 
 %
 \begin{align}
 	f_{\text{M}a}(\psi, v) :=   n_a(\psi)  \pi^{-3/2}  {v_{\text{t}a}^{-3}(\psi)}  \exp(-\frac{v^2}{v_{\text{t}a}^2(\psi)}).
@@ -185,7 +185,7 @@ The splitting is chosen so that the functions $\{f_j\}_{j=1}^{3}$ are solutions 
 	\nonumber\\
 	&
 	- 
-	\frac{\hat{E}_\psi}{\mean*{B^2}}
+	\frac{\widehat{E}_\psi}{\mean*{B^2}}
 	\vb*{B}\times \nabla\psi\cdot \nabla f_j
 %	 
 	\label{eq:DKE}
@@ -194,7 +194,7 @@ The splitting is chosen so that the functions $\{f_j\}_{j=1}^{3}$ are solutions 
 	- \hat{\nu}\Lorentz f_j
 	=  s_j, \quad 
 \end{align}
-for $j=1,2,3$, where $\hat{\nu} := \nu(v) / v$ and $\hat{E}_\psi := {E}_\psi/v$. The source terms are defined as
+for $j=1,2,3$, where $\hat{\nu} := \nu(v) / v$ and $\widehat{E}_\psi := {E}_\psi/v$. The source terms are defined as
 %
 \begin{align}
 	s_1 := - \vb*{v}_{\text{m} a} \cdot \nabla\psi \frac{\Omega_a}{B v^2},
@@ -206,7 +206,7 @@ for $j=1,2,3$, where $\hat{\nu} := \nu(v) / v$ and $\hat{E}_\psi := {E}_\psi/v$.
 \end{align} 
 Note that each source $s_j$ corresponds to one of the three thermodynamic forces on the right-hand side of definition (\ref{eq:DKE_Original_Source}).
 
-The relation between $h_a$ and $f_j$ given by equation (\ref{eq:Distribution_function_superposition}) is such that the transport quantities (\ref{eq:Particle_flux_Original}), (\ref{eq:Heat_flux_Original}) and (\ref{eq:Parallel_flow_Original}) can be written in terms of four transport coefficients which, for fixed $(\hat{\nu}, \hat{E}_\psi)$, depend only on the magnetic configuration. As $\dv*{\hat{\nu}}{v}$ never vanishes, the dependence of $f_j$ on the velocity $v$ can be parametrized by its dependence on $\hat{\nu}$. Thus, for fixed $(\hat{\nu}, \hat{E}_\psi)$, equation (\ref{eq:DKE}) is completely determined by the magnetic configuration. Hence, its unique solutions $f_j$ that satisfy conditions (\ref{eq:Regularity_conditions}) and (\ref{eq:kernel_elimination_condition}) are also completely determined by the magnetic configuration. The assumptions that lead to $\psi$ and $v$ appearing as parameters in the drift-kinetic equation (\ref{eq:DKE_Original}) comprise the so-called local monoenergetic approximation to neoclassical transport (see e.g. \cite{Landreman_Monoenergetic}).
+The relation between $h_a$ and $f_j$ given by equation (\ref{eq:Distribution_function_superposition}) is such that the transport quantities (\ref{eq:Particle_flux_Original}), (\ref{eq:Heat_flux_Original}) and (\ref{eq:Parallel_flow_Original}) can be written in terms of four transport coefficients which, for fixed $(\hat{\nu}, \widehat{E}_\psi)$, depend only on the magnetic configuration. As $\dv*{\hat{\nu}}{v}$ never vanishes, the dependence of $f_j$ on the velocity $v$ can be parametrized by its dependence on $\hat{\nu}$. Thus, for fixed $(\hat{\nu}, \widehat{E}_\psi)$, equation (\ref{eq:DKE}) is completely determined by the magnetic configuration. Hence, its unique solutions $f_j$ that satisfy conditions (\ref{eq:Regularity_conditions}) and (\ref{eq:kernel_elimination_condition}) are also completely determined by the magnetic configuration. The assumptions that lead to $\psi$ and $v$ appearing as parameters in the drift-kinetic equation (\ref{eq:DKE_Original}) comprise the so-called local monoenergetic approximation to neoclassical transport (see e.g. \cite{Landreman_Monoenergetic}).
 
 Using splitting (\ref{eq:Distribution_function_superposition}) we can write the transport quantities (\ref{eq:Particle_flux_Original}), (\ref{eq:Heat_flux_Original}) and (\ref{eq:Parallel_flow_Original}) in terms of the Onsager matrix
 %

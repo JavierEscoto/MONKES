@@ -154,34 +154,38 @@ module DKE_BTD_Solution_Legendre
         integer :: k
          
         integer :: c0, c1, c_rate, ipiv_temp(N_fs)
-        real :: t0, t1,  Delta_k(N_fs, N_fs), X(N_fs, N_fs) ! Auxiliary variables for calculations 
+        real :: t0, t1, Delta_k(N_fs, N_fs), X(N_fs, N_fs) ! Auxiliary variables for calculations 
         real :: y1(N_fs,1), y3(N_fs,1)
         
-        call system_clock(count_rate=c_rate) ! Get click rate                
-        L = Block_L(N_xi)         ! L_{N_\xi}
-        Delta_k  = Block_D(N_xi)  ! Delta_{N_\xi}    
+        call system_clock(count_rate=c_rate) ! Get click rate  
+        ! Initialize matrices as zero
+        L = 0 ; D = 0 ; U = 0 ; Delta_k = 0
+        
+        call Block_L(N_xi, L)        ! L_{N_\xi}  
+        call Block_D(N_xi, Delta_k)  ! Delta_{N_\xi}    
         call Solve_Matrix_System_LAPACK( Delta_k, L, .false., ipiv_temp, X ) ! X_{N_\xi}     
-
+ 
         ! Computation of Delta_2^{-1} and L_2
         do k = N_xi-1, 0, -1
                                 
            write(*,*) " Legendre Mode k = ", k  
            call system_clock(c0)
-           L =  Block_L(k) ! L_k 
-           D =  Block_D(k) ! D_k  
-           U =  Block_U(k) ! U_k             
+           call Block_L(k, L) ! L_k    
+           call Block_D(k, D) ! D_k  
+           call Block_U(k, U) ! U_k             
            call system_clock(c1)
            write(*,*) "      Time in Defining L, D, U = ", ( c1 - c0  ) / real(c_rate)               
 
            ! Schur complement Delta_k = D_k - U_k X_{k+1}
            call system_clock(c0)
-           Delta_k = D - matmul_LAPACK( U, X )          
+           Delta_k = D       
+           call dgemm_LAPACK( U, X, Delta_k, -1d0, 1d0 )      
            call system_clock(c1)
            write(*,*) "      Time in Defining Delta = ", ( c1 - c0  ) / real(c_rate)  
            
            ! Solve Delta_{k} * X_{k} = L_{k} for X_{k} for next iteration                         
            call system_clock(c0)        
-           if( k>0 ) call Solve_Matrix_System_LAPACK( Delta_k, L, .false., ipiv_temp, X )
+           if(k>0) call Solve_Matrix_System_LAPACK( Delta_k, L, .false., ipiv_temp, X )
            call system_clock(c1)
            write(*,*) "      Time in Solving Delta * X = L ", ( c1 - c0  ) / real(c_rate) 
            
@@ -237,13 +241,15 @@ module DKE_BTD_Solution_Legendre
       ! from the discretization
       ! L_k * f(:,:,k-1) + D_k * f(:,:,k) + U_k * f(:,:,k+1)
       ! Where f(0:N_theta-1,0:N_zeta-1,k) is the k-th Legendre mode of the
-      ! distribution function.
-      function Block_L(k) result(L)
+      ! distribution function. 
+      ! It requires to be given a zero matrix as it fills only the required
+      ! positions
+      subroutine Block_L(k, L)
         integer, intent(in) :: k
-        real :: L(N_fs, N_fs)
+        real, intent(inout) :: L(N_fs, N_fs)
         
         integer :: i, j, i_row, i_col, ii, jj 
-        L = 0
+        
         do j = 0, N_zeta-1   ! Loops for rows
            do i = 0, N_theta-1
               ! Row number     
@@ -269,19 +275,21 @@ module DKE_BTD_Solution_Legendre
            end do
         end do
             
-      end function
+      end subroutine
        
       ! *** Computes the block matrix D_k(N_theta*N_zeta, N_theta*N_zeta)
       ! from the discretization
       ! L_k * f(:,:,k-1) + D_k * f(:,:,k) + U_k * f(:,:,k+1)
       ! Where f(0:N_theta-1,0:N_zeta-1,k) is the k-th Legendre mode of the
-      ! distribution function.
-      function Block_D(k) result(D)
-        integer, intent(in) :: k
-        real :: D(N_fs, N_fs)
+      ! distribution function. 
+      ! It requires to be given a zero matrix as it fills only the required
+      ! positions 
+      subroutine Block_D(k, D)
+        integer, intent(in) :: k 
+        real, intent(inout) :: D(N_fs, N_fs)
         
         integer :: i, j, i_row, i_col, ii, jj 
-        D = 0
+
         do j = 0, N_zeta-1   ! Loops for rows
            do i = 0, N_theta-1
               ! Row number     
@@ -308,21 +316,22 @@ module DKE_BTD_Solution_Legendre
         end do
         
         ! Elimination of nullspace
-        if( k==0 ) D(1,1) = 1 ; if( k==0 ) D(1,2:N_fs) = 0
-      end function
+        if( k==0 ) D(1,1) = 1 ; if( k==0 ) D(1,2:N_fs) = 0 
+      end subroutine
        
       ! *** Computes the block matrix U_k(N_theta*N_zeta, N_theta*N_zeta)
       ! from the discretization
       ! L_k * f(:,:,k-1) + D_k * f(:,:,k) + U_k * f(:,:,k+1)
       ! Where f(0:N_theta-1,0:N_zeta-1,k) is the k-th Legendre mode of the
-      ! distribution function.
-      function Block_U(k) result(U)
+      ! distribution function. 
+      ! It requires to be given a zero matrix as it fills only the required
+      ! positions
+      subroutine Block_U(k, U)
         integer, intent(in) :: k
-        real :: U(N_fs, N_fs)
+        real, intent(inout) :: U(N_fs, N_fs)
         
         integer :: i, j, i_row, i_col, ii, jj 
         
-        U = 0
         do j = 0, N_zeta-1   ! Loops for rows
            do i = 0, N_theta-1
               ! Row number     
@@ -351,7 +360,7 @@ module DKE_BTD_Solution_Legendre
         ! Elimination of nullspace
         if( k==0 ) U(1,:) = 0
         
-      end function
+      end subroutine
              
   end subroutine
  

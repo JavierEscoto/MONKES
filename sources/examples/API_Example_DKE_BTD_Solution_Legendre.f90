@@ -26,20 +26,19 @@ module API_Example_DKE_BTD_Solution_Legendre
      integer :: N_nu, N_E_r, M_theta, M_zeta, M_xi, ierr 
      namelist /parameters/N_theta, N_zeta, N_xi, nu, E_r       
      
-     ! *** Read input parameters from "monkes_input.parameters" file
+     ! *** Read input parameters from "monkes.parameters" file
       N_theta = -1 ; N_zeta = -1 ; N_xi = -1 ; nu = -1d14 ; E_r = -1d14 
      open(1, file= "monkes_input.parameters", status="old") 
      read(1, nml=parameters, iostat=ierr)     
      close(1)  
      
      ! Count number of collisionalities and radial electric field to be
-     ! included in the database
+     ! includede in the database
      M_theta = count(N_theta > 0)  
      M_zeta = count(N_zeta > 0)  
      M_xi = count(N_xi > 1)  
      N_nu = count(nu > 0) ; N_E_r = count(E_r /= -1d14) 
      
-     ! Adjust theta and zeta resolutions to be nearest odd number
      where( mod(N_theta(1:M_theta),2) == 0 )  N_theta(1:M_theta) = N_theta(1:M_theta) + 1
      where( mod(N_zeta(1:M_zeta),2) == 0 )    N_zeta(1:M_zeta) = N_zeta(1:M_zeta) + 1
      

@@ -27,7 +27,7 @@ implicit none
   select case (input_case)
   
      case ("boozmn.nc")         
-     call READ_BOOZMNNC(s)
+     call read_boozer_xform_output(s)
      
      case ("ddkes2.data")
      call read_ddkes2data("ddkes2.data")

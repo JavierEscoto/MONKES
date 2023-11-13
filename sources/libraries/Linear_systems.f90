@@ -5,9 +5,10 @@ module Linear_systems
 
 
 contains 
-  
+ 
+ ! Computes C = A*B
  function matmul_LAPACK( A, B ) result(C)
-    real, intent(in) :: A(:,:), B(:,:)
+    real, intent(in) :: A(:,:), B(:,:) 
     real :: C( size(A,dim=1), size(B,dim=2) )
     integer :: M, N, K
     
@@ -15,6 +16,19 @@ contains
     call dgemm('N','N', M, N, K, 1d0, A, M, B, K, 0d0, C, M ) 
  
  end function
+ 
+ ! Computes C = alpha* A * B  + beta*C. The matrix C must be given a
+ ! value beforehand unless beta=0.
+ subroutine dgemm_LAPACK( A, B, C, alpha, beta ) 
+    real, intent(in) :: A(:,:), B(:,:)
+    real, intent(inout) :: C( size(A,dim=1), size(B,dim=2) )
+    real, intent(in) :: alpha, beta 
+    integer :: M, N, K
+    
+    M = size(A,dim=1) ; K = size(A,dim=1) ; N = size(B,dim=2)    
+    call dgemm('N','N', M, N, K, alpha, A, M, B, K, beta, C, M ) 
+ 
+ end subroutine
  
  function Invert_LU_LAPACK( A ) result(A_inv) 
     real, intent(in) :: A(:,:) 

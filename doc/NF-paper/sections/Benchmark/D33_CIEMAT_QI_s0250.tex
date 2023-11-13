@@ -6,6 +6,7 @@
 			xmode=log, 
 			ymode=log, 
 			enlarge x limits=false,
+			xtick = {1e-5, 1e-3, 1e-1, 1e1},
 %			enlarge y limits=false,
 %			legend pos = south west,
 			legend columns=4, 
@@ -22,7 +23,7 @@
 			y expr=\thisrowno{5}-\thisrowno{6}
 			]
 			{./results/CIEMAT-QI/0.250/Monoenergetic_Database_Example_15_119_180/Monoenergetic_1.plt};	
-			\addlegendentry{\texttt{MONKES}\\ $\hat{E}_r=0$}			
+			\addlegendentry{\texttt{MONKES}\\ $\widehat{E}_r=0$}			
 			
 			
 			%%% DKES RESULTS	
@@ -44,7 +45,7 @@
 			restrict expr to domain={\thisrowno{1}}{0:0},
 			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
 			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/CIEMAT-QI/0.250/results.data};
-			\addlegendentry{\texttt{DKES} \\ $\hat{E}_r=0$}
+			\addlegendentry{\texttt{DKES} \\ $\widehat{E}_r=0$}
 			
 			%%% MONKES RESULTS
 			\addplot[no markers, red, dashed]
@@ -53,7 +54,7 @@
 			y expr=\thisrowno{5}-\thisrowno{6}, 
 			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}]
 			{./results/CIEMAT-QI/0.250/Monoenergetic_Database_Example_15_119_180/Monoenergetic_6.plt};	
-			\addlegendentry{\texttt{MONKES}\\ $\hat{E}_r\ne 0$}
+			\addlegendentry{\texttt{MONKES}\\ $\widehat{E}_r\ne 0$}
 			
 			%%% DKES RESULTS				
 			\addplot[only marks, mark=square, red, error bars/.cd, y explicit,
@@ -65,7 +66,7 @@
 			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3},
 			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
 			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/CIEMAT-QI/0.250/results.data};
-			\addlegendentry{\texttt{DKES} \\ $\hat{E}_r\ne0$}	
+			\addlegendentry{\texttt{DKES} \\ $\widehat{E}_r\ne0$}	
 			
 			
 			%%% DKES RESULTS	

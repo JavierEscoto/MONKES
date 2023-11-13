@@ -6,6 +6,7 @@
 			xmode=log, ymode=log, enlarge x limits=false,
 			legend pos = north west, 
 			mark size = 1.5pt, 
+			xtick = {1e-5, 1e-3, 1e-1, 1e1},
 			ymax = 10
 %			legend style={at={(axis cs:1e-4,14)},anchor=north west}
 			]
@@ -43,9 +44,11 @@
 			\addplot+[no markers, red]
 			table[skip first n=1, 
 			x expr=\thisrowno{0},
-			y expr=\thisrowno{2}*0.5132*0.5132,  
-			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4}]
-			{./results/W7X-KJM/0.204/Monoenergetic_Database_Example_19_75_140/Monoenergetic_5.plt};	
+			y expr=\thisrowno{5}*0.5132*0.5132,  
+			restrict expr to domain={\thisrowno{0}}{1e-5:3e+2},  
+			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4}
+			]
+			{./results/W7X-KJM/0.204/Monoenergetic_19_79_180/monkes_Monoenergetic_Database.dat};
 %			\addlegendentry{\texttt{MONKES} $\hat{E}_r\ne 0$}
 			
 			

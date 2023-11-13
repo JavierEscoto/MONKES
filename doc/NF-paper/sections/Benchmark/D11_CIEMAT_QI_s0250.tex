@@ -21,7 +21,7 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{2}*0.4674*0.4674]
 			{./results/CIEMAT-QI/0.250/Monoenergetic_Database_Example_15_119_180/Monoenergetic_1.plt};	
-			\addlegendentry{\texttt{MONKES} \\ $\hat{E}_r=0$}			
+			\addlegendentry{\texttt{MONKES} \\ $\widehat{E}_r=0$}			
 						
 			%%% DKES RESULTS	
 			\foreach \nu in 
@@ -43,7 +43,7 @@
 			restrict expr to domain={\thisrowno{1}}{0:0},
 			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
 			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/CIEMAT-QI/0.250/results.data};
-			\addlegendentry{\texttt{DKES} \\ $\hat{E}_r=0$}
+			\addlegendentry{\texttt{DKES} \\ $\widehat{E}_r=0$}
 			
 			%%% DKES RESULTS	
 			\foreach \nu in 
@@ -61,7 +61,7 @@
 			y expr=\thisrowno{1}*0.4674*0.4674
 			]
 			{./results/SFINCS_results/CIEMAT-QI/20230420-01-058-CIEMAT-QI_s0p238_Er0_nuScan_sfincs_results.dat};	
-			\addlegendentry{\texttt{SFINCS}\\ $\hat{E}_r=0$}	
+			\addlegendentry{\texttt{SFINCS}\\ $\widehat{E}_r=0$}	
 			
 			%%% MONKES RESULTS
 			\addplot[no markers, red]
@@ -70,7 +70,7 @@
 			y expr=\thisrowno{2}*0.4674*0.4674,  
 			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}]
 			{./results/CIEMAT-QI/0.250/Monoenergetic_Database_Example_15_119_180/Monoenergetic_6.plt};	
-			\addlegendentry{\texttt{MONKES}\\ $\hat{E}_r\ne 0$}			
+			\addlegendentry{\texttt{MONKES}\\ $\widehat{E}_r\ne 0$}			
 			
 			%%% DKES RESULTS				
 			\addplot[only marks, mark=square*, red, error bars/.cd, y explicit,
@@ -82,7 +82,7 @@
 			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3},
 			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
 			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/CIEMAT-QI/0.250/results.data};
-			\addlegendentry{\texttt{DKES} \\ $\hat{E}_r\ne 0$}				
+			\addlegendentry{\texttt{DKES} \\ $\widehat{E}_r\ne 0$}				
 			
 			%%% SFINCS RESULTS
 			\addplot[mark repeat =2, only marks, red, mark=triangle*, mark options={rotate=60}]
@@ -91,7 +91,7 @@
 			y expr=\thisrowno{1}*0.4674*0.4674
 			]
 			{./results/SFINCS_results/CIEMAT-QI/20230420-01-047-CIEMAT-QI_s0p238_withEr_nuScan_sfincs_results.dat};	
-			\addlegendentry{\texttt{SFINCS}\\ $\hat{E}_r\ne 0$}			
+			\addlegendentry{\texttt{SFINCS}\\ $\widehat{E}_r\ne 0$}			
 			
 		\end{axis}
 		

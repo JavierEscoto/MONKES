@@ -1,4 +1,4 @@
 TikzFigures/Benchmark-W7X-KJM-s0204-D33.pdf: ./results/W7X-KJM/0.204/Monoenergetic_Database_Example_23_63_140/Monoenergetic_1.plt
 TikzFigures/Benchmark-W7X-KJM-s0204-D33.pdf: ./results/W7X-KJM/0.204/results.data
-TikzFigures/Benchmark-W7X-KJM-s0204-D33.pdf: ./results/W7X-KJM/0.204/Monoenergetic_Database_Example_19_75_140/Monoenergetic_5.plt
+TikzFigures/Benchmark-W7X-KJM-s0204-D33.pdf: ./results/W7X-KJM/0.204/Monoenergetic_19_79_180/monkes_Monoenergetic_Database.dat
 TikzFigures/Benchmark-W7X-KJM-s0204-D33.pdf: ./results/W7X-KJM/0.204/results.data

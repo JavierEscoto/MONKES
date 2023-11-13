@@ -153,7 +153,7 @@ prefix={TikzFigures/}
 \end{indented}
 
 \begin{abstract}
-	{\MONKES} is a new neoclassical code for the evaluation of monoenergetic transport coefficients in stellarators. By means of a convergence study and benchmarks with other codes, it is shown that {\MONKES} is accurate and efficient. The combination of spectral discretization in spatial and velocity coordinates with block sparsity allows {\MONKES} to compute monoenergetic coefficients at low collisionality, in a single core, in approximately one minute. {\MONKES} is sufficiently fast to be integrated into stellarator optimization codes for direct optimization of the bootstrap current and to be included in predictive transport suites.    
+	{\MONKES} is a new neoclassical code for the evaluation of monoenergetic transport coefficients in stellarators. By means of a convergence study and benchmarks with other codes, it is shown that {\MONKES} is accurate and efficient. The combination of spectral discretization in spatial and velocity coordinates with block sparsity allows {\MONKES} to compute monoenergetic coefficients at low collisionality, in a single core, in approximately one minute. {\MONKES} is sufficiently fast to be integrated into stellarator optimization codes for direct optimization of the bootstrap current and to be included in predictive transport suites. The code and data from this paper are available at \texttt{https://github.com/JavierEscoto/MONKES/}.   
 \end{abstract}
 
 %
@@ -208,6 +208,10 @@ prefix={TikzFigures/}
 \label{sec:Conclusions}
 \input{sections/Conclusions.tex}
  
+\section*{Acknowledgements}
+This work has been carried out within the framework of the EUROfusion Consortium, funded by the European Union via the Euratom Research and Training Programme (Grant Agreement No 101052200 – EUROfusion). Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Commission. Neither the European Union nor the European Commission can be held responsible for them. This research was supported in part by grant PID2021-123175NB-I00, Ministerio de Ciencia e Innovación, Spain. ML was supported by the U.S. Department of Energy, Office of Science, Office of Fusion Energy Science, under award number DE-FG02-93ER54197. This work was supported by the U.S. Department of Energy under contract number DE-AC02-09CH11466. The United States Government retains a non-exclusive, paid-up, irrevocable, world-wide license to publish or reproduce the published form of this manuscript, or allow others to do so, for United States Government purposes. The authors would like to thank C. D. Beidler for useful suggestions on the usage of {\DKES}.
+
+
 
 \FloatBarrier
 \appendix
@@ -219,13 +223,8 @@ prefix={TikzFigures/}
 %\input{sections/Onsager_Momentum_conservation.tex}
 	
 \FloatBarrier
-\section*{Acknowledgements}
-This work has been carried out within the framework of the EUROfusion Consortium, funded by the European Union via the Euratom Research and Training Programme (Grant Agreement No 101052200 – EUROfusion). Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Commission. Neither the European Union nor the European Commission can be held responsible for them. This research was supported in part by grant PID2021-123175NB-I00, Ministerio de Ciencia e Innovación, Spain. 
-ML was supported by the U.S. Department of Energy, Office of Science, Office of Fusion Energy Science, under award number DE-FG02-93ER54197. The authors would like to thank C. D. Beidler for useful suggestions on the usage of {\DKES}.
-
-
-% This without biblatex package works but does not sort quotes
 \section*{References}
+% This without biblatex package works but does not sort quotes
 \bibliographystyle{unsrt}
 \bibliography{refs}{}
 

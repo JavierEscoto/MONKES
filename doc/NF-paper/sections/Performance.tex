@@ -1,4 +1,4 @@
- In this subsection we will compare {\MONKES} and {\DKES} performance in terms of the wall-clock time and describe {\MONKES} scaling properties. For the wall-clock time comparison, a convergence study (similar to the one explained in subsection \ref{subsec:Convergence}) has been carried out with {\DKES} on \ref{sec:Appendix_DKES_Bounds}. This convergence study is done to compare the wall-clock times between {\MONKES} and {\DKES} for the same level of relative convergence with respect to $\widehat{D}_{31}^{\text{r}}$. The comparison is displayed in table \ref{tab:DKES_MONKES_Comparison} along with the minimum number of Legendre modes for which {\DKES} results satisfy convergence condition (i). In all six cases, {\MONKES} is faster than {\DKES} despite using more Legendre modes. Even for W7-X EIM, in which we have taken $N_\xi =40$ for {\DKES} calculations with finite $\widehat{E}_r$, {\MONKES} is four times faster using almost four times the number of Legendre modes. For the W7-X EIM case without radial electric field, the speed-up is also of four. For the high mirror configuration, {\MONKES} is $\sim 20$ times faster than {\DKES} without $\hat{E}_r$ and $\sim 10$ times faster than {\DKES} when $\hat{E}_r \ne 0$. In the case of CIEMAT-QI, {\MONKES} is more than $\sim 13$ times faster than {\DKES} without radial electric field. In the case with finite $\hat{E}_r$, {\MONKES} calculations are around 64 times faster than {\DKES} ones. One calculation of {\MONKES} takes less than a minute and a half and the same calculation with {\DKES} requires waiting for almost an hour and a half. We point out that the wall-clock times for all the calculations shown are those from one of the partitions of CIEMAT's cluster XULA. Specifically, partition number 2 has been used, whose nodes run with Intel Xeon Gold 6254 cores at 3.10 GHz. 
+ In this subsection we will compare {\MONKES} and {\DKES} performance in terms of the wall-clock time and describe {\MONKES} scaling properties. For the wall-clock time comparison, a convergence study (similar to the one explained in subsection \ref{subsec:Convergence}) has been carried out with {\DKES} on \ref{sec:Appendix_DKES_Bounds}. This convergence study is done to compare the wall-clock times between {\MONKES} and {\DKES} for the same level of relative convergence with respect to $\widehat{D}_{31}^{\text{r}}$. The comparison is displayed in table \ref{tab:DKES_MONKES_Comparison} along with the minimum number of Legendre modes for which {\DKES} results satisfy convergence condition (i). In all six cases, {\MONKES} is faster than {\DKES} despite using more Legendre modes. Even for W7-X EIM, in which we have taken $N_\xi =40$ for {\DKES} calculations with finite $\widehat{E}_r$, {\MONKES} is $\sim 4$ times faster using almost four times the number of Legendre modes. For the W7-X EIM case without radial electric field, the speed-up is also of $ 4$. For the high mirror configuration, {\MONKES} is $\sim 20$ times faster than {\DKES} without $\widehat{E}_r$ and $\sim 10$ times faster than {\DKES} when $\widehat{E}_r \ne 0$. In the case of CIEMAT-QI, {\MONKES} is more than $\sim 13$ times faster than {\DKES} without radial electric field. In the case with finite $\widehat{E}_r$, {\MONKES} calculations are around 64 times faster than {\DKES} ones. One calculation of {\MONKES} takes less than a minute and a half and the same calculation with {\DKES} requires waiting for almost an hour and a half. We point out that the wall-clock times for all the calculations shown are those from one of the partitions of CIEMAT's cluster XULA. Specifically, partition number 2 has been used, whose nodes run with Intel Xeon Gold 6254 cores at 3.10 GHz. 
  
  %
  \begin{table}[h]
@@ -6,12 +6,12 @@
  	\begin{tabular}{lccc}
  		\toprule
  		Case   & $N_\xi^{\DKES}$ & $t_{\text{clock}}^{\DKES}$  [s] & $t_{\text{clock}}^{\MONKES}$  {[}s{]} \\ \midrule
- 		W7X-EIM $\hat{E}_r=0$                                   & 80          &  90      &         22      \\
- 		W7X-EIM $\hat{E}_r\ne 0$                                & {40}          &  {172}     &         40      \\ 
- 		W7X-KJM $\hat{E}_r=0$                                   & 160         &  698     &         33      \\
- 		W7X-KJM $\hat{E}_r\ne 0$                                & 60          &  421     &         46      \\
- 		CIEMAT-QI $\hat{E}_r=0$                                 & 160         &  1060    &         78      \\
- 		CIEMAT-QI $\hat{E}_r\ne 0$                              & 160         &  4990    &         78                    \\\bottomrule
+ 		W7X-EIM $\widehat{E}_r=0$                                   & 80          &  90      &         22      \\
+ 		W7X-EIM $\widehat{E}_r\ne 0$                                & {40}          &  {172}     &         40      \\ 
+ 		W7X-KJM $\widehat{E}_r=0$                                   & 160         &  698     &         33      \\
+ 		W7X-KJM $\widehat{E}_r\ne 0$                                & 60          &  421     &         46      \\
+ 		CIEMAT-QI $\widehat{E}_r=0$                                 & 160         &  1060    &         78      \\
+ 		CIEMAT-QI $\widehat{E}_r\ne 0$                              & 160         &  4990    &         78                    \\\bottomrule
  	\end{tabular}
  	\caption{Comparison between the wall-clock time of {\DKES} and {\MONKES}.}
  	\label{tab:DKES_MONKES_Comparison}
@@ -47,12 +47,12 @@ As the {\texttt{LAPACK}} library is multithreaded and allows to parallelize the 
 		\toprule
 		%$t_{\text{clock}}^{\MONKES}$ {[}s{]}
 		\backslashbox{Case}{No. cores}   & 1  & 2  &  4 &  8 & 16\\ \midrule
-		W7X-EIM $\hat{E}_r=0$        & 22    & 13  &  8   &  5 &  5 \\
-		W7X-EIM $\hat{E}_r\ne 0$   & 40    & 20  & 12    & 8 &  6 \\ 
-		W7X-KJM $\hat{E}_r=0$        & 33    & 17  &  12 & 7 &   7   \\
-		W7X-KJM $\hat{E}_r\ne 0$   & 46    & 17  &  13 & 7 & 7  \\
-		CIEMAT-QI $\hat{E}_r=0$      & 78    & 45 & 29 & 21 & 16 \\
-		CIEMAT-QI $\hat{E}_r\ne 0$ & 78    & 45 & 29 & 21 & 16 \\\bottomrule
+		W7X-EIM $\widehat{E}_r=0$        & 22    & 13  &  8   &  5 &  5 \\
+		W7X-EIM $\widehat{E}_r\ne 0$   & 40    & 20  & 12    & 8 &  6 \\ 
+		W7X-KJM $\widehat{E}_r=0$        & 33    & 17  &  12 & 7 &   7   \\
+		W7X-KJM $\widehat{E}_r\ne 0$   & 46    & 17  &  13 & 7 & 7  \\
+		CIEMAT-QI $\widehat{E}_r=0$      & 78    & 45 & 29 & 21 & 16 \\
+		CIEMAT-QI $\widehat{E}_r\ne 0$ & 78    & 45 & 29 & 21 & 16 \\\bottomrule
 	\end{tabular}
 	\caption{Wall-clock time of {\MONKES} in seconds for the selected triplets $(N_\theta,N_\zeta,N_\xi)$ when running in several cores.}
 	\label{tab:MONKES_Times_Multicore}

@@ -59,7 +59,7 @@ From the output of {\DKES}, the diagonal elements $\widehat{D}_{ii}^{\pm}$ satis
 \end{align}
 and $\Delta_{ij} = \sqrt{(\widehat{D}_{ii}^{-} - \widehat{D}_{ii}^{+})(\widehat{D}_{jj}^{-} - \widehat{D}_{jj}^{+})} /2 $.  
 
- In figures \ref{fig:DKES_Convergence_W7X_EIM_Er_0}, \ref{fig:DKES_Convergence_W7X_EIM_Er_3e-4}, \ref{fig:DKES_Convergence_W7X_KJM_Er_0}, \ref{fig:DKES_Convergence_W7X_KJM_Er_3e-4}, \ref{fig:DKES_Convergence_CIEMAT_QI_Er_0} and \ref{fig:DKES_Convergence_CIEMAT_QI_Er_1e-3} the convergence study for selecting {\DKES} resolutions is shown. In the code {\DKES} the amount of Legendre modes used are specified by $N_\xi$. In order to select the amount of Fourier modes in the Boozer angles $(\theta,\zeta)$ that {\DKES} uses, an integer called ``coupling parameter'' must be specified. Using figures \ref{subfig:DKES_D31_convergence_Legendre_W7X_EIM_0200_Erho_0_Detail}, \ref{subfig:DKES_D31_convergence_Legendre_W7X_EIM_0200_Erho_3e-4_Detail}, \ref{subfig:DKES_D31_convergence_Legendre_W7X_KJM_0204_Erho_0_Detail}, \ref{subfig:DKES_D31_convergence_Legendre_W7X_KJM_0204_Erho_3e-4_Detail}, \ref{subfig:DKES_D31_convergence_Legendre_CIEMAT_QI_0250_Erho_0_Detail} and \ref{subfig:DKES_D31_convergence_Legendre_CIEMAT_QI_0250_Erho_1e-3_Detail}, the number of Legendre modes $N_\xi$ is selected so that it satisfies convergence condition (i) using the region $\mathcal{R}_\epsilon$ for each case. After that, using \ref{subfig:DKES_D31_convergence_Coupling_parameter_W7X_EIM_0200_Erho_0}, \ref{subfig:DKES_D31_convergence_Coupling_parameter_W7X_EIM_0200_Erho_3e-4}, \ref{subfig:DKES_D31_convergence_Coupling_parameter_W7X_KJM_0204_Erho_0}, \ref{subfig:DKES_D31_convergence_Coupling_parameter_W7X_KJM_0204_Erho_3e-4}, \ref{subfig:DKES_D31_convergence_Coupling_parameter_CIEMAT_QI_0250_Erho_0} and \ref{subfig:DKES_D31_convergence_Coupling_parameter_CIEMAT_QI_0250_Erho_1e-3}, we select the minimum value of the coupling parameter for which the calculation with the selected value of $N_\xi$ satisfies convergence condition (ii).
+In figures \ref{fig:DKES_Convergence_W7X_EIM_Er_0}, \ref{fig:DKES_Convergence_W7X_EIM_Er_3e-4}, \ref{fig:DKES_Convergence_W7X_KJM_Er_0}, \ref{fig:DKES_Convergence_W7X_KJM_Er_3e-4}, \ref{fig:DKES_Convergence_CIEMAT_QI_Er_0} and \ref{fig:DKES_Convergence_CIEMAT_QI_Er_1e-3} the convergence study for selecting {\DKES} resolutions is shown. In the code {\DKES} the number of Legendre modes used are specified by $N_\xi$. In order to select the number of Fourier modes in the Boozer angles $(\theta,\zeta)$ that {\DKES} uses, an integer called ``coupling order'' must be specified. Using figures \ref{subfig:DKES_D31_convergence_Legendre_W7X_EIM_0200_Erho_0_Detail}, \ref{subfig:DKES_D31_convergence_Legendre_W7X_EIM_0200_Erho_3e-4_Detail}, \ref{subfig:DKES_D31_convergence_Legendre_W7X_KJM_0204_Erho_0_Detail}, \ref{subfig:DKES_D31_convergence_Legendre_W7X_KJM_0204_Erho_3e-4_Detail}, \ref{subfig:DKES_D31_convergence_Legendre_CIEMAT_QI_0250_Erho_0_Detail} and \ref{subfig:DKES_D31_convergence_Legendre_CIEMAT_QI_0250_Erho_1e-3_Detail}, the number of Legendre modes $N_\xi$ is selected so that it satisfies convergence condition (i) using the region $\mathcal{R}_\epsilon$ for each case. After that, using \ref{subfig:DKES_D31_convergence_Coupling_parameter_W7X_EIM_0200_Erho_0}, \ref{subfig:DKES_D31_convergence_Coupling_parameter_W7X_EIM_0200_Erho_3e-4}, \ref{subfig:DKES_D31_convergence_Coupling_parameter_W7X_KJM_0204_Erho_0}, \ref{subfig:DKES_D31_convergence_Coupling_parameter_W7X_KJM_0204_Erho_3e-4}, \ref{subfig:DKES_D31_convergence_Coupling_parameter_CIEMAT_QI_0250_Erho_0} and \ref{subfig:DKES_D31_convergence_Coupling_parameter_CIEMAT_QI_0250_Erho_1e-3}, we select the minimum value of the coupling order for which the calculation with the selected value of $N_\xi$ satisfies convergence condition (ii).
  
  
 %\input{sections/Benchmark/DKES_Convergence_W7X_EIM.tex}
@@ -86,7 +86,7 @@ and $\Delta_{ij} = \sqrt{(\widehat{D}_{ii}^{-} - \widehat{D}_{ii}^{+})(\widehat{
 	\end{subfigure}
 	
 	
-	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for W7X-EIM at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.200$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\hat{E}_r(v)=0$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling parameter = 9. (b) Convergence with the coupling parameter for $N_\xi= 80$.}
+	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for W7X-EIM at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.200$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\widehat{E}_r(v)=0$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling order = 9. (b) Convergence with the coupling order for $N_\xi= 80$.}
 	\label{fig:DKES_Convergence_W7X_EIM_Er_0}
 \end{figure}
 
@@ -108,7 +108,7 @@ and $\Delta_{ij} = \sqrt{(\widehat{D}_{ii}^{-} - \widehat{D}_{ii}^{+})(\widehat{
 		\label{subfig:DKES_D31_convergence_Coupling_parameter_W7X_EIM_0200_Erho_3e-4}
 	\end{subfigure}
 	
-	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for W7X-EIM at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.200$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\hat{E}_r(v)=3\cdot 10^{-4}$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling parameter = 9. (b) Convergence with the coupling parameter for $N_\xi= 40$.}
+	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for W7X-EIM at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.200$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\widehat{E}_r(v)=3\cdot 10^{-4}$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling order = 9. (b) Convergence with the coupling order for $N_\xi= 40$.}
 	\label{fig:DKES_Convergence_W7X_EIM_Er_3e-4}
 \end{figure}
 
@@ -130,7 +130,7 @@ and $\Delta_{ij} = \sqrt{(\widehat{D}_{ii}^{-} - \widehat{D}_{ii}^{+})(\widehat{
 	\end{subfigure}
 	
 	
-	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for W7X-KJM at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.204$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\hat{E}_r(v)=0$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling parameter = 8. (b) Convergence with the coupling parameter for $N_\xi=160 $.}
+	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for W7X-KJM at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.204$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\widehat{E}_r(v)=0$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling order = 8. (b) Convergence with the coupling order for $N_\xi=160 $.}
 	\label{fig:DKES_Convergence_W7X_KJM_Er_0}
 \end{figure}
 
@@ -152,7 +152,7 @@ and $\Delta_{ij} = \sqrt{(\widehat{D}_{ii}^{-} - \widehat{D}_{ii}^{+})(\widehat{
 		\label{subfig:DKES_D31_convergence_Coupling_parameter_W7X_KJM_0204_Erho_3e-4}
 	\end{subfigure}
 	
-	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for W7X-KJM at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.204$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\hat{E}_r(v)=3\cdot 10^{-4}$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling parameter = 7. (b) Convergence with the coupling parameter for $N_\xi= 60$.}
+	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for W7X-KJM at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.204$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\widehat{E}_r(v)=3\cdot 10^{-4}$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling order = 7. (b) Convergence with the coupling order for $N_\xi= 60$.}
 	\label{fig:DKES_Convergence_W7X_KJM_Er_3e-4}
 \end{figure}
 
@@ -174,7 +174,7 @@ and $\Delta_{ij} = \sqrt{(\widehat{D}_{ii}^{-} - \widehat{D}_{ii}^{+})(\widehat{
 	\end{subfigure}
 	
 	
-	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for CIEMAT-QI at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.250$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\hat{E}_r(v)=0$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling parameter = 9. (b) Convergence with the coupling parameter for $N_\xi= 160$.}
+	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for CIEMAT-QI at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.250$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\widehat{E}_r(v)=0$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling order = 9. (b) Convergence with the coupling order for $N_\xi= 160$.}
 	\label{fig:DKES_Convergence_CIEMAT_QI_Er_0}
 \end{figure}
 
@@ -196,7 +196,7 @@ and $\Delta_{ij} = \sqrt{(\widehat{D}_{ii}^{-} - \widehat{D}_{ii}^{+})(\widehat{
 	\end{subfigure}
 	
 	
-	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for CIEMAT-QI at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.250$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\hat{E}_r(v)=10^{-3}$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling parameter = 9. (b) Convergence with the coupling parameter for $N_\xi= 160$.}
+	\caption{Convergence of $(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ computed with {\DKES} for CIEMAT-QI at the surface labelled by $\psi/\psi_{\text{lcfs}}=0.250$, for $\hat{\nu}(v)=10^{-5}$ $\text{m}^{-1}$ and $\widehat{E}_r(v)=10^{-3}$ $\text{kV}\cdot\text{s}/\text{m}^2$. (a) Convergence with $N_\xi$ for coupling order = 9. (b) Convergence with the coupling order for $N_\xi= 160$.}
 	\label{fig:DKES_Convergence_CIEMAT_QI_Er_1e-3}
 \end{figure}
 

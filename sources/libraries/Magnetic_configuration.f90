@@ -1,16 +1,16 @@
 module Magnetic_configuration
-    
+   use netcdf
    use Lagrange_interpolation
    implicit none
    
    private
    
-   public :: read_ddkes2data, READ_BOOZMNNC
+   public :: read_ddkes2data, read_boozer_xform_output
    public :: Select_Surface
    public :: Beidler_NF_2011_Normalization
    
    public :: Np, iota, psi_p, chi_p, B_theta, B_zeta, B00
-   public :: Major_Radius, Minor_Radius, s
+   public :: Aspect_ratio, Major_Radius, Minor_Radius, s
    
    public :: Magnetic_Field_Boozer
    public :: Magnetic_Field_Boozer_Derivative_theta
@@ -21,7 +21,7 @@ module Magnetic_configuration
    integer, save, allocatable :: mn(:,:) 
    real, save, allocatable :: B_modes(:)   
    
-   real, save :: Major_Radius, Minor_Radius, s
+   real, save :: Aspect_ratio, Major_Radius, Minor_Radius, s
    namelist /surface/s
    
    contains
@@ -33,7 +33,7 @@ module Magnetic_configuration
    subroutine Select_Surface     
      integer :: ierr 
      
-     open(21, file= "input.surface", status="old", iostat=ierr) 
+     open(21, file= "monkes_input.surface", status="old", iostat=ierr) 
      if( ierr == 0 ) read(21, nml=surface)     
      close(21) 
      
@@ -108,6 +108,7 @@ module Magnetic_configuration
      
      ! *** Estimate s, major and minor radius from large-aspect-ratio limit
      Major_Radius = abs(B_zeta/ B00) ; Minor_Radius = abs(psi_p / B00)
+     Aspect_ratio = Major_Radius / Minor_Radius
      !s = ( psi_p /(Minor_radius * B00) )**2  ! r/a = psi / psi_LCFS
 
      write(*,*) " ! *** Approximating Minor_Radius = abs(psi_p / B00)  " 
@@ -137,6 +138,7 @@ module Magnetic_configuration
      write(*,*)
      
      write(*,*) " *** Stellarator parameters "
+     write(*,*) "     Aspect_ratio = ", Aspect_ratio
      write(*,*) "     Minor_Radius = ", Minor_Radius
      write(*,*) "     Major_Radius = ", Major_Radius ; write(*,*)
 
@@ -161,6 +163,7 @@ module Magnetic_configuration
      write(21,*) "     B00/(B_zeta+iota*B_theta) = ", B00/(B_zeta+iota*B_theta) 
      
      write(21,*) " *** Stellarator parameters "
+     write(21,*) "     Aspect_ratio = ", Aspect_ratio
      write(21,*) "     Minor_Radius = ", Minor_Radius
      write(21,*) "     Major_Radius = ", Major_Radius ; write(21,*)
      
@@ -259,312 +262,213 @@ module Magnetic_configuration
   end subroutine 
   
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-! THIS ROUTINE IS EXTRACTED FROM KNOSOS (Velasco, JPPP 2018) and was originally
-! made by Satake. Minor modifications to adapt it to MONKES
-! have been done by Escoto in 2023.
-subroutine read_boozmnnc(s0)
-!-------------------------------------------------------------------------------------------
-!Read output from BOOZER_XFORM, netcdf file, by Satake
-!-------------------------------------------------------------------------------------------
-  
-  !Input
-  real, intent(in) :: s0
-  
-  real, parameter :: pi = acos(-1d0)
-  real, parameter :: TWOPI = 2*acos(-1d0)
-  !Others
-  CHARACTER*100 serr
-  CHARACTER*38 version
-  INTEGER nsval,jsize,is0,imn
-  REAL*8 aspect_b,rmax_b,rmin_b,betaxis_b
-  !netcdf by Satake
-  INCLUDE "netcdf.inc"
-  CHARACTER*60 filename
-  CHARACTER*40 varname
-  INTEGER  ncid,status_nc,rhid,idimid,ilist
-  INTEGER, ALLOCATABLE :: jlist(:),idx_b(:)
-  REAL*8, ALLOCATABLE :: packed2d(:,:,:)
-  
- !New: THESE ARE THE VARIABLES MEANT FOR DEFINING THE MODES OF B
-  INTEGER nfp_b,ns_b,mnboz_b,mboz_b,nboz_b,jsn
-  REAL*8 dpsi
-  INTEGER, ALLOCATABLE :: ixm_b(:),ixn_b(:),js_b(:)
-  REAL*8,  ALLOCATABLE :: Bmax_b(:),Bmin_b(:)
-  REAL*8,  ALLOCATABLE :: s_b(:),spol_b(:),iota_b(:),pres_b(:),beta_b(:),psi_p_b(:),psi_b(:),bvco_b(:),buco_b(:)
-  REAL*8,  ALLOCATABLE :: bmnc_b(:,:),rmnc_b(:,:),pmns_b(:,:),zmns_b(:,:),gmnc_b(:,:)
-  REAL*8,  ALLOCATABLE :: bmns_b(:,:),rmns_b(:,:),pmnc_b(:,:),zmnc_b(:,:)
-  
-  REAL*8 rad_a,rad_R,atorflux,torflux
-  
-  ! Variables introduced by FJEL
-  real :: B_mn_min = 5d-6
-  integer, parameter :: q = 2 ! Order of interpolation
-  integer :: sign_torflux = 1, k
-  real, allocatable :: B_mn_s0(:), chi_p_b(:)   
-  logical, allocatable :: bigger_earth_field(:)
-  
-  filename='boozmn.nc'
-  varname='***'
-  status_nc=nf_open(filename, nf_nowrite, ncid)
-  
-  IF(status_nc.NE.nf_noerr) THEN!.AND..NOT.KNOSOS_STELLOPT) THEN
-     filename='../boozmn.nc'
-     status_nc=nf_open(filename,nf_nowrite,ncid)
-  END IF
-  IF(status_nc.NE.nf_noerr) RETURN
-  
-  WRITE(*,*) 'File "boozmn.nc" found'   
-  !Read scalar values
-  !varname=
-  status_nc=nf_inq_varid(ncid,'nfp_b',rhid) ; IF(status_nc /= nf_noerr) stop 
-  status_nc=nf_get_var_int(ncid,rhid,nfp_b)
-  !varname=
-  status_nc=nf_inq_varid(ncid,'ns_b',rhid)   
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_int(ncid,rhid,ns_b)
-  varname='aspect_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)  
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid,rhid,aspect_b)
-  varname='rmax_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid,rhid,rmax_b)        
-  varname='rmin_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid,rhid,rmin_b)
-  varname='betaxis_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid,rhid,betaxis_b)
-  varname='mboz_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_int(ncid,rhid,mboz_b)
-  varname='nboz_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_int(ncid,rhid,nboz_b)
-  varname='mnboz_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_int(ncid,rhid,mnboz_b)
-  varname='version'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_text(ncid,rhid,version)
-  varname='pack_rad'
-  status_nc=nf_inq_dimid(ncid,varname,idimid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_inq_dim(ncid,idimid,varname,jsize)
-  
-  IF(ALLOCATED(s_b)) DEALLOCATE(s_b,js_b,iota_b,pres_b,beta_b,psi_p_b,psi_b,bvco_b,buco_b,&
-       & bmnc_b,rmnc_b,zmns_b,pmns_b,rmns_b,zmnc_b,pmnc_b,bmns_b,gmnc_b,ixn_b,ixm_b)
+
+  subroutine read_boozer_xform_output(s0)
+    real, intent(in) :: s0
+    
+    real, parameter :: pi = acos(-1d0)
+    integer :: Ns_b, Ns ! Ns_b: Number of surfaces with Boozer, Ns: Total number of surfaces
+    integer :: ncid, ierr_netcdf ! integer for knowing if we are reading correctly the file
+    integer :: mnboz_b ! Number of (Boozer) Fourier modes
+    real, allocatable :: s_b(:), ss(:) ! Surfaces grid
+    real, allocatable :: iota_s(:), psi_s(:), psi_p_s(:), B_theta_s(:), B_zeta_s(:)   
+    real, allocatable :: B_mnc_s(:,:),  B_mns_s(:,:), B_mnc(:), B_mns(:)  ! Cosine and Sine Fourier amplitudes
+    real, allocatable :: r_mnc_s(:,:),  r_mns_s(:,:) 
+    integer, allocatable :: i_b(:), mn_s(:,:)  
+    real :: B_mn_min = 5d-6   
+    logical, allocatable :: bigger_earth_field(:)
+    real :: torflux
+    integer :: sign_torflux = 1
+    
+    ! Open BOOZER_XFORM output file "boozmn.nc"
+    ierr_netcdf = nf90_open('boozmn.nc', nf90_nowrite, ncid )
+    
+    call read_scalar_quantities    
+    call read_profiles    
+    call read_magnetic_field_modes    
+    
+    ! *** Global module quantities for the flux-surface: rho = r/a
+    !     B_theta(rho), B_zeta(rho), psi'(rho), chi'(rho) and iota(rho).
+    ! If the reference system is left-handed, change the sign of 
+    ! B_theta, chi_p and iota to make it right-handed (change theta by -theta).   
+    
+    torflux = psi_s(Ns) / (2 * pi) ; if( torflux < 0 ) sign_torflux = -1
+    psi_p = 2 * torflux * sqrt(s0) / Minor_Radius  
+    iota  = sign_torflux * Interpolated_value(s0, ss(2:ns), iota_s(2:ns), 2)
+    chi_p = sign_torflux * iota * psi_p 
+      
+    B_theta = sign_torflux * Interpolated_value(s0, ss(2:Ns), B_theta_s(2:Ns), 2)
+    B_zeta  =                Interpolated_value(s0, ss(2:Ns),  B_zeta_s(2:Ns), 2) 
+    s = s0	
+    
+    ! Close BOOZER_XFORM output file "boozmn.nc"
+    ierr_netcdf = nf90_close(ncid) 
+    
+    call Write_Magnetic_Configuration
+    
+    contains 
+    
+    ! Reads the number of field periods, the radial grid sizes 
+    subroutine read_scalar_quantities
+       integer :: rhid, idimid
+       integer jsize 
        
-  ! note : jsize is the number of flux surfaces contained in booz_xform (/=ns_b)
-  ALLOCATE(s_b(ns_b),js_b(ns_b),iota_b(ns_b),pres_b(ns_b),beta_b(ns_b),&
-       &psi_p_b(ns_b),psi_b(ns_b),bvco_b(ns_b),buco_b(ns_b))
-  ALLOCATE(ixm_b(mnboz_b),ixn_b(mnboz_b),gmnc_b(mnboz_b,ns_b))
-  ALLOCATE(bmnc_b(mnboz_b,ns_b),rmnc_b(mnboz_b,ns_b),zmns_b(mnboz_b,ns_b),pmns_b(mnboz_b,ns_b))
-  ALLOCATE(rmns_b(mnboz_b,ns_b),zmnc_b(mnboz_b,ns_b),pmnc_b(mnboz_b,ns_b),bmns_b(mnboz_b,ns_b))
-  ALLOCATE(jlist(jsize),idx_b(ns_b),packed2d(mnboz_b,jsize,5))
-  
-  !Give values to quantities at the magnetic axis
-  s_b(1)=0 ; iota_b(1)=0 ; pres_b(1)=0 ; beta_b(1)=0
-  psi_p_b(1)=0 ; psi_b(1)=0 ; bvco_b(1)=0 ; buco_b(1)=0
-  
-  !Set to zero
-  ixn_b=0 ; ixm_b=0 ; rmnc_b=0 ; zmns_b=0 ; pmns_b=0 ; bmnc_b=0 ; gmnc_b=0 
-  
-  !Read profiles
-  varname='iota_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid,rhid,iota_b)
-  
-  varname='pres_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid,rhid,pres_b)
-  
-  varname='beta_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid,rhid,beta_b)
-  
-  varname='phip_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid,rhid,psi_p_b)  !name difference 
-  
-  varname='phi_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid,rhid,psi_b)   !name difference 
-  
-  varname='bvco_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid,rhid,bvco_b)
-  
-  varname='buco_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid,rhid,buco_b)
-  
-  varname='ixm_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_int(ncid,rhid,ixm_b)
-  
-  varname='ixn_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_int(ncid,rhid,ixn_b)
-  
-  varname='jlist'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_int(ncid,rhid,jlist)
-  
-  idx_b=0
-  DO ilist=1,jsize
-     nsval=jlist(ilist)
-     idx_b(nsval)=ilist
-  END DO
-  
-  !2d arrays (only jlist-ed radial nodes store in file)
-  varname='bmnc_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) THEN
-     varname='bmn_b'  !some versions has different name 
-     status_nc=nf_inq_varid(ncid,varname,rhid)
-     IF(status_nc.NE.nf_noerr) THEN
-        filename ='bmnc_b or bmn_b'
-        stop
-     END IF
-  END IF
-  status_nc=nf_get_var_double(ncid, rhid, packed2d(:,:,1))
-  varname='rmnc_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid, rhid, packed2d(:,:,2))
-  varname='zmns_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid, rhid, packed2d(:,:,3))
-  varname='pmns_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid, rhid, packed2d(:,:,4))
-  varname='gmn_b'
-  status_nc=nf_inq_varid(ncid,varname,rhid)
-  IF(status_nc.NE.nf_noerr) stop 
-  status_nc=nf_get_var_double(ncid, rhid, packed2d(:,:,5))
-  
-  is0=0
-  DO nsval=2,ns_b
-     ilist=idx_b(nsval)
-     ilist=idx_b(nsval)
-     
-     !IF(ilist/=0) THEN
-     s_b(nsval)=(nsval-1.)/(ns_b-1)
-     
-     bmnc_b(:,nsval) = packed2d(:,ilist,1)
-     rmnc_b(:,nsval) = packed2d(:,ilist,2)
-     zmns_b(:,nsval) = packed2d(:,ilist,3)
-     pmns_b(:,nsval) = packed2d(:,ilist,4)
-     gmnc_b(:,nsval) = packed2d(:,ilist,5) 
-     
-     is0=is0+1
-     js_b(is0)=nsval
-     !END IF
-  END DO
-  jsn=is0
-  
-  WRITE(*,*) 'File "boozmn.nc" read'
-  DO imn=1,mnboz_b
-     IF( ixn_b(imn).EQ.0 .AND. ixm_b(imn).EQ.0 ) THEN
-        rad_R=rmnc_b(imn,2)
-        IF(aspect_b.LT.1e-10) THEN
-           serr="aspect_b=0"
-           stop
-        END IF
-        rad_a=rad_R/aspect_b
-        EXIT
-     END IF
-  END DO
-  DEALLOCATE(jlist,packed2d,idx_b)
-  
-  !Close cdf File
-  status_nc = nf_close(ncid)   
-
-  pmns_b=-pmns_b
-  ixn_b=ixn_b/nfp_b
-  torflux=psi_b(ns_b)/TWOPI  ; if( torflux < 0 ) sign_torflux = -1
-  
-  ! *** Global module quantities for the flux-surface: rho = r/a
-  !     B_theta(rho), B_zeta(rho), psi'(rho), chi'(rho) and iota(rho).
-  ! If the reference system is left-handed, change the sign of 
-  ! B_theta, chi_p and iota to make it right-handed (change theta by -theta).
-  psi_p = 2 * torflux * sqrt(s0) / rad_a  
-  iota  = sign_torflux * Interpolated_value(s0, s_b(2:ns_b), iota_b(2:ns_b), q)
-  chi_p = sign_torflux * iota * psi_p 
-  
-  Np = nfp_b
-  B_theta = sign_torflux *  Interpolated_value(s0, s_b(2:ns_b), buco_b(2:ns_b), q)
-  B_zeta  = Interpolated_value(s0, s_b(2:ns_b), bvco_b(2:ns_b), q)
-  Major_Radius = rad_R ; Minor_Radius = rad_a 
-  s = s0
-  
-  ! *** Interpolated Fourier modes of the magnetic field strength at s0
-  allocate( B_mn_s0(mnboz_b), bigger_earth_field(mnboz_b) )   
-  do imn = 1, mnboz_b
-     B_mn_s0(imn) = Interpolated_value(s0, s_b(2:ns_b), bmnc_b(imn,2:ns_b), q)      
-  end do
-  
-  ! *** Start truncating modes which are larger than 10% of Earth's magnetic field.
-  ! If there are more than 150 modes, multiply by 2 the threshold recursively
-  ! until we end up with 150 modes or less.
-  bigger_earth_field = abs(B_mn_s0) >= B_mn_min
-  N_modes = count( bigger_earth_field )  
-  do while ( N_modes > 150 ) 
-     B_mn_min = 2 * B_mn_min
-     bigger_earth_field = abs(B_mn_s0) >= B_mn_min
-     N_modes = count( bigger_earth_field )  
-  end do 
-  write(*,*) " Truncating modes of B smaller than ", B_mn_min, " Tesla "
-  write(*,*) " Earth's magnetic field ", 5d-5, " Tesla "
-  
-  if( allocated(B_modes) ) deallocate( B_modes, mn ) 
-  allocate( B_modes(N_modes), mn(N_modes,2) )
-  B_modes = pack( B_mn_s0, bigger_earth_field )
-  mn(:,1) = pack(   ixm_b, bigger_earth_field )
-  mn(:,2) = pack(   ixn_b, bigger_earth_field )
-  
-  ! *** Mode (0,0) of the magnetic field strength
-  do k = 1, N_modes
-     if( mn(k,1) == 0 .and. mn(k,2) == 0) B00 = B_modes(k) 
-  end do 
-  
-  ! *** Write magnetic configuration in output file
-  call Write_Magnetic_Configuration
-  
-  
-  open(21,file="monkes_boozmnnc_profiles.dat")
-  write(21,*) " s,  psi'(s),  2 * torflux * sqrt(s) / rad_a  , iota_b(nsval), bvco_b(nsval), s0, psi_p(s0), iota(s0), B_zeta "
-  do nsval=2,ns_b
-     write(21,'(9999e)') s_b(nsval),  psi_p_b(nsval), 2 * torflux * sqrt(s_b(nsval)) / rad_a  , iota_b(nsval), bvco_b(nsval), s, psi_p, iota, B_zeta
-  end do
-  close(21) 
-  
-END SUBROUTINE READ_BOOZMNNC
-
-
+       ! Read No. Field periods and write it on global "Np"
+       ierr_netcdf = nf90_inq_varid( ncid, 'nfp_b', rhid )  
+       ierr_netcdf = nf90_get_var( ncid, rhid, Np )      
+       write(*,*) " Number of field periods ", Np 
+       
+       ! Read aspect ratio and write it on global "Aspect_ratio"
+       ierr_netcdf = nf90_inq_varid( ncid, 'aspect_b', rhid )   
+       ierr_netcdf = nf90_get_var( ncid, rhid, Aspect_ratio ) 
+            
+       ! Read total number of surfaces in original VMEC file
+       ierr_netcdf = nf90_inq_varid( ncid, 'ns_b', rhid )    
+       ierr_netcdf = nf90_get_var( ncid, rhid, Ns )
+       write(*,*) " Number of total surfaces in VMEC file ", Ns           
+        
+       ! Read number of surfaces of BOOZER_XFORM
+       ierr_netcdf = nf90_inq_dimid( ncid, 'pack_rad', idimid) 
+       ierr_netcdf = nf90_inquire_dimension( ncid, idimid, len=Ns_b )
+       write(*,*) " Number of surfaces of BOOZER_XFORM ", Ns_b    
+       
+       ! Read maximum number of (Boozer) Fourier modes 
+       ierr_netcdf = nf90_inq_varid( ncid, 'mnboz_b', rhid ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, mnboz_b)
+       write(*,*) " Number of (Boozer) Fourier modes  of BOOZER_XFORM ", mnboz_b
+                
+    end subroutine 
+    
+    subroutine read_profiles
+       integer :: rhid, idimid
+       integer :: i
+       
+       real, allocatable :: rmnc_b(:,:), rmns_b(:,:)
+       
+       ! Read index vector for surface position in which BOOZER_XFORM 
+       ! has done calculations
+       allocate( i_b(Ns_b) )  
+       ierr_netcdf = nf90_inq_varid( ncid, 'jlist', rhid ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, i_b ) 
+       
+       ! Radial grids 
+       allocate( ss(Ns), s_b(Ns_b) )        
+       ss = [((i-1)*1d0/(Ns-1), i=1, Ns)]! Vector of VMEC radial positions
+       s_b = ss(i_b) ! Vector of surfaces in which Boozer transform has been done
+              
+       ! Vector of rotational transform in VMEC radial positions
+       allocate( iota_s(1:Ns) ) ; iota_s(1) = 0
+       ierr_netcdf = nf90_inq_varid(ncid,'iota_b',rhid) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, iota_s )
+                     
+       ! Vector of of psi(s) (tor. flux=psi/2pi) in VMEC radial positions
+       allocate( psi_s(Ns) ) ; psi_s(1) = 0        
+       ierr_netcdf = nf90_inq_varid( ncid, 'phi_b', rhid ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, psi_s )   
+                     
+       ! Vector of derivative along s of psi'(s) (tor. flux=psi/2pi) in VMEC radial positions
+       allocate( psi_p_s(Ns) ) ; psi_p_s(1) = 0        
+       ierr_netcdf = nf90_inq_varid( ncid, 'phip_b', rhid ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, psi_p_s )   
+        
+       ! Poloidal current B_zeta 
+       allocate( B_theta_s(Ns) ) ; B_theta_s(1) = 0   
+       ierr_netcdf = nf90_inq_varid( ncid, 'buco_b', rhid )
+       ierr_netcdf = nf90_get_var( ncid, rhid, B_theta_s )
+       
+       ! Toroidal current B_zeta    
+       allocate( B_zeta_s(Ns) ) ; B_zeta_s(1) = 0    
+       ierr_netcdf = nf90_inq_varid( ncid, 'bvco_b', rhid ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, B_zeta_s )
+       
+       open(21, file="monkes_boozerxform_profile.dat")       
+       write(21,'(9999A25)') "s", "iota", "psi(s)", "psi'(s)", "B_theta_s(s)", "B_zeta_s(s)" 
+       do i = 2, Ns 
+          write(21,'(9999e)') ss(i), iota_s(i), psi_s(i), psi_p_s(i), B_theta_s(i), B_zeta_s(i) 
+       end do         
+       close(21) 
+       
+    end subroutine 
+    
+    subroutine read_magnetic_field_modes
+       integer :: rhid, idimid
+       integer :: i, j
+       
+       ! Poloidal (m) and toroidal (n) mode numbers  
+       allocate( mn_s(mnboz_b,2) )   
+       ierr_netcdf = nf90_inq_varid( ncid, 'ixm_b', rhid ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, mn_s(:,1) )
+					 
+       ierr_netcdf = nf90_inq_varid( ncid, 'ixn_b', rhid ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, mn_s(:,2) )
+       mn_s(:,2) = mn_s(:,2) / Np ! Projecting to one period
+       
+       ! B modes B = B_mnc_s * cos + B_mns_s * sin
+       allocate( B_mnc_s(mnboz_b, Ns_b), B_mns_s(mnboz_b, Ns_b) )  
+       ierr_netcdf = nf90_inq_varid( ncid, 'bmnc_b', rhid ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, B_mnc_s )
+       ierr_netcdf = nf90_inq_varid( ncid, 'bmns_b', rhid ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, B_mns_s )
+              
+       ! Surface
+       allocate( r_mnc_s(mnboz_b, Ns_b), r_mns_s(mnboz_b, Ns_b) )  
+       ierr_netcdf = nf90_inq_varid( ncid, 'rmnc_b', rhid ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, r_mnc_s )
+       ierr_netcdf = nf90_inq_varid( ncid, 'rmns_b', rhid ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, r_mns_s ) 
+       
+       ! Major and minor radius of the device.      
+       do i = 1, mnboz_b 
+          if( mn_s(i,1) == 0 .and. mn_s(i,2) == 0 ) &
+            Major_Radius = r_mnc_s(i,2)      
+       end do 
+       Minor_Radius = Major_Radius / Aspect_ratio     
+          
+       ! *** Interpolated Fourier modes of the magnetic field strength at s0
+       allocate( B_mnc(mnboz_b), B_mns(mnboz_b), bigger_earth_field(mnboz_b) )   
+       do i = 1, mnboz_b
+          B_mnc(i) = Interpolated_value(s0, s_b, B_mnc_s(i,:), 2)      
+          B_mns(i) = Interpolated_value(s0, s_b, B_mns_s(i,:), 2)      
+       end do        
+       
+       ! *** Start truncating modes which are larger than 10% of Earth's magnetic field.
+       ! If there are more than 150 modes, multiply by 2 the threshold recursively
+       ! until we end up with 150 modes or less.
+       bigger_earth_field = abs(B_mnc) >= B_mn_min
+       N_modes = count( bigger_earth_field )  
+       do while ( N_modes > 150 ) 
+          B_mn_min = 2 * B_mn_min
+          bigger_earth_field = abs(B_mnc) >= B_mn_min
+          N_modes = count( bigger_earth_field )  
+       end do 
+       write(*,*) " Truncating modes of B smaller than ", B_mn_min, " Tesla "
+       write(*,*) " Earth's magnetic field ", 5d-5, " Tesla "
+					  
+       if( allocated(B_modes) ) deallocate( B_modes, mn ) 
+       allocate( B_modes(N_modes), mn(N_modes,2) )
+       B_modes = pack( B_mnc, bigger_earth_field )
+       mn(:,1) = pack(   mn_s(:,1), bigger_earth_field )
+       mn(:,2) = pack(   mn_s(:,2), bigger_earth_field )	
+       
+       do i = 1, N_modes
+          if( mn(i,1) == 0 .and. mn(i,2) == 0 ) B00 = B_modes(i)
+       end do 
+	
+	   open(21,file="boozxform_B_modes.plt")
+	   write(21,*) " Number of surfaces = ", Ns_b
+	   do j = 1, Ns_b
+	      write(21,*) j, " Surface s= ", s_b(j)
+	      do i = 1, mnboz_b
+	         if( bigger_earth_field(i) ) & 
+	         write(21,'(9999e)') 1d0*j, 1d0*mn_s(i,:), B_mnc_s(i,j), B_mns_s(i,j)
+	      
+	      end do
+	   end do 
+	   close(21)	 	  
+    end subroutine 
+    
+  end subroutine  
 
 
 
