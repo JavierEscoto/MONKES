@@ -557,11 +557,13 @@ real pure function Interpolated_value(x, x_nodes, y_nodes, q) result(F)
       integer, intent(in) :: q
       
       real :: L(0:q) 
-      integer :: s(0:q), js       
+      integer :: js, q_eff        
+      integer, allocatable :: s(:)    
       
       ! *** Stencil centered at the nearest point x(js)
       js = minloc( abs(x_nodes - x) , 1) - 1
-      s = Stencil(x_nodes,js,q) 
+      q_eff = minval( [q,size(x_nodes)-1] ) ; allocate( s(0:q_eff) )
+      s = Stencil(x_nodes,js,q_eff) 
       
       ! *** Lagrange polynomials evaluated at x from stencil nodes
       L = Lagrange_polynomials_FJEL( x, x_nodes(s) ) 

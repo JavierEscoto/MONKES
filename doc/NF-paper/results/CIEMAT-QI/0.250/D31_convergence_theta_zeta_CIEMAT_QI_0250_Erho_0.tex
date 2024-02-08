@@ -36,26 +36,21 @@
 			y expr=\thisrowno{6} * 0.4674,
 			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
 			restrict expr to domain={\thisrowno{3}}{75:270}
-			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
-%			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_160/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
-			\addlegendimage{empty legend}
+			]{data/CIEMAT-QI/MONKES/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+ 			\addlegendimage{empty legend}
 			\addlegendentry{$N_\theta=$}
 			\expandafter\addlegendentry\expandafter{\Ntheta}
 		}	
-	
-	    
-		
+	 
 		\foreach \Ntheta in {15}{		
 			\addplot+[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
 			x expr=\thisrowno{3},
 			y expr=\thisrowno{6} * 0.4674,
 			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
 			restrict expr to domain={\thisrowno{3}}{119:119}
-			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+			]{data/CIEMAT-QI/MONKES/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
 			
-		}	
-		%		\addlegendentry{Spread of 5\%}
-		
-		
+		}	 
+		 
 	\end{axis}
 \end{tikzpicture}

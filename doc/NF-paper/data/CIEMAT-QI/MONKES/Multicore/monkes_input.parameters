@@ -1,0 +1,7 @@
+&parameters
+N_theta=15, 
+N_zeta=119,
+N_xi=180, 
+nu=1e-5,
+E_r=0d0, 1e-3 
+/

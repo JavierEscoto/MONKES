@@ -1,0 +1,4 @@
+For having a sufficiently converged calculation of D31
+we need Nxi = 160 and coupling parameter larger or equal to 6.
+
+Wall-clock time: 1.06E+03 s

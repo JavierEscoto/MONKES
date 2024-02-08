@@ -1,0 +1,7 @@
+&parameters
+N_theta=19, 23, 
+N_zeta=63, 75,
+N_xi=140, 
+nu=1e-5,
+E_r=0d0, 3e-4 
+/

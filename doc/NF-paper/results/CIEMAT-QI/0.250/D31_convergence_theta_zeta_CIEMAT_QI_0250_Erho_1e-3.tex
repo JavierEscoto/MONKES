@@ -22,9 +22,7 @@
 		domain = 50:227] {(0.189E-01* 0.4674) +1e-3};	
 		\addplot[forget plot, name path=Lower2,red!20, 
 		domain = 50:227] {(0.189E-01* 0.4674) -1e-3};		
-		\addplot[forget plot, red!20] fill between[of=Upper2 and Lower2];
-		
-		
+		\addplot[forget plot, red!20] fill between[of=Upper2 and Lower2];		
 		
 		\addplot[forget plot, name path=Upper2,blue!20, 
 		domain = 50:227] {0.189E-01*1.07 * 0.4674};	
@@ -39,7 +37,7 @@
 			y expr=\thisrowno{6} * 0.4674,
 			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
 			restrict expr to domain={\thisrowno{3}}{50:270}
-			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.100E-02_sorted.plt};
+			]{data/CIEMAT-QI/MONKES/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.100E-02_sorted.plt};
 			\addlegendimage{empty legend}
 			\addlegendentry{$N_\theta=$}
 			\expandafter\addlegendentry\expandafter{\Ntheta}
@@ -52,10 +50,9 @@
 			y expr=\thisrowno{6} * 0.4674,
 			restrict expr to domain={\thisrowno{2}}{\Ntheta:\Ntheta},
 			restrict expr to domain={\thisrowno{3}}{119:119}
-			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.100E-02.plt};
+			]{data/CIEMAT-QI/MONKES/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.100E-02.plt};
 			
-		}	
-%		\addlegendentry{Spread of 5\%}
+		}	 
         
 	\end{axis}
 \end{tikzpicture}

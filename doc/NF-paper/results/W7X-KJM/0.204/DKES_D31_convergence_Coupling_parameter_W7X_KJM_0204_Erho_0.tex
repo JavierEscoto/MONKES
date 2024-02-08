@@ -7,7 +7,7 @@
 			/pgf/number format/.cd,
 			fixed,
 			fixed zerofill,
-			precision=2,
+			precision=1,
 			/tikz/.cd}, 
 		xlabel = Coupling order, 
 		ylabel=$(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ ${[\text{m}]}$,
@@ -20,16 +20,13 @@
 		\addplot[forget plot, name path=Lower2,blue!20, 
 		domain = 5:8] {(0.65984E-01	+ 0.69566E-01)/2*0.95  *0.5132};		
 		\addplot[blue!20] fill between[of=Upper2 and Lower2];
-		%		\addlegendentry{ $\mathcal{R}_5$ }			
-		
-		
 		
 		\foreach \c in {5}
 		{		
 			\addplot[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
 			x expr=\c,
 			y expr=(\thisrowno{6} + \thisrowno{7})/2*0.5132,
-			]{results/DKES_convergence/W7X-KJM/0.204/efield_0e-0/c\c/la160/results.stellopt};					
+			]{data/W7X-KJM/DKES/Convergence/efield_0e-0/c\c/la160/results.stellopt};					
 		}
 		
 		\foreach \c in {6,7,...,8}
@@ -37,19 +34,8 @@
 			\addplot[forget plot, blue, mark=*, only marks] table[skip first n=1, 
 			x expr=\c,
 			y expr=(\thisrowno{6} + \thisrowno{7})/2*0.5132,
-			]{results/DKES_convergence/W7X-KJM/0.204/efield_0e-0/c\c/la160/results.stellopt};					
+			]{data/W7X-KJM/DKES/Convergence/efield_0e-0/c\c/la160/results.stellopt};					
 		}
-		
-		%		\addplot[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
-		%		x expr=\thisrowno{4},
-		%		y expr=\thisrowno{6}  *0.5132,
-		%		restrict expr to domain={\thisrowno{2}}{35:67},
-		%		restrict expr to domain={\thisrowno{3}}{75:179},
-		%		restrict expr to domain={\thisrowno{4}}{180:180}
-		%		]{results/W7X-KJM/0.204/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.300E-03.plt};
-		%		\addlegendentry{Selected}	
-		
-		
-		
+		 
 	\end{axis}
 \end{tikzpicture}

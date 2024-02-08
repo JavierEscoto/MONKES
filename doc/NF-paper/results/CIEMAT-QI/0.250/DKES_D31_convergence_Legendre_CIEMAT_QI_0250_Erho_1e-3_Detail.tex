@@ -1,6 +1,5 @@
 \begin{tikzpicture}
-	\begin{axis}[
-		%		height=0.85\textwidth, 
+	\begin{axis}[ 
 		width=\textwidth, 
 		scaled y ticks=base 10:2,
 		y tick label style={
@@ -11,8 +10,7 @@
 			/tikz/.cd}, 
 		xlabel = $N_\xi$, 
 		ylabel=$(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ ${[\text{m}]}$,
-		legend pos = south east, 
-		%		ymin = 0.05
+		legend pos = south east
 		]		
 		
 		\addplot[forget plot, name path=Upper2,blue!20, 
@@ -21,16 +19,13 @@
 		domain = 60:200] {(0.15298E-01	+ 0.22604E-01)/2*0.93  *0.4674};		
 		\addplot[blue!20] fill between[of=Upper2 and Lower2];
 		\addlegendentry{ $\mathcal{R}_7$ }			
-		
-		
-		
-		
+				
 		\foreach \Nxi in {160}
 		{		
 			\addplot[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
 			x expr=\Nxi,
 			y expr=(\thisrowno{6} + \thisrowno{7})/2*0.4674,
-			]{results/DKES_convergence/CIEMAT-QI/0.250/efield_1e-3/c9/la\Nxi/results.stellopt};					
+			]{data/CIEMAT-QI/DKES/Convergence/efield_1e-3/c9/la\Nxi/results.stellopt};					
 		}
 		\addlegendentry{Selected}	
 		
@@ -39,20 +34,8 @@
 			\addplot[forget plot, red, mark=square*, only marks] table[skip first n=1, 
 			x expr=\Nxi,
 			y expr=(\thisrowno{6} + \thisrowno{7})/2*0.4674,
-			]{results/DKES_convergence/CIEMAT-QI/0.250/efield_1e-3/c9/la\Nxi/results.stellopt};					
+			]{data/CIEMAT-QI/DKES/Convergence/efield_1e-3/c9/la\Nxi/results.stellopt};					
 		}
-		
-		
-		%		\addplot[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
-		%		x expr=\thisrowno{4},
-		%		y expr=\thisrowno{6}  *0.5132,
-		%		restrict expr to domain={\thisrowno{2}}{35:67},
-		%		restrict expr to domain={\thisrowno{3}}{75:179},
-		%		restrict expr to domain={\thisrowno{4}}{180:180}
-		%		]{results/W7X-KJM/0.204/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.300E-03.plt};
-		%		
-		
-		
 		
 	\end{axis}
 \end{tikzpicture}

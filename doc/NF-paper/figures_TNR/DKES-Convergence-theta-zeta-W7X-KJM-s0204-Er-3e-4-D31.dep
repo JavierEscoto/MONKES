@@ -1,0 +1,4 @@
+figures_TNR/DKES-Convergence-theta-zeta-W7X-KJM-s0204-Er-3e-4-D31.pdf: data/W7X-KJM/DKES/Convergence/efield_3e-4/c5/la60/results.stellopt
+figures_TNR/DKES-Convergence-theta-zeta-W7X-KJM-s0204-Er-3e-4-D31.pdf: data/W7X-KJM/DKES/Convergence/efield_3e-4/c6/la60/results.stellopt
+figures_TNR/DKES-Convergence-theta-zeta-W7X-KJM-s0204-Er-3e-4-D31.pdf: data/W7X-KJM/DKES/Convergence/efield_3e-4/c7/la60/results.stellopt
+figures_TNR/DKES-Convergence-theta-zeta-W7X-KJM-s0204-Er-3e-4-D31.pdf: data/W7X-KJM/DKES/Convergence/efield_3e-4/c8/la60/results.stellopt

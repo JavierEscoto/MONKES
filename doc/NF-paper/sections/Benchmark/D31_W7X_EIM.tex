@@ -20,20 +20,8 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{3}*0.5237						
 			]
-			{./results/W7X-EIM/0.200/Monoenergetic_Database_Example_23_55_140/Monoenergetic_1.plt};	
-%			\addlegendentry{\texttt{MONKES} $1/{\nu}$}			
-			
-			
-			%%% SFINCS RESULTS
-			\addplot[mark repeat =2,only marks, blue, mark=triangle*]
-			table[col sep = comma, skip first n=1, 
-			x expr=\thisrowno{0},
-			y expr=\thisrowno{2}*0.5237
-			]
-			{./results/SFINCS_results/W7X-EIM/20230420-01-027-W7X-EIM_Er0_nuScan_sfincs_results.dat};	
-%			\addlegendentry{\texttt{SFINCS} $\hat{E}_r = 0$}			
-			
-			
+			{data/W7X-EIM/MONKES/Monoenergetic_Database_Example_23_55_140/Monoenergetic_1.plt};				
+			\addlegendentry{{\MONKES} $\widehat{E}_r=0$}
 			
 			%%% DKES RESULTS				
 			\addplot[only marks, mark=*, blue, error bars/.cd, y explicit,
@@ -44,8 +32,17 @@
 			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
 			restrict expr to domain={\thisrowno{1}}{0:0},
 			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
-			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/W7X-EIM/0.200/results.data};
-%			\addlegendentry{\texttt{DKES} $1/{\nu}$}
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {data/W7X-EIM/DKES/results.data};
+			\addlegendentry{{\DKES} $\widehat{E}_r=0$}
+			
+			%%% SFINCS RESULTS
+			\addplot[mark repeat =2,only marks, blue, mark=triangle*]
+			table[col sep = comma, skip first n=1, 
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{2}*0.5237
+			]
+			{data/W7X-EIM/SFINCS/20230420-01-027-W7X-EIM_Er0_nuScan_sfincs_results.dat};	
+
 			
 			
 			%%% MONKES RESULTS
@@ -54,7 +51,7 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{6}*0.5237,  
 			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4}]
-			{./results/W7X-EIM/0.200/Convergence_nu_1e-5_Er_3e-4/monkes_Monoenergetic_Database.dat};	
+			{data/W7X-EIM/MONKES/Convergence_nu_1e-5_Er_3e-4/monkes_Monoenergetic_Database.dat};	
 %			\addlegendentry{\texttt{MONKES} $\sqrt{\nu}$}
 			
 			
@@ -67,7 +64,7 @@
 			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
 			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4},
 			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
-			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/W7X-EIM/0.200/results.data};
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {data/W7X-EIM/DKES/results.data};
 %			\addlegendentry{\texttt{DKES} $\sqrt{\nu}$}			
 			
 			%%% SFINCS RESULTS
@@ -76,7 +73,7 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{2}*0.5237
 			]
-			{./results/SFINCS_results/W7X-EIM/20230420-01-018-W7X-EIM_withEr_nuScan_sfincs_results.dat};	
+			{data/W7X-EIM/SFINCS/20230420-01-018-W7X-EIM_withEr_nuScan_sfincs_results.dat};	
 		\end{axis}
 		
 	\end{tikzpicture}

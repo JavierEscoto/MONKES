@@ -1,0 +1,6 @@
+figures_TNR/Benchmark-W7X-KJM-s0204-D31.pdf: data/W7X-KJM/MONKES/Monoenergetic_Database_Example_23_63_140/Monoenergetic_1.plt
+figures_TNR/Benchmark-W7X-KJM-s0204-D31.pdf: data/W7X-KJM/DKES/results.data
+figures_TNR/Benchmark-W7X-KJM-s0204-D31.pdf: data/W7X-KJM/SFINCS/20230420-01-020-W7X-KJM_Er0_nuScan_sfincs_results.dat
+figures_TNR/Benchmark-W7X-KJM-s0204-D31.pdf: data/W7X-KJM/MONKES/Monoenergetic_19_79_180/monkes_Monoenergetic_Database.dat
+figures_TNR/Benchmark-W7X-KJM-s0204-D31.pdf: data/W7X-KJM/DKES/results.data
+figures_TNR/Benchmark-W7X-KJM-s0204-D31.pdf: data/W7X-KJM/SFINCS/20230420-01-017-W7X-KJM_withEr_nuScan_sfincs_results.dat

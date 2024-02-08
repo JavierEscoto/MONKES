@@ -1,0 +1,2620 @@
+  ****************************************************** 
+  This is MONKES: 
+  MONoenergetic Kinetic Equation solver for Stellarators 
+ 
+  Author: F. Javier Escoto Lopez (javier.escoto.lopez@gmail.com) 
+  ****************************************************** 
+ 
+  ! *** Approximating Minor_Radius = abs(psi_p / B00)  
+  ! *** Approximating Major_Radius = abs(B_zeta/ B00)  
+  *** Flux-surface parameters 
+      s =   0.250000000000000     
+      Number of periods =            4
+      psi_p =  -0.467400000000000     
+      chi_p =   0.409100000000000     
+      iota =  -0.875267436884895     
+      B00 =    5.47140000000000     
+      B_theta =   0.000000000000000E+000
+      B_zeta =   -11.1346000000000     
+      B00/(B_zeta+iota*B_theta) =  -0.491387207443464     
+ 
+  *** Stellarator parameters 
+      Minor_Radius =   8.542603355631100E-002
+      Major_Radius =    2.03505501334211     
+ 
+  *** Monoenergetic coefficients normalization parameters 
+      eps_t = sqrt(s) * Minor_Radius / Major_Radius =   2.098863003610367E-002
+      fc = 1 - 1.46* sqrt(eps_t) =   0.788483183210037     
+ 
+  *** Factors relating nu/v and E_rho (rho=sqrt(s)=r/a) to 
+      nu^*  = nu * Major_radius / (v*iota) = nu_factor * nu /v  and 
+      v_E^* =  E_r/(B00*v) = E_rho_factor * E_rho
+      nu_factor =    2.32506651976558     
+      E_rho_factor =    2.13949507916132     
+ 
+  *** Factors relating Gamma_ij to Dij^* 
+      Dij^* = Gamma_ij * Dij_factor 
+      D11_factor = 8 * Minor_radius**2 * Major_radius * B00**2 * abs(iota) / pi 
+  0.990910558032387     
+      D31_factor = - 1.5 * Minor_radius * iota * eps_t * B00 / (1-fc) 
+  6.089195656931907E-002
+ 
+  *** Magnetic field strength Fourier modes 
+  m  n  B_mn  B_mn/B00 
+           0           0   5.47140000000000        1.00000000000000     
+           0           1   1.26610000000000       0.231403297145155     
+           0           2  0.216720000000000       3.960960631648207E-002
+           0           3  8.314500000000001E-003  1.519629345322952E-003
+           0           4  2.068700000000000E-002  3.780933581898600E-003
+           0           5  9.312500000000000E-003  1.702032386592097E-003
+           0           6  1.906600000000000E-003  3.484665716270059E-004
+           0           7 -1.710200000000000E-003 -3.125708228241401E-004
+           1          -8  1.075100000000000E-003  1.964944986657894E-004
+           1          -7 -2.789600000000000E-003 -5.098512263771612E-004
+           1          -6 -1.186400000000000E-002 -2.168366414446028E-003
+           1          -5 -1.006100000000000E-002 -1.838834667543956E-003
+           1          -4  1.420200000000000E-003  2.595679350806009E-004
+           1          -3  1.996800000000000E-003  3.649522974010308E-004
+           1          -2  3.152600000000000E-002  5.761962203457981E-003
+           1          -1  8.499900000000001E-002  1.553514639763132E-002
+           1           0 -9.329200000000000E-002 -1.705084621851811E-002
+           1           1 -0.194360000000000      -3.552290090287678E-002
+           1           2 -4.734300000000000E-002 -8.652812808421976E-003
+           1           3 -1.474900000000000E-002 -2.695653763205030E-003
+           1           4 -8.056700000000000E-003 -1.472511605804730E-003
+           1           5  5.577800000000000E-003  1.019446576744526E-003
+           1           6  7.384200000000000E-003  1.349599736813247E-003
+           1           7  5.364400000000000E-003  9.804437621084184E-004
+           1           8  1.389000000000000E-003  2.538655554337099E-004
+           2          -7 -1.893800000000000E-003 -3.461271338231531E-004
+           2          -6 -3.739800000000000E-003 -6.835179295975436E-004
+           2          -4  3.550000000000000E-003  6.488284534122894E-004
+           2          -3 -2.632800000000000E-003 -4.811931132799649E-004
+           2          -2 -5.701500000000000E-003 -1.042055049895822E-003
+           2          -1  2.768100000000000E-003  5.059217019410023E-004
+           2           0 -1.306400000000000E-002 -2.387688708557225E-003
+           2           1 -7.266800000000000E-003 -1.328142705706035E-003
+           2           3  2.919800000000000E-003  5.336476952882260E-004
+           2           4 -2.239300000000000E-003 -4.092736776693351E-004
+           2           5  1.433900000000000E-003  2.620718646050371E-004
+           2           7 -1.705300000000000E-003 -3.116752567898527E-004
+           2           8 -9.309600000000000E-004 -1.701502357714662E-004
+           3          -6 -2.959300000000000E-003 -5.408670541360530E-004
+           3          -5 -2.885200000000000E-003 -5.273239024746866E-004
+           3          -4  1.262700000000000E-003  2.307818839785064E-004
+           3          -3 -1.639900000000000E-003 -2.997221917607925E-004
+           3          -2 -2.997500000000000E-003 -5.478488138319261E-004
+           3           2 -4.333200000000000E-003 -7.919728040355302E-004
+           3           4  1.936900000000000E-003  3.540044595533136E-004
+           3           5  2.542800000000000E-003  4.647439412216252E-004
+           4          -4  1.020400000000000E-003  1.864970574258874E-004
+           4          -2 -9.169900000000000E-004 -1.675969587308550E-004
+           4           0 -1.114000000000000E-003 -2.036041963665607E-004
+           4           1 -1.066900000000000E-003 -1.949957963226962E-004
+ 
+  Legendre Mode k =          179
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   7.180000000000000E-002
+            Time in solving system from LU =   0.306500000000000     
+       Time in Solving Delta * X = L   0.394300000000000     
+       Time in Defining L, D, U =   4.010000000000000E-002
+       Time in Defining Delta =   2.590000000000000E-002
+  Legendre Mode k =          178
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.300000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.490000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          177
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.430000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          176
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.450000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          175
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.110000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          174
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.240000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          173
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.240000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          172
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.240000000000000E-002
+            Time in solving system from LU =   3.110000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          171
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.210000000000000E-002
+            Time in solving system from LU =   3.110000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          170
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.390000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          169
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.660000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          168
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          167
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.430000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          166
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.270000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.450000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          165
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.280000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.470000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          164
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.260000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.420000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          163
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          162
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          161
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.420000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          160
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.420000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          159
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          158
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.420000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          157
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          156
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.450000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          155
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          154
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.270000000000000E-002
+            Time in solving system from LU =   3.110000000000000E-002
+       Time in Solving Delta * X = L   5.440000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          153
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =          152
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.110000000000000E-002
+       Time in Solving Delta * X = L   5.390000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          151
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          150
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.270000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.440000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          149
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.280000000000000E-002
+       Time in Solving Delta * X = L   5.490000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          148
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.390000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          147
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          146
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.240000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.430000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          145
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          144
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.440000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          143
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          142
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.390000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          141
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =          140
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.260000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.430000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          139
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.020000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.480000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          138
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          137
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.600000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          136
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.200000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          135
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          134
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          133
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.190000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          132
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.210000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          131
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          130
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          129
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          128
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.200000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          127
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          126
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.340000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          125
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          124
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          123
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          122
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          121
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.190000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          120
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.110000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          119
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.190000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =          118
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.300000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          117
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.190000000000000E-002
+            Time in solving system from LU =   3.300000000000000E-002
+       Time in Solving Delta * X = L   5.530000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          116
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          115
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          114
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          113
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          112
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          111
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          110
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.340000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          109
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          108
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =          107
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          106
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          105
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.590000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          104
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          103
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.190000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          102
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          101
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          100
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           99
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           98
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           97
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =           96
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           95
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           94
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           93
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           92
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           91
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           90
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           89
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.120000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.280000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           88
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           87
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           86
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           85
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.280000000000000E-002
+       Time in Solving Delta * X = L   5.450000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           84
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =           83
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           82
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =           81
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           80
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.110000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           79
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           78
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.110000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           77
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           76
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           75
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           74
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           73
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.570000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           72
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.120000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           71
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           70
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.120000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =           69
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           68
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.300000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           67
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =           66
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.300000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           65
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.120000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.290000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           64
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.340000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           63
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.120000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           62
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           61
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           60
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =           59
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           58
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.290000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           57
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           56
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           55
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           54
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.110000000000000E-002
+       Time in Solving Delta * X = L   5.270000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           53
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.310000000000000E-002
+       Time in Solving Delta * X = L   5.490000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           52
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           51
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           50
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =           49
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           48
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           47
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.200000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           46
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.110000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           45
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           44
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           43
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           42
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           41
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.590000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           40
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           39
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.190000000000000E-002
+            Time in solving system from LU =   3.170000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           38
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           37
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           36
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.300000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           35
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           34
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           33
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           32
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           31
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           30
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           29
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.530000000000000E-002
+  Legendre Mode k =           28
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           27
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           26
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           25
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.340000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =           24
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           23
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           22
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           21
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.290000000000000E-002
+       Time in Solving Delta * X = L   5.480000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           20
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           19
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           18
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           17
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           16
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           15
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           14
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           13
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           12
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           11
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           10
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =            9
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.580000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =            8
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =            7
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.170000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =            6
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =            5
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =            4
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =            3
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =            2
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.300000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+          *** Clock time for Invert_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in inverse calculation from LU =   3.760000000000000E-002
+  Legendre Mode k =            1
+       Time in Defining L, D, U =   3.860000000000000E-002
+       Time in Defining Delta =   4.980000000000000E-002
+          *** Clock time for Invert_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in inverse calculation from LU =   3.550000000000000E-002
+       Time in Inverting Delta =   6.020000000000000E-002
+  Legendre Mode k =            0
+       Time in Defining L, D, U =   2.920000000000000E-002
+       Time in Defining Delta =   4.980000000000000E-002
+          *** Clock time for Invert_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in inverse calculation from LU =   3.580000000000000E-002
+       Time in Inverting Delta =   6.060000000000000E-002
+  Legendre Mode k =          179
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.430000000000000E-002
+       Time in Defining L, D, U =   3.990000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          178
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.260000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.450000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          177
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          176
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.240000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.420000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          175
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.390000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          174
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          173
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =          172
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          171
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.240000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =          170
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.440000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =          169
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          168
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.240000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.390000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          167
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.420000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          166
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.240000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.430000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          165
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.210000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.420000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          164
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.290000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.460000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          163
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          162
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.430000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          161
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.420000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          160
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.240000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.420000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          159
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.420000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          158
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.440000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          157
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          156
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.430000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          155
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          154
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          153
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          152
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          151
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          150
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.280000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.450000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          149
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          148
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.270000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.440000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          147
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          146
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.300000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.500000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          145
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          144
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.310000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.500000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          143
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          142
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          141
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =          140
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.250000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.390000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          139
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          138
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =          137
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.210000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          136
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.230000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          135
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.390000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          134
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.220000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.420000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          133
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.200000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.410000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          132
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          131
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.190000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          130
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          129
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.190000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =          128
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.210000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          127
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.200000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =          126
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          125
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          124
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.400000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          123
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          122
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          121
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.190000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          120
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          119
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          118
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          117
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =          116
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          115
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          114
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          113
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          112
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          111
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =          110
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          109
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.120000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.290000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          108
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          107
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          106
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.180000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =          105
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =          104
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =          103
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =          102
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =          101
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =          100
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           99
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           98
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           97
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           96
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           95
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           94
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           93
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           92
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.190000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.390000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.540000000000000E-002
+  Legendre Mode k =           91
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           90
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           89
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           88
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.590000000000000E-002
+  Legendre Mode k =           87
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           86
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.420000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           85
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.590000000000000E-002
+  Legendre Mode k =           84
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           83
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           82
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           81
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           80
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           79
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.300000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           78
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           77
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.290000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           76
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           75
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           74
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.170000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =           73
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           72
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           71
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           70
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           69
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           68
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.290000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           67
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           66
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           65
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           64
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           63
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           62
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           61
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           60
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           59
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           58
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           57
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           56
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           55
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           54
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           53
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           52
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           51
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           50
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           49
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           48
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           47
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.300000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           46
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           45
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           44
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.300000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           43
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           42
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.170000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =           41
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           40
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           39
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           38
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           37
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           36
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.360000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           35
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.590000000000000E-002
+  Legendre Mode k =           34
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.120000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.290000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           33
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           32
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           31
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           30
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           29
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           28
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           27
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.150000000000000E-002
+       Time in Solving Delta * X = L   5.390000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           26
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.130000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           25
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.410000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           24
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           23
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =           22
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.320000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           21
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           20
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           19
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.350000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           18
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.360000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           17
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           16
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           15
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           14
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =           13
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           12
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.400000000000000E-002
+       Time in Defining Delta =   2.570000000000000E-002
+  Legendre Mode k =           11
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =           10
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.580000000000000E-002
+  Legendre Mode k =            9
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+  Legendre Mode k =            8
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.130000000000000E-002
+       Time in Solving Delta * X = L   5.310000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =            7
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.170000000000000E-002
+            Time in solving system from LU =   3.160000000000000E-002
+       Time in Solving Delta * X = L   5.380000000000000E-002
+       Time in Defining L, D, U =   3.390000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =            6
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.350000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =            5
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.150000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.370000000000000E-002
+       Time in Defining L, D, U =   3.380000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =            4
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =            3
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in solving system from LU =   3.140000000000000E-002
+       Time in Solving Delta * X = L   5.330000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.550000000000000E-002
+  Legendre Mode k =            2
+          *** Clock time for Solve_System_LU_LAPACK 
+            Time in LU factorization =   1.180000000000000E-002
+            Time in solving system from LU =   3.120000000000000E-002
+       Time in Solving Delta * X = L   5.340000000000000E-002
+       Time in Defining L, D, U =   3.370000000000000E-002
+       Time in Defining Delta =   2.560000000000000E-002
+          *** Clock time for Invert_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in inverse calculation from LU =   3.720000000000000E-002
+  Legendre Mode k =            1
+       Time in Defining L, D, U =   3.890000000000000E-002
+       Time in Defining Delta =   4.990000000000000E-002
+          *** Clock time for Invert_LU_LAPACK 
+            Time in LU factorization =   1.140000000000000E-002
+            Time in inverse calculation from LU =   3.560000000000000E-002
+       Time in Inverting Delta =   5.980000000000000E-002
+  Legendre Mode k =            0
+       Time in Defining L, D, U =   2.910000000000000E-002
+       Time in Defining Delta =   4.960000000000000E-002
+          *** Clock time for Invert_LU_LAPACK 
+            Time in LU factorization =   1.160000000000000E-002
+            Time in inverse calculation from LU =   3.570000000000000E-002
+       Time in Inverting Delta =   6.050000000000000E-002

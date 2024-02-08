@@ -1,0 +1,8 @@
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/mnt/lustre/home/u6156/.profile: line 2: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/mnt/lustre/home/u6156/.profile: line 2: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/mnt/lustre/home/u6156/.profile: line 144: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/mnt/lustre/home/u6156/.profile: line 144: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/var/spool/slurm/d/job1849129/slurm_script: line 8: 243370 Killed                  /mnt/lustre/home/u6156/STELLOPT/CIEMAT/xintel/xdkes input_dkes.stellopt > STDOUT &>STDERR
+slurmstepd: error: Detected 1 oom-kill event(s) in step 1849129.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.

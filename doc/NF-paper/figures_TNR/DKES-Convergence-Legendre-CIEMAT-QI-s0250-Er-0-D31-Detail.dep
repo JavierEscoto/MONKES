@@ -1,0 +1,7 @@
+figures_TNR/DKES-Convergence-Legendre-CIEMAT-QI-s0250-Er-0-D31-Detail.pdf: data/CIEMAT-QI/DKES/Convergence/efield_0e-0/c9/la160/results.stellopt
+figures_TNR/DKES-Convergence-Legendre-CIEMAT-QI-s0250-Er-0-D31-Detail.pdf: data/CIEMAT-QI/DKES/Convergence/efield_0e-0/c9/la80/results.stellopt
+figures_TNR/DKES-Convergence-Legendre-CIEMAT-QI-s0250-Er-0-D31-Detail.pdf: data/CIEMAT-QI/DKES/Convergence/efield_0e-0/c9/la100/results.stellopt
+figures_TNR/DKES-Convergence-Legendre-CIEMAT-QI-s0250-Er-0-D31-Detail.pdf: data/CIEMAT-QI/DKES/Convergence/efield_0e-0/c9/la120/results.stellopt
+figures_TNR/DKES-Convergence-Legendre-CIEMAT-QI-s0250-Er-0-D31-Detail.pdf: data/CIEMAT-QI/DKES/Convergence/efield_0e-0/c9/la140/results.stellopt
+figures_TNR/DKES-Convergence-Legendre-CIEMAT-QI-s0250-Er-0-D31-Detail.pdf: data/CIEMAT-QI/DKES/Convergence/efield_0e-0/c9/la180/results.stellopt
+figures_TNR/DKES-Convergence-Legendre-CIEMAT-QI-s0250-Er-0-D31-Detail.pdf: data/CIEMAT-QI/DKES/Convergence/efield_0e-0/c9/la200/results.stellopt

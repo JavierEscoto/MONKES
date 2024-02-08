@@ -26,8 +26,8 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{3}*0.4674
 			]
-			{./results/CIEMAT-QI/0.250/Monoenergetic_Database_Example_15_119_180/Monoenergetic_1.plt};	
-%			\addlegendentry{\texttt{MONKES} $1/{\nu}$}						
+			{data/CIEMAT-QI/MONKES/Monoenergetic_Database_Example_15_119_180/Monoenergetic_1.plt};	
+
 			%%% DKES RESULTS	
 			\foreach \nu in 
 			{1e-5,3e-5,1e-4,3e-4,3e-3,1e-2,3e-2,1e-1,3e-1,1e-0,3e-0,1e+1,3e+1,1e+2,3e+2}
@@ -35,7 +35,7 @@
 				\addplot[forget plot, only marks, mark=*, blue] table[skip first n=2, 
 				x expr=\thisrowno{0},
 				y expr={ (\thisrowno{6} + \thisrowno{7})/2*0.4674 }, 
-				restrict expr to domain={\thisrowno{1}}{0:0}] {./results/CIEMAT-QI/0.250/omega_0e-0/cl_\nu/results.stellopt};
+				restrict expr to domain={\thisrowno{1}}{0:0}] {data/CIEMAT-QI/DKES/omega_0e-0/cl_\nu/results.stellopt};
 			} 
 			
 			%%% DKES RESULTS	
@@ -45,32 +45,16 @@
 				\addplot[forget plot, only marks, mark=square*, red] table[skip first n=2, 
 				x expr=\thisrowno{0},
 				y expr={ (\thisrowno{6} + \thisrowno{7})/2*0.4674 }, 
-				restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}] {./results/CIEMAT-QI/0.250/omega_1e-3/cl_\nu/results.stellopt};
+				restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}] {data/CIEMAT-QI/DKES/omega_1e-3/cl_\nu/results.stellopt};
 			} 
-			%%% DKES RESULTS				
-%			\addplot[forget plot, only marks, mark=*, blue, error bars/.cd, y explicit,
-%			y dir=both,
-%			error bar style={thick}] table[
-%			x expr=\thisrowno{0},
-%			y expr={ (\thisrowno{6} + \thisrowno{7})/2*0.4674 }, 
-%			restrict expr to domain={\thisrowno{0}}{1e-4:1e-4},
-%			restrict expr to domain={\thisrowno{1}}{0:0},
-%			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
-%			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2]
-%			{./results/CIEMAT-QI/0.250/results.data};
-			%			\addlegendentry{\texttt{DKES} $1/{\nu}$}
-			
-			
-			
-			
+		
 			%%% SFINCS RESULTS
-			\addplot[mark repeat = 2, only marks, blue, mark=triangle*]
+			\addplot[forget plot, mark repeat = 2, only marks, blue, mark=triangle*]
 			table[col sep = comma, skip first n=1, 
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{2}*0.4674
 			]
-			{./results/SFINCS_results/CIEMAT-QI/20230420-01-058-CIEMAT-QI_s0p238_Er0_nuScan_sfincs_results.dat};	
-%			\addlegendentry{\texttt{SFINCS} $1/{\nu}$}	
+			{data/CIEMAT-QI/SFINCS/20230420-01-058-CIEMAT-QI_s0p238_Er0_nuScan_sfincs_results.dat};	
 			
 			%%% MONKES RESULTS
 			\addplot+[forget plot, no markers, red]
@@ -78,12 +62,10 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{3}*0.4674,  
 			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}]
-			{./results/CIEMAT-QI/0.250/Monoenergetic_Database_Example_15_119_180/Monoenergetic_6.plt};	
-%			\addlegendentry{\texttt{MONKES} $\sqrt{\nu}$}
-			
+			{data/CIEMAT-QI/MONKES/Monoenergetic_Database_Example_15_119_180/Monoenergetic_6.plt};	
 			
 			%%% DKES RESULTS				
-			\addplot[forget plot, only marks, mark=square*, red, error bars/.cd, y explicit,
+			\addplot[only marks, mark=square*, red, error bars/.cd, y explicit,
 			y dir=both,
 			error bar style={thick}] table[
 			x expr=\thisrowno{0},
@@ -91,9 +73,8 @@
 			restrict expr to domain={\thisrowno{0}}{1e-4:3e2},
 			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3},
 			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
-			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/CIEMAT-QI/0.250/results.data};
-%			\addlegendentry{\texttt{DKES} $\sqrt{\nu}$}	
-			
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {data/CIEMAT-QI/DKES/results.data};
+			\addlegendentry{\texttt{DKES} $\widehat{E}_r \ne 0$}
 			
 			%%% SFINCS RESULTS
 			\addplot[mark repeat = 2, only marks, red, mark=triangle*, mark options={rotate=60}]
@@ -101,9 +82,9 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{2}*0.4674
 			]
-			{./results/SFINCS_results/CIEMAT-QI/20230420-01-047-CIEMAT-QI_s0p238_withEr_nuScan_sfincs_results.dat};	
-%			\addlegendentry{\texttt{SFINCS} $\sqrt{\nu}$}			
+			{data/CIEMAT-QI/SFINCS/20230420-01-047-CIEMAT-QI_s0p238_withEr_nuScan_sfincs_results.dat};	 		
 			
+			\addlegendentry{\texttt{SFINCS} $\widehat{E}_r \ne 0$}
 		\end{axis}
 		
 	\end{tikzpicture}

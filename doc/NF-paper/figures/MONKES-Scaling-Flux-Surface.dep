@@ -1,0 +1,6 @@
+figures/MONKES-Scaling-Flux-Surface.pdf: data/MONKES_Scaling/Scaling_Nfs/1_core/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt
+figures/MONKES-Scaling-Flux-Surface.pdf: data/MONKES_Scaling/Scaling_Nfs/2_cores/monkes_Monoenergetic_Database.dat
+figures/MONKES-Scaling-Flux-Surface.pdf: data/MONKES_Scaling/Scaling_Nfs/4_cores/monkes_Monoenergetic_Database.dat
+figures/MONKES-Scaling-Flux-Surface.pdf: data/MONKES_Scaling/Scaling_Nfs/8_cores/monkes_Monoenergetic_Database.dat
+figures/MONKES-Scaling-Flux-Surface.pdf: data/MONKES_Scaling/Scaling_Nfs/16_cores/monkes_Monoenergetic_Database.dat
+figures/MONKES-Scaling-Flux-Surface.pdf: data/MONKES_Scaling/Scaling_Nfs/1_core/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt

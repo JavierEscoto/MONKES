@@ -13,9 +13,8 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{2}*0.5237*0.5237,  
 			restrict expr to domain={\thisrowno{1}}{0:0}]
-			{./results/W7X-EIM/0.200/Monoenergetic_Database_Example_23_55_140/Monoenergetic_1.plt};	
-%			\addlegendentry{\texttt{MONKES} $\hat{E}_r=0$}			
-			
+			{data/W7X-EIM/MONKES/Monoenergetic_Database_Example_23_55_140/Monoenergetic_1.plt};	
+			\addlegendentry{{\MONKES} $\widehat{E}_r=0$}
 			
 			%%% DKES RESULTS				
 			\addplot[only marks, mark=*, blue, error bars/.cd, y explicit,
@@ -26,8 +25,8 @@
 			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
 			restrict expr to domain={\thisrowno{1}}{0:0},
 			y error plus expr=(\thisrowno{4}-\thisrowno{5})/2,
-			y error minus expr=(\thisrowno{4}-\thisrowno{5})/2] {./results/W7X-EIM/0.200/results.data};
-%			\addlegendentry{\texttt{DKES} $\hat{E}_r=0$}
+			y error minus expr=(\thisrowno{4}-\thisrowno{5})/2] {data/W7X-EIM/DKES/results.data};
+			\addlegendentry{{\DKES} $\widehat{E}_r=0$}
 			
 			%%% SFINCS RESULTS
 			\addplot[mark repeat = 2, only marks, blue, mark=triangle*]
@@ -35,7 +34,7 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{1}*0.5237*0.5237
 			]
-			{./results/SFINCS_results/W7X-EIM/20230420-01-027-W7X-EIM_Er0_nuScan_sfincs_results.dat};	
+			{data/W7X-EIM/SFINCS/20230420-01-027-W7X-EIM_Er0_nuScan_sfincs_results.dat};	
 			
 			%%% MONKES RESULTS
 			\addplot+[no markers, red]
@@ -43,9 +42,7 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{2}*0.5237*0.5237,  
 			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4}]
-			{./results/W7X-EIM/0.200/Monoenergetic_Database_Example_27_55_140/Monoenergetic_5.plt};	
-%			\addlegendentry{\texttt{MONKES} $\hat{E}_r\ne 0$}
-						
+			{data/W7X-EIM/MONKES/Monoenergetic_Database_Example_27_55_140/Monoenergetic_5.plt};	
 			
 			%%% DKES RESULTS				
 			\addplot[only marks, mark=square*, red, error bars/.cd, y explicit,
@@ -56,8 +53,7 @@
 			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
 			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4},
 			y error plus expr=(\thisrowno{4}-\thisrowno{5})/2,
-			y error minus expr=(\thisrowno{4}-\thisrowno{5})/2] {./results/W7X-EIM/0.200/results.data};
-%			\addlegendentry{\texttt{DKES} $\hat{E}_r\ne 0$}			
+			y error minus expr=(\thisrowno{4}-\thisrowno{5})/2] {data/W7X-EIM/DKES/results.data};
 			
 			%%% SFINCS RESULTS
 			\addplot[mark repeat =2, only marks, red, mark=triangle*, mark options={rotate=60}]
@@ -65,7 +61,7 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{1}*0.5237*0.5237
 			]
-			{./results/SFINCS_results/W7X-EIM/20230420-01-018-W7X-EIM_withEr_nuScan_sfincs_results.dat};	
+			{data/W7X-EIM/SFINCS/20230420-01-018-W7X-EIM_withEr_nuScan_sfincs_results.dat};	
 		\end{axis}
 		
 	\end{tikzpicture}

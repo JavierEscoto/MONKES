@@ -11,12 +11,13 @@
 			/tikz/.cd}, 
 		xlabel = $N_\xi$, ylabel=$\widehat{D}_{11} $ ${[\text{m}]}$
 		]
+		
 		\addplot[blue, mark=+, only marks] table[skip first n=1, 
 		x expr=\thisrowno{4},
 		y expr=\thisrowno{5}*0.4674*0.4674,
 		restrict expr to domain={\thisrowno{2}}{15:47},
 		restrict expr to domain={\thisrowno{3}}{75:97}
-		]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_20/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+		]{data/CIEMAT-QI/MONKES/DKE_zeta_Convergence_Example_Nxi_20/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
 		
 		
 		\foreach \Nxi in {120,140,160}{		
@@ -25,7 +26,7 @@
 			y expr=\thisrowno{5}*0.4674*0.4674,
 			restrict expr to domain={\thisrowno{2}}{35:47},
 			restrict expr to domain={\thisrowno{3}}{165:179}
-			]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_\Nxi/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
+			]{data/CIEMAT-QI/MONKES/DKE_zeta_Convergence_Example_Nxi_\Nxi/Gamma_11_Gamma_31_nu_0.100E-04_E_rho_0.000E+00.plt};
 		}	
 	
 	    
@@ -35,7 +36,7 @@
 	    	y expr=\thisrowno{5}*0.4674*0.4674,
 	    	restrict expr to domain={\thisrowno{2}}{31:47},
 	    	restrict expr to domain={\thisrowno{3}}{165:229}
-	    	]{results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_\Nxi/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
+	    	]{data/CIEMAT-QI/MONKES/DKE_zeta_Convergence_Example_Nxi_\Nxi/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt};
 	    }
     
         
@@ -44,7 +45,7 @@
         y expr=\thisrowno{5}*0.4674*0.4674,
         restrict expr to domain={\thisrowno{1}}{0:0},
         restrict expr to domain={\thisrowno{4}}{220:400}
-        ]{results/CIEMAT-QI/0.250/Convergence_nu_1e-5/Convergence_Nxi/N_theta_23_N_zeta_163/monkes_Monoenergetic_Database.dat};
+        ]{data/CIEMAT-QI/MONKES/Convergence_Nxi/N_theta_47_N_zeta_215/monkes_Monoenergetic_Database.dat};
         
         
 	\end{axis}

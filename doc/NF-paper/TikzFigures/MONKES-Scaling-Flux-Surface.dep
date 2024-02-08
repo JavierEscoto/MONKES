@@ -1,6 +1,0 @@
-TikzFigures/MONKES-Scaling-Flux-Surface.pdf: results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt
-TikzFigures/MONKES-Scaling-Flux-Surface.pdf: results/MONKES_Scaling/2_cores/Convergence_nu_1e-5_Er_0/Nxi_100/monkes_Monoenergetic_Database.dat
-TikzFigures/MONKES-Scaling-Flux-Surface.pdf: results/MONKES_Scaling/4_cores/Convergence_nu_1e-5_Er_0/Nxi_100/monkes_Monoenergetic_Database.dat
-TikzFigures/MONKES-Scaling-Flux-Surface.pdf: results/MONKES_Scaling/8_cores/Convergence_nu_1e-5_Er_0/Nxi_100/monkes_Monoenergetic_Database.dat
-TikzFigures/MONKES-Scaling-Flux-Surface.pdf: results/MONKES_Scaling/16_cores/Convergence_nu_1e-5_Er_0/Nxi_100/monkes_Monoenergetic_Database.dat
-TikzFigures/MONKES-Scaling-Flux-Surface.pdf: results/CIEMAT-QI/0.250/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.000E+00.plt

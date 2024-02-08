@@ -1,0 +1,4 @@
+figures/Benchmark-W7X-KJM-s0204-D33.pdf: data/W7X-KJM/MONKES/Monoenergetic_Database_Example_23_63_140/Monoenergetic_1.plt
+figures/Benchmark-W7X-KJM-s0204-D33.pdf: data/W7X-KJM/DKES/results.data
+figures/Benchmark-W7X-KJM-s0204-D33.pdf: data/W7X-KJM/MONKES/Monoenergetic_19_79_180/monkes_Monoenergetic_Database.dat
+figures/Benchmark-W7X-KJM-s0204-D33.pdf: data/W7X-KJM/DKES/results.data

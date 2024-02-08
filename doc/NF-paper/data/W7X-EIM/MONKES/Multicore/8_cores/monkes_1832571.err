@@ -1,0 +1,11 @@
+forrtl: No such file or directory
+forrtl: severe (29): file not found, unit 1, file /mnt/lustre/home/u7258/KNOSOS/WORKSPACE/dkes_w7x_std_v.0.0/0.200/Monoenergetic_Database/8_cores/ddkes2.data
+Image              PC                Routine            Line        Source             
+libifcoremt.so.5   00002B378290D97F  for__io_return        Unknown  Unknown
+libifcoremt.so.5   00002B37829314E4  for_open              Unknown  Unknown
+main_monkes.x      000000000049693E  magnetic_configur          83  Magnetic_configuration.f90
+main_monkes.x      00000000004FFE1F  MAIN__                     33  main_monkes.f90
+main_monkes.x      000000000040321E  Unknown               Unknown  Unknown
+libc-2.17.so       00002B3784A1A3D5  __libc_start_main     Unknown  Unknown
+main_monkes.x      0000000000403129  Unknown               Unknown  Unknown
+srun: error: xula1601: task 0: Exited with exit code 29

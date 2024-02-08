@@ -12,6 +12,7 @@
 			enlarge x limits=false,
 %			enlarge y limits=false,
 			legend pos = south west,
+			legend style={/tikz/every even column/.append style={column sep=1.1cm}, cells={align=left}},
 			mark size = 1.5pt
 			]
 			
@@ -21,19 +22,9 @@
 			x expr=\thisrowno{0},
 			y expr=(\thisrowno{5} - \thisrowno{6})
 			]
-			{./results/W7X-EIM/0.200/Monoenergetic_Database_Example_23_55_140/Monoenergetic_1.plt};	
-%			\addlegendentry{\texttt{MONKES} $1/{\nu}$}			
-						
-			%%% SFINCS RESULTS
-			%			\addplot[only marks, blue, mark=triangle*]
-			%			table[col sep = comma, skip first n=1, 
-			%			x expr=\thisrowno{0},
-			%			y expr=\thisrowno{2}
-			%			]
-			%			{./results/SFINCS_results/W7X-EIM/20230420-01-027-W7X-EIM_Er0_nuScan_sfincs_results.dat};	
-			%			\addlegendentry{\texttt{SFINCS} $\hat{E}_r = 0$}			
-					
-					
+			{data/W7X-EIM/MONKES/Monoenergetic_Database_Example_23_55_140/Monoenergetic_1.plt};	
+			\addlegendentry{\texttt{MONKES} \\ $\widehat{E}_r=0$}
+			
 			%%% DKES RESULTS				
 			\addplot[only marks, mark=*, blue, error bars/.cd, y explicit,
 			y dir=both,
@@ -43,8 +34,8 @@
 			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
 			restrict expr to domain={\thisrowno{1}}{0:0},
 			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
-			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/W7X-EIM/0.200/results.data};
-%			\addlegendentry{\texttt{DKES} $1/{\nu}$}
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {data/W7X-EIM/DKES/results.data};
+			\addlegendentry{\texttt{DKES} \\ $\widehat{E}_r=0$}
 			
 			%%% MONKES RESULTS
 			\addplot+[no markers, red, dashed]
@@ -52,8 +43,7 @@
 			x expr=\thisrowno{0},			
 			y expr=(\thisrowno{5} - \thisrowno{6}),  
 			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4}]
-			{./results/W7X-EIM/0.200/Monoenergetic_Database_Example_27_55_140/Monoenergetic_5.plt};	
-%			\addlegendentry{\texttt{MONKES} $\sqrt{\nu}$}
+			{data/W7X-EIM/MONKES/Monoenergetic_Database_Example_27_55_140/Monoenergetic_5.plt};	
 			
 			%%% DKES RESULTS				
 			\addplot[only marks, mark=square, red, error bars/.cd, y explicit,
@@ -64,8 +54,7 @@
 			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
 			restrict expr to domain={\thisrowno{1}}{3e-4:3e-4},
 			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
-			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/W7X-EIM/0.200/results.data};
-%			\addlegendentry{\texttt{DKES} $\sqrt{\nu}$}			
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {data/W7X-EIM/DKES/results.data}; 		
 			
 		\end{axis}
 		

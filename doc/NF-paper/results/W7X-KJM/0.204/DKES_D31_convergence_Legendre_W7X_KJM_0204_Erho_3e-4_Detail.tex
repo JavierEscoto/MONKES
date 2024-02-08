@@ -1,6 +1,5 @@
 \begin{tikzpicture}
-	\begin{axis}[
-		%		height=0.85\textwidth, 
+	\begin{axis}[ 
 		width=\textwidth, 
 		scaled y ticks=base 10:1,
 		y tick label style={
@@ -11,8 +10,7 @@
 			/tikz/.cd}, 
 		xlabel = $N_\xi$, 
 		ylabel=$(\widehat{D}_{31}^- + \widehat{D}_{31}^+) /2$ ${[\text{m}]}$,
-		legend pos = north east, 
-%		ymin = 0.05
+		legend pos = north east 
 		]		
 		
 		\addplot[forget plot, name path=Upper2,blue!20, 
@@ -21,16 +19,13 @@
 		domain = 20:200] {(0.26493E+00	+ 0.27735E+00)/2*0.95  *0.5132};		
 		\addplot[blue!20] fill between[of=Upper2 and Lower2];
 		\addlegendentry{ $\mathcal{R}_5$ }			
-		 
-		
-		
-		
+		  
 		\foreach \Nxi in {60}
 		{		
 			\addplot[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
 			x expr=\Nxi,
 			y expr=(\thisrowno{6} + \thisrowno{7})/2*0.5132,
-			]{results/DKES_convergence/W7X-KJM/0.204/efield_3e-4/c7/la\Nxi/results.stellopt};					
+			]{data/W7X-KJM/DKES/Convergence/efield_3e-4/c7/la\Nxi/results.stellopt};					
 		}
 		\addlegendentry{Selected}
 		\foreach \Nxi in {20,40,80,100,...,200}
@@ -38,20 +33,9 @@
 			\addplot[forget plot, red, mark=square*, only marks] table[skip first n=1, 
 			x expr=\Nxi,
 			y expr=(\thisrowno{6} + \thisrowno{7})/2*0.5132,
-			]{results/DKES_convergence/W7X-KJM/0.204/efield_3e-4/c7/la\Nxi/results.stellopt};					
+			]{data/W7X-KJM/DKES/Convergence/efield_3e-4/c7/la\Nxi/results.stellopt};					
 		}
-		
-		
-%		\addplot[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
-%		x expr=\thisrowno{4},
-%		y expr=\thisrowno{6}  *0.5132,
-%		restrict expr to domain={\thisrowno{2}}{35:67},
-%		restrict expr to domain={\thisrowno{3}}{75:179},
-%		restrict expr to domain={\thisrowno{4}}{180:180}
-%		]{results/W7X-KJM/0.204/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.300E-03.plt};
-%			
-		
-		
+		 
 		
 	\end{axis}
 \end{tikzpicture}

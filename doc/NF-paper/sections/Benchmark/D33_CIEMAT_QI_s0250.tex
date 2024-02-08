@@ -7,12 +7,9 @@
 			ymode=log, 
 			enlarge x limits=false,
 			xtick = {1e-5, 1e-3, 1e-1, 1e1},
-%			enlarge y limits=false,
-%			legend pos = south west,
 			legend columns=4, 
 			legend style={/tikz/every even column/.append style={column sep=1.1cm}, cells={align=left}},
 			legend to name={legendD33},
-%			xmax=0.01,
 			mark size = 1.5pt
 			]
 			
@@ -22,9 +19,8 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{5}-\thisrowno{6}
 			]
-			{./results/CIEMAT-QI/0.250/Monoenergetic_Database_Example_15_119_180/Monoenergetic_1.plt};	
+			{data/CIEMAT-QI/MONKES/Monoenergetic_Database_Example_15_119_180/Monoenergetic_1.plt};	
 			\addlegendentry{\texttt{MONKES}\\ $\widehat{E}_r=0$}			
-			
 			
 			%%% DKES RESULTS	
 			\foreach \nu in 
@@ -33,7 +29,7 @@
 				\addplot[forget plot, only marks, mark=*, blue] table[skip first n=2, 
 				x expr=\thisrowno{0},
 				y expr={ (\thisrowno{8} + \thisrowno{9})/2 }, 
-				restrict expr to domain={\thisrowno{1}}{0:0}] {./results/CIEMAT-QI/0.250/omega_0e-0/cl_\nu/results.stellopt};
+				restrict expr to domain={\thisrowno{1}}{0:0}] {data/CIEMAT-QI/DKES/omega_0e-0/cl_\nu/results.stellopt};
 			} 
 			%%% DKES RESULTS				
 			\addplot[only marks, mark=*, blue, error bars/.cd, y explicit,
@@ -44,7 +40,7 @@
 			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
 			restrict expr to domain={\thisrowno{1}}{0:0},
 			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
-			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/CIEMAT-QI/0.250/results.data};
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {data/CIEMAT-QI/DKES/results.data};
 			\addlegendentry{\texttt{DKES} \\ $\widehat{E}_r=0$}
 			
 			%%% MONKES RESULTS
@@ -53,7 +49,7 @@
 			x expr=\thisrowno{0},
 			y expr=\thisrowno{5}-\thisrowno{6}, 
 			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}]
-			{./results/CIEMAT-QI/0.250/Monoenergetic_Database_Example_15_119_180/Monoenergetic_6.plt};	
+			{data/CIEMAT-QI/MONKES/Monoenergetic_Database_Example_15_119_180/Monoenergetic_6.plt};	
 			\addlegendentry{\texttt{MONKES}\\ $\widehat{E}_r\ne 0$}
 			
 			%%% DKES RESULTS				
@@ -65,7 +61,7 @@
 			restrict expr to domain={\thisrowno{0}}{1e-5:3e2},
 			restrict expr to domain={\thisrowno{1}}{1e-3:1e-3},
 			y error plus expr=(\thisrowno{6}-\thisrowno{6})/2,
-			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {./results/CIEMAT-QI/0.250/results.data};
+			y error minus expr=(\thisrowno{6}-\thisrowno{6})/2] {data/CIEMAT-QI/DKES/results.data};
 			\addlegendentry{\texttt{DKES} \\ $\widehat{E}_r\ne0$}	
 			
 			
@@ -76,7 +72,7 @@
 				\addplot[forget plot, only marks, mark=square, red] table[skip first n=2, 
 				x expr=\thisrowno{0},
 				y expr={ (\thisrowno{8} + \thisrowno{9})/2 }, 
-				restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}] {./results/CIEMAT-QI/0.250/omega_1e-3/cl_\nu/results.stellopt};
+				restrict expr to domain={\thisrowno{1}}{1e-3:1e-3}] {data/CIEMAT-QI/DKES/omega_1e-3/cl_\nu/results.stellopt};
 			} 
 		\end{axis}
 		

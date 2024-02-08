@@ -20,37 +20,21 @@
 		\addplot[forget plot, name path=Lower2,blue!20, 
 		domain = 5:9] {(0.91331E-01	+ 0.86729E-01)/2*0.93  *0.4674};		
 		\addplot[blue!20] fill between[of=Upper2 and Lower2];
-		%		\addlegendentry{ $\mathcal{R}_5$ }			
-		
-		
 		
 		\foreach \c in {6}
 		{		
 			\addplot[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
 			x expr=\c,
 			y expr=(\thisrowno{6} + \thisrowno{7})/2*0.4674,
-			]{results/DKES_convergence/CIEMAT-QI/0.250/efield_0e-0/c\c/la160/results.stellopt};					
+			]{data/CIEMAT-QI/DKES/Convergence/efield_0e-0/c\c/la160/results.stellopt};					
 		}
-		
-		
 		
 		\foreach \c in {5,7,8,9}
 		{		
 			\addplot[forget plot, blue, mark=*, only marks] table[skip first n=1, 
 			x expr=\c,
 			y expr=(\thisrowno{6} + \thisrowno{7})/2*0.4674,
-			]{results/DKES_convergence/CIEMAT-QI/0.250/efield_0e-0/c\c/la160/results.stellopt};					
-		}
-		%		\addplot[ultra thick, Green, mark = star, mark size = 5 pt, only marks] table[skip first n=1, 
-		%		x expr=\thisrowno{4},
-		%		y expr=\thisrowno{6}  *0.5132,
-		%		restrict expr to domain={\thisrowno{2}}{35:67},
-		%		restrict expr to domain={\thisrowno{3}}{75:179},
-		%		restrict expr to domain={\thisrowno{4}}{180:180}
-		%		]{results/W7X-KJM/0.204/DKE_zeta_Convergence_Example_Nxi_180/Monoenergetic_nu_0.100E-04_E_rho_0.300E-03.plt};
-		%		\addlegendentry{Selected}	
-		
-		
-		
+			]{data/CIEMAT-QI/DKES/Convergence/efield_0e-0/c\c/la160/results.stellopt};					
+		} 
 	\end{axis}
 \end{tikzpicture}
