@@ -551,19 +551,16 @@ end function
 ! and the data { y_nodes(0),...,y_nodes(N) }
 ! calculates the interpolant evaluated at x
 ! *****************************************************************
-
 real pure function Interpolated_value(x, x_nodes, y_nodes, q) result(F)
          real, intent(in) :: x, x_nodes(0:), y_nodes(0:)
       integer, intent(in) :: q
       
-      real :: L(0:q) 
-      integer :: js, q_eff        
-      integer, allocatable :: s(:)    
+      real :: L(0:q), s(0:q)            
+      integer :: js 
       
       ! *** Stencil centered at the nearest point x(js)
-      js = minloc( abs(x_nodes - x) , 1) - 1
-      q_eff = minval( [q,size(x_nodes)-1] ) ; allocate( s(0:q_eff) )
-      s = Stencil(x_nodes,js,q_eff) 
+      js = minloc( abs(x_nodes - x) , 1) - 1 
+      s = Stencil(x_nodes,js,q) 
       
       ! *** Lagrange polynomials evaluated at x from stencil nodes
       L = Lagrange_polynomials_FJEL( x, x_nodes(s) ) 

@@ -1,6 +1,7 @@
 module Magnetic_configuration
    use netcdf
    use Lagrange_interpolation
+   
    implicit none
    
    private
@@ -418,7 +419,7 @@ module Magnetic_configuration
     real :: B_mn_min = 5d-6   
     logical, allocatable :: bigger_earth_field(:)
     real :: torflux
-    integer :: sign_torflux = 1       
+    integer :: sign_lh = 1, q_Ns_b, q_Ns      
     
     ! Open BOOZER_XFORM output file "boozmn.nc"
     ierr_netcdf = nf90_open('boozmn.nc', nf90_nowrite, ncid )
@@ -432,15 +433,15 @@ module Magnetic_configuration
     ! If the reference system is left-handed, change the sign of 
     ! B_theta, chi_p and iota to make it right-handed (change theta by -theta).   
     
-    torflux = psi_s(Ns) / (2 * pi) ; if( torflux < 0 ) sign_torflux = -1  
+    torflux = psi_s(Ns) / (2 * pi)
+    psi_p = 2 * torflux * sqrt(s0) / Minor_Radius   
     
-    sign_torflux = -1
-    psi_p = 2 * torflux * sqrt(s0) / Minor_Radius  
-    iota  = sign_torflux * Interpolated_value(s0, ss(2:ns), iota_s(2:ns), 2)
-    chi_p = sign_torflux * iota * psi_p 
+    sign_lh = -1 ! Sign to change from left-handed to right-handed coordinates
+    iota  = sign_lh * Interpolated_value(s0, ss(2:ns), iota_s(2:ns), q_Ns)
+    chi_p = sign_lh * iota * psi_p 
       
-    B_theta = sign_torflux * Interpolated_value(s0, ss(2:Ns), B_theta_s(2:Ns), 2)
-    B_zeta  =                Interpolated_value(s0, ss(2:Ns),  B_zeta_s(2:Ns), 2) 
+    B_theta = sign_lh * Interpolated_value(s0, ss(2:Ns), B_theta_s(2:Ns), q_Ns)
+    B_zeta  =                Interpolated_value(s0, ss(2:Ns),  B_zeta_s(2:Ns), q_Ns) 
     s = s0	
     
     ! Close BOOZER_XFORM output file "boozmn.nc"
@@ -474,6 +475,10 @@ module Magnetic_configuration
        ierr_netcdf = nf90_inq_dimid( ncid, 'pack_rad', idimid) 
        ierr_netcdf = nf90_inquire_dimension( ncid, idimid, len=Ns_b )
        write(*,*) " Number of surfaces of BOOZER_XFORM ", Ns_b    
+       
+       ! Set orders of interpolation 
+       q_Ns_b = minval( [ Ns_b-2,  2] )
+       q_Ns = minval( [ Ns-2,  2 ] )
        
        ! Read maximum number of (Boozer) Fourier modes 
        ierr_netcdf = nf90_inq_varid( ncid, 'mnboz_b', rhid ) 
@@ -564,7 +569,7 @@ module Magnetic_configuration
          
          allocate( BB_mns(mnboz_b) )   
          do i = 1, mnboz_b       
-            BB_mns(i) = Interpolated_value(s0, s_b(2:Ns_b), B_mns_s(i,2:Ns_b), 2)                      
+            BB_mns(i) = Interpolated_value(s0, s_b(2:Ns_b), B_mns_s(i,2:Ns_b), q_Ns_b)                      
          end do  
          
        end if 
@@ -585,8 +590,8 @@ module Magnetic_configuration
          
        ! *** Interpolated Fourier modes of the magnetic field strength at s0 and B_00
        allocate( BB_mnc(mnboz_b), bigger_earth_field(mnboz_b) )   
-       do i = 1, mnboz_b
-          BB_mnc(i) = Interpolated_value(s0, s_b(2:Ns_b), B_mnc_s(i,2:Ns_b), 2)   
+       do i = 1, mnboz_b  
+          BB_mnc(i) = Interpolated_value(s0, s_b(2:Ns_b), B_mnc_s(i,2:Ns_b), q_Ns_b)   
                      
           if( mn_s(i,1) == 0 .and. mn_s(i,2) == 0 ) &
             B00 = BB_mnc(i)  
