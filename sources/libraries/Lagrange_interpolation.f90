@@ -555,8 +555,8 @@ real pure function Interpolated_value(x, x_nodes, y_nodes, q) result(F)
          real, intent(in) :: x, x_nodes(0:), y_nodes(0:)
       integer, intent(in) :: q
       
-      real :: L(0:q), s(0:q)            
-      integer :: js 
+      real :: L(0:q)
+      integer :: s(0:q), js 
       
       ! *** Stencil centered at the nearest point x(js)
       js = minloc( abs(x_nodes - x) , 1) - 1 
