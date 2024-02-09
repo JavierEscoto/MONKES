@@ -162,7 +162,7 @@ module Magnetic_configuration
      call Beidler_NF_2011_Normalization
      
      write(*,*) " *** Magnetic field strength Fourier modes "
-     write(*,'(9999A25)') " m ", " n ", " B_mn ", " B_mn/B00 "
+     write(*,'(9999A25)') "m", "n", "B_mn", "B_mn/B00"
      do k = 1, N_modes 
         write(*,'(I25,I25,e25.16,e25.16)') mn(k,1), mn(k,2), B_mnc(k), B_mnc(k)/B00           
      end do; write(*,*)
@@ -185,7 +185,7 @@ module Magnetic_configuration
      write(21,*) "     Major_Radius = ", Major_Radius ; write(21,*)
      
      write(21,*) " *** Magnetic field strength Fourier modes "
-     write(21,'(9999A25)') " m ", " n ", " B_mn ", " B_mn/B00 "
+     write(21,'(9999A25)') "m", "n", "B_mn", "B_mn/B00"
      do k = 1, N_modes
         write(21,'(I25,I25,e25.16,e25.16)') mn(k,:), B_mnc(k), B_mnc(k)/B00        
      end do 
@@ -437,7 +437,7 @@ module Magnetic_configuration
     psi_p = 2 * torflux * sqrt(s0) / Minor_Radius   
     
     sign_lh = -1 ! Sign to change from left-handed to right-handed coordinates
-    iota  = sign_lh * Interpolated_value(s0, ss(2:ns), iota_s(2:ns), q_Ns)
+    iota  = sign_lh * Interpolated_value(s0, ss(2:Ns), iota_s(2:Ns), q_Ns)
     chi_p = sign_lh * iota * psi_p 
       
     B_theta = sign_lh * Interpolated_value(s0, ss(2:Ns), B_theta_s(2:Ns), q_Ns)
@@ -477,7 +477,7 @@ module Magnetic_configuration
        write(*,*) " Number of surfaces of BOOZER_XFORM ", Ns_b    
        
        ! Set orders of interpolation 
-       q_Ns_b = minval( [ Ns_b-2,  2] )
+       q_Ns_b = minval( [ Ns_b-1,  2] )
        q_Ns = minval( [ Ns-2,  2 ] )
        
        ! Read maximum number of (Boozer) Fourier modes 
@@ -569,7 +569,7 @@ module Magnetic_configuration
          
          allocate( BB_mns(mnboz_b) )   
          do i = 1, mnboz_b       
-            BB_mns(i) = Interpolated_value(s0, s_b(2:Ns_b), B_mns_s(i,2:Ns_b), q_Ns_b)                      
+            BB_mns(i) = Interpolated_value(s0, s_b(1:Ns_b), B_mns_s(i,1:Ns_b), q_Ns_b)                      
          end do  
          
        end if 
@@ -591,7 +591,7 @@ module Magnetic_configuration
        ! *** Interpolated Fourier modes of the magnetic field strength at s0 and B_00
        allocate( BB_mnc(mnboz_b), bigger_earth_field(mnboz_b) )   
        do i = 1, mnboz_b  
-          BB_mnc(i) = Interpolated_value(s0, s_b(2:Ns_b), B_mnc_s(i,2:Ns_b), q_Ns_b)   
+          BB_mnc(i) = Interpolated_value(s0, s_b(1:Ns_b), B_mnc_s(i,1:Ns_b), q_Ns_b)   
                      
           if( mn_s(i,1) == 0 .and. mn_s(i,2) == 0 ) &
             B00 = BB_mnc(i)  
