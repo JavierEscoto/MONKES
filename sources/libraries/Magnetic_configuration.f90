@@ -436,12 +436,12 @@ module Magnetic_configuration
     torflux = psi_s(Ns) / (2 * pi)
     psi_p = 2 * torflux * sqrt(s0) / Minor_Radius   
     
-    sign_lh = -1 ! Sign to change from left-handed to right-handed coordinates
-    iota  = sign_lh * Interpolated_value(s0, ss(2:Ns), iota_s(2:Ns), q_Ns)
+    sign_lh = -1 ! Sign to change from left-handed to right-handed coordinates 
+    iota  = sign_lh * Linear_Interpolation( s0, ss(2:Ns), iota_s(2:Ns) )
     chi_p = sign_lh * iota * psi_p 
-      
-    B_theta = sign_lh * Interpolated_value(s0, ss(2:Ns), B_theta_s(2:Ns), q_Ns)
-    B_zeta  =                Interpolated_value(s0, ss(2:Ns),  B_zeta_s(2:Ns), q_Ns) 
+       
+    B_theta = sign_lh * Linear_Interpolation(s0, ss(2:Ns), B_theta_s(2:Ns) )  
+    B_zeta  =           Linear_Interpolation(s0, ss(2:Ns),  B_zeta_s(2:Ns) ) 
     s = s0	
     
     ! Close BOOZER_XFORM output file "boozmn.nc"
@@ -568,8 +568,8 @@ module Magnetic_configuration
          ierr_netcdf = nf90_get_var( ncid, rhid, B_mns_s )       
          
          allocate( BB_mns(mnboz_b) )   
-         do i = 1, mnboz_b       
-            BB_mns(i) = Interpolated_value(s0, s_b(1:Ns_b), B_mns_s(i,1:Ns_b), q_Ns_b)                      
+         do i = 1, mnboz_b                             
+            BB_mns(i) = Linear_Interpolation(s0, s_b(1:Ns_b), B_mns_s(i,1:Ns_b) )                      
          end do  
          
        end if 
@@ -590,16 +590,14 @@ module Magnetic_configuration
          
        ! *** Interpolated Fourier modes of the magnetic field strength at s0 and B_00
        allocate( BB_mnc(mnboz_b), bigger_earth_field(mnboz_b) )   
-       do i = 1, mnboz_b  
-          BB_mnc(i) = Interpolated_value(s0, s_b(1:Ns_b), B_mnc_s(i,1:Ns_b), q_Ns_b)   
+       do i = 1, mnboz_b     
+          BB_mnc(i) = Linear_Interpolation(s0, s_b(1:Ns_b), B_mnc_s(i,1:Ns_b) )   
                      
           if( mn_s(i,1) == 0 .and. mn_s(i,2) == 0 ) &
             B00 = BB_mnc(i)  
        end do        
         
-       ! *** Start truncating modes which are larger than 10% of Earth's magnetic field.
-       ! If there are more than 150 modes, multiply by 2 the threshold recursively
-       ! until we end up with 150 modes or less.
+       ! *** Truncate magnetic field modes 
        B_mn_min = 1d-5 * B00
        bigger_earth_field = abs(BB_mnc)  > B_mn_min
        N_modes = count( bigger_earth_field )   
