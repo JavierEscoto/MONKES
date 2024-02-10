@@ -14,6 +14,7 @@ module Lagrange_interpolation
  public :: Lagrange_integrals                             ! *** FJEL Lagrange integrals
  public :: Interpolant, Interpolant_derivatives           ! *** FJEL Interpolant and derivatives
  public :: Interpolant_mask                               ! *** FJEL Interpolant with mask
+ public :: Linear_Interpolation                                
  
  public :: Interpolated_value, Interpolated_derivatives  ! *** FJEL Interpolated value and derivatives
  
@@ -371,6 +372,47 @@ end function
      x0 = x 
      S0 = Stencil( x0, i-1, q )
      S = [S0(0), S0(q)] + 1
+                
+end function
+
+ ! Linear interpolation of f(x) using y_nodes = f(x_nodes)   
+ real pure function Linear_Interpolation(x, x_nodes, y_nodes) result(F)   !pure
+     real, intent(in)   :: x, x_nodes(0:), y_nodes(0:) 
+     real :: L(0:1), dx 
+     integer :: S(0:1), j, N
+     
+     N = size(x_nodes) - 1
+     
+     j = minloc( abs(x - x_nodes), 1 ) -1    
+     if( x_nodes(j) ==  x ) then
+       F = y_nodes(j)
+     else
+     
+       if( x_nodes(j) <  x ) then
+               
+         if ( j == N ) then 
+           S = [ j-1, j ] 
+         else
+           S = [ j, j+1 ] 
+         end if 
+         
+       elseif( x < x_nodes(j) ) then
+         
+         if ( j == 0 ) then  
+           S = [ j, j+1 ] 
+         else
+           S = [ j-1, j ] 
+         end if 
+         
+       end if
+       
+       L(0) = ( x-x_nodes(s(1)) )/( x_nodes(s(0))-x_nodes(s(1)) )
+       L(1) = ( x-x_nodes(s(0)) )/( x_nodes(s(1))-x_nodes(s(0)) )
+       
+       F = dot_product( L, y_nodes(s) )
+       
+     end if
+      
                 
 end function
 
