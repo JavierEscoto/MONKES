@@ -86,7 +86,7 @@ module Magnetic_configuration
    subroutine read_ddkes2data(file_path) 
      character(len=*), intent(in) :: file_path
      
-     integer, parameter :: M_max = 50, N_max = 50 
+     integer, parameter :: M_max = 500, N_max = 500 
      integer :: ierr, i, j, k
      integer :: nzperiod, lalpha, lfout, nrun, mpolb, ntorb, ibbi     
      real :: cmul, efield, psip, chip, btheta, bzeta, borbi(-N_max:N_max,-M_max:M_max)
