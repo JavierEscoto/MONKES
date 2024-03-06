@@ -5,7 +5,7 @@ program main_monkes
   
 implicit none 
   
-  character(len=20) :: input_case="none"
+  character(len=30) :: input_case="none"
   
   write(*,*) " ****************************************************** "
   write(*,*) " This is MONKES: "
@@ -23,6 +23,9 @@ implicit none
   !input_case = "VMEC.nc"  ! ad-hoc for testing (TO BE ERASED)
   select case (input_case)
   
+     case ("monkes_input")         
+     call read_MONKES_input_configuration("monkes_input.configuration")
+     
      case ("boozmn.nc")         
      call read_boozer_xform_output(s)
      
@@ -47,20 +50,25 @@ implicit none
     
     integer :: ierr     
     
-    open(1, file= "boozmn.nc", status="old", iostat=ierr) ; close(1) 
-    
+    open(1, file= "monkes_input.configuration", status="old", iostat=ierr) ; close(1)  
     if( ierr == 0 ) then
-      input_case = "boozmn.nc"
-    else    
-      
-      open(1, file= "VMEC.nc", status="old", iostat=ierr) ; close(1)       
-      if( ierr == 0 ) then
-        input_case = "VMEC.nc"
-      else
-        input_case = "ddkes2.data" 
-      end if
-    end if     
+        input_case = "monkes_input"
+    else
     
+      open(1, file= "boozmn.nc", status="old", iostat=ierr) ; close(1)       
+      if( ierr == 0 ) then
+        input_case = "boozmn.nc"
+      else    
+        
+        open(1, file= "VMEC.nc", status="old", iostat=ierr) ; close(1)       
+        if( ierr == 0 ) then
+          input_case = "VMEC.nc"
+        else
+          input_case = "ddkes2.data" 
+        end if
+      end if     
+    end if     
+    input_case = "monkes_input"
   end subroutine
   
   

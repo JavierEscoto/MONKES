@@ -7,7 +7,7 @@ module Magnetic_configuration
    private
    
    public :: read_ddkes2data, read_boozer_xform_output
-   public :: read_VMEC_output
+   public :: read_VMEC_output, read_MONKES_input_configuration
    public :: Select_Surface
    public :: Beidler_NF_2011_Normalization
    
@@ -57,8 +57,50 @@ module Magnetic_configuration
      if( ierr /= 0 ) s = 0.25    
      
    end subroutine
-      
-      
+   
+   subroutine read_MONKES_input_configuration(file_path) 
+     character(len=*), intent(in) :: file_path
+     
+     integer, parameter :: M_max = 500, N_max = 500 
+     integer :: ierr, i, j, k 
+     real :: Bmnc(-N_max:N_max,-M_max:M_max), Bmns(-N_max:N_max,-M_max:M_max)
+     
+     namelist /magnetic_configuration/Np, iota, B_theta, B_zeta, Bmnc!, Bmns
+     
+     Stellarator_symmetry = .true. 
+     ! *** Read ddkes2.data parameters and magnetic field modes in DKES
+     ! format.
+     Bmnc = 0    
+     open(1, file= file_path, status="old") ; read(1, nml=magnetic_configuration, iostat=ierr)     
+     close(1)      
+     write(*,*) iota, Np, B_theta, B_zeta 
+     ! *** Storing flux-surface parameters  
+     B00 = Bmnc(0,0)   ; psi_p = 1 ; chi_p = 1
+     
+     ! *** Store the magnetic field strength modes in global variables
+     N_modes = count( Bmnc /= 0 )   
+     if( allocated(B_mnc) ) deallocate(B_mnc, mn)   
+     allocate( B_mnc(N_modes), mn(N_modes,2) ) 
+     
+     k = 1
+     do i = -M_max, M_max
+        do j = -N_max, N_max
+        
+           ! Store the non zero modes
+           if( Bmnc(i,j) /= 0 ) then 
+             mn(k,:) = [ i, j ] 
+             B_mnc(k) = Bmnc(i,j)    
+                   
+             k = k + 1
+           end if
+        
+        end do
+     end do      
+     
+     Aspect_ratio = 1 ; Minor_Radius= 0 ; Major_Radius = 0
+     call Write_Magnetic_Configuration
+     Boozer_coordinates = .true. 
+   end subroutine
       
       
    ! *** Read the DKES input file "ddkes2.data" stored in "file_path"
