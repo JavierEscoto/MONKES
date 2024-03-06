@@ -67,8 +67,8 @@ implicit none
           input_case = "ddkes2.data" 
         end if
       end if     
-    end if     
-    input_case = "monkes_input"
+    end if      
+    
   end subroutine
   
   
