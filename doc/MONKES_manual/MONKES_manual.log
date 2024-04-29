@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (MiKTeX 23.10) (format=lualatex 2023.11.2)  29 APR 2024 15:49
+This is LuaHBTeX, Version 1.17.0 (MiKTeX 23.10) (format=lualatex 2023.11.2)  29 APR 2024 15:53
  system commands enabled.
 **MONKES_manual.tex
 (./MONKES_manual.tex
@@ -1937,7 +1937,7 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 File: figures/8i7h5z.jpg Graphic file (type jpg)
 <use figures/8i7h5z.jpg>
 Package luatex.def Info: figures/8i7h5z.jpg  used on input line 28.
-(luatex.def)             Requested size: 225.84166pt x 226.74503pt.
+(luatex.def)             Requested size: 326.21487pt x 327.51974pt.
 
 [1
 
