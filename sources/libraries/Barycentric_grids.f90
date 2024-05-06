@@ -1,5 +1,7 @@
   module Barycentric_grids
   
+  use Linear_systems
+  
   implicit none
   
   
@@ -42,32 +44,6 @@
      
   end function
   
-  
-  function Barycentric_interpolant_OLD ( x, x_nodes, y_nodes, weights ) result(F)
-     real, intent(in) :: x(0:), x_nodes(0:), y_nodes(0:)
-     real, optional, intent(in) :: weights(0:size(x)-1)
-     real :: F(0:size(x)-1)
-  
-     real :: w(0:size(x_nodes)-1), dx(0:size(x_nodes)-1)  
-     integer :: i, j, N, M
-     
-     if(       present(weights) ) w = weights
-     if( .not. present(weights) ) w = Barycentric_weights(x_nodes)
-     
-     M = size(x) - 1 ; N = size(x_nodes) - 1
-     
-     do i = 0, M
-        dx = [( x(i)-x_nodes(j), j =0,N)]
-        
-        if( minval( abs(dx) ) > 0 ) then        
-           dx = w / dx           
-           F(i) = dot_product ( dx, y_nodes ) / sum( dx )        
-        else           
-           F(i) = y_nodes(i)        
-        end if      
-     end do
-     
-  end function
   
   function Barycentric_derivatives( x, p, weights ) result(D)
      real, intent(in) :: x(0:)
@@ -348,6 +324,176 @@
      end do
      
   end function 
+  
+  
+  
+  ! Gives the n+1 zeros of an orthogonal polynomial p_{n+1} which satisfies
+  ! the three-term recurrence relation 
+  ! u(n) p_{n+1}(x) = ( x - d(n) ) p_{n}(x) - l(n) p_{n-1}(x)
+  ! where l(n) * u(n) > 0.
+  !    -- Inputs: l, d, u : vectors of size n+1 containing the coefficients of the recurrence
+  !                     n : number of zeros calculated minus one. 
+  !    -- Output:       x : vector of size n+1 containing the zeros of p_{n+1}(x).
+  subroutine Zeros_orthogonal_polynomial( l, d, u, n, x, w ) 
+     real, intent(in) :: l(0:n), d(0:n), u(0:n)
+     integer, intent(in) :: n
+     real, intent(out) :: x(0:n), w(0:n) 
+     
+     real :: Jacobi(0:n,0:n), V(0:n,0:n) 
+     integer :: k
+     
+     ! Jacobi matrix  
+     Jacobi = 0 
+     do k = 0, n
+        Jacobi(k,k) = d(k)  
+        if( k < n ) Jacobi(k,k+1) = sqrt( l(k+1) * u(k) )
+        if( k < n ) Jacobi(k+1,k) = Jacobi(k,k+1)
+     end do
+     
+     ! Zeros as eigenvalues of the Jacobi matrix  
+     call Eigenvalues_Jacobi_LAPACK( Jacobi, x, V ) 
+     w = V(0,:)**2 
+     
+  end subroutine 
+  
+  
+  ! Gives the n+1 zeros of an orthonormal polynomial p_{n+1} which satisfies
+  ! the three-term recurrence relation 
+  ! l(n+1) p_{n+1}(x) = ( x - d(n) ) p_{n}(x) - l(n) p_{n-1}(x)
+  ! where l(n) > 0.
+  !    -- Inputs: l, d : vectors of size n+1 containing the coefficients of the recurrence
+  !                  n : number of zeros calculated minus one. 
+  !    -- Output:    x : vector of size n+1 containing the zeros of p_{n+1}(x).
+  subroutine Zeros_orthonormal_polynomial( l, d, n, x, w ) 
+     real, intent(in) :: l(0:n), d(0:n) 
+     integer, intent(in) :: n
+     real, intent(out) :: x(0:n), w(0:n) 
+     
+     real :: Jacobi(0:n,0:n), V(0:n,0:n) 
+     integer :: k
+     
+     ! Jacobi matrix  
+     Jacobi = 0 
+     do k = 0, n
+        Jacobi(k,k) = d(k)  
+        if( k < n ) Jacobi(k,k+1) = l(k+1)  
+        if( k < n ) Jacobi(k+1,k) = Jacobi(k,k+1)
+     end do
+     
+     ! Zeros as eigenvalues of the Jacobi matrix  
+     call Eigenvalues_Jacobi_LAPACK( Jacobi, x, V ) 
+     w = V(0,:)**2 
+     
+  end subroutine 
+  
+  
+  
+  ! Given an integer N gives the ORTHONORMAL Maxwell polynomials up to degree N.
+  ! Maxwell polynomials are orthogonal w.r.t to the weight function 
+  ! exp(-x^2)  in the domain [0, infinity). 
+  ! It has been tested that the tuning parameters "cut_off", "limit", "key"
+  ! "abs_tol", "rel_tol" work up to "N=~210". For bigger values of N,
+  ! the algorithm fails due to ill conditioning of the moment approach.
+  ! (Perhaps in the future implement with a Chebyshev modified moment algorithm).
+  subroutine Maxwell_polynomials( N, l, d, x, w )
+     integer, intent(in) :: N
+     real, intent(out) :: l(0:N+1), d(0:N)
+     real, optional, intent(out) :: x(0:N), w(0:N)
+     
+     integer, parameter :: inf = 1, key = 6 
+     real, dimension(18*N) :: alist, blist, rlist, elist !workspacesize=18*N
+     integer, dimension(18*N) :: iord
+     real, parameter :: pi = acos(-1d0), abs_tol = 0, rel_tol =1e-13, cut_off = 100
+     real :: mu_0 , abs_err, ll
+     integer :: i, k, N_evals, ierr, last, limit
+     
+     limit = 18*N
+     mu_0 = sqrt(pi/4)     
+     
+     l = 1 ;  d = 0
+     l(0) = 0 ; d(0) = 0.5/mu_0 ! Analytical
+     
+     do i = 0, N ; k = i
+        ! *** Compute d(k) 
+        if( i > 0 )  &
+          ! Integral between [0, cut_off]  as approximation to [0, infinity) 
+          call dqage( Integrand_d_k, 0d0, cut_off, abs_tol, rel_tol, key, limit,d(i), abs_err, &
+                      N_evals, ierr, alist, blist, rlist, elist, iord, last)           
+                     
+        ! *** Compute l(k+1)**2  
+        ! Integral between [0, cut_off]  as approximation to [0, infinity) 
+        call dqage( Integrand_l_k1, 0d0, cut_off, abs_tol, rel_tol, key, limit, ll, abs_err , &
+                    N_evals, ierr, alist, blist, rlist, elist, iord, last) 
+        
+        ! Compute l(k+1)
+        l(i+1) = sqrt( ll )  
+                 
+     end do 
+     
+     ! *** Zeros and weights of Maxwell polynomials   
+     if( present(x) .and. present(w) ) then
+       call Zeros_orthonormal_polynomial( l, d, N, x, w )    
+       w = w * mu_0 
+     end if 
+     
+     contains
+
+  function Orthon_polynom(x,n) result(P)
+     real, intent(in) :: x
+     integer, intent(in) :: n
+     real :: P
+     
+     real :: P0, P1 
+     integer :: k
+     
+     ! P_{-1} = 0, P_0 = 1/sqrt(mu_0)
+     P0 = 0 ; P1 = 1/sqrt(mu_0) ; P = P1
+     do k = 0, n-1
+        P = ( x - d(k) ) * P1  - l(k) * P0
+        P = P / l(k+1)
+        
+        P0 = P1
+        P1 = P 
+     end do
+     
+  
+  end function 
+  
+  function Weight_function(x) result(w)
+     real, intent(in) :: x
+     real :: w
+    
+     w = exp(-x**2) 
+  
+  end function
+  
+  function Integrand_d_k(x) result(F)
+     real, intent(in) :: x
+     real :: F
+     
+     real :: w, p_k
+     
+     p_k = Orthon_polynom(x,k)
+     w = Weight_function(x) 
+     F = x * w * p_k **2
+  
+  end function 
+  
+  function Integrand_l_k1(x) result(F)
+     real, intent(in) :: x
+     real :: F
+     
+     real :: w, p_k1
+     
+     p_k1 = Orthon_polynom(x,k+1)
+     w = Weight_function(x) 
+     F = w * p_k1**2
+  
+  end function 
+  
+  end subroutine 
+  
+  
   
   
   end module

@@ -14,7 +14,7 @@ implicit none
   write(*,*) " Author: F. Javier Escoto Lopez (javier.escoto.lopez@gmail.com) "
   write(*,*) " ****************************************************** "
   write(*,*)  
-    
+   
   
   ! *** Select input type: BOOZER_XFORM output or DKES input
   call Select_Input(input_case) 
@@ -40,8 +40,15 @@ implicit none
                   nor 'ddkes2.data' in this folder. "
      
   end select
-
+  
+  ! *** Select the case: Either a monoenergetic database for specified collisionalities 
+  ! or neoclassical flows (WORK IN PROGRESS).
   call Monoenergetic_Database_Input
+  
+  
+  ! *** Test of speed grid using Maxwell polynomials (WORK IN PROGRESS)
+  !call Monoenergetic_Database_Maxwell_points ; stop
+  
   
   contains
   

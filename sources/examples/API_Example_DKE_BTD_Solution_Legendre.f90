@@ -2,11 +2,14 @@ module API_Example_DKE_BTD_Solution_Legendre
 
   use DKE_BTD_Solution_Legendre
   use Finite_differences
+  use Barycentric_grids
+  
   implicit none
   
   private
   
   public :: Monoenergetic_Database_Input
+  public :: Monoenergetic_Database_Maxwell_points
   
   
   
@@ -25,12 +28,13 @@ module API_Example_DKE_BTD_Solution_Legendre
      integer, parameter :: M_xi_DF_max = 500, M_lambda_max = 500 
      integer :: N_xi_DF(M_xi_DF_max), N_lambda(M_lambda_max)  
      integer :: M_xi_DF, M_lambda   
-     logical :: Monoenergetic_lambda
-     integer :: i, j, k, ii, jj, kk, iii, kkk, c0, c1, rate
+     logical :: Monoenergetic_lambda, Monoenergetic_theta_zeta = .true.
+     integer :: i, j, k, ii, jj, kk, iii, kkk, c0, c1, rate, i_theta, i_zeta
      real :: t_clock, t_cpu, t0, t1, lambda_c
      real, allocatable :: F1(:,:,:), F3(:,:,:), Gamma_ij(:,:,:), lambda(:)
      real, allocatable :: dGamma_ij_dlambda(:,:,:) 
      real, allocatable :: D(:,:,:,:,:,:,:), D_33_Sp(:,:,:,:,:)  
+     real, allocatable :: Dij_FS(:,:,:,:)
      character(len=500) :: file_path
      
      call system_clock(count_rate=rate) ! Get click rate
@@ -120,17 +124,28 @@ module API_Example_DKE_BTD_Solution_Legendre
                              " CPU time [s] "
      ! OPEN (if necessary) monkes_Monoenergetic_lambda.dat
      if( Monoenergetic_lambda ) then     
-     open(31, file=trim("monkes_Monoenergetic_lambda.dat"))
-     write(31,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
-                             " N_theta ", " N_zeta ", " N_xi ", &
-                             " D_11 ", " D_31 ", &
-                             " D_13 ", " D_33 ", &
-                             " D_33_Spitzer ",   &
-                             " M_xi ", " lambda ", " lambda_c ", & 
-                             " d_11 ", " d_31 ", &
-                             " d_13 ", " d_33 ", &
-                             " d d_11 / dlambda ", " d d_31 / dlambda ", &
-                             " d d_13 / dlambda ", " d d_33 / dlambda  "
+       open(31, file=trim("monkes_Monoenergetic_lambda.dat"))
+       write(31,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+                               " N_theta ", " N_zeta ", " N_xi ", &
+                               " D_11 ", " D_31 ", &
+                               " D_13 ", " D_33 ", &
+                               " D_33_Spitzer ",   &
+                               " M_xi ", " lambda ", " lambda_c ", & 
+                               " d_11 ", " d_31 ", &
+                               " d_13 ", " d_33 ", &
+                               " d d_11 / dlambda ", " d d_31 / dlambda ", &
+                               " d d_13 / dlambda ", " d d_33 / dlambda  "
+     endif     
+     if( Monoenergetic_theta_zeta ) then     
+       open(41, file=trim("monkes_Monoenergetic_theta_zeta.dat"))
+       write(41,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+                               " N_theta ", " N_zeta ", " N_xi ", &
+                               " D_11 ", " D_31 ", &
+                               " D_13 ", " D_33 ", &
+                               " D_33_Spitzer ",   &
+                               " theta ", " zeta ", & 
+                               " d_11 ", " d_31 ", &
+                               " d_13 ", " d_33 " 
      endif     
      do j = 1, N_E_r ! Loop electric field value
         do i = 1, N_nu ! Loop collisionality value   
@@ -181,7 +196,36 @@ module API_Example_DKE_BTD_Solution_Legendre
                                         t_clock, t1-t0 
                           flush(21)
 
-
+                          ! Call the routine that computes Dij as (theta,zeta) functions                             
+                          if( Monoenergetic_theta_zeta ) then     
+                            
+                            if( allocated(Dij_FS) ) deallocate(Dij_FS) 
+                            allocate( Dij_FS(0:N_theta(ii),0:N_zeta(jj),3,3) )                        
+                            call Monenergetic_theta_zeta_function( N_theta(ii), N_zeta(jj), F1(:,:,0:2), F3(:,:,0:2), Dij_FS )
+                            
+                            do i_zeta = 0, N_zeta(jj)
+                               do i_theta = 0, N_theta(ii)
+                                  write(41,'(9999e25.16)') nu(i), E_r(j),         &   
+                                                    real(N_theta(ii)),            &
+                                                    real(N_zeta(jj)),             &
+                                                    real(N_xi(kk)),               &
+                                                    D(1,1,i,j,ii,jj,kk),          &
+                                                    D(3,1,i,j,ii,jj,kk),          &
+                                                    D(1,3,i,j,ii,jj,kk),          &
+                                                    D(3,3,i,j,ii,jj,kk),          &
+                                                    D_33_Sp(i,j,ii,jj,kk),        &
+                                                    theta(i_theta),               & 
+                                                    zeta(i_zeta),                 & 
+                                                    Dij_FS(i_theta, i_zeta, 1,1), &
+                                                    Dij_FS(i_theta, i_zeta, 3,1), &
+                                                    Dij_FS(i_theta, i_zeta, 1,3), &
+                                                    Dij_FS(i_theta, i_zeta, 3,3) 
+                                  flush(41)
+                               end do
+                            end do 
+                          endif  
+                          
+                               
                           if( Monoenergetic_lambda ) then
 					   
                              allocate( lambda(0:N_lambda(iii)), Gamma_ij(3,3,0:N_lambda(iii)) )
@@ -241,10 +285,45 @@ module API_Example_DKE_BTD_Solution_Legendre
      close(21) ! close monkes_Monoenergetic_database.dat
      ! CLOSE (if necessary) monkes_Monoenergetic_lambda.dat 
      if( Monoenergetic_lambda ) close(31)
+     ! CLOSE (if necessary) monkes_Monoenergetic_theta_zeta.dat 
+     if( Monoenergetic_theta_zeta )  close(41)
      
   end subroutine
   
-
+  
+  ! *** Compute a mononergetic database for nu(v)/v correspondent to
+  ! Maxwell points.
+  subroutine Monoenergetic_Database_Maxwell_points
+     integer, parameter :: Nx = 80 
+     real, parameter :: pi = acos(-1d0) 
+     real :: x(0:Nx), w(0:Nx), l(0:Nx+1), d(0:Nx) 
+     integer :: k 
+     
+     
+     call Maxwell_polynomials( Nx, l, d, x, w )
+     
+     write(*,*) " l(k), d(k) "
+     do k = 0, Nx
+        write(*,*) l(k), d(k) 
+     end do
+     write(*,*) " x(k), w(k) "
+     do k = 0, Nx
+        write(*,*) x(k), w(k)
+     end do
+     write(*,*)
+     
+     do k = 0, Nx
+         
+        call Maxwell_polynomials( k, l(0:k), d(0:k), x(0:k), w(0:k) )  
+        
+        write(*,*) k , dot_product( sin(x(0:k)**2), w(0:k) ), 0.5* sqrt( pi /sqrt(2d0) ) * sin(pi/8)
+        write(*,*) k , dot_product( sin(x(0:k))+2*x(0:k)*cos(x(0:k)), w(0:k) ), 1d0
+        write(*,*) k , dot_product( 1d0/(1+x(0:k))-2*x(0:k)*log(1+x(0:k)), w(0:k) ), 0d0
+        write(*,*) k , dot_product( 0.5/sqrt( 1d-2 + x(0:k) )-2*x(0:k)*sqrt(1d-2+ x(0:k) ), w(0:k) ), -sqrt(1d-2)
+         
+     end do
+  
+  end subroutine 
 
 
 end module

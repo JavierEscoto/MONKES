@@ -16,6 +16,7 @@ LFLAGS=-L$(NETCDFF_LIB) -L$(MKL_LIB) -qmkl=parallel -Wl,-rpath,$(MKL_LIB)/lib/in
 
 # *** Defining objects for: modules, examples and main in that order
 objects = \
+quadpack.o \
 Utilities.o \
 Sparse_Matrices.o \
 Linear_systems.o \
@@ -56,6 +57,9 @@ Magnetic_configuration.o: ../sources/libraries/Magnetic_configuration.f90
 
 plots.o: ../sources/libraries/plots.f90
 	$(f90comp) -c $(FFLAGS) ../sources/libraries/plots.f90
+	
+quadpack.o: ../sources/libraries/quadpack.f
+	$(f90comp) -c $(FFLAGS) ../sources/libraries/quadpack.f
 
 Utilities.o: ../sources/libraries/Utilities.f90
 	$(f90comp) -c $(FFLAGS) ../sources/libraries/Utilities.f90  

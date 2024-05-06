@@ -14,6 +14,8 @@ module DKE_BTD_Solution_Legendre
 
    public :: Solve_BTD_DKE_Legendre_DF 
    public :: Monoenergetic_lambda_function
+   public :: Monenergetic_theta_zeta_function    
+   public :: theta, zeta ! Don't know if I like this. DONE FOR Dij dependence on (theta, zeta)
    
    real, parameter :: pi = acos(-1d0)   
       
@@ -370,7 +372,118 @@ module DKE_BTD_Solution_Legendre
              
   end subroutine
    
-   
+  subroutine Monenergetic_theta_zeta_function( N_theta, N_zeta, F1, F3, Dij )                                      
+      integer, intent(in) :: N_theta, N_zeta 
+      real, intent(in)  :: F1(0:N_theta-1,0:N_zeta-1,0:2), &
+                           F3(0:N_theta-1,0:N_zeta-1,0:2)                            
+      real, intent(out) :: Dij(0:N_theta, 0:N_zeta,3,3) 
+      
+      real :: Dij_theta(0:N_theta,3,3),  Dij_zeta(0:N_zeta,3,3)
+                           
+      real :: D11(0:N_theta,0:N_zeta), D31(0:N_theta,0:N_zeta)
+      real :: D13(0:N_theta,0:N_zeta), D33(0:N_theta,0:N_zeta)
+                                                      
+      logical, parameter :: timing = .false.
+      real :: U1(0:N_theta,0:N_zeta,0:2), U3(0:N_theta,0:N_zeta,0:2) 
+      integer :: i, j, k, kk, c0, c1, c_rate
+      
+      if(timing) call system_clock(count_rate=c_rate) ! Get click rate
+      if(timing) call system_clock(c0)
+      
+      ! *** Legendre modes in periodic grid with repeated point.  
+      do j = 0, N_zeta
+         do i = 0, N_theta
+            U1(i,j,:) = F1( modulo(i,N_theta), modulo(j,N_zeta), :)
+            U3(i,j,:) = F3( modulo(i,N_theta), modulo(j,N_zeta), :)                
+         end do
+      end do                
+                
+      ! *** Antiderivatives \int_{0}^{zeta} \int_{0}^{theta} f(theta',zeta') d{theta'}d{zeta'}     
+      D11 = Antiderivative( ["theta","zeta "], "theta", g * ( -2*vm(:,:,0) * U1(:,:,0) - 2*vm(:,:,2) * U1(:,:,2)/5 ) ) / V_prime 
+      D11 = Antiderivative( ["theta","zeta "], "zeta", D11  )   
+      
+      D31 = Antiderivative( ["theta","zeta "], "theta", g * 2* U1(:,:,1) * B/3 ) / V_prime 
+      D31 = Antiderivative( ["theta","zeta "], "zeta", D31 )
+      
+      D13 = Antiderivative( ["theta","zeta "], "theta", g * ( -2 * vm(:,:,0) * U3(:,:,0) - 2* vm(:,:,2) * U3(:,:,2) / 5 ) ) / V_prime
+      D13 = Antiderivative( ["theta","zeta "], "zeta", D13 )  
+      
+      D33 = Antiderivative( ["theta","zeta "], "theta", g * 2 * B * U3(:,:,1) /3 ) / V_prime  
+      D33 = Antiderivative( ["theta","zeta "], "zeta", D33 )
+     
+      ! ** Scaling to match DKES normalization
+      D11 = D11 / psi_p**2 
+      D31 = D31 / (psi_p * B00)  
+      D13 = D13 / (psi_p * B00)
+      D33 = D33 / B00**2    
+      
+      do j = 1,2 
+         Dij(:,:,3,j) = D31  
+         Dij(:,:,j,3) = D13  
+         do i = 1,2
+            Dij(:,:,i,j) = D11                    
+         end do  
+      end do       
+      Dij(:,:,3,3) = D33  
+      
+      do j = 1,2 
+         Dij_theta(:,3,j) = D31(:,N_zeta)
+         Dij_theta(:,j,3) = D13(:,N_zeta)
+         Dij_zeta(:,3,j) = D31(N_theta,:)
+         Dij_zeta(:,j,3) = D13(N_theta,:)
+         do i = 1,2
+            Dij_theta(:,i,j) = D11(:,N_zeta)            
+            Dij_zeta(:,i,j) = D11(N_theta,:)            
+         end do  
+      end do       
+      Dij_theta(:,3,3) = D33(:,N_zeta)
+      Dij_zeta(:,3,3) = D33(N_theta,:)
+            
+      open(111,file="Dij_theta.dat")
+      write(111,'(9999A25)') "theta", "D11", "D31", "D13", "D33"
+      do i = 0, N_theta
+         write(111,'(9999e25.16)') theta(i), Dij_theta(i,1,1), Dij_theta(i,3,1), &
+                                             Dij_theta(i,1,3), Dij_theta(i,3,3)
+      end do      
+      close(111)          
+            
+      open(111,file="Dij_zeta.dat")
+      write(111,'(9999A25)') "theta", "zeta", "D11"
+      do j = 0, N_zeta 
+         write(111,'(9999e25.16)') zeta(j), Dij_zeta(j,1,1), Dij_zeta(j,3,1), &
+                                            Dij_zeta(j,1,3), Dij_zeta(j,3,3)    
+      end do      
+      close(111)          
+                      
+      
+      open(111,file="D31_theta_zeta.dat")
+      write(111,'(9999A25)') "theta", "zeta", "D31"
+      do j = 0, N_zeta
+         do i = 0, N_theta
+            write(111,'(9999e25.16)') theta(i), zeta(j),  D31(i,j)     
+         end do
+      end do      
+      close(111)          
+      
+      open(111,file="D13_theta_zeta.dat")
+      write(111,'(9999A25)') "theta", "zeta", "D13"
+      do j = 0, N_zeta
+         do i = 0, N_theta
+            write(111,'(9999e25.16)') theta(i), zeta(j),  D13(i,j)     
+         end do
+      end do      
+      close(111)          
+      
+      open(111,file="D33_theta_zeta.dat")
+      write(111,'(9999A25)') "theta", "zeta", "D33"
+      do j = 0, N_zeta
+         do i = 0, N_theta
+            write(111,'(9999e25.16)') theta(i), zeta(j),  D33(i,j)     
+         end do
+      end do      
+      close(111)          
+                           
+  end subroutine 
    
   subroutine Monoenergetic_lambda_function( N_lambda, N_theta, N_zeta, &
                                                 N_xi, M_xi, F1, F3,        &

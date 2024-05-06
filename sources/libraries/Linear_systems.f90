@@ -6,6 +6,31 @@ module Linear_systems
 
 contains 
  
+ ! Computes the eigenvalues lambda and optionally eigenvectors V
+ ! of a SYMMETRIC, TRIDIAGONAL matrix A
+ subroutine Eigenvalues_Jacobi_LAPACK( A, lambda, V )
+    real, intent(in) :: A(:,:)
+    real, intent(out) :: lambda( size(A,dim=1) )
+    real, optional, intent(out) :: V( size(A,dim=1), size(A,dim=2) )
+    
+    character(len=1) :: jobz="N" ! For LAPACK routine
+    real  :: work( max(1,2*size(A,dim=1)-2) )  
+    real  :: E( size(A,dim=1) -1) ! Non-Diagonal elements of A
+    
+    integer :: N, info, i 
+    
+    if( present(V) ) jobz="V" ! To compute eigenvectors
+    
+    N = size(A,dim=1)
+    lambda = [(A(i,i), i=1,N)] ! Diagonal elements of A
+    E = [(A(i,i+1), i=1,N-1)]  ! Non-Diagonal elements of A
+     
+    call dstev( jobz, N, lambda, E, V, N, work, info  )       
+ 
+ end subroutine 
+ 
+ 
+ 
  ! Computes C = A*B
  function matmul_LAPACK( A, B ) result(C)
     real, intent(in) :: A(:,:), B(:,:) 
