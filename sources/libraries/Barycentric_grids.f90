@@ -393,8 +393,8 @@
   ! exp(-x^2)  in the domain [0, infinity). 
   ! It has been tested that the tuning parameters "cut_off", "limit", "key"
   ! "abs_tol", "rel_tol" work up to 
-  !  "N=~210" (for Visual Studio project using ifort). 
-  !  "N=~95" (for gfortran Ubuntu version). 
+  !  "N=~200" (for Visual Studio project using ifort in Javi's laptop and ifort version in XULA). 
+  !  "N=~95" (for gfortran Ubuntu version in Javi's laptop). 
   ! 
   ! For bigger values of N, the algorithm fails due to ill-conditioning of the moment approach.
   ! (Perhaps in the future implement with a Chebyshev modified moment algorithm).

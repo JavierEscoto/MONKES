@@ -12,6 +12,9 @@ module API_Example_DKE_BTD_Solution_Legendre
   public :: Monoenergetic_Database_Maxwell_points
   
   
+  ! TO BE ERASED:
+  
+  public :: Test_Maxwell_points
   
   contains  
   
@@ -311,6 +314,42 @@ module API_Example_DKE_BTD_Solution_Legendre
         write(*,*) x(k), w(k)
      end do
      write(*,*)
+     
+     do k = 0, Nx
+         
+        call Maxwell_polynomials( k, l(0:k), d(0:k), x(0:k), w(0:k) )  
+        
+        write(*,*) k , dot_product( sin(x(0:k)**2), w(0:k) ), 0.5* sqrt( pi /sqrt(2d0) ) * sin(pi/8)
+        write(*,*) k , dot_product( sin(x(0:k))+2*x(0:k)*cos(x(0:k)), w(0:k) ), 1d0
+        write(*,*) k , dot_product( 1d0/(1+x(0:k))-2*x(0:k)*log(1+x(0:k)), w(0:k) ), 0d0
+        write(*,*) k , dot_product( 0.5/sqrt( 1d-2 + x(0:k) )-2*x(0:k)*sqrt(1d-2+ x(0:k) ), w(0:k) ), -sqrt(1d-2)
+         
+     end do
+  
+  end subroutine 
+
+
+  
+  ! *** Test to check up until which Nx, using Maxwell polynomials works. 
+  ! For smooth functions, convergence is excellent.
+  subroutine Test_Maxwell_points
+     integer, parameter :: Nx = 200 
+     real, parameter :: pi = acos(-1d0) 
+     real :: x(0:Nx), w(0:Nx), l(0:Nx+1), d(0:Nx) 
+     integer :: k 
+     
+     
+     !call Maxwell_polynomials( Nx, l, d, x, w )
+     !
+     !write(*,*) " l(k), d(k) "
+     !do k = 0, Nx
+     !   write(*,*) l(k), d(k) 
+     !end do
+     !write(*,*) " x(k), w(k) "
+     !do k = 0, Nx
+     !   write(*,*) x(k), w(k)
+     !end do
+     !write(*,*)
      
      do k = 0, Nx
          
