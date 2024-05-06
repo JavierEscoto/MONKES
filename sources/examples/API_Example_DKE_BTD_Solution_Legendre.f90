@@ -294,7 +294,7 @@ module API_Example_DKE_BTD_Solution_Legendre
   ! *** Compute a mononergetic database for nu(v)/v correspondent to
   ! Maxwell points.
   subroutine Monoenergetic_Database_Maxwell_points
-     integer, parameter :: Nx = 80 
+     integer, parameter :: Nx = 100 
      real, parameter :: pi = acos(-1d0) 
      real :: x(0:Nx), w(0:Nx), l(0:Nx+1), d(0:Nx) 
      integer :: k 

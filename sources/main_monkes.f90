@@ -15,6 +15,7 @@ implicit none
   write(*,*) " ****************************************************** "
   write(*,*)  
    
+  call Monoenergetic_Database_Maxwell_points ; stop
   
   ! *** Select input type: BOOZER_XFORM output or DKES input
   call Select_Input(input_case) 
