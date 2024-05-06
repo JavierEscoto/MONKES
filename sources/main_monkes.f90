@@ -14,9 +14,7 @@ implicit none
   write(*,*) " Author: F. Javier Escoto Lopez (javier.escoto.lopez@gmail.com) "
   write(*,*) " ****************************************************** "
   write(*,*)  
-   
-  call Monoenergetic_Database_Maxwell_points ; stop
-  
+      
   ! *** Select input type: BOOZER_XFORM output or DKES input
   call Select_Input(input_case) 
   call Select_surface  ! Select flux surface (needed for BOOZER_XFORM output)
@@ -48,7 +46,7 @@ implicit none
   
   
   ! *** Test of speed grid using Maxwell polynomials (WORK IN PROGRESS)
-  !call Monoenergetic_Database_Maxwell_points ; stop
+  call Monoenergetic_Database_Maxwell_points ; stop
   
   
   contains
