@@ -7,6 +7,8 @@ implicit none
   
   character(len=30) :: input_case="none"
   
+  logical :: Neoclassical_flows=.false.
+  
   write(*,*) " ****************************************************** "
   write(*,*) " This is MONKES: "
   write(*,*) " MONoenergetic Kinetic Equation Solver "
@@ -41,12 +43,12 @@ implicit none
   end select
   
   ! *** Select the case: Either a monoenergetic database for specified collisionalities 
-  ! or neoclassical flows (WORK IN PROGRESS).
-  call Monoenergetic_Database_Input
+  ! or neoclassical flows  
+  if( .not. Neoclassical_flows ) call Monoenergetic_Database_Input
   
   
   ! *** Test of speed grid using Maxwell polynomials (WORK IN PROGRESS)
-  call Monoenergetic_Database_Maxwell_points ; stop
+  if( Neoclassical_flows ) call Monoenergetic_Database_Maxwell_points  
   
   
   contains
