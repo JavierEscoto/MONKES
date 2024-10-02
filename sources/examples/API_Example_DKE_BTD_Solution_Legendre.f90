@@ -31,7 +31,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      integer, parameter :: M_xi_DF_max = 500, M_lambda_max = 500 
      integer :: N_xi_DF(M_xi_DF_max), N_lambda(M_lambda_max)  
      integer :: M_xi_DF, M_lambda   
-     logical :: Monoenergetic_lambda, Monoenergetic_theta_zeta = .true.
+     logical :: Monoenergetic_lambda, Monoenergetic_theta_zeta = .false.
      integer :: i, j, k, ii, jj, kk, iii, kkk, c0, c1, rate, i_theta, i_zeta
      real :: t_clock, t_cpu, t0, t1, lambda_c
      real, allocatable :: F1(:,:,:), F3(:,:,:), Gamma_ij(:,:,:), lambda(:)

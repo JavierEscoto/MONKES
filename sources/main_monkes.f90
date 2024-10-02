@@ -16,10 +16,7 @@ implicit none
   write(*,*) " Author: F. Javier Escoto Lopez (javier.escoto.lopez@gmail.com) "
   write(*,*) " ****************************************************** "
   write(*,*)  
-  
-  ! TO BE ERASED: 
-  !call Test_Maxwell_points ; stop
-  
+     
       
   ! *** Select input type: BOOZER_XFORM output or DKES input
   call Select_Input(input_case) 
