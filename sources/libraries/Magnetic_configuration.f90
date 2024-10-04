@@ -8,6 +8,7 @@ module Magnetic_configuration
    
    public :: read_ddkes2data, read_boozer_xform_output
    public :: read_VMEC_output, read_MONKES_input_configuration
+   public :: read_boozer_txt
    public :: Select_Surface
    public :: Beidler_NF_2011_Normalization
    
@@ -443,7 +444,101 @@ module Magnetic_configuration
      write(*,*) 
   end subroutine 
   
-
+  
+  subroutine read_boozer_txt(s0)
+    real, intent(in) :: s0
+    real, parameter :: pi = acos(-1d0), mu0_o_2pi = 2d-7
+    
+    integer, parameter :: N_file_header = 7, &
+                          N_parameters_header = 1, &
+                          N_fs_parameters_header = 2, &
+                          N_modes_header = 1 
+    integer :: i, j, k, N_modes_txt
+    character(len=100) :: file_header, parameters_header, modes_header
+    integer, allocatable :: mn_v(:,:)
+    real, allocatable :: r_mn_v(:,:), z_mn_v(:,:), dphi_mn_v(:,:)
+    real, allocatable :: B_mn_v(:,:), s_v(:), iota_v(:), B_theta_v(:), B_zeta_v(:)  
+    real, allocatable :: B_mnc_txt(:), mn_txt(:,:) 
+    integer :: m_max, n_max, Ns
+    real :: tor_flux, a, R, avol, rvol, Vol, dp_ds, sqrt_g_00
+    real :: B_mnc_min
+    
+    ! Read header of version, year, author...
+    open(1, file="boozer.txt")
+    do i = 1, N_file_header 
+       read(1,'(A)') file_header 
+       write(*,*) file_header
+    end do
+    
+    ! *** Read m_max, n_max, #surfaces, #field-periods, toroidal flux,
+    ! minor radius, major radius, avol, rvol, Vol
+    do i = 1, N_parameters_header ! Read header 
+       read(1,'(A)') parameters_header  
+       write(*,*) parameters_header
+    end do
+    read(1,*)  m_max, n_max, Ns, Np, tor_flux, a, R, avol, rvol, Vol
+    !write(*,*) m_max, n_max, Ns, Np, tor_flux, a, R, avol, rvol, Vol
+    
+    ! *** Read flux-surface parameters and Fourier modes for each surface
+    N_modes_txt = 1 + (m_max+1)*(2*n_max) ! Number of Fourier modes in the txt
+    allocate( s_v(Ns), iota_v(Ns), B_theta_v(Ns), B_zeta_v(Ns) )    
+    allocate( mn_v(N_modes_txt,2), B_mn_v(N_modes_txt, Ns) )
+    allocate( r_mn_v(N_modes_txt, Ns), z_mn_v(N_modes_txt, Ns), dphi_mn_v(N_modes_txt, Ns) )
+    do j = 1, Ns ! loop on flux-surfaces
+    
+       do i = 1, N_fs_parameters_header  ! Read header 
+          read(1,'(A)') parameters_header   ! write(*,*) parameters_header
+       end do
+       read(1,*) s_v(j), iota_v(j), B_zeta_v(j), B_theta_v(j), dp_ds, sqrt_g_00
+       !write(*,*) s_v(j), iota_v(j), B_zeta_v(j), B_theta_v(j), dp_ds, sqrt_g_00
+       
+       ! *** Read Fourier modes 
+       do i = 1, N_modes_header  ! Read header 
+          read(1,'(A)') modes_header  ! write(*,*) modes_header 
+       end do
+       
+       do k = 1, N_modes_txt  ! Loop on Fourier modes         
+          read(1,*)  mn_v(k,1), mn_v(k,2), r_mn_v(k, j), z_mn_v(k, j), dphi_mn_v(k, j), B_mn_v(k, j)
+          !write(*,*) mn_v(k,1), mn_v(k,2), r_mn_v(k, j), z_mn_v(k, j), dphi_mn_v(k, j), B_mn_v(k, j)       
+       end do 
+       
+    end do
+    close(1) 
+    
+    ! Interpolate quantities to given surface s0 and adapt normalizations
+    ! and definitions.
+    Minor_Radius = a ; Major_Radius = R ; Aspect_ratio = R/a
+    iota  = -Linear_Interpolation( s0, s_v, iota_v )  
+    B_theta  = Linear_Interpolation( s0, s_v, B_theta_v )  
+    B_zeta  = Linear_Interpolation( s0, s_v, B_zeta_v )  
+    B_theta=-B_theta * Np* mu0_o_2pi
+    B_zeta=B_zeta * Np * mu0_o_2pi
+    tor_flux = tor_flux/(2*pi)
+    psi_p = 2*tor_flux*sqrt(s0)/a
+    chi_p = iota * psi_p
+    
+    allocate( B_mnc_txt(N_modes_txt), mn_txt(N_modes_txt,2) )
+    
+    do k = 0, N_modes_txt 
+       mn_txt(k,:) = mn_v(k,:) 
+       B_mnc_txt(k) = Linear_Interpolation( s0, s_v, B_mn_v(k, :) )  
+       if( mn_txt(k,1) == 0 .and. mn_txt(k,2) == 0 ) B00 = B_mnc_txt(k) 
+    end do  
+    
+    ! Filter non relevant Fourier modes if necessary
+    if( N_modes_txt <= 150 ) B_mnc_min = 0
+    if( N_modes_txt >  150 ) B_mnc_min = 1d-5 * B00
+    
+    N_modes = count( abs(B_mnc_txt) >= B_mnc_min ) 
+    allocate( B_mnc(N_modes), mn(N_modes,2) )
+    B_mnc = pack( B_mnc_txt, abs(B_mnc_txt) >= B_mnc_min ) 
+    mn(:,1) = pack( mn_txt(:,1), abs(B_mnc_txt) >= B_mnc_min ) 
+    mn(:,2) = pack( mn_txt(:,2), abs(B_mnc_txt) >= B_mnc_min ) 
+    
+    call Write_Magnetic_Configuration
+    Boozer_coordinates = .true. ! Set logical for Boozer coordinates as true
+  
+  end subroutine 
 
 
   subroutine read_boozer_xform_output(s0)

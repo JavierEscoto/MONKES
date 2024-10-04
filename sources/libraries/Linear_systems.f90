@@ -135,7 +135,6 @@ contains
     integer, intent(inout) :: ipiv(size(A,dim=1)) 
     real, intent(out) :: X( size(B,dim=1), size(B,dim=2) ) 
     
-         
     logical, parameter :: timing = .false.  
     integer :: N, N_rhs, info
     integer :: c0, c1, c_rate ! for clock time      

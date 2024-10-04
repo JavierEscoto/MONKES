@@ -775,7 +775,7 @@ module DKE_BTD_Solution_Legendre
          
          do jj = 0, N_zeta
             do ii = 0, N_theta
-               i = modulo(i,N_theta) ; j = modulo(j,N_zeta) 
+               i = modulo(ii,N_theta) ; j = modulo(jj,N_zeta) 
                ff1(ii,jj) = f1(i,j)
                ff2(ii,jj) = f2(i,j)
             end do

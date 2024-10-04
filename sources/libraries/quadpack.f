@@ -30,7 +30,7 @@ c      EXTERNAL  ERRMSG
 
       IF( I.EQ.1 )  THEN
 c         D1MACH = 2.3D-308
-        SFINCS_D1MACH = TINY(1.D0)
+        D1MACH = TINY(1.D0)
       ELSE IF( I.EQ.2 )  THEN  
 c         D1MACH = 1.7D+308
         D1MACH = HUGE(1.D0)
