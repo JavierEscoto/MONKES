@@ -399,52 +399,53 @@ module Magnetic_configuration
    end function
 
   
-  ! *** Computes the normalization factor to traduce Gamma_ij to the 
-  ! normalized monoenergetic coefficient D_ij^* in  [Beidler, NF (2011)]
-  ! It also gives the factor to traduce nu/v to adimensional collisionality
-  ! nu^* and E_rho/v = a*E_r/v to v_E^ = E_r/(B00*v).
-   subroutine Beidler_NF_2011_Normalization( nu_f, E_rho_f, D11_f, D31_f )
-     real, optional, intent(out) :: nu_f, E_rho_f, D11_f, D31_f  
-     real, parameter :: pi = acos(-1d0) 
-     real:: nu_factor, E_rho_factor, D11_factor, D31_factor !, intent(out) 
+   
+  ! *** Computes the normalization factor to change K_{ij}*\hat{D}_ij
+  ! from [Escoto, NF (2024)] to the normalized monoenergetic coefficients
+  ! D_ij^* in  [Beidler, NF (2011)]. It also gives the factor to change
+  ! from nu/v to adimensional collisionality nu^* and v_E^ = E_r/(B00*v). 
+  subroutine Beidler_NF_2011_Normalization( nu_f, E_r_f, D11_f, D31_f )
+    real, optional, intent(out) :: nu_f, E_r_f, D11_f, D31_f  
+    real, parameter :: pi = acos(-1d0) 
+    real:: nu_factor, E_r_factor, D11_factor, D31_factor !, intent(out) 
      
-     real :: eps_t, fc 
-     
-     nu_factor = Major_Radius / abs(iota)
-     E_rho_factor = 1d0 /( B00 * Minor_Radius ) 
-     D11_factor = 8 * Minor_radius**2 * Major_radius * B00**2 * abs(iota) / pi
-     
-     eps_t = sqrt(s) * Minor_Radius / Major_Radius
-     fc = 1 - 1.46* sqrt(eps_t) 
-     D31_factor = - 1.5 * Minor_radius * iota * eps_t * B00 / (1-fc)
+    real :: eps_t, fc 
+    
+    nu_factor = Major_Radius / abs(iota)
+    E_r_factor = 1d0 /( B00  ) 
+    D11_factor = 8 * Major_radius * B00**2 * abs(iota) / pi
+    
+    eps_t = Minor_Radius / Major_Radius
+    fc = 1 - 1.46* sqrt(eps_t) 
+    D31_factor = 1.5 * abs(iota) * eps_t * B00 / (1-fc)
 
-     if( present(nu_f) )    nu_f = nu_factor
-     if( present(E_rho_f) ) E_rho_f = E_rho_factor
-     if( present(D11_f) )   D11_f = D11_factor
-     if( present(D31_f) )   D31_f = D31_factor
+    if( present(nu_f) )  nu_f = nu_factor
+    if( present(E_r_f) ) E_r_f = E_r_factor
+    if( present(D11_f) ) D11_f = D11_factor
+    if( present(D31_f) ) D31_f = D31_factor
 
-     
-     write(*,*) " *** Monoenergetic coefficients normalization parameters "
-     write(*,*) "     eps_t = sqrt(s) * Minor_Radius / Major_Radius = ",  eps_t
-     write(*,*) "     fc = 1 - 1.46* sqrt(eps_t) = ",  fc   ; write(*,*)
+    
+    write(*,*) " *** Monoenergetic coefficients normalization parameters "
+    write(*,*) "     eps_t = Minor_Radius / Major_Radius = ",  eps_t
+    write(*,*) "     fc = 1 - 1.46* sqrt(eps_t) = ",  fc   ; write(*,*)
 
-     write(*,*) " *** Factors relating nu/v and E_rho (rho=sqrt(s)=r/a) to "
-     write(*,*) "     nu^*  = nu * Major_radius / (v*iota) = nu_factor * nu /v  and "
-     write(*,*) "     v_E^* =  E_r/(B00*v) = E_rho_factor * E_rho"
-     write(*,*) "     nu_factor = ", nu_factor
-     write(*,*) "     E_rho_factor = ", E_rho_factor ; write(*,*)
+    write(*,*) " *** Factors relating nu/v and E_r/v to "
+    write(*,*) "     nu^*  = nu * Major_radius / (v*iota) = nu_factor * nu /v  and "
+    write(*,*) "     v_E^* =  E_r/(B00*v) = E_r_factor * E_rho"
+    write(*,*) "     nu_factor = ", nu_factor
+    write(*,*) "     E_r_factor = ", E_r_factor ; write(*,*)
 
-     
-     write(*,*) " *** Factors relating Gamma_ij to Dij^* "
-     write(*,*) "     Dij^* = Gamma_ij * Dij_factor "
-     write(*,*) "     D11_factor = 8 * Minor_radius**2 * Major_radius * B00**2 * abs(iota) / pi ", &
-                      D11_factor
-     write(*,*) "     D31_factor = - 1.5 * Minor_radius * iota * eps_t * B00 / (1-fc) ", &
-                      D31_factor
-     write(*,*) 
+    
+    write(*,*) " *** Factors relating K_{ij}*\hat{D}_ij to Dij^* from [Beidler, NF (2011)] "
+    write(*,*) "     Dij^* = K_{ij}*\hat{D}_ij * Dij_factor "
+    write(*,*) "     D11_factor = 8 * Major_radius * B00**2 * abs(iota) / pi ", &
+                     D11_factor
+    write(*,*) "     D31_factor = 1.5 * Minor_radius * abs(iota) * eps_t * B00 / (1-fc) ", &
+                     D31_factor
+    write(*,*) 
   end subroutine 
   
-  
+    
   subroutine read_boozer_txt(s0)
     real, intent(in) :: s0
     real, parameter :: pi = acos(-1d0), mu0_o_2pi = 2d-7

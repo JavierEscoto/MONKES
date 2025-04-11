@@ -85,7 +85,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      write(*,*) " nu/v [m^-1] "
      write(*,*) nu(1:N_nu)
      write(*,*)
-     write(*,*) " E_r/v [kV s /m^2] "
+     write(*,*) " E_r/v [V s /m^2] "
      write(*,*) E_r(1:N_E_r) 
      write(*,*)
      write(*,*) " *** Scan done using the resolutions "
@@ -110,7 +110,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      where( mod(N_zeta(1:M_zeta),2) == 0 )    N_zeta(1:M_zeta) = N_zeta(1:M_zeta) + 1     
      
      write(*,*) " *** Monoenergetic Database " 
-     write(*,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(*,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -123,7 +123,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      file_path = "monkes_Monoenergetic_Database.dat"     
      ! Open output file and write header
      open(21, file=trim(file_path))
-     write(21,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(21,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -133,7 +133,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      ! OPEN (if necessary) monkes_Monoenergetic_lambda.dat
      if( Monoenergetic_lambda ) then     
        open(31, file=trim("monkes_Monoenergetic_lambda.dat"))
-       write(31,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+       write(31,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                                " N_theta ", " N_zeta ", " N_xi ", &
                                " D_11 ", " D_31 ", &
                                " D_13 ", " D_33 ", &
@@ -146,7 +146,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      endif     
      if( Monoenergetic_theta_zeta ) then     
        open(41, file=trim("monkes_Monoenergetic_theta_zeta.dat"))
-       write(41,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+       write(41,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                                " N_theta ", " N_zeta ", " N_xi ", &
                                " D_11 ", " D_31 ", &
                                " D_13 ", " D_33 ", &
@@ -456,7 +456,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      allocate( F1(0:N_theta-1, 0:N_zeta-1,0:2), F3(0:N_theta-1, 0:N_zeta-1,0:2) )
      
      open(111,file="monkes_Monoenergetic_Database.dat")
-     write(111,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]",        &
+     write(111,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]",        &
                              " N_theta ", " N_zeta ", " N_xi ",          &
                              " D_11 ", " D_31 ",                         &
                              " D_13 ", " D_33 ",                         &
@@ -757,7 +757,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      write(*,*) " nu/v [m^-1] "
      write(*,*) nu(1:N_nu)
      write(*,*)
-     write(*,*) " E_r/v [kV s /m^2] "
+     write(*,*) " E_r/v [V s /m^2] "
      write(*,*) E_r(1:N_E_r) 
      write(*,*)
      write(*,*) " *** Scan done using the resolutions "
@@ -782,7 +782,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      where( mod(N_zeta(1:M_zeta),2) == 0 )    N_zeta(1:M_zeta) = N_zeta(1:M_zeta) + 1     
      
      write(*,*) " *** Monoenergetic Database " 
-     write(*,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(*,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -795,7 +795,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      file_path = "monkes_Monoenergetic_Database.dat"     
      ! Open output file and write header
      open(21, file=trim(file_path))
-     write(21,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(21,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -807,7 +807,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      file_path = "monkes_Monoenergetic_Database_Adjoint.dat"     
      ! Open output file and write header
      open(121, file=trim(file_path))
-     write(121,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(121,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -819,7 +819,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      file_path = "monkes_Monoenergetic_Database_nu_derivatives.dat"     
      ! Open output file and write header
      open(221, file=trim(file_path))
-     write(221,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(221,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -833,7 +833,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      file_path = "monkes_Monoenergetic_Database_Er_derivatives.dat"     
      ! Open output file and write header
      open(222, file=trim(file_path))
-     write(222,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(222,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -847,7 +847,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      file_path = "monkes_Monoenergetic_Database_Bmn_derivatives.dat"     
      ! Open output file and write header
      open(223, file=trim(file_path))
-     write(223,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(223,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -859,7 +859,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      ! OPEN (if necessary) monkes_Monoenergetic_lambda.dat
      if( Monoenergetic_lambda ) then     
        open(31, file=trim("monkes_Monoenergetic_lambda.dat"))
-       write(31,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+       write(31,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                                " N_theta ", " N_zeta ", " N_xi ", &
                                " D_11 ", " D_31 ", &
                                " D_13 ", " D_33 ", &
@@ -872,7 +872,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      endif     
      if( Monoenergetic_theta_zeta ) then     
        open(41, file=trim("monkes_Monoenergetic_theta_zeta.dat"))
-       write(41,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+       write(41,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                                " N_theta ", " N_zeta ", " N_xi ", &
                                " D_11 ", " D_31 ", &
                                " D_13 ", " D_33 ", &
@@ -1188,7 +1188,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      write(*,*) " nu/v [m^-1] "
      write(*,*) nu(1:N_nu)
      write(*,*)
-     write(*,*) " E_r/v [kV s /m^2] "
+     write(*,*) " E_r/v [V s /m^2] "
      write(*,*) E_r(1:N_E_r) 
      write(*,*)
      write(*,*) " *** Scan done using the resolutions "
@@ -1213,7 +1213,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      where( mod(N_zeta(1:M_zeta),2) == 0 )    N_zeta(1:M_zeta) = N_zeta(1:M_zeta) + 1     
      
      write(*,*) " *** Monoenergetic Database " 
-     write(*,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(*,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -1226,7 +1226,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      file_path = "monkes_Monoenergetic_Database.dat"     
      ! Open output file and write header
      open(21, file=trim(file_path))
-     write(21,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(21,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -1238,7 +1238,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      file_path = "monkes_Monoenergetic_Database_Adjoint.dat"     
      ! Open output file and write header
      open(121, file=trim(file_path))
-     write(121,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(121,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -1250,7 +1250,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      file_path = "monkes_Monoenergetic_Database_nu_derivatives.dat"     
      ! Open output file and write header
      open(221, file=trim(file_path))
-     write(221,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(221,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -1264,7 +1264,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      file_path = "monkes_Monoenergetic_Database_Er_derivatives.dat"     
      ! Open output file and write header
      open(222, file=trim(file_path))
-     write(222,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(222,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -1278,7 +1278,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      file_path = "monkes_Monoenergetic_Database_Bmn_derivatives.dat"     
      ! Open output file and write header
      open(223, file=trim(file_path))
-     write(223,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+     write(223,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                              " N_theta ", " N_zeta ", " N_xi ", &
                              " D_11 ", " D_31 ", &
                              " D_13 ", " D_33 ", &
@@ -1290,7 +1290,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      ! OPEN (if necessary) monkes_Monoenergetic_lambda.dat
      if( Monoenergetic_lambda ) then     
        open(31, file=trim("monkes_Monoenergetic_lambda.dat"))
-       write(31,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+       write(31,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                                " N_theta ", " N_zeta ", " N_xi ", &
                                " D_11 ", " D_31 ", &
                                " D_13 ", " D_33 ", &
@@ -1303,7 +1303,7 @@ module API_Example_DKE_BTD_Solution_Legendre
      endif     
      if( Monoenergetic_theta_zeta ) then     
        open(41, file=trim("monkes_Monoenergetic_theta_zeta.dat"))
-       write(41,'(9999A25)') " nu/v [m^-1]", " E_r/v [kV s /m^2]", &
+       write(41,'(9999A25)') " nu/v [m^-1]", " E_r/v [V s /m^2]", &
                                " N_theta ", " N_zeta ", " N_xi ", &
                                " D_11 ", " D_31 ", &
                                " D_13 ", " D_33 ", &
@@ -1327,13 +1327,13 @@ module API_Example_DKE_BTD_Solution_Legendre
                           allocate( G3(0:N_theta(ii)-1, 0:N_zeta(jj)-1, 0:N_xi_DF(k) ) )
 
                           ! Solve the DKE and extract N_xi_DF(k)+1 Legendre modes
-                          call Compute_Monoenergetic_derivatives_Adjoint( N_theta(ii),          &
-                                                                          N_zeta(jj),           &
-                                                                          N_xi(kk),             &
-                                                                          N_xi_DF(k),           & 
-                                                                          nu(i), E_r(j),        &        
-                                                                          D(:,:,i,j,ii,jj,kk),  &
-                                                                          D_33_Sp(i,j,ii,jj,kk),&
+                          call Compute_Monoenergetic_derivatives_Adjoint( N_theta(ii),              &
+                                                                          N_zeta(jj),               &
+                                                                          N_xi(kk),                 &
+                                                                          N_xi_DF(k),               & 
+                                                                          nu(i), E_r(j),            &        
+                                                                          D(:,:,i,j,ii,jj,kk),      &
+                                                                          D_33_Sp(i,j,ii,jj,kk),    &
                                                                           D_adj(:,:,i,j,ii,jj,kk),  &
                                                                           D_33_Sp_adj(i,j,ii,jj,kk),&
                                                                           D_nu(:,:,i,j,ii,jj,kk),   & ! nu derivatives
@@ -1348,26 +1348,26 @@ module API_Example_DKE_BTD_Solution_Legendre
                           
                           ! Writing results on terminal
                           write(*,'(9999e25.16)') nu(i), E_r(j), &                               
-                                        real(N_theta(ii)), &
-                                        real(N_zeta(jj)), &
-                                        real(N_xi(kk)), &
-                                        D(1,1,i,j,ii,jj,kk), &
-                                        D(3,1,i,j,ii,jj,kk), &
-                                        D(1,3,i,j,ii,jj,kk), &
-                                        D(3,3,i,j,ii,jj,kk), &
-                                        D_33_Sp(i,j,ii,jj,kk), &
+                                        real(N_theta(ii)),       &
+                                        real(N_zeta(jj)),        &
+                                        real(N_xi(kk)),          &
+                                        D(1,1,i,j,ii,jj,kk),     &
+                                        D(3,1,i,j,ii,jj,kk),     &
+                                        D(1,3,i,j,ii,jj,kk),     &
+                                        D(3,3,i,j,ii,jj,kk),     &
+                                        D_33_Sp(i,j,ii,jj,kk),   &
                                         t_clock/2, (t1-t0)/2
                           
                           ! Writing results on "monkes_Monoenergetic_Database.dat"
                           write(21,'(9999e25.16)') nu(i), E_r(j), &                               
-                                        real(N_theta(ii)), &
-                                        real(N_zeta(jj)), &
-                                        real(N_xi(kk)), &
-                                        D(1,1,i,j,ii,jj,kk), &
-                                        D(3,1,i,j,ii,jj,kk), &
-                                        D(1,3,i,j,ii,jj,kk), &
-                                        D(3,3,i,j,ii,jj,kk), &
-                                        D_33_Sp(i,j,ii,jj,kk), &
+                                        real(N_theta(ii)),        &
+                                        real(N_zeta(jj)),         &
+                                        real(N_xi(kk)),           &
+                                        D(1,1,i,j,ii,jj,kk),      &
+                                        D(3,1,i,j,ii,jj,kk),      &
+                                        D(1,3,i,j,ii,jj,kk),      &
+                                        D(3,3,i,j,ii,jj,kk),      &
+                                        D_33_Sp(i,j,ii,jj,kk),    &
                                         t_clock/2, (t1-t0)/2
                           flush(21)
 

@@ -97,7 +97,7 @@ module DKE_BTD_Solution_Legendre
                                            N_theta, N_zeta, N_xi ) 
 
       ! *** Bounds remapping for distribution functions and source terms
-      pF1(1:N_fs,0:M_xi) => F1     ; pF3(1:N_fs,0:M_xi) => F3
+      pF1(1:N_fs,0:M_xi) => F1  ; pF3(1:N_fs,0:M_xi) => F3
       pS1(1:N_fs,0:N_xi) => S1  ; pS3(1:N_fs,0:N_xi) => S3
       pSigma_1(1:N_fs,0:M_xi) => Sigma_1 ; pSigma_3(1:N_fs,0:M_xi) => Sigma_3
       
@@ -1088,7 +1088,7 @@ module DKE_BTD_Solution_Legendre
           call Set_LDU_coefficients_E_psi_derivatives
           
           D_Er = 0 ; Dk = 0
-          do k = 1, N_xi_DF 
+          do k = 0, N_xi_DF 
              
              ! Squared norm of the Legendre polynomial of degree k
              norm2_k = 2d0/(2*k+1)
@@ -1127,19 +1127,19 @@ module DKE_BTD_Solution_Legendre
           D_Er(3,1) = D_Er(3,1) /(psi_p*B00)
           D_Er(3,3) = D_Er(3,3) /B00
           
-          write(*,*) "D_Er(1,1) ", D_Er(1,1)
-          write(*,*) "D_Er(3,1) ", D_Er(3,1)
-          write(*,*) "D_Er(1,3) ", D_Er(1,3)
-          write(*,*) "D_Er(3,3) ", D_Er(3,3)
-          write(*,*) ; write(*,*)  
           ! Conversion from deriving w.r.t. E_psi to E_r
-          D_Er(1,1) = D_Er(1,1)*psi_p  ; D_Er(1,3) = D_Er(1,3)*psi_p
-          D_Er(3,1) = D_Er(3,1)*psi_p  ; D_Er(3,3) = D_Er(3,3)*psi_p
+          D_Er(1,1) = D_Er(1,1) / psi_p  ; D_Er(1,3) = D_Er(1,3) / psi_p
+          D_Er(3,1) = D_Er(3,1) / psi_p  ; D_Er(3,3) = D_Er(3,3) / psi_p
           
           ! Onsager symmetry
           D_Er(2,1:2) = D_Er(1,1)  ; D_Er(1,2) = D_Er(1,1)
           D_Er(3,2) = D_Er(3,1) ; D_Er(2,3) = D_Er(1,3)
           
+          write(*,*) "D_Er(1,1) ", D_Er(1,1)
+          write(*,*) "D_Er(3,1) ", D_Er(3,1)
+          write(*,*) "D_Er(1,3) ", D_Er(1,3)
+          write(*,*) "D_Er(3,3) ", D_Er(3,3)
+          write(*,*) ; write(*,*)  
        end subroutine
        
        
@@ -1252,8 +1252,8 @@ module DKE_BTD_Solution_Legendre
           E_psi= 1
           a_theta = 0 ; a_zeta = 0 ; a = 0
           do k = 0, N_xi_DF
-             a_zeta(:,:,k,0)  = E_psi * B_u / ( g * B2_mean )              
-             a_theta(:,:,k,0)  = -E_psi * B_v / ( g * B2_mean )		                  
+             a_zeta(:,:,k,0)  =  E_psi * B_u / ( g * B2_mean )              
+             a_theta(:,:,k,0) = -E_psi * B_v / ( g * B2_mean )		                  
           end do
        
        end subroutine 
