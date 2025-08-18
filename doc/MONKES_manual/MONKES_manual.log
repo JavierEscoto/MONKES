@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (MiKTeX 23.10) (format=lualatex 2023.11.2)  16 AUG 2025 19:24
+This is LuaHBTeX, Version 1.17.0 (MiKTeX 23.10) (format=lualatex 2023.11.2)  18 AUG 2025 16:18
  system commands enabled.
 **MONKES_manual.tex
 (./MONKES_manual.tex
@@ -1485,32 +1485,32 @@ LaTeX Warning: Unused global option(s):
 (./MONKES_manual.aux)
 \openout1 = MONKES_manual.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 39.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 3
-7.
+9.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: luatex
@@ -1546,21 +1546,21 @@ LaTeX Font Info:    ... okay on input line 37.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 37.
-Package microtype Info: Applying patch `item' on input line 37.
-Package microtype Info: Applying patch `toc' on input line 37.
-Package microtype Info: Applying patch `eqnum' on input line 37.
+LaTeX Info: Redefining \microtypecontext on input line 39.
+Package microtype Info: Applying patch `item' on input line 39.
+Package microtype Info: Applying patch `toc' on input line 39.
+Package microtype Info: Applying patch `eqnum' on input line 39.
 
-Package microtype Warning: Unable to apply patch `footnote' on input line 37.
+Package microtype Warning: Unable to apply patch `footnote' on input line 39.
 
-Package microtype Info: Applying patch `verbatim' on input line 37.
+Package microtype Info: Applying patch `verbatim' on input line 39.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 37.
+LaTeX Info: Redefining \showhyphens on input line 39.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of spacing.
 Package microtype Info: No adjustment of kerning.
@@ -1603,7 +1603,7 @@ Package caption Info: End \AtBeginDocument code.
 Package pgfplots notification 'compat/show suggested version=true': you might b
 enefit from \pgfplotsset{compat=1.18} (current compat level: 1.12).
 
-Package hyperref Info: Link coloring ON on input line 37.
+Package hyperref Info: Link coloring ON on input line 39.
 (./MONKES_manual.out) (./MONKES_manual.out)
 \@outlinefile=\write4
 
@@ -1613,8 +1613,8 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
-9.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 4
+1.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1623,37 +1623,37 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmr' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-9.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 4
+1.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-39.
+41.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-39.
+41.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 39.
+(Font)              <12> on input line 41.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 39.
+(Font)              <8> on input line 41.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 39.
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 39
+(Font)              <6> on input line 41.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 41
 .
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 39.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 41.
 
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/umsa.fd
@@ -1662,7 +1662,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 39.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 41.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1670,7 +1670,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 39
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 41
 .
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/jknappen/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
@@ -1709,13 +1709,16 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 23.
+               Default added (so using `tbp') on input line 25.
 
 (./temp.f90)
 warning  (pdf backend): ignoring duplicate destination with the name 'page.2'
 [2] (./temp.f90) [3
 
-]) 
+]) (./MONKES_manual.bbl) [4
+
+]
+
 enddocument/afterlastpage: lastpage setting LastPage.
 (./MONKES_manual.aux)
  ***********
@@ -1727,43 +1730,45 @@ Package rerunfilecheck Info: File `MONKES_manual.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 48197 strings out of 477259
- 1166656,2373549 words of node,token memory allocated
- 635 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 3 glyph, 15
- attribute, 67 glue_spec, 9 attribute_list, 3 write nodes
-   avail lists: 1:1,2:14327,3:316,4:4620,5:34638,6:81,7:33050,8:21,9:57776,10:11
-8,11:2290
- 67996 multiletter control sequences out of 65536+600000
- 86 fonts using 6461711 bytes
+ 48216 strings out of 477259
+ 1166628,2373549 words of node,token memory allocated
+ 626 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 3 glyph, 13
+ attribute, 67 glue_spec, 8 attribute_list, 2 write nodes
+   avail lists: 2:14329,3:317,4:4620,5:34639,6:84,7:33050,8:28,9:57776,10:118,11
+:2290
+ 68008 multiletter control sequences out of 65536+600000
+ 87 fonts using 6593399 bytes
  91i,12n,111p,1009b,1203s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc
-}{C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.en
-c}{C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.e
-nc}<//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opentype/public/lm/
-lmroman7-regular.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/o
-pentype/public/lm/lmroman8-regular.otf>{C:/Users/Usuarix/AppData/Local/Programs/
-MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}<//?/c:/users/usuarix/appdata/local/programs
-/miktex/fonts/opentype/public/lm/lmmono9-regular.otf><//?/c:/users/usuarix/appda
-ta/local/programs/miktex/fonts/opentype/public/lm/lmmono10-regular.otf><//?/c:/u
-sers/usuarix/appdata/local/programs/miktex/fonts/opentype/public/lm/lmroman12-bo
-ld.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opentype/public
-/lm/lmmonolt10-bold.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/font
-s/opentype/public/lm/lmroman10-bold.otf><//?/c:/users/usuarix/appdata/local/prog
-rams/miktex/fonts/opentype/public/lm/lmroman10-regular.otf><//?/c:/users/usuarix
-/appdata/local/programs/miktex/fonts/opentype/public/lm/lmroman12-regular.otf></
-/?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opentype/public/lm/lmrom
-an17-regular.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opent
-ype/public/lm/lmromancaps10-regular.otf><//?/c:/users/usuarix/appdata/local/prog
-rams/miktex/fonts/opentype/public/lm/lmmonocaps10-regular.otf><C:/Users/Usuarix/
-AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Usuarix
-/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/Usuari
-x/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Usuari
-x/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Usuari
-x/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on MONKES_manual.pdf (5 pages, 125125 bytes).
+<//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opentype/public/lm/lmr
+oman10-italic.otf>{C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/enc/dvip
+s/lm/lm-mathsy.enc}{C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/enc/dvi
+ps/lm/lm-mathit.enc}{C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/enc/dv
+ips/lm/lm-mathex.enc}<//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/o
+pentype/public/lm/lmroman7-regular.otf><//?/c:/users/usuarix/appdata/local/progr
+ams/miktex/fonts/opentype/public/lm/lmroman8-regular.otf>{C:/Users/Usuarix/AppDa
+ta/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}<//?/c:/users/usuarix/appd
+ata/local/programs/miktex/fonts/opentype/public/lm/lmmono9-regular.otf><//?/c:/u
+sers/usuarix/appdata/local/programs/miktex/fonts/opentype/public/lm/lmmono10-reg
+ular.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opentype/publ
+ic/lm/lmroman12-bold.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fon
+ts/opentype/public/lm/lmmonolt10-bold.otf><//?/c:/users/usuarix/appdata/local/pr
+ograms/miktex/fonts/opentype/public/lm/lmroman10-bold.otf><//?/c:/users/usuarix/
+appdata/local/programs/miktex/fonts/opentype/public/lm/lmroman10-regular.otf><//
+?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opentype/public/lm/lmroma
+n12-regular.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/openty
+pe/public/lm/lmroman17-regular.otf><//?/c:/users/usuarix/appdata/local/programs/
+miktex/fonts/opentype/public/lm/lmromancaps10-regular.otf><//?/c:/users/usuarix/
+appdata/local/programs/miktex/fonts/opentype/public/lm/lmmonocaps10-regular.otf>
+<C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb
+><C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pf
+b><C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pf
+b><C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pf
+b><C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.p
+fb>
+Output written on MONKES_manual.pdf (6 pages, 132256 bytes).
 
-PDF statistics: 239 PDF objects out of 1000 (max. 8388607)
- 62 named destinations out of 1000 (max. 131072)
+PDF statistics: 256 PDF objects out of 1000 (max. 8388607)
+ 64 named destinations out of 1000 (max. 131072)
  80 words of extra memory for PDF output out of 10000 (max. 100000000)
 

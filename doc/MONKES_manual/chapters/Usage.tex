@@ -17,6 +17,8 @@ In an output file from {\BOOZERXFORM} there is information about the equilibrium
 For running {\MONKES} using a {\DKES} input file, it \textbf{must} be renamed as \texttt{ddkes2.data}.
 
 
+%\subsubsection{From {\DESC} input file}
+
 \subsection{Monoenergetic database input}\FloatBarrier
 In addition to the magnetic configuration (see section \ref{sec:Magnetic_configuration_input}), in order to run {\MONKES} for calculating the monoenergetic coefficients $\Dij{ij}$, it is necessary to specify 5 additional parameters. The required parameters are listed in table \ref{tab:monkes_input.parameters}.
 
@@ -24,7 +26,7 @@ In addition to the magnetic configuration (see section \ref{sec:Magnetic_configu
 	\centering
 	\begin{tabular}{@{}llll@{}}
 		\toprule
-		Parameter             & Symbol in {\MONKES} paper & {Name for {\MONKES}} & Units           \\ \midrule
+		Parameter             & Symbol in {\MONKES} paper \cite{Escoto_2024} & {Name for {\MONKES}} & Units           \\ \midrule
 		Poloidal resolution   & $N_\theta$                                 & \texttt{N\_theta}                                & N/A             \\
 		Toroidal resolution   & $N_\zeta$                                 & \texttt{N\_zeta}                                & N/A             \\
 		No. Legendre modes    & $N_\xi$                                    & \texttt{N\_xi}                                   & N/A             \\
@@ -44,7 +46,7 @@ These parameters have to be specified in the input file \texttt{monkes\_input.pa
 
 \subsection{Monoenergetic database output}
 
-The monoenergetic coefficients $\Dij{ij}$ are written in an output file called \texttt{monkes\_Monoenergetic\_Database.dat}.
+The monoenergetic coefficients $\Dij{ij}$ are written in an output file called \texttt{monkes\_Monoenergetic\_Database.dat}. Instead of writing directly $\Dij{ij}$ which are in meters, in the output file \texttt{monkes\_Monoenergetic\_Database.dat}, the quantities written are $K_{ij} \Dij{ij}$. The monoenergetic coefficients are defined in section 2 of reference \cite{Escoto_2024}. The quantities $K_{ij}$ are defined in Appendix E of \cite{Escoto_2024}.
 
 
 \begin{landscape}

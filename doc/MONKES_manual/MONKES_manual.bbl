@@ -1,0 +1,11 @@
+\begin{thebibliography}{1}
+
+\bibitem{Escoto_2024}
+F.J. Escoto, J.L. Velasco, I.~Calvo, M.~Landreman, and F.I. Parra.
+\newblock Monkes: a fast neoclassical code for the evaluation of monoenergetic
+  transport coefficients in stellarator plasmas.
+\newblock {\em Nuclear Fusion}, 64(7):076030, 2024.
+\newblock \href {https://doi.org/10.1088/1741-4326/ad3fc9}
+  {\path{doi:10.1088/1741-4326/ad3fc9}}.
+
+\end{thebibliography}
