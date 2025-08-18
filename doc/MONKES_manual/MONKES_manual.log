@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (MiKTeX 23.10) (format=lualatex 2023.11.2)  29 APR 2024 15:53
+This is LuaHBTeX, Version 1.17.0 (MiKTeX 23.10) (format=lualatex 2023.11.2)  16 AUG 2025 19:24
  system commands enabled.
 **MONKES_manual.tex
 (./MONKES_manual.tex
@@ -1463,251 +1463,21 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
-)) (./figures/figures.tex) (./bibliography.tex
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/biblatex.sty
-Package: biblatex 2023/03/05 v3.19 programmable bibliographies (PK/MW)
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/logreq/logreq.sty
-Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count361
+)) (./figures/figures.tex)
+(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/pdflscape/pdflscape.s
+ty
+Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
 
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/logreq/logreq.def
-File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/pdflscape/pdflscape-n
+ometadata.sty
+Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PD
+F (HO)
+
+(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-\c@tabx@nest=\count362
-\c@listtotal=\count363
-\c@listcount=\count364
-\c@liststart=\count365
-\c@liststop=\count366
-\c@citecount=\count367
-\c@citetotal=\count368
-\c@multicitecount=\count369
-\c@multicitetotal=\count370
-\c@instcount=\count371
-\c@maxnames=\count372
-\c@minnames=\count373
-\c@maxitems=\count374
-\c@minitems=\count375
-\c@citecounter=\count376
-\c@maxcitecounter=\count377
-\c@savedcitecounter=\count378
-\c@uniquelist=\count379
-\c@uniquename=\count380
-\c@refsection=\count381
-\c@refsegment=\count382
-\c@maxextratitle=\count383
-\c@maxextratitleyear=\count384
-\c@maxextraname=\count385
-\c@maxextradate=\count386
-\c@maxextraalpha=\count387
-\c@abbrvpenalty=\count388
-\c@highnamepenalty=\count389
-\c@lownamepenalty=\count390
-\c@maxparens=\count391
-\c@parenlevel=\count392
-\blx@tempcnta=\count393
-\blx@tempcntb=\count394
-\blx@tempcntc=\count395
-\c@blx@maxsection=\count396
-\blx@maxsegment@0=\count397
-\blx@notetype=\count398
-\blx@parenlevel@text=\count399
-\blx@parenlevel@foot=\count400
-\blx@sectionciteorder@0=\count401
-\blx@sectionciteorderinternal@0=\count402
-\blx@entrysetcounter=\count403
-\blx@biblioinstance=\count404
-\labelnumberwidth=\skip70
-\labelalphawidth=\skip71
-\biblabelsep=\skip72
-\bibitemsep=\skip73
-\bibnamesep=\skip74
-\bibinitsep=\skip75
-\bibparsep=\skip76
-\bibhang=\skip77
-\blx@bcfin=\read4
-\blx@bcfout=\write4
-\blx@langwohyphens=\language80
-\c@mincomprange=\count405
-\c@maxcomprange=\count406
-\c@mincompwidth=\count407
-Package biblatex Info: Trying to load biblatex default data model...
-Package biblatex Info: ... file 'blx-dm.def' found.
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/blx-dm.def
-File: blx-dm.def 2023/03/05 v3.19 biblatex localization (PK/MW)
-)
-Package biblatex Info: Trying to load biblatex custom data model...
-Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count408
-\c@savedafterword=\count409
-\c@annotator=\count410
-\c@savedannotator=\count411
-\c@author=\count412
-\c@savedauthor=\count413
-\c@bookauthor=\count414
-\c@savedbookauthor=\count415
-\c@commentator=\count416
-\c@savedcommentator=\count417
-\c@editor=\count418
-\c@savededitor=\count419
-\c@editora=\count420
-\c@savededitora=\count421
-\c@editorb=\count422
-\c@savededitorb=\count423
-\c@editorc=\count424
-\c@savededitorc=\count425
-\c@foreword=\count426
-\c@savedforeword=\count427
-\c@holder=\count428
-\c@savedholder=\count429
-\c@introduction=\count430
-\c@savedintroduction=\count431
-\c@namea=\count432
-\c@savednamea=\count433
-\c@nameb=\count434
-\c@savednameb=\count435
-\c@namec=\count436
-\c@savednamec=\count437
-\c@translator=\count438
-\c@savedtranslator=\count439
-\c@shortauthor=\count440
-\c@savedshortauthor=\count441
-\c@shorteditor=\count442
-\c@savedshorteditor=\count443
-\c@labelname=\count444
-\c@savedlabelname=\count445
-\c@institution=\count446
-\c@savedinstitution=\count447
-\c@lista=\count448
-\c@savedlista=\count449
-\c@listb=\count450
-\c@savedlistb=\count451
-\c@listc=\count452
-\c@savedlistc=\count453
-\c@listd=\count454
-\c@savedlistd=\count455
-\c@liste=\count456
-\c@savedliste=\count457
-\c@listf=\count458
-\c@savedlistf=\count459
-\c@location=\count460
-\c@savedlocation=\count461
-\c@organization=\count462
-\c@savedorganization=\count463
-\c@origlocation=\count464
-\c@savedoriglocation=\count465
-\c@origpublisher=\count466
-\c@savedorigpublisher=\count467
-\c@publisher=\count468
-\c@savedpublisher=\count469
-\c@language=\count470
-\c@savedlanguage=\count471
-\c@origlanguage=\count472
-\c@savedoriglanguage=\count473
-\c@pageref=\count474
-\c@savedpageref=\count475
-\shorthandwidth=\skip78
-\shortjournalwidth=\skip79
-\shortserieswidth=\skip80
-\shorttitlewidth=\skip81
-\shortauthorwidth=\skip82
-\shorteditorwidth=\skip83
-\locallabelnumberwidth=\skip84
-\locallabelalphawidth=\skip85
-\localshorthandwidth=\skip86
-\localshortjournalwidth=\skip87
-\localshortserieswidth=\skip88
-\localshorttitlewidth=\skip89
-\localshortauthorwidth=\skip90
-\localshorteditorwidth=\skip91
-Package biblatex Info: Trying to load enhanced support for Unicode engines...
-Package biblatex Info: ... file 'blx-unicode.def' found.
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/blx-unicode.
-def)
-Package biblatex Info: Trying to load compatibility code...
-Package biblatex Info: ... file 'blx-compat.def' found.
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/blx-compat.d
-ef
-File: blx-compat.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
-)
-Package biblatex Info: Trying to load generic definitions...
-Package biblatex Info: ... file 'biblatex.def' found.
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/biblatex.def
-File: biblatex.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
-\c@textcitecount=\count476
-\c@textcitetotal=\count477
-\c@textcitemaxnames=\count478
-\c@biburlbigbreakpenalty=\count479
-\c@biburlbreakpenalty=\count480
-\c@biburlnumpenalty=\count481
-\c@biburlucpenalty=\count482
-\c@biburllcpenalty=\count483
-\biburlbigskip=\muskip21
-\biburlnumskip=\muskip22
-\biburlucskip=\muskip23
-\biburllcskip=\muskip24
-\c@smartand=\count484
-)
-Package biblatex Info: Trying to load bibliography style 'numeric'...
-Package biblatex Info: ... file 'numeric.bbx' found.
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/bbx/numeric.
-bbx
-File: numeric.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
-Package biblatex Info: Trying to load bibliography style 'standard'...
-Package biblatex Info: ... file 'standard.bbx' found.
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/bbx/standard
-.bbx
-File: standard.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count485
-\c@bbx:relatedtotal=\count486
-))
-Package biblatex Info: Trying to load citation style 'numeric'...
-Package biblatex Info: ... file 'numeric.cbx' found.
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/cbx/numeric.
-cbx
-File: numeric.cbx 2023/03/05 v3.19 biblatex citation style (PK/MW)
-Package biblatex Info: Redefining '\cite'.
-Package biblatex Info: Redefining '\parencite'.
-Package biblatex Info: Redefining '\footcite'.
-Package biblatex Info: Redefining '\footcitetext'.
-Package biblatex Info: Redefining '\smartcite'.
-Package biblatex Info: Redefining '\supercite'.
-Package biblatex Info: Redefining '\textcite'.
-Package biblatex Info: Redefining '\textcites'.
-Package biblatex Info: Redefining '\cites'.
-Package biblatex Info: Redefining '\parencites'.
-Package biblatex Info: Redefining '\smartcites'.
-)
-Package biblatex Info: Trying to load configuration file...
-Package biblatex Info: ... file 'biblatex.cfg' found.
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/biblatex.cfg
-File: biblatex.cfg 
-)
-Package biblatex Info: LuaTeX detected.
-(biblatex)             Assuming input encoding 'utf8'.
-Package biblatex Info: Document encoding is UTF8 ....
-Package biblatex Info: ... and expl3
-(biblatex)             2023-08-29 L3 programming layer (loader) 
-(biblatex)             is new enough (at least 2020/04/06),
-(biblatex)             setting 'casechanger=expl3'.
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/blx-case-exp
-l3.sty
-Package: blx-case-expl3 2023/03/05 v3.19 expl3 case changing code for biblatex
-)))
-
-Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
-(biblatex)                Loading 'csquotes' recommended.
-
-\@quotelevel=\count487
-\@quotereset=\count488
 
 LaTeX Warning: Unused global option(s):
     [english2].
@@ -1715,32 +1485,32 @@ LaTeX Warning: Unused global option(s):
 (./MONKES_manual.aux)
 \openout1 = MONKES_manual.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 3
 7.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: luatex
@@ -1776,21 +1546,21 @@ LaTeX Font Info:    ... okay on input line 27.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 27.
-Package microtype Info: Applying patch `item' on input line 27.
-Package microtype Info: Applying patch `toc' on input line 27.
-Package microtype Info: Applying patch `eqnum' on input line 27.
+LaTeX Info: Redefining \microtypecontext on input line 37.
+Package microtype Info: Applying patch `item' on input line 37.
+Package microtype Info: Applying patch `toc' on input line 37.
+Package microtype Info: Applying patch `eqnum' on input line 37.
 
-Package microtype Warning: Unable to apply patch `footnote' on input line 27.
+Package microtype Warning: Unable to apply patch `footnote' on input line 37.
 
-Package microtype Info: Applying patch `verbatim' on input line 27.
+Package microtype Info: Applying patch `verbatim' on input line 37.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 27.
+LaTeX Info: Redefining \showhyphens on input line 37.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of spacing.
 Package microtype Info: No adjustment of kerning.
@@ -1803,16 +1573,16 @@ ern Roman (RS)
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.
 mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count489
+\scratchcounter=\count361
 \scratchdimen=\dimen350
 \scratchbox=\box99
-\nofMPsegments=\count490
-\nofMParguments=\count491
+\nofMPsegments=\count362
+\nofMParguments=\count363
 \everyMPshowfont=\toks63
-\MPscratchCnt=\count492
+\MPscratchCnt=\count364
 \MPscratchDim=\dimen351
-\MPnumerator=\count493
-\makeMPintoPDFobject=\count494
+\MPnumerator=\count365
+\makeMPintoPDFobject=\count366
 \everyMPtoPDFconversion=\toks64
 )
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/epstopdf-pkg/epstopdf
@@ -1825,20 +1595,6 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 .cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/pdflscape/pdflscape.s
-ty
-Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/pdflscape/pdflscape-n
-ometadata.sty
-Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PD
-F (HO)
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/graphics/lscape.sty
-Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
-)
-Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
-))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
@@ -1847,32 +1603,18 @@ Package caption Info: End \AtBeginDocument code.
 Package pgfplots notification 'compat/show suggested version=true': you might b
 enefit from \pgfplotsset{compat=1.18} (current compat level: 1.12).
 
-Package hyperref Info: Link coloring ON on input line 27.
+Package hyperref Info: Link coloring ON on input line 37.
 (./MONKES_manual.out) (./MONKES_manual.out)
-\@outlinefile=\write5
+\@outlinefile=\write4
 
-\openout5 = MONKES_manual.out
-\c@lstlisting=\count495
-Package biblatex Info: Trying to load language 'english'...
-Package biblatex Info: ... file 'english.lbx' found.
-
-(C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/lbx/english.
-lbx
-File: english.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
-)
-Package biblatex Info: LuaTeX detected.
-(biblatex)             Assuming input encoding 'utf8'.
-Package biblatex Info: Automatic encoding selection.
-(biblatex)             Assuming data encoding 'utf8'.
-
-\openout4 = MONKES_manual.bcf
-Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'MONKES_manual.bbl' found.
- (./MONKES_manual.bbl)
-Package biblatex Info: Reference section=0 on input line 27.
-Package biblatex Info: Reference segment=0 on input line 27.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-8.
+\openout4 = MONKES_manual.out
+\c@lstlisting=\count367
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
+9.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1881,37 +1623,37 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmr' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-8.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
+9.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-28.
+39.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-28.
+39.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 28.
+(Font)              <12> on input line 39.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 28.
+(Font)              <8> on input line 39.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 28.
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 28
+(Font)              <6> on input line 39.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 39
 .
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 28.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 39.
 
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/umsa.fd
@@ -1920,7 +1662,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 28.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 39.
 
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1928,55 +1670,52 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 28
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 39
 .
 (C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/tex/latex/jknappen/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-<figures/8i7h5z.jpg, id=62, 501.875pt x 503.8825pt>
-File: figures/8i7h5z.jpg Graphic file (type jpg)
-<use figures/8i7h5z.jpg>
-Package luatex.def Info: figures/8i7h5z.jpg  used on input line 28.
-(luatex.def)             Requested size: 326.21487pt x 327.51974pt.
-
 [1
 
-{C:/Users/Usuarix/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}<./figures/8i
-7h5z.jpg>] (./MONKES_manual.toc
+{C:/Users/Usuarix/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+(./MONKES_manual.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 3.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 6.
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmtt' (encoding: TU).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
 )
-\tf@toc=\write6
+\tf@toc=\write5
 
-\openout6 = MONKES_manual.toc
+\openout5 = MONKES_manual.toc
  [2] (./chapters/Install.tex
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 21.
+nput line 19.
  (./temp.f90
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <9> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1.
-)
-(./temp.f90)) (./chapters/Usage.tex
+) (./temp.f90))
+(./chapters/Usage.tex
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1.
-) (./chapters/Implementation.tex (./temp.f90) [3] (./temp.f90) (./temp.f90 [4]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+ (./temp.f90
+warning  (pdf backend): ignoring duplicate destination with the name 'page.1'
+[1])
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 14.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 14.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 14.
 
- [5]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [6])
-(./temp.f90)) (./chapters/API.tex)
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 23.
 
-LaTeX Warning: Empty bibliography on input line 57.
+(./temp.f90)
+warning  (pdf backend): ignoring duplicate destination with the name 'page.2'
+[2] (./temp.f90) [3
 
-[7] 
+]) 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./MONKES_manual.aux)
  ***********
@@ -1984,39 +1723,47 @@ LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
 Package rerunfilecheck Info: File `MONKES_manual.out' has not changed.
-(rerunfilecheck)             Checksum: 5DB52CBA281805CC8BFC05BE381A8448;2555.
-Package logreq Info: Writing requests to 'MONKES_manual.run.xml'.
-
-\openout1 = MONKES_manual.run.xml
+(rerunfilecheck)             Checksum: C0170D9805AAFC4E60A64218F95002BD;1378.
 )
 
 Here is how much of LuaTeX's memory you used:
- 55340 strings out of 477259
- 2842993,2848258 words of node,token memory allocated
- 676 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 3 glyph, 13
- attribute, 77 glue_spec, 8 attribute_list, 2 write nodes
-   avail lists: 1:5,2:38018,3:446,4:12466,5:92632,6:141,7:61615,8:4,9:154509,10:
-83,11:6032
- 74831 multiletter control sequences out of 65536+600000
- 61 fonts using 4670631 bytes
- 91i,11n,111p,1009b,1956s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opentype/public/lm/lmm
-ono10-italic.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opent
-ype/public/lm/lmmono9-regular.otf><//?/c:/users/usuarix/appdata/local/programs/m
-iktex/fonts/opentype/public/lm/lmmono10-regular.otf><//?/c:/users/usuarix/appdat
-a/local/programs/miktex/fonts/opentype/public/lm/lmroman12-bold.otf><//?/c:/user
-s/usuarix/appdata/local/programs/miktex/fonts/opentype/public/lm/lmmonolt10-bold
-.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opentype/public/l
-m/lmroman10-bold.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/o
-pentype/public/lm/lmroman10-regular.otf><//?/c:/users/usuarix/appdata/local/prog
-rams/miktex/fonts/opentype/public/lm/lmroman12-regular.otf><//?/c:/users/usuarix
-/appdata/local/programs/miktex/fonts/opentype/public/lm/lmroman17-regular.otf></
+ 48197 strings out of 477259
+ 1166656,2373549 words of node,token memory allocated
+ 635 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 3 glyph, 15
+ attribute, 67 glue_spec, 9 attribute_list, 3 write nodes
+   avail lists: 1:1,2:14327,3:316,4:4620,5:34638,6:81,7:33050,8:21,9:57776,10:11
+8,11:2290
+ 67996 multiletter control sequences out of 65536+600000
+ 86 fonts using 6461711 bytes
+ 91i,12n,111p,1009b,1203s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc
+}{C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.en
+c}{C:/Users/Usuarix/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.e
+nc}<//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opentype/public/lm/
+lmroman7-regular.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/o
+pentype/public/lm/lmroman8-regular.otf>{C:/Users/Usuarix/AppData/Local/Programs/
+MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}<//?/c:/users/usuarix/appdata/local/programs
+/miktex/fonts/opentype/public/lm/lmmono9-regular.otf><//?/c:/users/usuarix/appda
+ta/local/programs/miktex/fonts/opentype/public/lm/lmmono10-regular.otf><//?/c:/u
+sers/usuarix/appdata/local/programs/miktex/fonts/opentype/public/lm/lmroman12-bo
+ld.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opentype/public
+/lm/lmmonolt10-bold.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/font
+s/opentype/public/lm/lmroman10-bold.otf><//?/c:/users/usuarix/appdata/local/prog
+rams/miktex/fonts/opentype/public/lm/lmroman10-regular.otf><//?/c:/users/usuarix
+/appdata/local/programs/miktex/fonts/opentype/public/lm/lmroman12-regular.otf></
 /?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opentype/public/lm/lmrom
-ancaps10-regular.otf>
-Output written on MONKES_manual.pdf (7 pages, 215990 bytes).
+an17-regular.otf><//?/c:/users/usuarix/appdata/local/programs/miktex/fonts/opent
+ype/public/lm/lmromancaps10-regular.otf><//?/c:/users/usuarix/appdata/local/prog
+rams/miktex/fonts/opentype/public/lm/lmmonocaps10-regular.otf><C:/Users/Usuarix/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Usuarix
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/Usuari
+x/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Usuari
+x/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Usuari
+x/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
+Output written on MONKES_manual.pdf (5 pages, 125125 bytes).
 
-PDF statistics: 436 PDF objects out of 1000 (max. 8388607)
- 265 named destinations out of 1000 (max. 131072)
- 128 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 239 PDF objects out of 1000 (max. 8388607)
+ 62 named destinations out of 1000 (max. 131072)
+ 80 words of extra memory for PDF output out of 10000 (max. 100000000)
 

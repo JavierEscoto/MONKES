@@ -1,5 +1,5 @@
 \section{Installation and required libraries}
-In this section it is explained how to install {\MONKES}. 
+In this section it is sketched how to install {\MONKES}. 
 \subsection{Fortran compiler}
 {\MONKES} is written in Fortran language and thus requires having an installed Fortran compiler. This compiler must be compatible with LAPACK and NetCDF libraries. One possible compiler is the Intel Fortran compiler.
 
@@ -16,13 +16,9 @@ In order to read \texttt{BOOZER\_XFORM} output files, {\MONKES} needs to use the
 
 \subsection{LAPACK library}
 For using LAPACK library there are two options. One can use the static or the dynamic version of the library. In listing \ref{lst:LAPACK_linking}, the dynamic case is illustrated.
-\listings{../../bin/Makefile}{Compiler selection}{LFLAGS}{
-	\texttt{Makefile} \label{lst:LAPACK_linking}
-}
+\listings{../../bin/Makefile}{Compiler selection}{LFLAGS}{\texttt{Makefile}}{lst:LAPACK_linking}
  The variable \texttt{LFLAGS} includes the linking of LAPACK libraries. Specifically, those flags which include the variable \texttt{\$MKL\_HOME} (variable containing the location of the dynamic library) set the instructions for where to find the library. The flag \texttt{-mkl=parallel} allows for LAPACK multithreading functionalities. In listing \ref{lst:main_MONKES_compiling_instruction}, it is shown how the monkes executable is generated. 
  
- 
- \listings{../../bin/Makefile}{main_monkes.x:}{f90comp}{
- 	\texttt{Makefile} \label{lst:main_MONKES_compiling_instruction}
- }
- 
+ \begingroup
+ \listings{../../bin/Makefile}{main_monkes.x:}{f90comp}{\texttt{Makefile}}{lst:main_MONKES_compiling_instruction}
+ \endgroup

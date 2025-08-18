@@ -39,8 +39,8 @@ end
 }%
 
 
-\newcommand{\listings}[4]{
+\newcommand{\listings}[5]{
 	\ExtractCode{"#1"}{"#2"}{"#3"}
-	\lstinputlisting[language=Fortran, firstline = 1, lastline = 500, caption = {#4}]{temp.f90}	
+	\lstinputlisting[language=Fortran, firstline = 1, lastline = 500, caption = {#4}, label={#5}]{temp.f90}	 
 }
 

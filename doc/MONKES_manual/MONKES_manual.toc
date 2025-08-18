@@ -1,15 +1,11 @@
 \babel@toc {english}{}\relax 
-\contentsline {section}{\numberline {1}Installation and required libraries}{3}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Fortran compiler}{3}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}NetCDF library}{3}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}LAPACK library}{3}{subsection.1.3}%
-\contentsline {section}{\numberline {2}How to use \texttt {MONKES}}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Magnetic configuration input}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Monoenergetic database input}{3}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Running the executable with SLURM}{3}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Monoenergetic database output}{3}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Algorithm implementation}{3}{section.3}%
-\contentsline {subsection}{\numberline {3.1}User level}{3}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Developer level: main routines}{7}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Developer level: libraries}{7}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Application Programming Interface (API)}{7}{section.4}%
+\contentsline {section}{\numberline {1}Installation and required libraries}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Fortran compiler}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}NetCDF library}{1}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}LAPACK library}{1}{subsection.1.3}%
+\contentsline {section}{\numberline {2}How to use \texttt {MONKES}}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Magnetic configuration input}{1}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}From {\texttt {BOOZER\_XFORM}} output file}{1}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}From {\texttt {DKES}} input file}{2}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}Monoenergetic database input}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Monoenergetic database output}{2}{subsection.2.3}%

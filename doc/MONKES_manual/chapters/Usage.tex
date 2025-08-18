@@ -1,14 +1,56 @@
 \section{How to use \texttt{MONKES}}
 
 
-\subsection{Magnetic configuration input}
+\subsection{Magnetic configuration input}\label{sec:Magnetic_configuration_input}
 
 
-\subsection{Monoenergetic database input}
+{\MONKES} can read the magnetic configuration of a particular flux surface from different types of files.
+\subsubsection{From {\BOOZERXFORM} output file}
+{\MONKES} can read the magnetic confituration of an output (binary) file from {\BOOZERXFORM}. The file \textbf{must} be named \texttt{boozmn.nc}. It is advisable to make a soft link instead of renaming the original {\BOOZERXFORM} output file. 
+
+In an output file from {\BOOZERXFORM} there is information about the equilibrium of many flux surfaces. If not specified, {\MONKES} will perform its calculations at the flux surface labelled by $s={\psi/\psi_{\text{lcfs}}}=0.25$. A different flux surface can be specified in the input file \texttt{monkes\_input.surface}. An example on how to fill the input file \texttt{monkes\_input.surface} is given in listing \ref{lst:monkes_input.surface}. 
 
 
+\listings{../../examples/W7X-EIM/boozer_xform_input/monkes_input.surface}{&surface}{/}{Example of \texttt{monkes\_input.surface} for specifying the surface $s={\psi/\psi_{\text{lcfs}}}=0.2$}{lst:monkes_input.surface}
 
-\subsection{Running the executable with SLURM}
+\subsubsection{From {\DKES} input file}
+For running {\MONKES} using a {\DKES} input file, it \textbf{must} be renamed as \texttt{ddkes2.data}.
+
+
+\subsection{Monoenergetic database input}\FloatBarrier
+In addition to the magnetic configuration (see section \ref{sec:Magnetic_configuration_input}), in order to run {\MONKES} for calculating the monoenergetic coefficients $\Dij{ij}$, it is necessary to specify 5 additional parameters. The required parameters are listed in table \ref{tab:monkes_input.parameters}.
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{@{}llll@{}}
+		\toprule
+		Parameter             & Symbol in {\MONKES} paper & {Name for {\MONKES}} & Units           \\ \midrule
+		Poloidal resolution   & $N_\theta$                                 & \texttt{N\_theta}                                & N/A             \\
+		Toroidal resolution   & $N_\zeta$                                 & \texttt{N\_zeta}                                & N/A             \\
+		No. Legendre modes    & $N_\xi$                                    & \texttt{N\_xi}                                   & N/A             \\
+		Collisionallity       & $\hat{\nu}$                                & \texttt{nu}                                      & $1/\text{m}$    \\
+		Radial electric field & $\Er$                                      & \texttt{E\_r}                                    & $\text{V}\cdot \text{m}/\text{s}$ \\ \bottomrule
+	\end{tabular}
+	\caption{Parameters to be specified in the file \texttt{monkes\_input.parameters} for calculating the monoenergetic coefficients.}
+	\label{tab:monkes_input.parameters}
+\end{table}
+
+These parameters have to be specified in the input file \texttt{monkes\_input.parameters}. For each combination of $(N_\theta,N_\zeta,N_\xi,\hat{\nu},N_\xi)$ {\MONKES} will compute the monoenergetic coefficients $\Dij{ij}$. An example on how to fill this input file is given in listing \ref{lst:monkes_input.parameters}. Note that in the example shown in listing \ref{lst:monkes_input.parameters} there is a single value for \texttt{N\_theta}, \texttt{N\_zeta} and \texttt{N\_xi} while there are 10 values \texttt{nu} and 2 values of \texttt{E\_r}. This means that {\MONKES} will perform a scan in $\hat{\nu}$ and $\Er$ for fixed resolution $(N_\theta,N_\zeta,N_\xi)=(30,60,160)$. Similarly, one could be interested in doing scans in the different resolutions to check how the monoenergetic coefficients $\Dij{ij}$ converge. This scan is also possible by introducing several values of, say $N_\zeta$, separated by commas. 
+
+\listings{../../examples/W7X-EIM/dkes_input/monkes_input.parameters}{&parameters}{/}{Example of \texttt{monkes\_input.parameters} for calculating a monoenergetic database}{lst:monkes_input.parameters}
+
+
 
 
 \subsection{Monoenergetic database output}
+
+The monoenergetic coefficients $\Dij{ij}$ are written in an output file called \texttt{monkes\_Monoenergetic\_Database.dat}.
+
+
+\begin{landscape}
+	
+	
+	
+	\listings{../../examples/W7X-EIM/dkes_input/monkes_Monoenergetic_Database.dat}{nu}{0.3000000000000000E+00}{Example of \texttt{monkes\_Monoenergetic\_Database.dat} for calculating a monoenergetic database}{lst:monkes_Monoenergetic_Database.dat}
+\end{landscape}
+

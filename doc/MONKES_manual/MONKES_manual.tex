@@ -17,43 +17,32 @@
 
 %
 \input{./figures/figures.tex}
-\title{\huge \textsc{MONKES MANUAL} \\ (DRAFT) }
-\author{Francisco Javier Escoto L\'opez\\ \\ \includegraphics[scale=0.65]{figures/8i7h5z}}
 
-\date{}
-\usetikzlibrary{positioning,decorations.pathreplacing}
 
-\input{bibliography.tex}
-\begin{document} 
-	\maketitle
-
-\newpage
-\tableofcontents
-
-\newcommand{\uu}{\vb*{u}}
-\newcommand{\vv}{\vb*{v}}
-\newcommand{\ww}{\vb*{w}}
-\newcommand{\zz}{\vb*{z}}
-\newcommand{\FF}{\vb*{F}}
-\newcommand{\GG}{\vb*{G}}
-\newcommand{\HH}{\vb*{H}}	
-\newcommand{\OO}{\mathcal{O}}
-%\include{./chapters/Lyapunov}
-
-\newcommand{\fix}[1]{\mbox{fix}\left(#1\right)}
 \newcommand{\MONKES}{\texttt{MONKES}}
-\newcommand{\per}[1]{\mbox{per}\left(#1\right)}
- 
+\newcommand{\DKES}{\texttt{DKES}}
+\newcommand{\BOOZERXFORM}{\texttt{BOOZER\_XFORM}}
+
+\newcommand{\Dij}[1]{\widehat{D}_{#1}}
+\newcommand{\Er}{\widehat{E}_{r}}
+
+\title{\huge \textsc{{\MONKES} \\ (MONoenergetic Kinetic Equation Solver) MANUAL} \\ (DRAFT) }
+\author{Francisco Javier Escoto L\'opez\\ \\ 
+%	\includegraphics[scale=0.45]{figures/8i7h5z}
+}
+
+\date{\today}
+\usetikzlibrary{positioning,decorations.pathreplacing}
+\usepackage{pdflscape}
+\begin{document} 
+
+\maketitle
+\newpage
+\thispagestyle{empty}
+\tableofcontents
  \newpage
+ \setcounter{page}{1} 
  \input{chapters/Install.tex} 
  \input{chapters/Usage.tex}
- \input{chapters/Implementation.tex}
- 
- \input{chapters/API.tex}
- 
- \appendix 
-  
- 
- \printbibliography
 \end{document}
 
