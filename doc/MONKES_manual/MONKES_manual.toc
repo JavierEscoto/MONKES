@@ -9,3 +9,6 @@
 \contentsline {subsubsection}{\numberline {2.1.2}From {\texttt {DKES}} input file}{2}{subsubsection.2.1.2}%
 \contentsline {subsection}{\numberline {2.2}Monoenergetic database input}{2}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Monoenergetic database output}{2}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Example of running {\texttt {MONKES}} for Wendelstein 7-X EIM geometry}{5}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Running from {\texttt {DKES}} input}{5}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Running from {\texttt {BOOZER\_XFORM}} output}{5}{subsubsection.2.4.2}%

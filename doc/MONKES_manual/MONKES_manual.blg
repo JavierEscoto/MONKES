@@ -12,7 +12,7 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Database file #1: refs.bib
 You've used 1 entry,
             2616 wiz_defined-function locations,
-            592 strings with 4890 characters,
+            592 strings with 4892 characters,
 and the built_in function-call counts, 458 in all, are:
 = -- 40
 > -- 19

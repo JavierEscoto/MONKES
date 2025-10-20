@@ -8,14 +8,13 @@
 \subsubsection{From {\BOOZERXFORM} output file}
 {\MONKES} can read the magnetic confituration of an output (binary) file from {\BOOZERXFORM}. The file \textbf{must} be named \texttt{boozmn.nc}. It is advisable to make a soft link instead of renaming the original {\BOOZERXFORM} output file. 
 
-In an output file from {\BOOZERXFORM} there is information about the equilibrium of many flux surfaces. If not specified, {\MONKES} will perform its calculations at the flux surface labelled by $s={\psi/\psi_{\text{lcfs}}}=0.25$. A different flux surface can be specified in the input file \texttt{monkes\_input.surface}. An example on how to fill the input file \texttt{monkes\_input.surface} is given in listing \ref{lst:monkes_input.surface}. 
+In an output file from {\BOOZERXFORM} there is information about the equilibrium of many flux surfaces. If not specified, {\MONKES} will perform its calculations at the flux surface labelled by $s={\psi/\psi_{\text{lcfs}}}=0.25$ where $2\pi\psi$ is the toroidal flux and $\psi_{\text{lcfs}}$ the label of the last closed flux surface. A different flux surface can be specified in the input file \texttt{monkes\_input.surface}. An example on how to fill the input file \texttt{monkes\_input.surface} is given in listing \ref{lst:monkes_input.surface}. 
 
 
 \listings{../../examples/W7X-EIM/boozer_xform_input/monkes_input.surface}{&surface}{/}{Example of \texttt{monkes\_input.surface} for specifying the surface $s={\psi/\psi_{\text{lcfs}}}=0.2$}{lst:monkes_input.surface}
 
 \subsubsection{From {\DKES} input file}
-For running {\MONKES} using a {\DKES} input file, it \textbf{must} be renamed as \texttt{ddkes2.data}.
-
+The magnetic configuration can also be specified using a {\DKES} input file. This input file contains the information about a single flux surface and therefore $s$ does not need to be (explicitly) specified. For running {\MONKES} using a {\DKES} input file, it \textbf{must} be renamed as \texttt{ddkes2.data}. 
 
 %\subsubsection{From {\DESC} input file}
 
@@ -26,7 +25,7 @@ In addition to the magnetic configuration (see section \ref{sec:Magnetic_configu
 	\centering
 	\begin{tabular}{@{}llll@{}}
 		\toprule
-		Parameter             & Symbol in {\MONKES} paper \cite{Escoto_2024} & {Name for {\MONKES}} & Units           \\ \midrule
+		Parameter             & Symbol in {\MONKES} paper \cite{Escoto_2024} & {Name in {\MONKES} input file} & Units           \\ \midrule
 		Poloidal resolution   & $N_\theta$                                 & \texttt{N\_theta}                                & N/A             \\
 		Toroidal resolution   & $N_\zeta$                                 & \texttt{N\_zeta}                                & N/A             \\
 		No. Legendre modes    & $N_\xi$                                    & \texttt{N\_xi}                                   & N/A             \\
@@ -46,13 +45,106 @@ These parameters have to be specified in the input file \texttt{monkes\_input.pa
 
 \subsection{Monoenergetic database output}
 
-The monoenergetic coefficients $\Dij{ij}$ are written in an output file called \texttt{monkes\_Monoenergetic\_Database.dat}. Instead of writing directly $\Dij{ij}$ which are in meters, in the output file \texttt{monkes\_Monoenergetic\_Database.dat}, the quantities written are $K_{ij} \Dij{ij}$. The monoenergetic coefficients are defined in section 2 of reference \cite{Escoto_2024}. The quantities $K_{ij}$ are defined in Appendix E of \cite{Escoto_2024}.
+The monoenergetic coefficients $\Dij{ij}$ are written in an output file called \texttt{monkes\_Monoenergetic\_Database.dat}. Instead of writing directly $\Dij{ij}$ which are in meters, in the output file \texttt{monkes\_Monoenergetic\_Database.dat}, the quantities written are $K_{ij} \Dij{ij}$. The monoenergetic coefficients are defined in section 2 of reference \cite{Escoto_2024}. The quantities $K_{ij}$, as defined in Appendix E of \cite{Escoto_2024}, are: $K_{11}=(\dv*{\psi}{r})^{-2}$, $K_{13}=K_{31}=(\dv*{\psi}{r})^{-1}$ and $K_{33}=1$.
 
 
 \begin{landscape}
-	
-	
-	
 	\listings{../../examples/W7X-EIM/dkes_input/monkes_Monoenergetic_Database.dat}{nu}{0.3000000000000000E+00}{Example of \texttt{monkes\_Monoenergetic\_Database.dat} for calculating a monoenergetic database}{lst:monkes_Monoenergetic_Database.dat}
 \end{landscape}
 
+
+\subsection{Example of running {\MONKES} for Wendelstein 7-X EIM geometry}
+
+In the folder location \texttt{\detokenize{examples/W7X-EIM/}} there is an example for running {\MONKES} in Wendelstein 7-X (W7-X) geometry. For both cases, the \texttt{\detokenize{monkes_input.parameters}} file used is the one shown in listing \ref{lst:monkes_input.parameters}. That is, a scan of 10 points in $\hat{\nu}$ for 2 different values of the radial electric field $\Er$.
+
+
+\subsubsection{Running from {\DKES} input}\label{sec:Running_example_dkes_input}
+An example in which the magnetic configuration is specified via a {\DKES} input file can be found at \texttt{\detokenize{examples/W7X-EIM/dkes_input/}}. Once that {\MONKES} has been correctly compiled, this example can be run by simply typing
+\begin{verbatim}
+	./../../bin/main_monkes.x
+\end{verbatim} 
+in the command prompt or, if running in a remote platform, by executing the batch file from within this location.
+
+The monoenergetic coefficients, are written in the \texttt{\detokenize{monkes_Monoenergetic_Database.dat}} file. Specifically, the results of this run correspond to the output file example of listing \ref{lst:monkes_Monoenergetic_Database.dat}. In figure \ref{fig:Monoenergetic_database_dkes_input}, the main results of the simulation are plotted, for both values of the electric field $\Er$, against the collisionality $\hat{\nu}$. 
+\begin{figure}[H]
+	\tikzsetnextfilename{D11_W7X_EIM_dkes_input}
+	\begin{tikzpicture}
+		\begin{axis}[  
+			xmode=log, ymode=log,
+			no markers, name=D11W7XEIM, width=0.45\textwidth,xlabel=$\hat{\nu}$ {$[1/\text{m}]$}, ylabel={{$ K_{11}\Dij{11}$ {[$\text{T}^{-2}\cdot\text{m}^{-1}$]} }}, ]
+			\addplot[blue] table [skip first n=1, restrict expr to domain={\thisrowno{1}}{0:0},
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{5}] {../../examples/W7X-EIM/dkes_input/monkes_Monoenergetic_Database.dat}; 
+			\addplot[red] table [skip first n=1, restrict expr to domain={\thisrowno{1}}{3e-4:3e-4},
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{5}] {../../examples/W7X-EIM/dkes_input/monkes_Monoenergetic_Database.dat}; 
+			
+			\legend{$\Er=0$, $\Er=\num{3e-4}$}
+		\end{axis}  
+	\end{tikzpicture} 
+	\tikzsetnextfilename{D31_W7X_EIM_dkes_input}
+	\begin{tikzpicture}
+	\begin{axis}[  
+		xmode=log,  
+		no markers, name=D11W7XEIM, width=0.45\textwidth, xlabel=$\hat{\nu}$ {$[1/\text{m}]$}, ylabel={{$ K_{31}\Dij{31} $ {[$\text{T}^{-1}$]} }}, ]
+		\addplot[blue] table [skip first n=1, restrict expr to domain={\thisrowno{1}}{0:0},
+		x expr=\thisrowno{0},
+		y expr=\thisrowno{6}] {../../examples/W7X-EIM/dkes_input/monkes_Monoenergetic_Database.dat}; 
+		\addplot[red] table [skip first n=1, restrict expr to domain={\thisrowno{1}}{3e-4:3e-4},
+		x expr=\thisrowno{0},
+		y expr=\thisrowno{6}] {../../examples/W7X-EIM/dkes_input/monkes_Monoenergetic_Database.dat}; 
+		
+		\legend{$\Er=0$, $\Er=\num{3e-4}$}
+	\end{axis}  
+	\end{tikzpicture} 
+	\caption{Radial transport $K_{11}\Dij{11}$ (left) and bootstrap current coefficient $K_{31}\Dij{31}$ (right) obtained from running the example using a {\DKES} input file.}
+	\label{fig:Monoenergetic_database_dkes_input}
+\end{figure}
+	
+	
+\subsubsection{Running from {\BOOZERXFORM} output}\label{sec:Running_example_boozer_xform_input}
+An example in which the magnetic configuration is specified via a {\BOOZERXFORM} output file can be found at \texttt{\detokenize{examples/W7X-EIM/boozer_xform_input/}}. In this folder, the file \texttt{\detokenize{boozmn_wout_w7x_std_v_0.0.txt.nc}} contains the magnetic configuration. As mentioned in section \ref{sec:Magnetic_configuration_input} {\MONKES} expects any {\BOOZERXFORM} output file to be named \texttt{boozmn.nc}. Thus, before running {\MONKES}, the file \texttt{\detokenize{boozmn_wout_w7x_std_v_0.0.txt.nc}} should be renamed to \texttt{boozmn.nc}. The surface $\psi/\psi_{\text{lcfs}}=0.2$ is specified in the \texttt{\detokenize{monkes_input.surface}} file as shown in listing \ref{lst:monkes_input.surface}. This surface also corresponds to the one specified in the {\DKES} input file from section \ref{sec:Running_example_boozer_xform_input}.
+
+
+
+Now, provided that {\MONKES} has been correctly compiled, this example can be run by simply typing
+\begin{verbatim}
+	./../../bin/main_monkes.x
+\end{verbatim}
+in the command prompt or, if running in a remote platform, by executing the batch file from within this location.
+
+In figure \ref{fig:Monoenergetic_database_boozerxform_output}, the main results of the simulation (written in the \texttt{\detokenize{monkes_Monoenergetic_Database.dat}} file) are plotted. 
+\begin{figure}[H]
+	\tikzsetnextfilename{D11_W7X_EIM_boozxform_input}
+	\begin{tikzpicture}
+		\begin{axis}[  
+			xmode=log, ymode=log,
+			no markers, name=D11W7XEIM,width=0.45\textwidth,xlabel=$\hat{\nu}$ {$[1/\text{m}]$}, ylabel={{$ K_{11}\Dij{11}$ {[$\text{T}^{-2}\cdot\text{m}^{-1}$]} }}, ]
+			\addplot[blue] table [skip first n=1, restrict expr to domain={\thisrowno{1}}{0:0},
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{5}] {../../examples/W7X-EIM/boozer_xform_input/monkes_Monoenergetic_Database.dat}; 
+			\addplot[red] table [skip first n=1, restrict expr to domain={\thisrowno{1}}{3e-4:3e-4},
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{5}] {../../examples/W7X-EIM/boozer_xform_input/monkes_Monoenergetic_Database.dat}; 
+			
+			\legend{$\Er=0$, $\Er=\num{3e-4}$}
+		\end{axis}  
+	\end{tikzpicture} 
+	\tikzsetnextfilename{D31_W7X_EIM_boozxform_input}
+	\begin{tikzpicture}
+		\begin{axis}[  
+			xmode=log,  
+			no markers, name=D11W7XEIM,width=0.45\textwidth,xlabel=$\hat{\nu}$ {$[1/\text{m}]$}, ylabel={{$ K_{31}\Dij{31}$ {[$\text{T}^{-1}$]} }}, ]
+			\addplot[blue] table [skip first n=1, restrict expr to domain={\thisrowno{1}}{0:0},
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{6}] {../../examples/W7X-EIM/boozer_xform_input/monkes_Monoenergetic_Database.dat}; 
+			\addplot[red] table [skip first n=1, restrict expr to domain={\thisrowno{1}}{3e-4:3e-4},
+			x expr=\thisrowno{0},
+			y expr=\thisrowno{6}] {../../examples/W7X-EIM/boozer_xform_input/monkes_Monoenergetic_Database.dat}; 
+			
+			\legend{$\Er=0$, $\Er=\num{3e-4}$}
+		\end{axis}  
+	\end{tikzpicture} 
+	\caption{Radial transport $K_{11}\Dij{11}$ (left) and bootstrap current coefficient $K_{31}\Dij{31}$ (right) obtained from running the example using a {\BOOZERXFORM} output file.}
+	\label{fig:Monoenergetic_database_boozerxform_output}
+\end{figure}
