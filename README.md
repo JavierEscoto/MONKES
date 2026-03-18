@@ -5,7 +5,7 @@ The MONoenergetic Kinetic Equation Solver (MONKES) is a freely available, open-s
 
 Details about the drift-kinetic equation and the method used to solve it can be found at [Escoto, Velasco, Calvo, Landreman and Parra, Nuclear Fusion (2024)](https://iopscience.iop.org/article/10.1088/1741-4326/ad3fc9).
 
-In order to receive an updated user manual and working examples, contact me at javier.escoto.lopez@gmail.com
+In order to receive an updated user manual and working examples, contact javier.escoto.lopez@gmail.com
 
 # License and usage of the code
 Individuals, companies or institutions operating for profit must obtain prior permission to download and use this code, which is owned and registered by CIEMAT, by contacting joseluis.velasco@ciemat.es and javier.escoto.lopez@gmail.com
