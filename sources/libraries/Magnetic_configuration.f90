@@ -481,7 +481,7 @@ module Magnetic_configuration
     !write(*,*) m_max, n_max, Ns, Np, tor_flux, a, R, avol, rvol, Vol
     
     ! *** Read flux-surface parameters and Fourier modes for each surface
-    N_modes_txt = 1 + (m_max+1)*(2*n_max) ! Number of Fourier modes in the txt
+    N_modes_txt = n_max+1 + m_max*(2*n_max+1) ! Number of Fourier modes in the txt
     allocate( s_v(Ns), iota_v(Ns), B_theta_v(Ns), B_zeta_v(Ns) )    
     allocate( mn_v(N_modes_txt,2), B_mn_v(N_modes_txt, Ns) )
     allocate( r_mn_v(N_modes_txt, Ns), z_mn_v(N_modes_txt, Ns), dphi_mn_v(N_modes_txt, Ns) )
@@ -505,7 +505,7 @@ module Magnetic_configuration
        
     end do
     close(1) 
-    
+
     ! Interpolate quantities to given surface s0 and adapt normalizations
     ! and definitions.
     Minor_Radius = a ; Major_Radius = R ; Aspect_ratio = R/a
@@ -520,12 +520,12 @@ module Magnetic_configuration
     
     allocate( B_mnc_txt(N_modes_txt), mn_txt(N_modes_txt,2) )
     
-    do k = 0, N_modes_txt 
+    do k = 1, N_modes_txt 
        mn_txt(k,:) = mn_v(k,:) 
        B_mnc_txt(k) = Linear_Interpolation( s0, s_v, B_mn_v(k, :) )  
        if( mn_txt(k,1) == 0 .and. mn_txt(k,2) == 0 ) B00 = B_mnc_txt(k) 
     end do  
-    
+
     ! Filter non relevant Fourier modes if necessary
     if( N_modes_txt <= 150 ) B_mnc_min = 0
     if( N_modes_txt >  150 ) B_mnc_min = 1d-5 * B00
@@ -535,7 +535,6 @@ module Magnetic_configuration
     B_mnc = pack( B_mnc_txt, abs(B_mnc_txt) >= B_mnc_min ) 
     mn(:,1) = pack( mn_txt(:,1), abs(B_mnc_txt) >= B_mnc_min ) 
     mn(:,2) = pack( mn_txt(:,2), abs(B_mnc_txt) >= B_mnc_min ) 
-    
     call Write_Magnetic_Configuration
     Boozer_coordinates = .true. ! Set logical for Boozer coordinates as true
   
@@ -751,7 +750,7 @@ module Magnetic_configuration
          if( allocated(B_mns) ) deallocate( B_mns )
          B_mns = pack( BB_mns, bigger_earth_field )       
        end if 
-	 
+
 	   open(21,file="boozxform_B_modes.plt")
 	   write(21,*) " Number of surfaces = ", Ns_b
 	   do j = 1, Ns_b
