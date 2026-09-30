@@ -298,12 +298,13 @@ end function
  ! Linear interpolation of f(x) using y_nodes = f(x_nodes)   
  real pure function Linear_Interpolation(x, x_nodes, y_nodes) result(F)   !pure
      real, intent(in)   :: x, x_nodes(0:), y_nodes(0:) 
-     real :: L(0:1), dx 
+     real :: L(0:1)!, dx 
      integer :: S(0:1), j, N
      
      N = size(x_nodes) - 1
      
      j = minloc( abs(x - x_nodes), 1 ) -1    
+     
      if( x_nodes(j) ==  x ) then
        F = y_nodes(j)
      else

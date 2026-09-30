@@ -45,13 +45,13 @@ implicit none
                   nor 'ddkes2.data' in this folder. "
      
   end select
+
   ! *** Select the case: Either a monoenergetic database for specified collisionalities 
   ! or neoclassical flows  
   call Select_functionality(Neoclassical_flows) 
-  if( .not. Neoclassical_flows ) call Monoenergetic_Database_Input!Test_Adjoint_derivatives!
+  if( .not. Neoclassical_flows ) call Monoenergetic_Database_Input !Test_Adjoint_derivatives!  
   
-  
-  ! *** Test of speed grid using Maxwell polynomials (WORK IN PROGRESS)
+  ! *** Compute fluxes using Maxwell polynomials 
   if( Neoclassical_flows ) call Neoclassical_fluxes_Lorentz 
   
   

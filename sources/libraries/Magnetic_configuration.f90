@@ -11,6 +11,7 @@ module Magnetic_configuration
    public :: read_boozer_txt
    public :: Select_Surface
    public :: Beidler_NF_2011_Normalization
+
    
    public :: Np, iota, psi_p, chi_p, B_theta, B_zeta, B00
    public :: Aspect_ratio, Major_Radius, Minor_Radius, s
@@ -31,13 +32,15 @@ module Magnetic_configuration
    
    logical, save :: Stellarator_symmetry = .true. 
    logical, save :: Boozer_coordinates = .false. 
-   integer, save :: Np, N_modes   
+   integer, save :: Np, N_modes, N_modes_nyq    
    real, save :: iota, psi_p, chi_p, B_theta, B_zeta, B00
-   integer, save, allocatable :: mn(:,:) 
+   integer, save, allocatable :: mn(:,:), mn_nyq(:,:)  
    real, save, allocatable :: B_modes(:)   
    real, save, allocatable :: B_mnc(:), B_mns(:), g_mnc(:), g_mns(:)   
    real, save, allocatable :: Bu_mnc(:), Bu_mns(:), Bv_mnc(:), Bv_mns(:)    ! Contravariant
-   real, save, allocatable :: B_u_mnc(:), B_u_mns(:), B_v_mnc(:), B_v_mns(:)! Covariant   
+   real, save, allocatable :: B_u_mnc(:), B_u_mns(:), B_v_mnc(:), B_v_mns(:)! Covariant  
+   real, save, allocatable :: lambda_mns(:)  ! Sine Fourier modes of the lambda function from VMEC
+   real, save, allocatable :: r_mnc(:), z_mns(:)  ! Cosine Fourier modes of the flux surface representation in cylindrical coordinates 
    
    real, save :: Aspect_ratio, Major_Radius, Minor_Radius, s
    namelist /surface/s
@@ -548,15 +551,15 @@ module Magnetic_configuration
     integer :: Ns_b, Ns ! Ns_b: Number of surfaces with Boozer, Ns: Total number of surfaces
     integer :: ncid, ierr_netcdf ! integer for knowing if we are reading correctly the file
     integer :: mnboz_b ! Number of (Boozer) Fourier modes in the boozer xform output
-    real, allocatable :: s_b(:), ss(:) ! Surfaces grid
+    real, allocatable :: s_b(:), ss(:), ss_half(:) ! Surfaces grid
     real, allocatable :: iota_s(:), psi_s(:), psi_p_s(:), B_theta_s(:), B_zeta_s(:)   
     real, allocatable :: B_mnc_s(:,:),  B_mns_s(:,:), BB_mnc(:), BB_mns(:)  ! Cosine and Sine Fourier amplitudes
     real, allocatable :: r_mnc_s(:,:),  r_mns_s(:,:) 
     integer, allocatable :: i_b(:), mn_s(:,:)  
     real :: B_mn_min = 5d-6   
     logical, allocatable :: bigger_earth_field(:)
-    real :: torflux
-    integer :: sign_lh = 1, q_Ns_b, q_Ns      
+    real :: psi_LCFS
+    integer :: sign_lh = 1!, q_Ns_b, q_Ns      
     
     ! Open BOOZER_XFORM output file "boozmn.nc"
     ierr_netcdf = nf90_open('boozmn.nc', nf90_nowrite, ncid )
@@ -570,15 +573,15 @@ module Magnetic_configuration
     ! If the reference system is left-handed, change the sign of 
     ! B_theta, chi_p and iota to make it right-handed (change theta by -theta).   
     
-    torflux = psi_s(Ns) / (2 * pi)
-    psi_p = 2 * torflux * sqrt(s0) / Minor_Radius   
+    psi_LCFS = psi_s(Ns) / (2 * pi)
+    psi_p = 2 * psi_LCFS * sqrt(s0) / Minor_Radius   
     
     sign_lh = -1 ! Sign to change from left-handed to right-handed coordinates 
-    iota  = sign_lh * Linear_Interpolation( s0, ss(2:Ns), iota_s(2:Ns) )
+    iota  = sign_lh * Linear_Interpolation( s0, ss_half(2:Ns), iota_s(2:Ns) )  
     chi_p = sign_lh * iota * psi_p 
        
-    B_theta = sign_lh * Linear_Interpolation(s0, ss(2:Ns), B_theta_s(2:Ns) )  
-    B_zeta  =           Linear_Interpolation(s0, ss(2:Ns),  B_zeta_s(2:Ns) ) 
+    B_theta = sign_lh * Linear_Interpolation(s0, ss_half(2:Ns), B_theta_s(2:Ns) )  
+    B_zeta  =           Linear_Interpolation(s0, ss_half(2:Ns),  B_zeta_s(2:Ns) ) 
     s = s0	
     
     ! Close BOOZER_XFORM output file "boozmn.nc"
@@ -614,8 +617,8 @@ module Magnetic_configuration
        write(*,*) " Number of surfaces of BOOZER_XFORM ", Ns_b    
        
        ! Set orders of interpolation 
-       q_Ns_b = minval( [ Ns_b-1,  2] )
-       q_Ns = minval( [ Ns-2,  2 ] )
+      !  q_Ns_b = minval( [ Ns_b-1,  2] )
+      !  q_Ns = minval( [ Ns-2,  2 ] )
        
        ! Read maximum number of (Boozer) Fourier modes 
        ierr_netcdf = nf90_inq_varid( ncid, 'mnboz_b', rhid ) 
@@ -634,30 +637,32 @@ module Magnetic_configuration
        ! has done calculations
        allocate( i_b(Ns_b) )  
        ierr_netcdf = nf90_inq_varid( ncid, 'jlist', rhid ) 
-       ierr_netcdf = nf90_get_var( ncid, rhid, i_b ) 
+       ierr_netcdf = nf90_get_var( ncid, rhid, i_b )   
        
-       ! Vector of of psi(s) (tor. flux=psi/2pi) in VMEC radial positions
+       ! Vector of of 2pi*psi(s) (phi_b=2pi*psi) in VMEC radial positions
        allocate( psi_s(Ns) ) ; psi_s(1) = 0        
        ierr_netcdf = nf90_inq_varid( ncid, 'phi_b', rhid ) 
        ierr_netcdf = nf90_get_var( ncid, rhid, psi_s )   
+       if( maxval(abs(psi_s))==minval(abs(psi_s)) ) psi_s = [((i-1)*1d0/(Ns-1), i=1, Ns)]! Done because python's booz xform sometimes does not calculate phi
        
        ! Radial grids 
-       allocate( ss(Ns), s_b(Ns_b) )        
-       !ss = [((i-1)*1d0/(Ns-1), i=1, Ns)]! Vector of VMEC radial positions
-       ss = psi_s/psi_s(Ns)! Vector of VMEC radial positions
-       s_b = ss(i_b) ! Vector of surfaces in which Boozer transform has been done
+       allocate( ss(Ns), ss_half(2:Ns), s_b(Ns_b) )        
+       ss = psi_s/psi_s(Ns)! Vector of VMEC radial positions 
+       ss_half =( ss(1:Ns-1) + ss(2:Ns))/2
+       s_b = (ss(i_b) + ss(i_b-1))/2 ! Vector of surfaces in which Boozer transform has been done
               
        ! Vector of rotational transform in VMEC radial positions
        allocate( iota_s(1:Ns) ) ; iota_s(1) = 0
        ierr_netcdf = nf90_inq_varid(ncid,'iota_b',rhid) 
-       ierr_netcdf = nf90_get_var( ncid, rhid, iota_s )
+       ierr_netcdf = nf90_get_var( ncid, rhid, iota_s )   
                      
                      
        ! Vector of derivative along s of psi'(s) (tor. flux=psi/2pi) in VMEC radial positions
        allocate( psi_p_s(Ns) ) ; psi_p_s(1) = 0        
        ierr_netcdf = nf90_inq_varid( ncid, 'phip_b', rhid ) 
        ierr_netcdf = nf90_get_var( ncid, rhid, psi_p_s )   
-        
+       if( maxval(abs(psi_p_s))== 0 ) psi_p_s = 1
+       
        ! Poloidal current B_zeta 
        allocate( B_theta_s(Ns) ) ; B_theta_s(1) = 0   
        ierr_netcdf = nf90_inq_varid( ncid, 'buco_b', rhid )
@@ -669,9 +674,9 @@ module Magnetic_configuration
        ierr_netcdf = nf90_get_var( ncid, rhid, B_zeta_s )
        
        open(21, file="monkes_boozerxform_profile.dat")       
-       write(21,'(9999A25)') "s", "iota", "psi(s)", "psi'(s)", "B_theta_s(s)", "B_zeta_s(s)" 
+       write(21,'(9999A25)') "s", "iota", "2pi*psi(s)", "psi'(s)", "B_theta_s(s)", "B_zeta_s(s)" 
        do i = 2, Ns 
-          write(21,'(9999e25.16)') ss(i), iota_s(i), psi_s(i), psi_p_s(i), B_theta_s(i), B_zeta_s(i) 
+          write(21,'(9999e25.16)') ss_half(i), iota_s(i), ss_half(i)*psi_s(Ns), psi_p_s(i), B_theta_s(i), B_zeta_s(i) 
        end do         
        close(21) 
        
@@ -693,7 +698,7 @@ module Magnetic_configuration
        ! B modes B = B_mnc_s * cos + B_mns_s * sin
        allocate( B_mnc_s(mnboz_b, Ns_b) )  
        ierr_netcdf = nf90_inq_varid( ncid, 'bmnc_b', rhid ) 
-       ierr_netcdf = nf90_get_var( ncid, rhid, B_mnc_s )       
+       ierr_netcdf = nf90_get_var( ncid, rhid, B_mnc_s )   
           
        ! *** Non Stellarator-symmetric modes (if needed)       
        ! Detect stellarator symmetry 
@@ -750,7 +755,7 @@ module Magnetic_configuration
          if( allocated(B_mns) ) deallocate( B_mns )
          B_mns = pack( BB_mns, bigger_earth_field )       
        end if 
-
+	 
 	   open(21,file="boozxform_B_modes.plt")
 	   write(21,*) " Number of surfaces = ", Ns_b
 	   do j = 1, Ns_b
@@ -768,14 +773,15 @@ module Magnetic_configuration
     
   end subroutine  
 
+  
   subroutine read_VMEC_output(s0)
     real, intent(in) :: s0
     
     real, parameter :: pi = acos(-1d0)
-    integer :: Ns_b, Ns ! Ns_b: Number of surfaces with Boozer, Ns: Total number of surfaces
+    integer :: Ns ! Ns: Total number of surfaces
     integer :: ncid, ierr_netcdf ! integer for knowing if we are reading correctly the file
     integer :: mn_b ! Number of (Boozer) Fourier modes
-    real, allocatable :: ss(:) ! Surfaces grid
+    real, allocatable :: ss(:), ss_half(:) ! Surfaces grids
     real, allocatable :: iota_s(:), psi_s(:), psi_p_s(:), B_theta_s(:), B_zeta_s(:)   
     real, allocatable :: g_mnc_s(:,:),  g_mns_s(:,:)  ! Cosine and Sine Fourier amplitudes
     real, allocatable :: B_mnc_s(:,:),  B_mns_s(:,:)  ! Cosine and Sine Fourier amplitudes
@@ -783,67 +789,155 @@ module Magnetic_configuration
     real, allocatable :: B_u_mns_s(:,:),  B_v_mns_s(:,:)  
     real, allocatable :: Bu_mnc_s(:,:),  Bv_mnc_s(:,:) 
     real, allocatable :: Bu_mns_s(:,:),  Bv_mns_s(:,:)  
+    real, allocatable :: r_mnc_s(:,:),  r_mns_s(:,:) ! Modes of r(psi,u,v)
+    real, allocatable :: z_mnc_s(:,:),  z_mns_s(:,:) ! Modes of z(psi,u,v)
+    real, allocatable :: lambda_mnc_s(:,:),  lambda_mns_s(:,:) ! Modes of lambda(psi,u,v)
+    real, allocatable :: Tor_flux(:) ! Toroidal flux from VMEC.   
     
     integer :: mpol, ntor, rhid, idimid 
     
     ! Open VMEC output file "VMEC.nc"
-    ierr_netcdf = nf90_open('VMEC.nc', nf90_nowrite, ncid )
+    !ierr_netcdf = nf90_open('VMEC.nc', nf90_nowrite, ncid )
         
-    call read_scalar_quantities
-    call read_profiles
-    call Write_Modes  
-    call Interpolate_magnetic_configuration 
-     
     psi_p = 1 ;  chi_p = 1 ; B_theta = 1 ; B_zeta = 1;
     Aspect_ratio = 1 ; Minor_Radius = 1 ; Major_Radius = 1 ; 
     
+    call read_scalar_quantities
+    call read_profiles
+   !  call Write_Modes  
+    call Interpolate_magnetic_configuration 
+     
+    
     call Write_Magnetic_Configuration
+   !  call Write_quantities_on_FS
     
     contains 
     subroutine Write_Modes
-      integer :: i, j
-      
+      integer :: i, j, jj 
+
+
       open(1234, file="VMEC_modes.dat")
-      do j = 1, Ns
+      do j = 2, Ns
          write(1234,*) " *** Surface s = ", ss(j) 
-         write(1234,'(9999A25)') "m", "n", "B_mn", "g_mn" , "B_umn", "B_vmn", "Bu_mn", "Bv_mn"
+         write(1234,'(9999A25)') "m", "n", "r_mn", "z_mn"
          do i = 1, N_modes
             write(1234,'(9999e25.16)') &
-            1d0*mn(i,1), 1d0*mn(i,2), B_mnc_s(i,j), g_mnc_s(i,j) , &
-            B_u_mnc_s(i,j), B_v_mnc_s(i,j), Bu_mnc_s(i,j), Bv_mnc_s(i,j)
+            1d0*mn(i,1), 1d0*mn(i,2), r_mnc_s(i,j), z_mns_s(i,j)
+         end do       
+      end do       
+      close(1234) 
+
+      
+      open(1234, file="VMEC_modes_nyquist.dat")
+      do j = 2, Ns ; jj = j + 1         
+         write(1234,*) " *** Surface s = ", ss_half(j) 
+         write(1234,'(9999A25)') "m", "n", "B_mnc", "g_mnc" , "B_u_mnc", "B_v_mnc", "Bu_mnc", "Bv_mnc"   
+         do i = 1, N_modes_nyq
+            write(1234,'(9999e25.16)') &
+            1d0*mn_nyq(i,1), 1d0*mn_nyq(i,2), B_mnc_s(i,j), g_mnc_s(i,j) , &
+            B_u_mnc_s(i,j), B_v_mnc_s(i,j), Bu_mnc_s(i,j), Bv_mnc_s(i,j)  
          end do       
       end do       
       close(1234) 
     
     
     end subroutine 
+
+    subroutine Write_quantities_on_FS
+       integer, parameter :: N_theta = 40, N_zeta = 40 
+       integer :: i, j
+       real :: theta(0:N_theta), zeta(0:N_zeta), B(0:N_theta, 0:N_zeta), g(0:N_theta, 0:N_zeta)
+       real :: lambda(0:N_theta, 0:N_zeta), lambda_theta(0:N_theta, 0:N_zeta), lambda_zeta(0:N_theta, 0:N_zeta)
+       real :: r(0:N_theta, 0:N_zeta), z(0:N_theta, 0:N_zeta)
+       
+       theta = [(i*2*pi/N_theta, i=0, N_theta)]
+       zeta  = [(j*2*pi/(N_zeta*Np), j=0, N_zeta)]
+
+       do j = 0, N_zeta
+          do i = 0, N_theta 
+             B(i,j) =  Fourier_expansion_cos_sin( B_mnc, 0*B_mnc, theta(i), zeta(j) )
+             g(i,j) = Fourier_expansion_cos_sin( g_mnc, 0*g_mnc, theta(i), zeta(j) )
+
+             
+             lambda(i,j)       = Fourier_expansion_cos_sin( 0*lambda_mns, lambda_mns, theta(i), zeta(j) )
+             lambda_theta(i,j) = Fourier_expansion_cos_sin_DV_theta( 0*lambda_mns, lambda_mns, theta(i), zeta(j) )
+             lambda_zeta(i,j)  = Fourier_expansion_cos_sin_DV_zeta( 0*lambda_mns, lambda_mns, theta(i), zeta(j) )  
+             r(i,j) = Fourier_expansion_cos_sin( r_mnc, 0*r_mnc, theta(i), zeta(j) ) 
+             z(i,j) = Fourier_expansion_cos_sin( 0*z_mns, z_mns, theta(i), zeta(j) ) 
+          end do 
+       end do
+       
+       open(1234, file="Quantities_on_FS.dat")
+       write(1234,'(9999A25)') "theta", "zeta", "B", "Jacobian", "lambda", "lambda_theta", "lambda_zeta"  
+       do j = 0, N_zeta
+          do i = 0, N_theta             
+             write(1234,'(9999e25.16)') theta(i), zeta(j), B(i,j), g(i,j), lambda(i,j), lambda_theta(i,j), lambda_zeta(i,j) 
+          end do 
+       end do
+      close(1234)
+      
+      open(1234, file="Cross_sections.dat")
+      write(1234,'(9999A25)') "r", "z", "zeta / (2pi/N_fp)"
+      do j = 0, N_zeta
+         write(1234,*) "zeta / (2pi/N_fp)= ", zeta(j)/(2*pi/Np)
+         do i = 0, N_theta             
+            write(1234,'(9999e25.16)') r(i,j), z(i,j), zeta(j)/(2*pi/Np)
+         end do  
+      end do
+      close(1234)
+
+      open(1234, file="Flux_surface.dat")
+      write(1234,'(9999A25)') "x","y", "z"
+      do j = 0, N_zeta 
+         do i = 0, N_theta             
+            write(1234,'(9999e25.16)') r(i,j) * cos(zeta(j)), r(i,j) * sin(zeta(j)), z(i,j)
+         end do  
+      end do
+      close(1234)
+
+
+
+    end subroutine 
+
     subroutine Interpolate_magnetic_configuration
        integer :: i
+       real :: ds_dr, dpsi_ds, psi_LCFS
+
+       ! Rotational transform and toroidal and poloidal flux derivatives at s0
+       iota = Interpolated_value( s0, ss(2:Ns), iota_s(2:Ns), 2 ) 
+       psi_LCFS = Tor_flux(Ns) / (2 * pi) ! dpsi/ds = psi_LCFS
+       dpsi_ds = psi_LCFS
+       ds_dr = 2 * sqrt(s0) / Minor_Radius 
        
+       psi_p = psi_LCFS * ds_dr
+       chi_p = iota * psi_p
+
        ! *** Stellarator symmetric modes
        allocate( B_mnc(N_modes), g_mnc(N_modes) ) 
        allocate( B_u_mnc(N_modes), B_v_mnc(N_modes) ) 
-       allocate( Bu_mnc(N_modes), Bv_mnc(N_modes) ) 
+       allocate( Bu_mnc(N_modes), Bv_mnc(N_modes) )  
        do i = 1, N_modes
            
           ! Cosine Fourier modes of magnetic field strength
-          B_mnc(i) = Interpolated_value( s0, ss(2:Ns), B_mnc_s(i,2:Ns), 2 )   
+          B_mnc(i) = Interpolated_value( s0, ss_half(2:Ns), B_mnc_s(i,2:Ns), 2 )   
           if( mn(i,1)==0 .and. mn(i,2)==0 ) B00 = B_mnc(i)            
           
           ! Cosine Fourier modes of covariant components of the Jacobian
-          g_mnc(i) = -Interpolated_value( s0, ss(2:Ns), g_mnc_s(i,2:Ns), 2 )  
+          ! It must be corrected to change from coordinate s=psi/psi_LCFS to psi to be consistent with the DKE formulation for Er /= 0. 
+          g_mnc(i) = - Interpolated_value( s0, ss_half(2:Ns), g_mnc_s(i,2:Ns), 2 ) / dpsi_ds 
           
           ! Cosine Fourier modes of covariant components of B
-          B_u_mnc(i) = Interpolated_value( s0, ss(2:Ns), B_u_mnc_s(i,2:Ns), 2 )
-          B_v_mnc(i) = Interpolated_value( s0, ss(2:Ns), B_v_mnc_s(i,2:Ns), 2 )
+          B_u_mnc(i) =  Interpolated_value( s0, ss_half(2:Ns), B_u_mnc_s(i,2:Ns), 2 )   
+          B_v_mnc(i) = -Interpolated_value( s0, ss_half(2:Ns), B_v_mnc_s(i,2:Ns), 2 )  
+          if( mn(i,1)==0 .and. mn(i,2)==0 ) B_theta = B_u_mnc(i)  
+          if( mn(i,1)==0 .and. mn(i,2)==0 ) B_zeta = B_v_mnc(i)
           
           ! Cosine Fourier modes of contravariant components of B
-          Bu_mnc(i) = Interpolated_value( s0, ss(2:Ns), Bu_mnc_s(i,2:Ns), 2 )
-          Bv_mnc(i) = Interpolated_value( s0, ss(2:Ns), Bv_mnc_s(i,2:Ns), 2 )
+          Bu_mnc(i) =  Interpolated_value( s0, ss_half(2:Ns), Bu_mnc_s(i,2:Ns), 2 ) 
+          Bv_mnc(i) = - Interpolated_value( s0, ss_half(2:Ns), Bv_mnc_s(i,2:Ns), 2 )
              
-       end do 
-       ! Rotational transform 
-       iota = Interpolated_value( s0, ss, iota_s(2:Ns), 2 ) 
+       end do  
+       
        ! *** Non-Stellarator symmetric modes 
        if(.not. Stellarator_symmetry) then  
          allocate( B_mns(N_modes), g_mns(N_modes) ) 
@@ -851,118 +945,124 @@ module Magnetic_configuration
          allocate( Bu_mns(N_modes), Bv_mns(N_modes) ) 
          do i = 1, N_modes
             ! Sine Fourier modes of magnetic field strength
-            B_mns(i) = Interpolated_value( s0, ss, B_mns_s(i,:), 2 )
+            B_mns(i) = Interpolated_value( s0, ss_half(2:Ns), B_mns_s(i,2:Ns), 2 )
             
             ! Sine Fourier modes of covariant components of the Jacobian
-            g_mns(i) = Interpolated_value( s0, ss, g_mns_s(i,:), 2 ) 
+            g_mns(i) = Interpolated_value( s0, ss_half(2:Ns), g_mns_s(i,2:Ns), 2 ) 
           
             ! Sine Fourier modes of covariant components of B
-            B_u_mns(i) = Interpolated_value( s0, ss, B_u_mns_s(i,:), 2 )
-            B_v_mns(i) = Interpolated_value( s0, ss, B_v_mns_s(i,:), 2 )
+            B_u_mns(i) = Interpolated_value( s0, ss_half(2:Ns), B_u_mns_s(i,2:Ns), 2 )
+            B_v_mns(i) = Interpolated_value( s0, ss_half(2:Ns), B_v_mns_s(i,2:Ns), 2 )
           
             ! Sine Fourier modes of contravariant components of B
-            Bu_mns(i) = Interpolated_value( s0, ss, Bu_mns_s(i,:), 2 )
-            Bv_mns(i) = Interpolated_value( s0, ss, Bv_mns_s(i,:), 2 )
+            Bu_mns(i) = Interpolated_value( s0, ss_half(2:Ns), Bu_mns_s(i,2:Ns), 2 )
+            Bv_mns(i) = Interpolated_value( s0, ss_half(2:Ns), Bv_mns_s(i,2:Ns), 2 )
+            
          end do 
        end if
     
     end subroutine 
     
     ! Reads the number of field periods, the radial grid sizes 
-    subroutine read_scalar_quantities
-       integer :: rhid, idimid
-       integer :: jsize 
+    subroutine read_scalar_quantities 
        
-       ! Read No. Field periods and write it on global "Np"
-       ierr_netcdf = nf90_inq_varid( ncid, 'nfp', rhid )  
-       ierr_netcdf = nf90_get_var( ncid, rhid, Np )      
+       ! Read No. Field periods and write it on global "Np" 
+       call read_netcdf_integer('nfp', Np)
        write(*,*) " Number of field periods ", Np 
-       write(*,*) " ierr_netcdf ", ierr_netcdf
-       
-       ! Read aspect ratio and write it on global "Aspect_ratio"
-       ierr_netcdf = nf90_inq_varid( ncid, 'aspect', rhid )   
-       ierr_netcdf = nf90_get_var( ncid, rhid, Aspect_ratio )      
+        
+       ! Read aspect ratio and write it on global "Aspect_ratio" 
+       call read_netcdf_scalar('aspect', Aspect_ratio)    
        write(*,*) " Aspect ratio ", Aspect_ratio 
-       write(*,*) " ierr_netcdf ", ierr_netcdf
-            
-       ! Read total number of surfaces in original VMEC file
-       ierr_netcdf = nf90_inq_varid( ncid, 'ns', rhid )    
-       ierr_netcdf = nf90_get_var( ncid, rhid, Ns )
-       write(*,*) " Number of total surfaces in VMEC file ", Ns   
-       write(*,*) " ierr_netcdf ", ierr_netcdf                  
-       
-       ! Read maximum number of poloidal Fourier modes 
-       ierr_netcdf = nf90_inq_varid( ncid, 'mpol', rhid ) 
-       ierr_netcdf = nf90_get_var( ncid, rhid, mpol)
+       call read_netcdf_scalar('Aminor_p', Minor_Radius)
+       write(*,*) " Minor radius ", Minor_Radius 
+       call read_netcdf_scalar('Rmajor_p', Major_Radius)
+       write(*,*) " Major radius ", Major_Radius
+               
+       ! Read number of surfaces and write it on "Ns" 
+       call read_netcdf_integer('ns', Ns)
+       write(*,*) " Number of total surfaces in VMEC file ", Ns                 
+        
+
+       call read_netcdf_integer('mpol', mpol)
        write(*,*) " Number of poloidal Fourier modes  of VMEC ", mpol
-       write(*,*) " ierr_netcdf ", ierr_netcdf          
        
-       ! Read maximum number of poloidal Fourier modes 
-       ierr_netcdf = nf90_inq_varid( ncid, 'ntor', rhid ) 
-       ierr_netcdf = nf90_get_var( ncid, rhid, ntor)
+       ! Read maximum number of poloidal Fourier modes  
+       call read_netcdf_integer('ntor', ntor)
        write(*,*) " Number of poloidal Fourier modes  of VMEC ", ntor
-       write(*,*) " ierr_netcdf ", ierr_netcdf
        
-       N_modes = mpol * ntor * 2
+      ! Read number of total Fourier modes   
+       call read_netcdf_integer('mnmax_nyq', N_modes)
        write(*,*) " Number of total Fourier modes  of VMEC ", N_modes
-                
+      
+       call read_netcdf_scalar('Aminor_p', Minor_Radius)
+       call read_netcdf_scalar('Rmajor_p', Major_Radius)
+
     end subroutine 
     
     subroutine read_profiles   
        integer :: i, j 
+
+       real, allocatable :: mn_temp(:,:), mn_temp_nyq(:,:)
            
        ! *** Flux-surface label as normalized Toroidal flux s = psi/psi_LCFS 
-       allocate( ss(Ns) )        
-       ierr_netcdf = nf90_inq_varid( ncid, 'phi', rhid ) ! In vmec output psi is denoted phi
-       ierr_netcdf = nf90_get_var( ncid, rhid, ss)      
+       allocate( ss(Ns), ss_half(Ns) )        
+       call read_netcdf_vector('phi', ss) ! In vmec output psi is denoted phi
        ss = ss/ss(Ns)  
+       ss_half(2:Ns) = ( ss(2:Ns) + ss(1:Ns-1) ) /2 ; ss_half(1) = 0! VMEC's half mesh
+       
+       allocate( Tor_flux(Ns) )
+       call read_netcdf_vector('phi', Tor_flux)     
+ 
            
-       ! *** Rotational transform 
+       ! *** Rotational transform in full mesh
        allocate( iota_s(Ns) )        
-       ierr_netcdf = nf90_inq_varid( ncid, 'iota_f', rhid ) ! In vmec output psi is denoted phi
-       ierr_netcdf = nf90_get_var( ncid, rhid, iota_s)                    
+       call read_netcdf_vector('iotaf', iota_s)               
        
        ! *** Integer map of the Fourier modes (m,n) = ( xm(i), xn(i) ) for
-       ! 1 <= i <= N_modes.
-       allocate( mn(N_modes,2) )       
-       ierr_netcdf = nf90_inq_varid( ncid, 'xm', rhid )  
-       ierr_netcdf = nf90_get_var( ncid, rhid, mn(:,1))  
-       ierr_netcdf = nf90_inq_varid( ncid, 'xn', rhid )  
-       ierr_netcdf = nf90_get_var( ncid, rhid, mn(:,2))  
-       mn(:,2) = mn(:,2) / Np         
+       ! 1 <= i <= N_modes. It is the same for all surfaces.            
+       allocate( mn(N_modes,2), mn_temp(N_modes,2) )     
+       call read_netcdf_vector('xm_nyq', mn_temp(:,1))
+       call read_netcdf_vector('xn_nyq', mn_temp(:,2))   
+       
+       mn = nint( mn_temp ) ! The modes are read as real and we need to convert them to integer
+       mn(:,2) = mn(:,2) / Np          
+        
         
        ! *** Stellarator symmetric modes          
-       ! Cosine Fourier modes of the magnetic field strength 
-       allocate( B_mnc_s(N_modes,Ns) )        
-       ierr_netcdf = nf90_inq_varid( ncid, 'bmnc', rhid )  
-       ierr_netcdf = nf90_get_var( ncid, rhid, B_mnc_s)      
-       ! Cosine Fourier modes of the Jacobian
+       ! Cosine Fourier modes of the magnetic field strength on half mesh.
+       ! The first point does not count
+       allocate( B_mnc_s(N_modes,Ns) )             
+       call read_netcdf_array('bmnc', B_mnc_s)
+
+       ! Cosine Fourier modes of the Jacobian on half mesh.
+       ! The first point does not count
        allocate( g_mnc_s(N_modes,Ns) )        
-       ierr_netcdf = nf90_inq_varid( ncid, 'gmnc', rhid )  
-       ierr_netcdf = nf90_get_var( ncid, rhid, g_mnc_s) 
+       call read_netcdf_array('gmnc', g_mnc_s)
        
        ! Cosine Fourier modes of the poloidal B_u and toroidal B_v covariant
-       ! components of the magnetic field
-       allocate( B_u_mnc_s(N_modes,Ns), B_v_mnc_s(N_modes,Ns) )        
-       ierr_netcdf = nf90_inq_varid( ncid, 'bsubumnc', rhid )  
-       ierr_netcdf = nf90_get_var( ncid, rhid, B_u_mnc_s) 
-          
-       ierr_netcdf = nf90_inq_varid( ncid, 'bsubvmnc', rhid ) 
-       ierr_netcdf = nf90_get_var( ncid, rhid, B_v_mnc_s)        
+       ! components of the magnetic fieldon half mesh.
+       ! The first point does not count
+       allocate( B_u_mnc_s(N_modes,Ns), B_v_mnc_s(N_modes,Ns) )   
+       call read_netcdf_array('bsubumnc', B_u_mnc_s)
+       call read_netcdf_array('bsubvmnc', B_v_mnc_s)
+               
        
-       ! Cosine Fourier modes of the poloidal Bu and toroidal Bv contravariant
+       
+       ! Cosine Fourier modes of the poloidal B_u and toroidal B_v contravariant
        ! components of the magnetic field
-       allocate( Bu_mnc_s(N_modes,Ns), Bv_mnc_s(N_modes,Ns) )        
-       ierr_netcdf = nf90_inq_varid( ncid, 'bsupumnc', rhid )  
-       ierr_netcdf = nf90_get_var( ncid, rhid, Bu_mnc_s) 
-          
-       ierr_netcdf = nf90_inq_varid( ncid, 'bsupvmnc', rhid )  
-       ierr_netcdf = nf90_get_var( ncid, rhid, Bv_mnc_s)         
+       allocate( Bu_mnc_s(N_modes,Ns), Bv_mnc_s(N_modes,Ns) )   
+       call read_netcdf_array('bsupumnc', Bu_mnc_s)
+       call read_netcdf_array('bsupvmnc', Bv_mnc_s)
+ 
+       
        
        ! *** Non Stellarator-symmetric modes (if needed)       
        ! Detect stellarator symmetry 
+        
        ierr_netcdf = nf90_inq_varid( ncid, 'bmns', rhid )  
-       Stellarator_symmetry = ( ierr_netcdf /= 0 )
+       Stellarator_symmetry = ( ierr_netcdf /= 0 )  
+       write(*,*) " Stellarator_symmetry ", Stellarator_symmetry
+       
        if( .not. Stellarator_symmetry ) then 
        
          ! Sine Fourier modes of the magnetic field strength 
@@ -1050,6 +1150,205 @@ module Magnetic_configuration
 !~        end do        
        
     end subroutine 
+
+
   end subroutine
+  
+  
+    real function Fourier_expansion_cos_sin( F_mn_c, F_mn_s, theta, zeta ) result(F)
+       real, intent(in) :: F_mn_c(:), F_mn_s(:), theta, zeta
+
+       integer :: i, m, n, N_mn, mn_index(size(F_mn_c),2)
+       
+       N_mn = size(F_mn_c) ! Choose if nyquist modes or not
+       if( N_mn == N_modes )     mn_index = mn
+       if( N_mn == N_modes_nyq ) mn_index = mn_nyq
+
+       F = 0 
+       do i = 1, N_mn ; 
+         
+         m = mn_index(i,1) ; n = mn_index(i,2)
+          F = F &
+            + F_mn_c(i) * cos( m*theta - Np*n*zeta ) &
+            + F_mn_s(i) * sin( m*theta - Np*n*zeta ) 
+       end do 
+    end function
+   
+    real function Fourier_expansion_cos_sin_DV_theta( F_mn_c, F_mn_s, theta, zeta ) result(F)
+       real, intent(in) :: F_mn_c(:), F_mn_s(:), theta, zeta
+       integer :: i, m, n, N_mn, mn_index(size(F_mn_c),2)
+       
+       N_mn = size(F_mn_c) ! Choose if nyquist modes or not
+       if( N_mn == N_modes )     mn_index = mn
+       if( N_mn == N_modes_nyq ) mn_index = mn_nyq
+
+       F = 0 
+       do i = 1, N_mn ;  m = mn_index(i,1) ; n = mn_index(i,2)
+
+          F = F &
+            - m* F_mn_c(i) * sin( m*theta - Np*n*zeta ) &
+            + m* F_mn_s(i) * cos( m*theta - Np*n*zeta ) 
+       end do 
+    end function
+
     
+    real function Fourier_expansion_cos_sin_DV_zeta( F_mn_c, F_mn_s, theta, zeta ) result(F)
+       real, intent(in) :: F_mn_c(:), F_mn_s(:), theta, zeta
+       integer :: i, m, n, N_mn, mn_index(size(F_mn_c),2)
+       
+       N_mn = size(F_mn_c) ! Choose if nyquist modes or not
+       if( N_mn == N_modes )     mn_index = mn
+       if( N_mn == N_modes_nyq ) mn_index = mn_nyq
+
+       F = 0 
+       do i = 1, N_mn ;  m = mn_index(i,1) ; n = mn_index(i,2)
+          F = F &
+            + Np*n* F_mn_c(i) * sin( m*theta - Np*n*zeta ) &
+            - Np*n* F_mn_s(i) * cos( m*theta - Np*n*zeta ) 
+       end do 
+    end function
+
+    
+    real function Fourier_expansion_cos_sin_DV2_theta( F_mn_c, F_mn_s, theta, zeta ) result(F)
+       real, intent(in) :: F_mn_c(:), F_mn_s(:), theta, zeta
+       integer :: i, m, n, N_mn, mn_index(size(F_mn_c),2)
+       
+       N_mn = size(F_mn_c) ! Choose if nyquist modes or not
+       if( N_mn == N_modes )     mn_index = mn
+       if( N_mn == N_modes_nyq ) mn_index = mn_nyq
+
+       F = 0 
+       do i = 1, N_mn ;  m = mn_index(i,1) ; n = mn_index(i,2)
+          F = F &
+            - m*m* F_mn_c(i) * cos( m*theta - Np*n*zeta ) &
+            - m*m* F_mn_s(i) * sin( m*theta - Np*n*zeta ) 
+       end do 
+    end function
+
+    
+    
+    real function Fourier_expansion_cos_sin_DV2_theta_zeta( F_mn_c, F_mn_s, theta, zeta ) result(F)
+       real, intent(in) :: F_mn_c(:), F_mn_s(:), theta, zeta
+       integer :: i, m, n, N_mn, mn_index(size(F_mn_c),2)
+       
+       N_mn = size(F_mn_c) ! Choose if nyquist modes or not
+       if( N_mn == N_modes )     mn_index = mn
+       if( N_mn == N_modes_nyq ) mn_index = mn_nyq
+
+       F = 0 
+       do i = 1, N_mn ;  m = mn_index(i,1) ; n = mn_index(i,2)
+          F = F &
+            + m*Np*n* F_mn_c(i) * cos( m*theta - Np*n*zeta ) &
+            + m*Np*n* F_mn_s(i) * sin( m*theta - Np*n*zeta ) 
+       end do 
+    end function
+
+
+
+    
+    real function Fourier_expansion_cos_sin_DV2_zeta( F_mn_c, F_mn_s, theta, zeta ) result(F)
+       real, intent(in) :: F_mn_c(:), F_mn_s(:), theta, zeta
+       integer :: i, m, n, N_mn, mn_index(size(F_mn_c),2)
+       
+       N_mn = size(F_mn_c) ! Choose if nyquist modes or not
+       if( N_mn == N_modes )     mn_index = mn
+       if( N_mn == N_modes_nyq ) mn_index = mn_nyq
+
+       F = 0 
+       do i = 1, N_mn ;  m = mn_index(i,1) ; n = mn_index(i,2)
+          F = F &
+            - Np*n*Np*n* F_mn_c(i) * cos( m*theta - Np*n*zeta ) &
+            - Np*n*Np*n* F_mn_s(i) * sin( m*theta - Np*n*zeta ) 
+       end do 
+    end function
+
+
+  subroutine read_netcdf_array(tag, variable)
+    character(len=*), intent(in) :: tag
+    real, intent(out) :: variable(:, :)
+    
+    integer :: rhid, ierr_netcdf, ncid
+
+    
+    ierr_netcdf = nf90_open('VMEC.nc', nf90_nowrite, ncid )
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_inq_varid( ncid, trim(tag), rhid )  
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_get_var( ncid, rhid, variable )      
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_close( ncid )
+ 
+
+  end subroutine
+
+  
+  subroutine read_netcdf_vector(tag, variable)
+    character(len=*), intent(in) :: tag
+    real, intent(out) :: variable(:)
+    
+    integer :: rhid, ierr_netcdf, ncid
+
+    ierr_netcdf = nf90_open('VMEC.nc', nf90_nowrite, ncid )
+    if(ierr_netcdf/=0) write(*,*) " Error opening ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_inq_varid( ncid, tag, rhid )  
+    if(ierr_netcdf/=0) write(*,*) " Error inquiring ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_get_var( ncid, rhid, variable )      
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_close( ncid )
+
+  end subroutine
+
+  
+  subroutine read_netcdf_integer_vector(tag, variable)
+    character(len=*), intent(in) :: tag
+    integer, intent(out) :: variable(:)
+    
+    integer :: rhid, ierr_netcdf, ncid
+
+    ierr_netcdf = nf90_open('VMEC.nc', nf90_nowrite, ncid )
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_inq_varid( ncid, tag, rhid )  
+    if(ierr_netcdf/=0) write(*,*) " Error inquiring ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_get_var( ncid, rhid, variable )      
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_close( ncid )
+
+  end subroutine
+
+  
+  subroutine read_netcdf_integer(tag, variable)
+    character(len=*), intent(in) :: tag
+    integer, intent(out) :: variable
+    
+    integer :: rhid, ierr_netcdf, ncid 
+
+    ierr_netcdf = nf90_open('VMEC.nc', nf90_nowrite, ncid )
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_inq_varid( ncid, tag, rhid )  
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_get_var( ncid, rhid, variable )      
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_close( ncid )
+
+  end subroutine
+  
+  subroutine read_netcdf_scalar(tag, variable)
+    character(len=*), intent(in) :: tag
+    real, intent(out) :: variable 
+    
+    integer :: rhid, ierr_netcdf, ncid 
+
+    ierr_netcdf = nf90_open('VMEC.nc', nf90_nowrite, ncid )
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_inq_varid( ncid, tag, rhid )  
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_get_var( ncid, rhid, variable )      
+    if(ierr_netcdf/=0) write(*,*) " Error reading ", tag, " ierr_netcdf ", ierr_netcdf
+    ierr_netcdf = nf90_close( ncid )
+
+  end subroutine
+  
+   
+  
+  
 end module

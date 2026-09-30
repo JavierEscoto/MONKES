@@ -732,8 +732,8 @@ module DKE_BTD_Solution_Legendre
         else ! For general flux cooordinates
         
           do j = 0, N_zeta
-             do i = 0, N_theta      
-                         
+             do i = 0, N_theta       
+                B(i,j)   = Magnetic_Field( theta(i), zeta(j) ) 
                 g(i,j)   = Jacobian( theta(i), zeta(j) )
                 B_u(i,j) = Magnetic_Field_Pol_Cov( theta(i), zeta(j) )
                 B_v(i,j) = Magnetic_Field_Tor_Cov( theta(i), zeta(j) )
@@ -741,15 +741,7 @@ module DKE_BTD_Solution_Legendre
                 Bu(i,j) = Magnetic_Field_Pol_Contr( theta(i), zeta(j) )
                 Bv(i,j) = Magnetic_Field_Tor_Contr( theta(i), zeta(j) )  
              end do
-          end do
-!~           do j = 0, N_zeta
-!~              do i = 0, N_theta      
-                
-!~                 write(*,*) B_u(i,j) ,  Bu(i,j) , B_v(i,j) , Bv(i,j), B(i,j)                   
-!~                 write(*,*) B_u(i,j) *  Bu(i,j) + B_v(i,j) * Bv(i,j), B(i,j)**2                   
-                
-!~              end do
-!~           end do  !; stop
+          end do 
           
         end if    
         vds_l = ( B_u * dBdzeta - B_v * dBdtheta ) & ! Spatial dependence of 
