@@ -1,0 +1,11 @@
+This is an example of MONKES usage for W7-X KJM geometry.
+The monoenergetic coefficients are written in the file 
+"monkes_Monoenergetic_Database.dat". Using the notation of MONKES paper
+[Escoto, NF (2024)] (https://iopscience.iop.org/article/10.1088/1741-4326/ad3fc9)
+the coefficients are K_ij*{D}_{ij} where D_{ij} are in metres 
+(see equations (19), (26) and Appendix E of the paper). 
+
+Note that for the case of W7X-KJM in which VMEC input is used, the normalization term
+B_0 (equation (30) from [Escoto, NF (2024)] (https://iopscience.iop.org/article/10.1088/1741-4326/ad3fc9))
+is no longer the (0,0) Fourier mode in Boozer coordinates but the (0,0) Fourier mode in the flux coordinates used by VMEC.
+
